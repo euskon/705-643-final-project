@@ -1,0 +1,38 @@
+name: final-proj-torch
+channels:
+  - conda-forge
+dependencies:
+  # Base Python and package manager
+  - python=3.12
+  - pip
+
+  # Jupyter and IPython kernel for interactive computing; nbclient runs the
+  # notebook headless (python -m nbclient / validation)
+  - ipykernel
+  - nbclient
+
+  # Core data science libraries
+  - numpy
+  - scipy
+  - pandas
+  - scikit-learn
+  - matplotlib
+  - tqdm
+
+  # Point cloud I/O: PDAL streams USGS 3DEP Entwine Point Tiles (EPT) over HTTP
+  # and python-pdal exposes the result as NumPy structured arrays. Only
+  # libpdal-core is needed (readers.ept and the expression and reprojection
+  # filters are core stages); the full `pdal`
+  # package adds HDF/TileDB plugins whose hdf5 builds fail to load on macOS
+  - libpdal-core
+  - python-pdal
+
+  # Coordinate transforms (WGS84 lat/lon <-> EPSG:3857 used by the USGS EPT tiles)
+  - pyproj
+
+  # HTTP for the Mountain Project route-finder CSV export
+  - requests
+
+  # PyTorch. conda-forge picks a CUDA build automatically on a Linux machine
+  # with an NVIDIA driver and the CPU/MPS build on Apple silicon
+  - pytorch

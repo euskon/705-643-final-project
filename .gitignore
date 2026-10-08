@@ -1,0 +1,4 @@
+data/*
+pretrained/*
+runs/*
+__pycache__/*

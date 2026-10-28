@@ -1,0 +1,1448 @@
+x,y,label,source,wall,route,n_points,split_wall,split
+473562.65684563044,3985077.07122254,1,mp_route,The Land Beyond Routes,Sofia Says,846,The Land Beyond Routes,test
+473560.10359812074,3985078.6989410277,1,mp_route,The Land Beyond Routes,Dog Crap Broken Fingers,966,The Land Beyond Routes,test
+473560.5288077431,3985074.7322089626,1,mp_route,The Land Beyond Routes,Deadman Five,913,The Land Beyond Routes,test
+473562.9678975499,3985080.898719458,1,mp_route,The Land Beyond Routes,Fatty McFlipflops,853,The Land Beyond Routes,test
+473566.0465091644,3985076.303392167,1,mp_route,The Land Beyond Routes,Older...Better...Stronger...Faster,858,The Land Beyond Routes,test
+473557.4794877967,3985075.611854923,1,mp_route,The Land Beyond Routes,Yo Sista,1006,The Land Beyond Routes,test
+473558.5089976426,3985081.4521537093,1,mp_route,The Land Beyond Routes,Pantry Moth Invasion,1040,The Land Beyond Routes,test
+473566.40332479763,3985081.887800745,1,mp_route,The Land Beyond Routes,Sendtember,954,The Land Beyond Routes,test
+473568.44023564406,3985078.1580154,1,mp_route,The Land Beyond Routes,Toys for Tots,936,The Land Beyond Routes,test
+473560.9922582078,3985083.4677013783,1,mp_route,The Land Beyond Routes,Damn Turtle,914,The Land Beyond Routes,test
+473558.320324963,3985072.5626946515,1,mp_route,The Land Beyond Routes,Tufantastic,1065,The Land Beyond Routes,test
+473561.14847571077,3985070.8213087968,1,mp_route,The Land Beyond Routes,Brat Holes,919,The Land Beyond Routes,test
+473555.36620395613,3985078.1731942235,1,mp_route,The Land Beyond Routes,Yo Momma,1094,The Land Beyond Routes,test
+473568.5230920617,3985073.4105070787,1,mp_route,The Land Beyond Routes,Tembertantrum,917,The Land Beyond Routes,test
+473569.7294612305,3985081.5312161297,1,mp_route,The Land Beyond Routes,Another Shorty in the Forty,971,The Land Beyond Routes,test
+473555.539856885,3985082.0736428853,1,mp_route,The Land Beyond Routes,Hanging Judge,1254,The Land Beyond Routes,test
+473570.8223186137,3985076.1439409913,1,mp_route,The Land Beyond Routes,"Peaceful, But for Gunfire",1054,The Land Beyond Routes,test
+473554.21284555586,3985074.219274932,1,mp_route,The Land Beyond Routes,The Danforth Anchor,995,The Land Beyond Routes,test
+473558.39949716325,3985069.282090437,1,mp_route,The Land Beyond Routes,90 Days,1130,The Land Beyond Routes,test
+473561.3664232818,3985086.7469355254,1,mp_route,The Land Beyond Routes,Something for Sofia,763,The Land Beyond Routes,test
+473373.55854860164,3984968.3500946653,1,mp_route,North Forty Routes,Season of the Corn,520,North Forty Routes,train
+473365.8394263076,3984964.327398607,1,mp_route,North Forty Routes,Big Fat Grinder,605,North Forty Routes,train
+473367.64070846135,3984971.0117053716,1,mp_route,North Forty Routes,Sonny Jim,351,North Forty Routes,train
+473369.3811711673,3984973.6581540923,1,mp_route,North Forty Routes,Corn Grinder,273,North Forty Routes,train
+473363.00039302505,3984967.8179134456,1,mp_route,North Forty Routes,Dancing Outlaw,421,North Forty Routes,train
+473364.4718707791,3984972.5285276202,1,mp_route,North Forty Routes,Lavender Eye,319,North Forty Routes,train
+473362.2723250068,3984962.653684,1,mp_route,North Forty Routes,Big Hand,478,North Forty Routes,train
+473364.26965378755,3984959.238259334,1,mp_route,North Forty Routes,Big Top,507,North Forty Routes,train
+473361.640869994,3984970.6591433976,1,mp_route,North Forty Routes,Fat Grinder,338,North Forty Routes,train
+473371.22092846385,3984977.013577304,1,mp_route,North Forty Routes,The Controversy,337,North Forty Routes,train
+473382.26352810144,3984963.769827767,1,mp_route,North Forty Routes,Green Goblin,312,North Forty Routes,train
+473364.64331247227,3984975.6713909386,1,mp_route,North Forty Routes,Fat Hand,339,North Forty Routes,train
+473377.66651811445,3984956.1670899745,1,mp_route,North Forty Routes,Summer Rain,332,North Forty Routes,train
+473364.7920488551,3984955.3114684694,1,mp_route,North Forty Routes,Season of the Storm,467,North Forty Routes,train
+473361.18089380546,3984973.811982474,1,mp_route,North Forty Routes,Trapeze Artist,349,North Forty Routes,train
+473361.1899146385,3984958.1030842355,1,mp_route,North Forty Routes,First Normal Form,454,North Forty Routes,train
+473375.3917061675,3984953.506134307,1,mp_route,North Forty Routes,Lion Tamer,326,North Forty Routes,train
+473384.52084989543,3984966.0036569834,1,mp_route,North Forty Routes,Ace in the Hole,380,North Forty Routes,train
+473358.21776002727,3984960.4091913956,1,mp_route,North Forty Routes,Serfs and Lords,375,North Forty Routes,train
+473380.1785579866,3984954.2976216166,1,mp_route,North Forty Routes,Side Show,471,North Forty Routes,train
+473369.630205131,3984981.032256951,1,mp_route,North Forty Routes,Scrambled Eggs,418,North Forty Routes,train
+473382.86369546235,3984956.1190975076,1,mp_route,North Forty Routes,Paul's Redemption,445,North Forty Routes,train
+473374.19331876625,3984950.753255224,1,mp_route,North Forty Routes,Corn Grinder - A0,336,North Forty Routes,train
+473362.5576855485,3984952.6423331755,1,mp_route,North Forty Routes,Little Manly Man,553,North Forty Routes,train
+473359.1332856103,3984976.663357977,1,mp_route,North Forty Routes,Wanted Man,441,North Forty Routes,train
+473372.2827839629,3984982.7974031237,1,mp_route,North Forty Routes,Walker Arkansas Ranger,441,North Forty Routes,train
+473354.6107593895,3984969.600434643,1,mp_route,North Forty Routes,Deep and Wide,362,North Forty Routes,train
+473356.6921272845,3984956.528913325,1,mp_route,North Forty Routes,Tunnel Vision,471,North Forty Routes,train
+473386.7814452491,3984974.6612638147,1,mp_route,North Forty Routes,Keep 'Em Seperated,359,North Forty Routes,train
+473377.0533661188,3984948.8504898855,1,mp_route,North Forty Routes,Private Property,473,North Forty Routes,train
+473368.92996301944,3984947.666121394,1,mp_route,North Forty Routes,Count Chalkula,460,North Forty Routes,train
+473365.89896884636,3984983.9612733754,1,mp_route,North Forty Routes,Spam,445,North Forty Routes,train
+473357.65243125707,3984952.8506516134,1,mp_route,North Forty Routes,Sin Nombre,456,North Forty Routes,train
+473369.64981147833,3984984.828433483,1,mp_route,North Forty Routes,African Herbman,414,North Forty Routes,train
+473356.21624091186,3984978.453456903,1,mp_route,North Forty Routes,Local Hebrew,424,North Forty Routes,train
+473354.04011381895,3984976.2999912603,1,mp_route,North Forty Routes,Playing Hooky,417,North Forty Routes,train
+473388.3198577367,3984977.4211667464,1,mp_route,North Forty Routes,Dancing Bears,350,North Forty Routes,train
+473376.6385761658,3984945.5471548797,1,mp_route,North Forty Routes,Caught in the Closet Again,444,North Forty Routes,train
+473363.5489710779,3984985.8705479647,1,mp_route,North Forty Routes,More Better,444,North Forty Routes,train
+473351.4430967935,3984974.1719825803,1,mp_route,North Forty Routes,Webster's Partner,410,North Forty Routes,train
+473351.47369638295,3984957.576422387,1,mp_route,North Forty Routes,Poetry in Goshen,339,North Forty Routes,train
+473356.4038274024,3984981.580149113,1,mp_route,North Forty Routes,Mine Mine Mine,435,North Forty Routes,train
+473353.6471901144,3984953.523720707,1,mp_route,North Forty Routes,Horny Goatweed,372,North Forty Routes,train
+473349.822886244,3984971.138294535,1,mp_route,North Forty Routes,Webster,389,North Forty Routes,train
+473391.58924974775,3984974.3565377896,1,mp_route,North Forty Routes,Fifteen Degrees,387,North Forty Routes,train
+473371.67887997965,3984943.821234553,1,mp_route,North Forty Routes,Fairy Moans,414,North Forty Routes,train
+473391.85399769724,3984954.8586793067,1,mp_route,North Forty Routes,Mr. Hanky,367,North Forty Routes,train
+473389.0122062639,3984981.4893446313,1,mp_route,North Forty Routes,Hit Boy,411,North Forty Routes,train
+473391.31009733723,3984978.4115407714,1,mp_route,North Forty Routes,Jackhole,347,North Forty Routes,train
+473376.82311847515,3984942.33066169,1,mp_route,North Forty Routes,Lamb Chops,379,North Forty Routes,train
+473346.7778276264,3984962.757112893,1,mp_route,North Forty Routes,Something for Roman,263,North Forty Routes,train
+473354.67179716734,3984984.382206137,1,mp_route,North Forty Routes,Harry Potter,421,North Forty Routes,train
+473373.55783930793,3984941.4136621226,1,mp_route,North Forty Routes,Roman Says,371,North Forty Routes,train
+473380.58850746666,3984942.649707644,1,mp_route,North Forty Routes,Hit Girl,407,North Forty Routes,train
+473366.16302309895,3984990.9484448475,1,mp_route,North Forty Routes,Lampe Land,413,North Forty Routes,train
+473356.64718407707,3984944.382661794,1,mp_route,North Forty Routes,Narwhal,418,North Forty Routes,train
+473355.757314986,3984987.2885535113,1,mp_route,North Forty Routes,Zeppelin,453,North Forty Routes,train
+473369.5938572243,3984939.6766634616,1,mp_route,North Forty Routes,Around the Fur,512,North Forty Routes,train
+473344.32767250226,3984961.007475864,1,mp_route,North Forty Routes,Sundial,268,North Forty Routes,train
+473343.8116246464,3984969.6896247296,1,mp_route,North Forty Routes,Brand New,364,North Forty Routes,train
+473372.29304877686,3984938.1209615357,1,mp_route,North Forty Routes,Tres Equis,430,North Forty Routes,train
+473363.91161431617,3984993.3329553204,1,mp_route,North Forty Routes,Girth Hitch,448,North Forty Routes,train
+473342.6336993881,3984965.679338333,1,mp_route,North Forty Routes,Dreadlock Holiday,354,North Forty Routes,train
+473354.1465461164,3984990.0338213686,1,mp_route,North Forty Routes,Uncle Grandfather,463,North Forty Routes,train
+473350.0832374972,3984944.8861760935,1,mp_route,North Forty Routes,Piratas Putas,275,North Forty Routes,train
+473526.53876993636,3984965.4776987657,1,mp_route,Kindergarten Boulder,Hangs a Little to the Left,914,Kindergarten Boulder,train
+473528.7972863601,3984960.062654183,1,mp_route,Kindergarten Boulder,The Hurricane,1245,Kindergarten Boulder,train
+473521.9336620026,3984963.202551486,1,mp_route,Kindergarten Boulder,The Poison Ivy Route,231,Kindergarten Boulder,train
+473530.0191509458,3984965.2495893934,1,mp_route,Kindergarten Boulder,A Little Further Left,1765,Kindergarten Boulder,train
+473522.8583359009,3984966.480169038,1,mp_route,Kindergarten Boulder,Marek's Golden Way,391,Kindergarten Boulder,train
+473520.6537844003,3984960.256462439,1,mp_route,Kindergarten Boulder,The Accident,235,Kindergarten Boulder,train
+473529.13598893955,3984956.9424251164,1,mp_route,Kindergarten Boulder,Kindergarten Boulder | 4543,1600,Kindergarten Boulder,train
+473531.88991432934,3984960.109753082,1,mp_route,Kindergarten Boulder,Jewell Always Smiles,2145,Kindergarten Boulder,train
+473526.5325887179,3984968.798421607,1,mp_route,Kindergarten Boulder,Legacy 26,1419,Kindergarten Boulder,train
+473519.6733553161,3984965.3371968805,1,mp_route,Kindergarten Boulder,The Purpose,257,Kindergarten Boulder,train
+473533.18891803024,3984964.0310418825,1,mp_route,Kindergarten Boulder,E-Kat,2127,Kindergarten Boulder,train
+473518.3199135379,3984962.157591663,1,mp_route,Kindergarten Boulder,Little Miss Giggles,263,Kindergarten Boulder,train
+473523.2320338627,3984969.5982473004,1,mp_route,Kindergarten Boulder,Owen's Best Buddy,610,Kindergarten Boulder,train
+473526.4960051838,3984953.9762527454,1,mp_route,Kindergarten Boulder,Class clown,1386,Kindergarten Boulder,train
+473519.13169883215,3984957.5287220897,1,mp_route,Kindergarten Boulder,Mossy Revelations,233,Kindergarten Boulder,train
+473530.97831667215,3984969.228319572,1,mp_route,Kindergarten Boulder,The Romaniac,2567,Kindergarten Boulder,train
+473534.8732621279,3984961.503196915,1,mp_route,Kindergarten Boulder,Swiss Family Pancakes,2263,Kindergarten Boulder,train
+473534.3728843673,3984967.3884785078,1,mp_route,Kindergarten Boulder,Sonrisa Loco,2114,Kindergarten Boulder,train
+473516.053946339,3984959.730314306,1,mp_route,Kindergarten Boulder,Crab Louse,265,Kindergarten Boulder,train
+473201.98043891,3984580.332890901,1,mp_route,Titanic Boulder,Starboard List,327,Titanic Boulder,train
+473211.8335578008,3984580.4801624482,1,mp_route,Titanic Boulder,Port Side,443,Titanic Boulder,train
+473206.97252090403,3984568.7107979036,1,mp_route,Titanic Boulder,The Lookout,347,Titanic Boulder,train
+473197.4313420115,3984580.5885804584,1,mp_route,Titanic Boulder,Cracked Rib,355,Titanic Boulder,train
+473197.02887598745,3984573.39194271,1,mp_route,Titanic Boulder,TNC Forever,367,Titanic Boulder,train
+473295.4760784396,3984419.3965227036,1,mp_route,Prophecy Wall,Egyptian Airbus,446,Prophecy Wall,test
+473298.20035682566,3984420.7182172304,1,mp_route,Prophecy Wall,Prophecy Wall | 4284,421,Prophecy Wall,test
+473294.47040227964,3984416.1512131877,1,mp_route,Prophecy Wall,Jihad,446,Prophecy Wall,test
+473292.1132982619,3984418.4314305363,1,mp_route,Prophecy Wall,Granny T.,442,Prophecy Wall,test
+473291.6486764975,3984414.733089804,1,mp_route,Prophecy Wall,Paying the Rent (a.k.a. The Prophet),420,Prophecy Wall,test
+473289.92333475366,3984422.42801779,1,mp_route,Prophecy Wall,Taliban Soup,473,Prophecy Wall,test
+473289.093806722,3984418.537337326,1,mp_route,Prophecy Wall,Paying the Granny,425,Prophecy Wall,test
+473551.6180595108,3984134.4696582467,1,mp_route,Confederate Cracks,Meadow Mountain Massacre,1601,Confederate Cracks,train
+473551.98382947035,3984137.6364189372,1,mp_route,Confederate Cracks,Fat Bastard,1679,Confederate Cracks,train
+473548.42340970185,3984135.5916559435,1,mp_route,Confederate Cracks,Public Access,1818,Confederate Cracks,train
+473549.69980836014,3984131.968549774,1,mp_route,Confederate Cracks,Classique,1433,Confederate Cracks,train
+473553.6026391435,3984132.109953405,1,mp_route,Confederate Cracks,Up your Buttress,1347,Confederate Cracks,train
+473555.3587710247,3984134.547064945,1,mp_route,Confederate Cracks,Marching Season,1411,Confederate Cracks,train
+473549.47142129164,3984139.473765514,1,mp_route,Confederate Cracks,"The Mud, the Blood, and the Beer",1738,Confederate Cracks,train
+473551.1487037732,3984129.1671168194,1,mp_route,Confederate Cracks,Mortar Fire,1300,Confederate Cracks,train
+473546.2861235201,3984132.946115084,1,mp_route,Confederate Cracks,Chinese Soul Food,1436,Confederate Cracks,train
+473554.1688649368,3984140.0077517466,1,mp_route,Confederate Cracks,Hand Grenade,1265,Confederate Cracks,train
+473546.08204128774,3984137.767038981,1,mp_route,Confederate Cracks,Royal Flush,1751,Confederate Cracks,train
+473556.4319426417,3984130.650506573,1,mp_route,Confederate Cracks,Blood and Thunder,1231,Confederate Cracks,train
+473557.63199106953,3984136.6279481887,1,mp_route,Confederate Cracks,WMA Crack,1161,Confederate Cracks,train
+473547.0460393296,3984129.8807526194,1,mp_route,Confederate Cracks,Animal Thunderdome,1281,Confederate Cracks,train
+473558.3275290771,3984133.691753301,1,mp_route,Confederate Cracks,Deft Jam,1177,Confederate Cracks,train
+473550.816030311,3984142.3715737555,1,mp_route,Confederate Cracks,Dirt Farm,1313,Confederate Cracks,train
+473553.3120319768,3984127.0164512214,1,mp_route,Confederate Cracks,Door Prize,1450,Confederate Cracks,train
+473557.40807094413,3984140.23982253,1,mp_route,Confederate Cracks,I Fought Piranhas,1094,Confederate Cracks,train
+473543.50036211207,3984135.421084224,1,mp_route,Confederate Cracks,Fool's Gold,1768,Confederate Cracks,train
+473547.2025553303,3984141.5280183274,1,mp_route,Confederate Cracks,I Fought Guppies,1610,Confederate Cracks,train
+473530.36206763267,3983966.7804701533,1,mp_route,Crackhouse Alley,Old School,2457,Crackhouse Alley,test
+473529.73944099556,3983969.732624556,1,mp_route,Crackhouse Alley,Veggie Delight,2109,Crackhouse Alley,test
+473533.4762404001,3983968.488053428,1,mp_route,Crackhouse Alley,Electroglide,1838,Crackhouse Alley,test
+473528.646085976,3983964.2464655465,1,mp_route,Crackhouse Alley,Tarzan,2369,Crackhouse Alley,test
+473526.07180100906,3983967.0594061487,1,mp_route,Crackhouse Alley,Meatcake,1691,Crackhouse Alley,test
+473532.3038138154,3983971.6917502717,1,mp_route,Crackhouse Alley,The Vegetable,2014,Crackhouse Alley,test
+473525.7270994953,3983970.889357893,1,mp_route,Crackhouse Alley,Beefcake,1223,Crackhouse Alley,test
+473528.566821634,3983972.871835122,1,mp_route,Crackhouse Alley,The Catholic Boat,1866,Crackhouse Alley,test
+473529.43861477805,3983961.253492939,1,mp_route,Crackhouse Alley,Wuwei,2633,Crackhouse Alley,test
+473526.3799880888,3983961.8592139874,1,mp_route,Crackhouse Alley,Milquetoast,1811,Crackhouse Alley,test
+473536.9168992746,3983968.3809584784,1,mp_route,Crackhouse Alley,Elephant Ear,1252,Crackhouse Alley,test
+473536.0521570307,3983971.591788922,1,mp_route,Crackhouse Alley,420,1621,Crackhouse Alley,test
+473534.7584819195,3983961.422865889,1,mp_route,Crackhouse Alley,Straight to the Hops,2369,Crackhouse Alley,test
+473533.96306997165,3983974.2098025917,1,mp_route,Crackhouse Alley,Marronera,2124,Crackhouse Alley,test
+473522.1904159299,3983965.999007224,1,mp_route,Crackhouse Alley,Hickedelic Jazz Grass,445,Crackhouse Alley,test
+473531.0340440664,3983958.709509586,1,mp_route,Crackhouse Alley,Captain Disco,2445,Crackhouse Alley,test
+473531.0291956001,3983975.9114228245,1,mp_route,Crackhouse Alley,Crackhouse Alley | 5493,2315,Crackhouse Alley,test
+473537.99344554055,3983962.9124443205,1,mp_route,Crackhouse Alley,Barley and Hops,1772,Crackhouse Alley,test
+473523.1985046379,3983972.7429165617,1,mp_route,Crackhouse Alley,T-Rex,529,Crackhouse Alley,test
+473527.1318159268,3983958.7938150973,1,mp_route,Crackhouse Alley,Interorectogestion,1884,Crackhouse Alley,test
+473526.39774523326,3983975.8125257995,1,mp_route,Crackhouse Alley,Strong Men Also Cry,1014,Crackhouse Alley,test
+473195.68895478355,3984577.353649433,1,mp_route,Titanic Wall,Sea Shanty,361,Titanic Wall,val
+473193.0789331125,3984578.9736784296,1,mp_route,Titanic Wall,Barnacles,402,Titanic Wall,val
+473195.18683679245,3984582.6024483517,1,mp_route,Titanic Wall,Little Dingy,388,Titanic Wall,val
+473193.17185695906,3984572.283328085,1,mp_route,Titanic Wall,The Megalodon,450,Titanic Wall,val
+473197.0997252241,3984570.0789329894,1,mp_route,Titanic Wall,Fuzzy Buckets,356,Titanic Wall,val
+473191.7225277758,3984582.838709824,1,mp_route,Titanic Wall,Skid Mark,413,Titanic Wall,val
+473197.87393825216,3984606.2431812324,1,mp_route,The Doomsday Wall,The Giant Poison Ivy Monster From the Planet Scratch My Butt,434,The Doomsday Wall,val
+473201.0864332499,3984605.733641002,1,mp_route,The Doomsday Wall,Itchy and Scratchy,500,The Doomsday Wall,val
+473197.44378428016,3984603.2380038337,1,mp_route,The Doomsday Wall,Z-Day,423,The Doomsday Wall,val
+473196.4698460112,3984610.3985159737,1,mp_route,The Doomsday Wall,New Doomsday,444,The Doomsday Wall,val
+473439.10365968914,3984335.1399221243,1,mp_route,The Arcade,Modern Warfare,471,The Arcade,val
+473440.97924462013,3984339.599787789,1,mp_route,The Arcade,Victims of Survival Horror,528,The Arcade,val
+473437.5515117311,3984338.578403727,1,mp_route,The Arcade,Grand Theft Auto,491,The Arcade,val
+473442.14879064605,3984332.793159034,1,mp_route,The Arcade,2UP,458,The Arcade,val
+473439.48220899777,3984342.5222267406,1,mp_route,The Arcade,King Koopa,468,The Arcade,val
+473442.88155815046,3984342.189527789,1,mp_route,The Arcade,Legend of Zelda,469,The Arcade,val
+473435.2063558499,3984334.1199582797,1,mp_route,The Arcade,Metroid,446,The Arcade,val
+473446.12765036,3984339.36658891,1,mp_route,The Arcade,Pitfall,466,The Arcade,val
+473434.08349297807,3984337.6216269922,1,mp_route,The Arcade,Out of Quarters,453,The Arcade,val
+473436.18742571224,3984342.6289159344,1,mp_route,The Arcade,Donkey Kong,464,The Arcade,val
+473441.36953097384,3984329.442329932,1,mp_route,The Arcade,IDDQD,419,The Arcade,val
+473445.9910837081,3984342.3977618203,1,mp_route,The Arcade,Rockband,429,The Arcade,val
+473446.6473747884,3984331.8525974485,1,mp_route,The Arcade,Duck Hunt,436,The Arcade,val
+473433.3400465255,3984340.75942304,1,mp_route,The Arcade,Level Up,488,The Arcade,val
+473441.61130802054,3984345.14352201,1,mp_route,The Arcade,The Tempest,471,The Arcade,val
+473432.1060688853,3984334.2905452,1,mp_route,The Arcade,Mortal Combat,439,The Arcade,val
+473436.876728326,3984345.681772096,1,mp_route,The Arcade,Black Slabbath,399,The Arcade,val
+473403.1132500388,3984371.488922374,1,mp_route,Street Fighter Wall,Back Back B,381,Street Fighter Wall,train
+473404.9559556032,3984367.759389245,1,mp_route,Street Fighter Wall,Hadouken,385,Street Fighter Wall,train
+473399.21990443475,3984369.0986807514,1,mp_route,Street Fighter Wall,Blanka,417,Street Fighter Wall,train
+473406.1629220833,3984370.649457079,1,mp_route,Street Fighter Wall,Sonic Boom,406,Street Fighter Wall,train
+473402.02924950176,3984374.4504093365,1,mp_route,Street Fighter Wall,The Van Damme,413,Street Fighter Wall,train
+473396.6998402215,3984371.048894448,1,mp_route,Street Fighter Wall,Evil Ryu,390,Street Fighter Wall,train
+473507.74145246105,3984203.3111683764,1,mp_route,Walls Of Moria,Tales of Ribaldry,385,Walls Of Moria,train
+473504.592905082,3984208.971182567,1,mp_route,Walls Of Moria,Gimp and Wheezer,485,Walls Of Moria,train
+473500.5911537753,3984205.549414895,1,mp_route,Walls Of Moria,"Up Yours, Ashcroft",436,Walls Of Moria,train
+473499.3582578166,3984210.163827313,1,mp_route,Walls Of Moria,Stove Top,444,Walls Of Moria,train
+473512.3765317368,3984199.282983619,1,mp_route,Walls Of Moria,Leftovers,362,Walls Of Moria,train
+473497.26741150935,3984206.808843101,1,mp_route,Walls Of Moria,Devil's Candy,405,Walls Of Moria,train
+473510.5702195948,3984196.3140460593,1,mp_route,Walls Of Moria,Rightovers,380,Walls Of Moria,train
+473511.1461710049,3984215.4805450486,1,mp_route,Walls Of Moria,Flake Tectonics,415,Walls Of Moria,train
+473497.6098758761,3984199.561279446,1,mp_route,Walls Of Moria,Right Hook of Allah,437,Walls Of Moria,train
+473515.64729976305,3984199.2489402615,1,mp_route,Walls Of Moria,Entwash,578,Walls Of Moria,train
+473498.1283769746,3984213.0935531924,1,mp_route,Walls Of Moria,Stem Cell Research,472,Walls Of Moria,train
+473496.0706693029,3984209.9883505777,1,mp_route,Walls Of Moria,In The Crack Or On Your Back,418,Walls Of Moria,train
+473516.32139777136,3984213.377234059,1,mp_route,Walls Of Moria,The Seamstress,860,Walls Of Moria,train
+473493.8677648353,3984207.0609198143,1,mp_route,Walls Of Moria,Treebeard,353,Walls Of Moria,train
+473509.73386801995,3984219.6682777703,1,mp_route,Walls Of Moria,Gelgamek Vagina,421,Walls Of Moria,train
+473494.0466254269,3984199.2576642837,1,mp_route,Walls Of Moria,Hackberry Crack,457,Walls Of Moria,train
+473493.9319315185,3984212.227603481,1,mp_route,Walls Of Moria,Shelob's Lair,404,Walls Of Moria,train
+473521.41030186496,3984206.8085850566,1,mp_route,Walls Of Moria,T-Slab,2142,Walls Of Moria,train
+473520.43197327165,3984199.1861526864,1,mp_route,Walls Of Moria,Adhesive Love,1825,Walls Of Moria,train
+473521.70609867177,3984202.874093817,1,mp_route,Walls Of Moria,Message to a Hairy Man Back,2242,Walls Of Moria,train
+473491.95699745684,3984201.6741066608,1,mp_route,Walls Of Moria,Fighting Uruk-Hai,421,Walls Of Moria,train
+473140.07722952054,3984854.931231158,1,mp_route,Spooky Dooky Wall,Buttgeist,412,Spooky Dooky Wall,train
+473141.9388201607,3984852.1528743827,1,mp_route,Spooky Dooky Wall,Bowel Power,454,Spooky Dooky Wall,train
+473138.7664816227,3984857.820743678,1,mp_route,Spooky Dooky Wall,Turdulation,403,Spooky Dooky Wall,train
+473141.80171605456,3984857.6180197215,1,mp_route,Spooky Dooky Wall,Super Gut,459,Spooky Dooky Wall,train
+473136.1222337392,3984856.1603975208,1,mp_route,Spooky Dooky Wall,Upper Decker,387,Spooky Dooky Wall,train
+473138.7395139391,3984849.003110315,1,mp_route,Spooky Dooky Wall,Poltergeist,554,Spooky Dooky Wall,train
+473473.94875330967,3984281.3593518403,1,mp_route,Hanging Gardens,Nova Monkey,403,Hanging Gardens,train
+473750.73904728756,3984186.3717248994,1,mp_route,The Park,Dino-might!,707,The Park,train
+473750.8835290829,3984183.2437529084,1,mp_route,The Park,Renal Excellence,796,The Park,train
+473753.9367622488,3984186.2735032053,1,mp_route,The Park,Kidney Conditioner,801,The Park,train
+473748.1190041544,3984184.7109953673,1,mp_route,The Park,Lizard of Oz,764,The Park,train
+473748.07307427184,3984188.306191127,1,mp_route,The Park,Slither Vision,610,The Park,train
+473816.9466597603,3984513.922939746,1,mp_route,The Carrion Cube,Pocket Full of Teeth,599,The Carrion Cube,train
+474306.54134764546,3984592.137434602,1,mp_route,Roman Wall,Boronocus Salad,395,Roman Wall,train
+474309.4927927684,3984590.9278176697,1,mp_route,Roman Wall,Boronocus,457,Roman Wall,train
+474306.6962667683,3984595.280495728,1,mp_route,Roman Wall,Ceasar's Tossed Salad,446,Roman Wall,train
+474310.1932865759,3984595.1493627327,1,mp_route,Roman Wall,Maximus,504,Roman Wall,train
+474303.09753912577,3984596.620971318,1,mp_route,Roman Wall,Centurion,406,Roman Wall,train
+474312.5110085326,3984590.403131492,1,mp_route,Roman Wall,Commodus,465,Roman Wall,train
+474307.7813976164,3984598.1467849715,1,mp_route,Roman Wall,Be Gay,475,Roman Wall,train
+474311.6907052987,3984586.738095055,1,mp_route,Roman Wall,Spartacus,453,Roman Wall,train
+474302.71830381436,3984599.822015531,1,mp_route,Roman Wall,Aphrodite,393,Roman Wall,train
+474298.0612803103,3984588.099854929,1,mp_route,Roman Wall,Gaius,325,Roman Wall,train
+474301.9982485258,3984583.381120328,1,mp_route,Roman Wall,Acree Prime,364,Roman Wall,train
+474304.94004399603,3984581.639548878,1,mp_route,Roman Wall,Sentinel Prime,372,Roman Wall,train
+474054.7329105568,3985234.993998705,1,mp_route,Goat Cave,Anal Sac Expression,233,Goat Cave,train
+474056.41666075477,3985232.232602225,1,mp_route,Goat Cave,PBR,233,Goat Cave,train
+474053.097160986,3985237.5618197927,1,mp_route,Goat Cave,Goat Cave | 9138,248,Goat Cave,train
+474062.31016888795,3985235.0280332323,1,mp_route,Goat Cave,Austrian Ass Attack,254,Goat Cave,train
+474051.76193420414,3985240.4672601796,1,mp_route,Goat Cave,Man Junk,258,Goat Cave,train
+474054.0918941057,3985242.709033997,1,mp_route,Goat Cave,Respect My Authority,326,Goat Cave,train
+474061.95123907947,3985242.323129994,1,mp_route,Goat Cave,Mexican Sac Pull,329,Goat Cave,train
+474059.2710208455,3985244.82955523,1,mp_route,Goat Cave,Dirty Trip,398,Goat Cave,train
+474050.1362185448,3985224.513828861,1,mp_route,Goat Cave,Junk Bus,359,Goat Cave,train
+474066.0503048997,3985240.5540077523,1,mp_route,Goat Cave,Shits and Giggles,357,Goat Cave,train
+474379.3936078896,3984455.3660800355,1,mp_route,The Far East,Alesia,987,The Far East,val
+474377.63713458955,3984452.7112650075,1,mp_route,The Far East,Orange Crush,1147,The Far East,val
+474376.4177964201,3984456.567702017,1,mp_route,The Far East,The Vodka Diet,1004,The Far East,val
+474381.8276907543,3984457.1806350853,1,mp_route,The Far East,Space Monkey,797,The Far East,val
+474382.440520242,3984453.55972009,1,mp_route,The Far East,Cowgirl Up,933,The Far East,val
+474379.2821846741,3984458.8001424815,1,mp_route,The Far East,Purple Nehi,863,The Far East,val
+474373.61292336415,3984455.3103989353,1,mp_route,The Far East,Manked,1043,The Far East,val
+474376.48637183604,3984449.5468759406,1,mp_route,The Far East,King Kong,1091,The Far East,val
+474374.1412664144,3984458.807078383,1,mp_route,The Far East,Pieces of Eight,833,The Far East,val
+474382.17729993473,3984449.3610080746,1,mp_route,The Far East,Good Rain,1067,The Far East,val
+474382.1537740795,3984460.726266602,1,mp_route,The Far East,Knock Knock,717,The Far East,val
+474384.6438380039,3984451.1996517587,1,mp_route,The Far East,Emotional Content,946,The Far East,val
+474378.78745119384,3984447.3960909517,1,mp_route,The Far East,First Time Up,966,The Far East,val
+474376.11016090406,3984462.1222250317,1,mp_route,The Far East,Horseshoes and Hand Grenades,725,The Far East,val
+474379.93337424484,3984462.7800872535,1,mp_route,The Far East,Plumb Bob,791,The Far East,val
+474385.9932368963,3984458.6274226466,1,mp_route,The Far East,September Hero,661,The Far East,val
+474371.21046931745,3984453.2378200334,1,mp_route,The Far East,Filthy Sanchez,1072,The Far East,val
+474371.0030508424,3984457.0671239523,1,mp_route,The Far East,Stink Pretty,855,The Far East,val
+474373.30291720195,3984448.9516310873,1,mp_route,The Far East,Kinky Boots,1142,The Far East,val
+474381.97390077176,3984446.242216809,1,mp_route,The Far East,Pills on an Empty Stomach,919,The Far East,val
+474375.87756388116,3984446.219696388,1,mp_route,The Far East,Spine Tingler,984,The Far East,val
+474388.5337149113,3984455.2830025335,1,mp_route,The Far East,El Chupacabra,710,The Far East,val
+474384.74193543085,3984462.6290365066,1,mp_route,The Far East,Blood Brothers,642,The Far East,val
+474377.2519563497,3984464.9884005557,1,mp_route,The Far East,Supersoul Sureshot,666,The Far East,val
+474385.9192877991,3984447.1495997733,1,mp_route,The Far East,Gracie's Eight,971,The Far East,val
+474379.35323282477,3984444.299236815,1,mp_route,The Far East,Recidivist,829,The Far East,val
+474368.4901184479,3984458.751022801,1,mp_route,The Far East,Stinky Boots,761,The Far East,val
+474380.76072159247,3984466.090502629,1,mp_route,The Far East,Full Yellow Jacket,677,The Far East,val
+474372.09984160727,3984463.93139624,1,mp_route,The Far East,Bury the Boot,642,The Far East,val
+474372.9678639087,3984445.1077855,1,mp_route,The Far East,The Farrier,970,The Far East,val
+474388.30330608,3984462.33653737,1,mp_route,The Far East,Tuff Gong,672,The Far East,val
+474370.06679447065,3984446.9540270288,1,mp_route,The Far East,Montezuma's Toe,918,The Far East,val
+474376.32969613955,3984443.018387586,1,mp_route,The Far East,El Libro De Ruth,880,The Far East,val
+474215.0103921606,3984597.8785936385,1,mp_route,Magoo Rock,Monkeys on Magoo,269,Magoo Rock,val
+474213.40683512774,3984600.4384128116,1,mp_route,Magoo Rock,Mr. Magoo,289,Magoo Rock,val
+474223.1908219587,3984593.5987488064,1,mp_route,Magoo Rock,Mr. Charlie,218,Magoo Rock,val
+474223.3485857083,3984597.700974534,1,mp_route,Magoo Rock,Memoirs of a Daisha,218,Magoo Rock,val
+474215.3331509584,3984603.0281701074,1,mp_route,Magoo Rock,Man Servant,288,Magoo Rock,val
+474209.1633090102,3984591.721575751,1,mp_route,Magoo Rock,The Flying Daisha,304,Magoo Rock,val
+474220.7220681223,3984602.037057663,1,mp_route,Magoo Rock,Mixed Reviews,273,Magoo Rock,val
+474212.1279615526,3984603.2874485725,1,mp_route,Magoo Rock,Heavy Stigmatism,323,Magoo Rock,val
+474224.2659815676,3984590.2989327805,1,mp_route,Magoo Rock,Road Hog,227,Magoo Rock,val
+474091.61108444433,3984772.68081569,1,mp_route,The Tool Buttress,Bum Fight,521,The Tool Buttress,train
+474092.45394290454,3984775.7331191553,1,mp_route,The Tool Buttress,Gin & Juice,458,The Tool Buttress,train
+474089.71737882635,3984778.4010341014,1,mp_route,The Tool Buttress,When Panties Fly,400,The Tool Buttress,train
+474095.1034538354,3984773.7425121064,1,mp_route,The Tool Buttress,The Poo-Choo Train,467,The Tool Buttress,train
+474093.7316236331,3984769.756792303,1,mp_route,The Tool Buttress,Don't Be A Tool,472,The Tool Buttress,train
+474094.5813154413,3984777.8708385075,1,mp_route,The Tool Buttress,Maynard's Crossing,420,The Tool Buttress,train
+474086.14028704853,3984778.806533603,1,mp_route,The Tool Buttress,Parabola,409,The Tool Buttress,train
+474092.6538971298,3984766.6729388884,1,mp_route,The Tool Buttress,Short Cut,496,The Tool Buttress,train
+474140.4929154707,3984701.228483495,1,mp_route,Rosie's Cantina Area,Redrum,461,Rosie's Cantina Area,test
+474137.37638912303,3984701.342442216,1,mp_route,Rosie's Cantina Area,Rosie's Cantina,456,Rosie's Cantina Area,test
+474141.7395584901,3984698.444044846,1,mp_route,Rosie's Cantina Area,Ermagerd,470,Rosie's Cantina Area,test
+474139.44894983375,3984704.109047042,1,mp_route,Rosie's Cantina Area,Meh,442,Rosie's Cantina Area,test
+474138.5071285751,3984697.687842831,1,mp_route,Rosie's Cantina Area,El Regalo,465,Rosie's Cantina Area,test
+474144.03105762956,3984701.3309100457,1,mp_route,Rosie's Cantina Area,Oakie Dokie,484,Rosie's Cantina Area,test
+474143.2705342894,3984704.2428794825,1,mp_route,Rosie's Cantina Area,Kekoa,483,Rosie's Cantina Area,test
+474134.60928408813,3984699.1501564416,1,mp_route,Rosie's Cantina Area,Motor City Margarita,455,Rosie's Cantina Area,test
+474143.6101391399,3984695.851213575,1,mp_route,Rosie's Cantina Area,It's a Boy!,478,Rosie's Cantina Area,test
+474140.81347511645,3984694.618175713,1,mp_route,Rosie's Cantina Area,Kai,493,Rosie's Cantina Area,test
+474136.8401095886,3984695.177968524,1,mp_route,Rosie's Cantina Area,Zen,448,Rosie's Cantina Area,test
+474133.47702728596,3984702.2889076783,1,mp_route,Rosie's Cantina Area,Jacob's Ladder,462,Rosie's Cantina Area,test
+474146.0691801195,3984697.8993261824,1,mp_route,Rosie's Cantina Area,Mad Money,466,Rosie's Cantina Area,test
+474147.4937764276,3984700.563058727,1,mp_route,Rosie's Cantina Area,Tequila Sunrise,485,Rosie's Cantina Area,test
+474133.6265516463,3984695.3325153613,1,mp_route,Rosie's Cantina Area,Makoa & Makaia,407,Rosie's Cantina Area,test
+474116.7936194494,3984733.160192615,1,mp_route,Nipple Stimulation Alcove,Hard-On,340,Nipple Stimulation Alcove,test
+474119.05283031194,3984736.0793757895,1,mp_route,Nipple Stimulation Alcove,Oh Yeah,298,Nipple Stimulation Alcove,test
+474120.3883473785,3984733.238261871,1,mp_route,Nipple Stimulation Alcove,Direct Hard-On,280,Nipple Stimulation Alcove,test
+474111.2672687546,3984736.9325176054,1,mp_route,Nipple Stimulation Alcove,Silver Lisp,419,Nipple Stimulation Alcove,test
+474122.8197699264,3984731.409499853,1,mp_route,Nipple Stimulation Alcove,Nipple Stimulation Alcove | 8716,242,Nipple Stimulation Alcove,test
+474042.8835734377,3984781.0298993937,1,mp_route,Super Slab,Confident Wreck,420,Super Slab,train
+474043.41382428224,3984771.436777855,1,mp_route,Super Slab,Slow Disaster,340,Super Slab,train
+474048.8873159659,3984774.4512136695,1,mp_route,Super Slab,Beautiful Disaster,327,Super Slab,train
+474350.0537591466,3984530.203710268,1,mp_route,Cliffs of Insanity,Ropebelt,663,Cliffs of Insanity,train
+474353.52018710214,3984530.677209456,1,mp_route,Cliffs of Insanity,Krusty Panties,451,Cliffs of Insanity,train
+474350.65849790745,3984526.5909066657,1,mp_route,Cliffs of Insanity,Ramp Up the Insanity,769,Cliffs of Insanity,train
+474350.9860749768,3984533.417067017,1,mp_route,Cliffs of Insanity,Bolt Em All,483,Cliffs of Insanity,train
+474355.3499397506,3984527.931347826,1,mp_route,Cliffs of Insanity,Fireworks in February,430,Cliffs of Insanity,train
+474347.80142483907,3984532.402702752,1,mp_route,Cliffs of Insanity,Swamp Rat,611,Cliffs of Insanity,train
+474354.0885423491,3984534.0125342375,1,mp_route,Cliffs of Insanity,Sphagnum Esplanade,427,Cliffs of Insanity,train
+474356.3332290699,3984531.9667127337,1,mp_route,Cliffs of Insanity,Shanghai Summers,430,Cliffs of Insanity,train
+474351.7669913919,3984523.597278142,1,mp_route,Cliffs of Insanity,Little Sprout,780,Cliffs of Insanity,train
+474345.07378433325,3984527.090837467,1,mp_route,Cliffs of Insanity,Fesic,1079,Cliffs of Insanity,train
+474356.45045647566,3984524.9780454272,1,mp_route,Cliffs of Insanity,Rubber Chicken,473,Cliffs of Insanity,train
+474348.6800763201,3984522.7841359423,1,mp_route,Cliffs of Insanity,The Man in Black,1057,Cliffs of Insanity,train
+474358.3683445071,3984527.4630958685,1,mp_route,Cliffs of Insanity,Dirty Thieving Bastards,524,Cliffs of Insanity,train
+474351.1987324936,3984536.93075683,1,mp_route,Cliffs of Insanity,Fashion Sense,476,Cliffs of Insanity,train
+474343.08185908233,3984529.7485113693,1,mp_route,Cliffs of Insanity,One Piece at a Time,1059,Cliffs of Insanity,train
+474354.4488555948,3984521.5501772505,1,mp_route,Cliffs of Insanity,Arizona Bay,541,Cliffs of Insanity,train
+474274.7065073582,3984616.3389232806,1,mp_route,New Roman Wall,Wild Kingdom,348,New Roman Wall,train
+474272.38909387874,3984618.4172007344,1,mp_route,New Roman Wall,Stereo Love,311,New Roman Wall,train
+474276.68800675176,3984612.899443185,1,mp_route,New Roman Wall,Electric Daisy,399,New Roman Wall,train
+474269.8410308976,3984616.377355527,1,mp_route,New Roman Wall,Drunken Monkey,331,New Roman Wall,train
+474269.5265037705,3984619.554023823,1,mp_route,New Roman Wall,Bass Down Low,361,New Roman Wall,train
+474344.8002631846,3984547.089350184,1,mp_route,Mexican Pillar,Nieto,1121,Mexican Pillar,test
+474342.0119591177,3984545.9529269612,1,mp_route,Mexican Pillar,Nieta,1281,Mexican Pillar,test
+474346.9200272158,3984549.396474953,1,mp_route,Mexican Pillar,Mijo,916,Mexican Pillar,test
+474237.3883242874,3984636.8730091047,1,mp_route,Wrangler wall,"Searching for the Elephant  aka ""Cowboys are always looking""",316,Wrangler wall,train
+474239.6974870867,3984634.746389254,1,mp_route,Wrangler wall,Randy's Crack,333,Wrangler wall,train
+474239.79859606485,3984638.8568225442,1,mp_route,Wrangler wall,Cowboy Coffee,287,Wrangler wall,train
+474234.5516964645,3984635.8173759673,1,mp_route,Wrangler wall,Cowboy Engineered,316,Wrangler wall,train
+474242.79633389873,3984634.1166616785,1,mp_route,Wrangler wall,Bowlegged Cowboy,370,Wrangler wall,train
+474231.481095599,3984635.036478744,1,mp_route,Wrangler wall,Bucked off,357,Wrangler wall,train
+474239.16762706294,3984644.549209654,1,mp_route,Wrangler wall,The Inspiration,327,Wrangler wall,train
+474289.36939745303,3984600.2076717317,1,mp_route,Warthog Wall,Michael Thirteen,366,Warthog Wall,val
+474294.77708202304,3984602.859799087,1,mp_route,Warthog Wall,Grant Sixteen,270,Warthog Wall,val
+474108.03205774503,3984891.760348353,1,mp_route,Jungle Cliff,The Jungles of Arkansas,413,Jungle Cliff,train
+474107.4714412815,3984888.32843019,1,mp_route,Jungle Cliff,Jungle Porn,401,Jungle Cliff,train
+473582.46839905897,3985079.81026448,0,stepback_base,The Land Beyond Routes,,875,The Land Beyond Routes,test
+473542.8452922019,3985074.3321806,0,stepback_top,The Land Beyond Routes,,2631,The Land Beyond Routes,test
+473578.43171815784,3985086.7039404595,0,stepback_base,The Land Beyond Routes,,696,The Land Beyond Routes,test
+473541.77547808364,3985070.693941596,0,stepback_top,The Land Beyond Routes,,2464,The Land Beyond Routes,test
+473580.12719458377,3985070.7443231517,0,stepback_base,The Land Beyond Routes,,677,The Land Beyond Routes,test
+473540.93042090244,3985078.7200947735,0,stepback_top,The Land Beyond Routes,,2253,The Land Beyond Routes,test
+473580.084770109,3985091.2434124835,0,stepback_base,The Land Beyond Routes,,873,The Land Beyond Routes,test
+473545.85102499084,3985070.5540264323,0,stepback_top,The Land Beyond Routes,,1974,The Land Beyond Routes,test
+473569.02261389256,3985064.678298591,0,stepback_base,The Land Beyond Routes,,827,The Land Beyond Routes,test
+473571.0066837113,3985056.9282362075,0,stepback_base,The Land Beyond Routes,,876,The Land Beyond Routes,test
+473561.08633461746,3985095.678548127,0,stepback_top,The Land Beyond Routes,,736,The Land Beyond Routes,test
+473546.3109478927,3985071.2228098772,0,stepback_top,The Land Beyond Routes,,2007,The Land Beyond Routes,test
+473538.8652546234,3985068.296779847,0,stepback_top,The Land Beyond Routes,,2128,The Land Beyond Routes,test
+473576.5324598855,3985090.1213410287,0,stepback_base,The Land Beyond Routes,,611,The Land Beyond Routes,test
+473540.4855353997,3985072.78296639,0,stepback_top,The Land Beyond Routes,,2392,The Land Beyond Routes,test
+473569.5070918897,3985093.479462828,0,stepback_top,The Land Beyond Routes,,769,The Land Beyond Routes,test
+473571.57626995107,3985101.2072375496,0,stepback_top,The Land Beyond Routes,,991,The Land Beyond Routes,test
+473573.46385314094,3985067.2601593155,0,stepback_base,The Land Beyond Routes,,715,The Land Beyond Routes,test
+473576.8129314722,3985059.9949219255,0,stepback_base,The Land Beyond Routes,,586,The Land Beyond Routes,test
+473580.3672611286,3985088.428473679,0,stepback_base,The Land Beyond Routes,,862,The Land Beyond Routes,test
+473541.617255287,3985078.5069290777,0,stepback_top,The Land Beyond Routes,,2309,The Land Beyond Routes,test
+473547.1608820359,3985076.9748181263,0,stepback_top,The Land Beyond Routes,,2125,The Land Beyond Routes,test
+473576.91939650825,3985065.209155527,0,stepback_base,The Land Beyond Routes,,521,The Land Beyond Routes,test
+473539.7212534178,3985079.916233776,0,stepback_top,The Land Beyond Routes,,1967,The Land Beyond Routes,test
+473567.03364110534,3985060.3635447775,0,stepback_base,The Land Beyond Routes,,884,The Land Beyond Routes,test
+473570.95708470175,3985053.3917020983,0,stepback_base,The Land Beyond Routes,,797,The Land Beyond Routes,test
+473558.1856678782,3985058.372925963,0,stepback_base,The Land Beyond Routes,,1033,The Land Beyond Routes,test
+473552.5467400341,3985097.9734624843,0,stepback_top,The Land Beyond Routes,,1208,The Land Beyond Routes,test
+473564.07864882465,3985062.263896638,0,stepback_top,The Land Beyond Routes,,914,The Land Beyond Routes,test
+473575.93049745675,3985091.9881911464,0,stepback_base,The Land Beyond Routes,,620,The Land Beyond Routes,test
+473579.21985627676,3985088.875084447,0,stepback_top,The Land Beyond Routes,,801,The Land Beyond Routes,test
+473585.5467863076,3985093.770996659,0,stepback_top,The Land Beyond Routes,,805,The Land Beyond Routes,test
+473570.184397665,3985095.6948552155,0,stepback_base,The Land Beyond Routes,,825,The Land Beyond Routes,test
+473540.8953161049,3985068.452430555,0,stepback_top,The Land Beyond Routes,,2375,The Land Beyond Routes,test
+473578.7836666665,3985067.1652474795,0,stepback_base,The Land Beyond Routes,,583,The Land Beyond Routes,test
+473584.091232035,3985061.1794518046,0,stepback_base,The Land Beyond Routes,,712,The Land Beyond Routes,test
+473542.5218266244,3985076.9248388926,0,stepback_base,The Land Beyond Routes,,2601,The Land Beyond Routes,test
+473534.7278140035,3985078.7285481994,0,stepback_base,The Land Beyond Routes,,929,The Land Beyond Routes,test
+473568.403114992,3985062.65429817,0,stepback_base,The Land Beyond Routes,,894,The Land Beyond Routes,test
+473575.07219354453,3985058.235769992,0,stepback_base,The Land Beyond Routes,,667,The Land Beyond Routes,test
+473541.72680078197,3985080.328410882,0,stepback_top,The Land Beyond Routes,,2178,The Land Beyond Routes,test
+473549.3667196892,3985086.8312782208,0,stepback_top,The Land Beyond Routes,,1508,The Land Beyond Routes,test
+473581.3659292694,3985086.606364366,0,stepback_base,The Land Beyond Routes,,889,The Land Beyond Routes,test
+473541.36691729416,3985086.8875066848,0,stepback_top,The Land Beyond Routes,,2378,The Land Beyond Routes,test
+473378.33900790947,3984974.5642549563,0,stepback_top,North Forty Routes,,422,North Forty Routes,train
+473389.04223271547,3984938.8889141553,0,stepback_top,North Forty Routes,,394,North Forty Routes,train
+473372.9832412386,3985000.7491823924,0,stepback_top,North Forty Routes,,543,North Forty Routes,train
+473398.0834323802,3984943.143751341,0,stepback_top,North Forty Routes,,487,North Forty Routes,train
+473363.12306215835,3984932.6503260406,0,stepback_base,North Forty Routes,,496,North Forty Routes,train
+473340.5587401394,3984984.0786300926,0,stepback_top,North Forty Routes,,534,North Forty Routes,train
+473379.35982819274,3984973.1064049825,0,stepback_top,North Forty Routes,,443,North Forty Routes,train
+473336.752606121,3984954.9747267948,0,stepback_base,North Forty Routes,,363,North Forty Routes,train
+473395.28609105217,3984966.1953911623,0,stepback_top,North Forty Routes,,348,North Forty Routes,train
+473400.95585492085,3984960.551476061,0,stepback_top,North Forty Routes,,451,North Forty Routes,train
+473366.57348083553,3984927.8054317855,0,stepback_base,North Forty Routes,,519,North Forty Routes,train
+473374.5672589327,3984992.259510958,0,stepback_base,North Forty Routes,,499,North Forty Routes,train
+473380.3461189903,3984997.7916693464,0,stepback_base,North Forty Routes,,455,North Forty Routes,train
+473338.16372392693,3984948.3572913343,0,stepback_base,North Forty Routes,,478,North Forty Routes,train
+473357.03140340035,3985000.345384781,0,stepback_top,North Forty Routes,,452,North Forty Routes,train
+473334.53891363123,3984971.861163573,0,stepback_top,North Forty Routes,,358,North Forty Routes,train
+473398.2815604114,3984970.730540481,0,stepback_base,North Forty Routes,,338,North Forty Routes,train
+473404.9226955278,3984966.270122971,0,stepback_base,North Forty Routes,,440,North Forty Routes,train
+473388.61185090936,3984946.347587209,0,stepback_top,North Forty Routes,,536,North Forty Routes,train
+473396.5940340718,3984946.881208762,0,stepback_top,North Forty Routes,,519,North Forty Routes,train
+473374.2203541576,3984991.358861291,0,stepback_base,North Forty Routes,,496,North Forty Routes,train
+473381.33460954414,3984995.0177368415,0,stepback_base,North Forty Routes,,480,North Forty Routes,train
+473341.6854921681,3984981.156905771,0,stepback_top,North Forty Routes,,574,North Forty Routes,train
+473335.1804224179,3984985.813521231,0,stepback_top,North Forty Routes,,513,North Forty Routes,train
+473331.84432320873,3984961.408877055,0,stepback_base,North Forty Routes,,448,North Forty Routes,train
+473352.6921767476,3984933.5465349825,0,stepback_base,North Forty Routes,,522,North Forty Routes,train
+473339.46089441894,3984977.190494583,0,stepback_base,North Forty Routes,,551,North Forty Routes,train
+473332.5528998689,3984981.2252946147,0,stepback_base,North Forty Routes,,470,North Forty Routes,train
+473397.3596371794,3984984.8780694692,0,stepback_top,North Forty Routes,,430,North Forty Routes,train
+473401.20656213386,3984991.8924239227,0,stepback_top,North Forty Routes,,451,North Forty Routes,train
+473365.13644273876,3984924.921591304,0,stepback_base,North Forty Routes,,577,North Forty Routes,train
+473403.535041612,3984957.6069902536,0,stepback_top,North Forty Routes,,405,North Forty Routes,train
+473411.3224042218,3984959.4391975515,0,stepback_top,North Forty Routes,,298,North Forty Routes,train
+473400.71405847755,3984978.8310265974,0,stepback_base,North Forty Routes,,387,North Forty Routes,train
+473408.51529328665,3984977.0588145745,0,stepback_base,North Forty Routes,,435,North Forty Routes,train
+473392.27568865154,3984966.4504524674,0,stepback_base,North Forty Routes,,377,North Forty Routes,train
+473390.3445060229,3984990.3726290753,0,stepback_top,North Forty Routes,,459,North Forty Routes,train
+473389.7007784801,3984998.3466879446,0,stepback_top,North Forty Routes,,478,North Forty Routes,train
+473368.7618628367,3984924.0272150873,0,stepback_base,North Forty Routes,,515,North Forty Routes,train
+473328.79398063006,3984971.5081840963,0,stepback_top,North Forty Routes,,486,North Forty Routes,train
+473343.0170920769,3984981.5242612013,0,stepback_base,North Forty Routes,,548,North Forty Routes,train
+473335.24728868325,3984979.6189645776,0,stepback_base,North Forty Routes,,461,North Forty Routes,train
+473363.1449374654,3984935.4494794277,0,stepback_top,North Forty Routes,,502,North Forty Routes,train
+473356.20300290367,3984931.4733576314,0,stepback_top,North Forty Routes,,429,North Forty Routes,train
+473387.0341888414,3984932.5277912435,0,stepback_base,North Forty Routes,,458,North Forty Routes,train
+473391.33130975795,3984925.7798469765,0,stepback_base,North Forty Routes,,537,North Forty Routes,train
+473358.2005254745,3984999.9261189103,0,stepback_top,North Forty Routes,,467,North Forty Routes,train
+473352.89219372487,3985005.9112349525,0,stepback_top,North Forty Routes,,463,North Forty Routes,train
+473343.8167142694,3984986.0960542345,0,stepback_base,North Forty Routes,,534,North Forty Routes,train
+473335.8563137916,3984985.3010547166,0,stepback_base,North Forty Routes,,517,North Forty Routes,train
+473377.81612745504,3984930.936281762,0,stepback_base,North Forty Routes,,504,North Forty Routes,train
+473383.2976409422,3984925.109360629,0,stepback_base,North Forty Routes,,540,North Forty Routes,train
+473333.56554915174,3984966.315648901,0,stepback_top,North Forty Routes,,407,North Forty Routes,train
+473326.39080025145,3984969.8544309256,0,stepback_top,North Forty Routes,,505,North Forty Routes,train
+473339.4034872758,3984980.8506428245,0,stepback_top,North Forty Routes,,545,North Forty Routes,train
+473336.4647290287,3984988.2913215547,0,stepback_top,North Forty Routes,,515,North Forty Routes,train
+473382.9511543476,3984932.606908068,0,stepback_base,North Forty Routes,,500,North Forty Routes,train
+473390.05655806145,3984928.930872423,0,stepback_base,North Forty Routes,,553,North Forty Routes,train
+473356.1675059727,3985002.4996769787,0,stepback_top,North Forty Routes,,430,North Forty Routes,train
+473351.0047670771,3985008.610824751,0,stepback_top,North Forty Routes,,523,North Forty Routes,train
+473330.65622578235,3984966.414270999,0,stepback_top,North Forty Routes,,459,North Forty Routes,train
+473322.67124337854,3984966.9042261094,0,stepback_top,North Forty Routes,,498,North Forty Routes,train
+473345.9397418475,3984981.2789162467,0,stepback_base,North Forty Routes,,487,North Forty Routes,train
+473367.8245532312,3985004.6253299047,0,stepback_top,North Forty Routes,,519,North Forty Routes,train
+473344.371241875,3984934.3328303676,0,stepback_base,North Forty Routes,,486,North Forty Routes,train
+473340.5632447935,3984927.2972665504,0,stepback_base,North Forty Routes,,468,North Forty Routes,train
+473533.5598731539,3984984.2047943654,0,stepback_base,Kindergarten Boulder,,2756,Kindergarten Boulder,train
+473519.5176667188,3984946.750603166,0,stepback_top,Kindergarten Boulder,,446,Kindergarten Boulder,train
+473533.2422109783,3984948.9162356933,0,stepback_base,Kindergarten Boulder,,2223,Kindergarten Boulder,train
+473536.20549405704,3984941.4852900337,0,stepback_base,Kindergarten Boulder,,2394,Kindergarten Boulder,train
+473521.3890786632,3984978.640018332,0,stepback_top,Kindergarten Boulder,,389,Kindergarten Boulder,train
+473510.4790305822,3984966.7790608206,0,stepback_base,Kindergarten Boulder,,439,Kindergarten Boulder,train
+473502.84260963526,3984969.163400377,0,stepback_base,Kindergarten Boulder,,442,Kindergarten Boulder,train
+473535.25890532706,3984976.0451891464,0,stepback_base,Kindergarten Boulder,,2423,Kindergarten Boulder,train
+473538.7520749145,3984983.242255648,0,stepback_base,Kindergarten Boulder,,2185,Kindergarten Boulder,train
+473521.2862269771,3984947.2569231386,0,stepback_top,Kindergarten Boulder,,565,Kindergarten Boulder,train
+473516.1390805733,3984976.422583626,0,stepback_base,Kindergarten Boulder,,335,Kindergarten Boulder,train
+473511.6595770216,3984983.050860018,0,stepback_base,Kindergarten Boulder,,340,Kindergarten Boulder,train
+473534.05709478015,3984949.9094780576,0,stepback_top,Kindergarten Boulder,,2054,Kindergarten Boulder,train
+473509.23728849017,3984963.9528960083,0,stepback_base,Kindergarten Boulder,,438,Kindergarten Boulder,train
+473501.6262912167,3984966.4171850546,0,stepback_base,Kindergarten Boulder,,423,Kindergarten Boulder,train
+473539.68127758394,3984954.0957398233,0,stepback_top,Kindergarten Boulder,,1400,Kindergarten Boulder,train
+473536.0970690877,3984947.1677965727,0,stepback_base,Kindergarten Boulder,,2033,Kindergarten Boulder,train
+473540.7377891864,3984940.6513775433,0,stepback_base,Kindergarten Boulder,,1698,Kindergarten Boulder,train
+473524.19576237653,3984941.6489831707,0,stepback_base,Kindergarten Boulder,,1351,Kindergarten Boulder,train
+473539.58406628214,3984978.5705229933,0,stepback_top,Kindergarten Boulder,,1526,Kindergarten Boulder,train
+473531.0925347726,3984979.898281605,0,stepback_base,Kindergarten Boulder,,2686,Kindergarten Boulder,train
+473534.1324988091,3984987.2981882705,0,stepback_base,Kindergarten Boulder,,2691,Kindergarten Boulder,train
+473508.6373078216,3984970.0494846157,0,stepback_base,Kindergarten Boulder,,452,Kindergarten Boulder,train
+473501.2799428252,3984973.1910097725,0,stepback_base,Kindergarten Boulder,,435,Kindergarten Boulder,train
+473539.61367734394,3984974.166251193,0,stepback_base,Kindergarten Boulder,,901,Kindergarten Boulder,train
+473543.89685021975,3984980.923057399,0,stepback_base,Kindergarten Boulder,,1342,Kindergarten Boulder,train
+473522.4809858407,3984947.1390263657,0,stepback_top,Kindergarten Boulder,,679,Kindergarten Boulder,train
+473507.11221369257,3984966.4456523173,0,stepback_base,Kindergarten Boulder,,442,Kindergarten Boulder,train
+473499.64041379566,3984969.30435942,0,stepback_base,Kindergarten Boulder,,381,Kindergarten Boulder,train
+473519.5400224305,3984981.016174064,0,stepback_top,Kindergarten Boulder,,398,Kindergarten Boulder,train
+473517.0786814757,3984988.62812524,0,stepback_top,Kindergarten Boulder,,449,Kindergarten Boulder,train
+473536.4939140095,3984947.3398516793,0,stepback_base,Kindergarten Boulder,,1990,Kindergarten Boulder,train
+473543.15918655996,3984942.9155843016,0,stepback_base,Kindergarten Boulder,,1632,Kindergarten Boulder,train
+473509.8328238076,3984965.036921189,0,stepback_top,Kindergarten Boulder,,435,Kindergarten Boulder,train
+473507.8199549493,3984961.5342745273,0,stepback_base,Kindergarten Boulder,,429,Kindergarten Boulder,train
+473500.2787923608,3984964.204642819,0,stepback_base,Kindergarten Boulder,,421,Kindergarten Boulder,train
+473537.9846053035,3984950.8528013607,0,stepback_top,Kindergarten Boulder,,1545,Kindergarten Boulder,train
+473536.07108184556,3984980.094033671,0,stepback_top,Kindergarten Boulder,,2712,Kindergarten Boulder,train
+473539.4662586278,3984987.3378430707,0,stepback_top,Kindergarten Boulder,,2325,Kindergarten Boulder,train
+473541.4225564886,3984971.5583818154,0,stepback_base,Kindergarten Boulder,,711,Kindergarten Boulder,train
+473545.788752729,3984978.2618384156,0,stepback_base,Kindergarten Boulder,,1230,Kindergarten Boulder,train
+473523.9577715268,3984944.7445554147,0,stepback_top,Kindergarten Boulder,,1193,Kindergarten Boulder,train
+473535.3863875572,3984979.3456023796,0,stepback_top,Kindergarten Boulder,,2792,Kindergarten Boulder,train
+473532.68371238414,3984947.4599387217,0,stepback_base,Kindergarten Boulder,,2253,Kindergarten Boulder,train
+473536.06205635046,3984987.317018294,0,stepback_top,Kindergarten Boulder,,2653,Kindergarten Boulder,train
+473505.0946630572,3984964.6184744863,0,stepback_base,Kindergarten Boulder,,457,Kindergarten Boulder,train
+473497.7884742027,3984967.87724794,0,stepback_base,Kindergarten Boulder,,366,Kindergarten Boulder,train
+473221.76256658084,3984577.3888418498,0,stepback_base,Titanic Boulder,,503,Titanic Boulder,train
+473182.1983112392,3984583.276939952,0,stepback_top,Titanic Boulder,,462,Titanic Wall,val
+473223.5973526448,3984582.8493671394,0,stepback_base,Titanic Boulder,,531,Titanic Boulder,train
+473231.4398825408,3984584.4288369333,0,stepback_base,Titanic Boulder,,461,Titanic Boulder,train
+473212.58519905,3984558.1042978195,0,stepback_base,Titanic Boulder,,436,Titanic Boulder,train
+473216.32698448066,3984551.0332977637,0,stepback_base,Titanic Boulder,,500,Titanic Boulder,train
+473183.25322615984,3984594.69464408,0,stepback_top,Titanic Boulder,,499,Titanic Wall,val
+473185.38183299964,3984570.5029308307,0,stepback_top,Titanic Boulder,,542,Titanic Wall,val
+473177.6171376745,3984568.5769229108,0,stepback_top,Titanic Boulder,,519,Titanic Wall,val
+473300.72123637405,3984430.1894981153,0,stepback_base,Prophecy Wall,,389,Prophecy Wall,test
+473304.2180083304,3984437.384815057,0,stepback_base,Prophecy Wall,,232,Prophecy Wall,test
+473286.73414854886,3984401.4082303504,0,stepback_top,Prophecy Wall,,438,Prophecy Wall,test
+473309.07183648524,3984425.798663078,0,stepback_base,Prophecy Wall,,236,Prophecy Wall,test
+473316.31948959164,3984429.1856269767,0,stepback_base,Prophecy Wall,,228,Prophecy Wall,test
+473280.0812240597,3984412.250807484,0,stepback_top,Prophecy Wall,,437,Prophecy Wall,test
+473282.65812328144,3984414.036960396,0,stepback_base,Prophecy Wall,,398,Prophecy Wall,test
+473306.28268127784,3984418.2654659795,0,stepback_top,Prophecy Wall,,475,Prophecy Wall,test
+473274.7832706159,3984412.6274585347,0,stepback_base,Prophecy Wall,,461,Prophecy Wall,test
+473314.15753394336,3984419.674967841,0,stepback_top,Prophecy Wall,,286,Prophecy Wall,test
+473284.79326478584,3984408.9226393458,0,stepback_base,Prophecy Wall,,482,Prophecy Wall,test
+473279.91324246844,3984402.5834452184,0,stepback_base,Prophecy Wall,,449,Prophecy Wall,test
+473304.31335405534,3984434.2794158543,0,stepback_top,Prophecy Wall,,244,Prophecy Wall,test
+473284.4620423467,3984405.12307994,0,stepback_top,Prophecy Wall,,470,Prophecy Wall,test
+473303.6264000822,3984430.7497729105,0,stepback_base,Prophecy Wall,,298,Prophecy Wall,test
+473279.6709529128,3984398.716406698,0,stepback_top,Prophecy Wall,,462,Prophecy Wall,test
+473294.436356484,3984433.5470390986,0,stepback_base,Prophecy Wall,,452,Prophecy Wall,test
+473297.4450376376,3984440.959719971,0,stepback_base,Prophecy Wall,,405,Prophecy Wall,test
+473282.4016318697,3984403.896315609,0,stepback_top,Prophecy Wall,,436,Prophecy Wall,test
+473291.88382280845,3984430.2084902353,0,stepback_base,Prophecy Wall,,522,Prophecy Wall,test
+473286.3037906356,3984406.8661844167,0,stepback_top,Prophecy Wall,,522,Prophecy Wall,test
+473293.74383353273,3984437.9892588416,0,stepback_base,Prophecy Wall,,465,Prophecy Wall,test
+473284.4437799113,3984399.0854158103,0,stepback_top,Prophecy Wall,,421,Prophecy Wall,test
+473561.76212859,3984151.706185232,0,stepback_base,Confederate Cracks,,1016,Confederate Cracks,train
+473541.4739904315,3984117.2331312615,0,stepback_top,Confederate Cracks,,2174,Confederate Cracks,train
+473570.1078140211,3984146.0934387436,0,stepback_base,Confederate Cracks,,1101,Confederate Cracks,train
+473533.8598449196,3984129.179399131,0,stepback_top,Confederate Cracks,,2286,Confederate Cracks,train
+473551.31630372367,3984155.3813291136,0,stepback_base,Confederate Cracks,,1411,Confederate Cracks,train
+473545.53051568003,3984115.8019827735,0,stepback_top,Confederate Cracks,,1728,Confederate Cracks,train
+473545.69293369167,3984151.563063174,0,stepback_base,Confederate Cracks,,1788,Confederate Cracks,train
+473568.22772496945,3984145.752052385,0,stepback_base,Confederate Cracks,,1222,Confederate Cracks,train
+473538.9775533175,3984118.467854425,0,stepback_top,Confederate Cracks,,2544,Confederate Cracks,train
+473568.4114056644,3984149.700570446,0,stepback_base,Confederate Cracks,,1208,Confederate Cracks,train
+473542.30613638496,3984119.393559444,0,stepback_top,Confederate Cracks,,2085,Confederate Cracks,train
+473567.20984921476,3984148.7121731048,0,stepback_base,Confederate Cracks,,1247,Confederate Cracks,train
+473531.7329933685,3984130.235357923,0,stepback_top,Confederate Cracks,,1886,Confederate Cracks,train
+473570.96926926094,3984126.4940691683,0,stepback_base,Confederate Cracks,,927,Confederate Cracks,train
+473531.3281382855,3984131.8401644705,0,stepback_top,Confederate Cracks,,1763,Confederate Cracks,train
+473539.3993439612,3984151.7230229047,0,stepback_top,Confederate Cracks,,2307,Confederate Cracks,train
+473550.92954728444,3984151.562266931,0,stepback_base,Confederate Cracks,,1413,Confederate Cracks,train
+473548.77000218286,3984159.2652770537,0,stepback_base,Confederate Cracks,,1459,Confederate Cracks,train
+473559.56772769074,3984120.7502264394,0,stepback_top,Confederate Cracks,,1392,Confederate Cracks,train
+473546.4523839072,3984149.761322884,0,stepback_top,Confederate Cracks,,1708,Confederate Cracks,train
+473545.46480358863,3984117.7765658093,0,stepback_base,Confederate Cracks,,1641,Confederate Cracks,train
+473546.69927898684,3984157.7575121527,0,stepback_top,Confederate Cracks,,1672,Confederate Cracks,train
+473558.3260931179,3984118.800941434,0,stepback_base,Confederate Cracks,,1460,Confederate Cracks,train
+473559.58886010206,3984110.901231342,0,stepback_base,Confederate Cracks,,1308,Confederate Cracks,train
+473553.2750251813,3984150.3997818036,0,stepback_top,Confederate Cracks,,1137,Confederate Cracks,train
+473561.7285766402,3984117.051993891,0,stepback_base,Confederate Cracks,,1269,Confederate Cracks,train
+473553.5354054989,3984156.2039024862,0,stepback_top,Confederate Cracks,,1194,Confederate Cracks,train
+473543.54301192134,3984118.4034359045,0,stepback_top,Confederate Cracks,,1853,Confederate Cracks,train
+473541.20766031585,3984110.7518914277,0,stepback_top,Confederate Cracks,,2104,Confederate Cracks,train
+473566.84700773616,3984142.1426990097,0,stepback_base,Confederate Cracks,,1170,Confederate Cracks,train
+473572.5266601755,3984147.776662816,0,stepback_base,Confederate Cracks,,891,Confederate Cracks,train
+473544.1283979787,3984119.606843786,0,stepback_top,Confederate Cracks,,1726,Confederate Cracks,train
+473562.250922074,3984146.0107014487,0,stepback_base,Confederate Cracks,,1055,Confederate Cracks,train
+473569.8741832494,3984148.4367865776,0,stepback_base,Confederate Cracks,,1138,Confederate Cracks,train
+473531.75787737255,3984136.3063609335,0,stepback_top,Confederate Cracks,,1829,Confederate Cracks,train
+473563.8943045306,3984121.358226447,0,stepback_base,Confederate Cracks,,1190,Confederate Cracks,train
+473570.94915289973,3984117.586076597,0,stepback_base,Confederate Cracks,,1374,Confederate Cracks,train
+473535.6749110539,3984136.4468258456,0,stepback_top,Confederate Cracks,,2481,Confederate Cracks,train
+473557.89244618756,3984152.2300427374,0,stepback_base,Confederate Cracks,,1073,Confederate Cracks,train
+473558.2153630165,3984160.223522876,0,stepback_base,Confederate Cracks,,829,Confederate Cracks,train
+473556.60077887174,3984120.2561221845,0,stepback_top,Confederate Cracks,,1521,Confederate Cracks,train
+473542.095472975,3984155.371680368,0,stepback_base,Confederate Cracks,,2327,Confederate Cracks,train
+473544.90525124915,3984115.4704880794,0,stepback_top,Confederate Cracks,,1812,Confederate Cracks,train
+473557.0436951817,3984148.394747274,0,stepback_base,Confederate Cracks,,849,Confederate Cracks,train
+473563.6044550827,3984152.9725665716,0,stepback_base,Confederate Cracks,,1099,Confederate Cracks,train
+473530.8006555779,3984130.0834700833,0,stepback_top,Confederate Cracks,,1702,Confederate Cracks,train
+473550.3097075414,3983965.3342122,0,stepback_base,Crackhouse Alley,,965,Crackhouse Alley,test
+473510.4144277239,3983968.226728107,0,stepback_top,Crackhouse Alley,,229,Crackhouse Alley,test
+473533.8708497314,3983950.1639899113,0,stepback_base,Crackhouse Alley,,1084,Crackhouse Alley,test
+473525.60803225974,3983989.3012592006,0,stepback_top,Crackhouse Alley,,724,Crackhouse Alley,test
+473528.98415102204,3983948.9990531197,0,stepback_base,Crackhouse Alley,,2124,Crackhouse Alley,test
+473546.3705650014,3983954.9813242485,0,stepback_base,Crackhouse Alley,,988,Crackhouse Alley,test
+473510.9216069506,3983973.5116068446,0,stepback_top,Crackhouse Alley,,251,Crackhouse Alley,test
+473514.32746875455,3983969.5232770657,0,stepback_top,Crackhouse Alley,,324,Crackhouse Alley,test
+473545.6456880999,3983962.9529546206,0,stepback_base,Crackhouse Alley,,1024,Crackhouse Alley,test
+473506.4979139182,3983971.165857677,0,stepback_top,Crackhouse Alley,,197,Crackhouse Alley,test
+473545.4831537213,3983956.6483131764,0,stepback_base,Crackhouse Alley,,1035,Crackhouse Alley,test
+473519.1244739095,3983986.735187367,0,stepback_top,Crackhouse Alley,,373,Crackhouse Alley,test
+473518.80348678783,3983980.690561241,0,stepback_top,Crackhouse Alley,,398,Crackhouse Alley,test
+473514.1877449829,3983987.2246968066,0,stepback_top,Crackhouse Alley,,358,Crackhouse Alley,test
+473537.5562963316,3983980.8210076992,0,stepback_base,Crackhouse Alley,,2125,Crackhouse Alley,test
+473543.5492794633,3983986.1204560837,0,stepback_base,Crackhouse Alley,,1290,Crackhouse Alley,test
+473513.5843638047,3983959.62321416,0,stepback_top,Crackhouse Alley,,287,Crackhouse Alley,test
+473536.8271506264,3983951.7978312476,0,stepback_base,Crackhouse Alley,,972,Crackhouse Alley,test
+473541.752841192,3983945.494056787,0,stepback_base,Crackhouse Alley,,887,Crackhouse Alley,test
+473542.9988838081,3983950.7321162047,0,stepback_base,Crackhouse Alley,,906,Crackhouse Alley,test
+473509.7610923695,3983972.98631177,0,stepback_top,Crackhouse Alley,,224,Crackhouse Alley,test
+473546.32406808966,3983950.731449282,0,stepback_base,Crackhouse Alley,,956,Crackhouse Alley,test
+473527.5097304596,3983986.030467675,0,stepback_top,Crackhouse Alley,,1423,Crackhouse Alley,test
+473540.382029294,3983982.7834021295,0,stepback_top,Crackhouse Alley,,1388,Crackhouse Alley,test
+473543.2686108029,3983990.244477601,0,stepback_top,Crackhouse Alley,,1308,Crackhouse Alley,test
+473541.8966007659,3983951.776765157,0,stepback_base,Crackhouse Alley,,929,Crackhouse Alley,test
+473546.65534666344,3983945.3460313356,0,stepback_base,Crackhouse Alley,,1192,Crackhouse Alley,test
+473549.933587041,3983962.1705922964,0,stepback_base,Crackhouse Alley,,1089,Crackhouse Alley,test
+473517.9925529023,3983986.249012887,0,stepback_top,Crackhouse Alley,,367,Crackhouse Alley,test
+473524.8810457046,3983985.8171936045,0,stepback_top,Crackhouse Alley,,690,Crackhouse Alley,test
+473529.5868017742,3983946.79710052,0,stepback_base,Crackhouse Alley,,2066,Crackhouse Alley,test
+473528.6219735794,3983938.8554944764,0,stepback_base,Crackhouse Alley,,1796,Crackhouse Alley,test
+473537.80904171633,3983985.8126190472,0,stepback_base,Crackhouse Alley,,1596,Crackhouse Alley,test
+473545.2035609507,3983972.5048494292,0,stepback_base,Crackhouse Alley,,1695,Crackhouse Alley,test
+473550.0103045575,3983978.8997861687,0,stepback_base,Crackhouse Alley,,1482,Crackhouse Alley,test
+473525.9765865236,3983946.9251024723,0,stepback_top,Crackhouse Alley,,2489,Crackhouse Alley,test
+473527.74742738233,3983983.8472986636,0,stepback_base,Crackhouse Alley,,1437,Crackhouse Alley,test
+473515.61696673057,3983954.2356130583,0,stepback_top,Crackhouse Alley,,325,Crackhouse Alley,test
+473531.6275662659,3983947.6677992386,0,stepback_base,Crackhouse Alley,,1764,Crackhouse Alley,test
+473534.62473315856,3983940.250455333,0,stepback_base,Crackhouse Alley,,2039,Crackhouse Alley,test
+473527.81517686066,3983987.7285187324,0,stepback_base,Crackhouse Alley,,1467,Crackhouse Alley,test
+473528.7601312789,3983995.6725140214,0,stepback_base,Crackhouse Alley,,1578,Crackhouse Alley,test
+473183.7366260312,3984578.4222173514,0,stepback_top,Titanic Wall,,435,Titanic Wall,val
+473175.76840686303,3984579.1345959636,0,stepback_top,Titanic Wall,,492,Titanic Wall,val
+473189.9710725497,3984590.5642436757,0,stepback_top,Titanic Wall,,469,Titanic Wall,val
+473198.2587007172,3984559.656069686,0,stepback_base,Titanic Wall,,399,Titanic Wall,val
+473187.8991655078,3984598.291287173,0,stepback_top,Titanic Wall,,462,The Doomsday Wall,val
+473186.75928778714,3984591.1450719396,0,stepback_top,Titanic Wall,,471,Titanic Wall,val
+473181.1409217836,3984596.840154331,0,stepback_top,Titanic Wall,,528,The Doomsday Wall,val
+473181.2435713144,3984573.593290519,0,stepback_top,Titanic Wall,,539,Titanic Wall,val
+473173.2913808846,3984574.4665988083,0,stepback_top,Titanic Wall,,518,Titanic Wall,val
+473185.1236852854,3984569.320996721,0,stepback_top,Titanic Wall,,564,Titanic Wall,val
+473217.0597917885,3984571.342160104,0,stepback_base,Titanic Wall,,526,Titanic Boulder,train
+473177.13965865964,3984568.815705875,0,stepback_top,Titanic Wall,,505,Titanic Wall,val
+473184.47091896535,3984573.277634065,0,stepback_base,Titanic Wall,,511,Titanic Wall,val
+473198.97413658624,3984592.3997855824,0,stepback_top,Titanic Wall,,506,Titanic Wall,val
+473179.63651309174,3984566.9035835597,0,stepback_base,Titanic Wall,,516,Titanic Wall,val
+473209.71822823415,3984608.1700426238,0,stepback_base,The Doomsday Wall,,396,The Doomsday Wall,val
+473186.02964827017,3984604.316319841,0,stepback_top,The Doomsday Wall,,544,The Doomsday Wall,val
+473217.6144215555,3984609.4546168847,0,stepback_base,The Doomsday Wall,,675,The Doomsday Wall,val
+473178.13345494884,3984603.03174558,0,stepback_top,The Doomsday Wall,,564,The Doomsday Wall,val
+473212.40796405077,3984601.755835033,0,stepback_base,The Doomsday Wall,,443,The Doomsday Wall,val
+473219.9556512513,3984599.1039643874,0,stepback_base,The Doomsday Wall,,428,The Doomsday Wall,val
+473182.21721524844,3984612.3633176163,0,stepback_top,The Doomsday Wall,,546,The Doomsday Wall,val
+473209.25098702265,3984605.3804238196,0,stepback_base,The Doomsday Wall,,374,The Doomsday Wall,val
+473185.63658153766,3984601.0955838477,0,stepback_top,The Doomsday Wall,,480,The Doomsday Wall,val
+473217.12245551764,3984606.8087038104,0,stepback_base,The Doomsday Wall,,626,The Doomsday Wall,val
+473177.76511304267,3984599.667303857,0,stepback_top,The Doomsday Wall,,526,The Doomsday Wall,val
+473196.2389623682,3984622.3962946325,0,stepback_top,The Doomsday Wall,,463,The Doomsday Wall,val
+473196.8546520828,3984590.402218209,0,stepback_base,The Doomsday Wall,,450,Titanic Wall,val
+473196.0850399396,3984630.3948137383,0,stepback_top,The Doomsday Wall,,531,The Doomsday Wall,val
+473433.2111932978,3984324.686270139,0,stepback_top,The Arcade,,524,The Arcade,val
+473448.924437008,3984352.562675433,0,stepback_base,The Arcade,,476,The Arcade,val
+473429.2828823703,3984317.717168816,0,stepback_top,The Arcade,,556,The Arcade,val
+473434.3663727997,3984358.4749017297,0,stepback_base,The Arcade,,376,The Arcade,val
+473447.5921164406,3984320.724673848,0,stepback_top,The Arcade,,435,The Arcade,val
+473425.73444478266,3984340.665729465,0,stepback_top,The Arcade,,379,The Arcade,val
+473457.24662331183,3984335.0995274973,0,stepback_base,The Arcade,,478,The Arcade,val
+473417.8564001504,3984342.057279957,0,stepback_top,The Arcade,,417,The Arcade,val
+473439.46226147725,3984321.0977513446,0,stepback_base,The Arcade,,438,The Arcade,val
+473437.6712420314,3984313.3008128847,0,stepback_base,The Arcade,,445,The Arcade,val
+473446.6263392607,3984352.2855051835,0,stepback_top,The Arcade,,497,The Arcade,val
+473443.0337153238,3984353.9846349875,0,stepback_base,The Arcade,,504,The Arcade,val
+473445.40138620784,3984361.6262404853,0,stepback_base,The Arcade,,448,The Arcade,val
+473433.5630317877,3984323.418212996,0,stepback_top,The Arcade,,522,The Arcade,val
+473445.4743724138,3984353.9060679865,0,stepback_base,The Arcade,,506,The Arcade,val
+473447.2029152561,3984361.7170947846,0,stepback_base,The Arcade,,419,The Arcade,val
+473423.96414570493,3984338.3167083384,0,stepback_base,The Arcade,,417,The Arcade,val
+473416.4693389416,3984341.114541711,0,stepback_base,The Arcade,,427,The Arcade,val
+473453.9433727582,3984327.1253748485,0,stepback_top,The Arcade,,539,The Arcade,val
+473457.01203531935,3984322.5877282796,0,stepback_base,The Arcade,,400,The Arcade,val
+473435.24326540064,3984356.1454495406,0,stepback_top,The Arcade,,377,The Arcade,val
+473422.52324834495,3984340.840437956,0,stepback_base,The Arcade,,421,The Arcade,val
+473414.81641858956,3984342.986311932,0,stepback_base,The Arcade,,465,The Arcade,val
+473436.7396246163,3984354.61620405,0,stepback_base,The Arcade,,376,The Arcade,val
+473437.107757219,3984362.6077294606,0,stepback_base,The Arcade,,526,The Arcade,val
+473435.2670942055,3984322.650102408,0,stepback_top,The Arcade,,499,The Arcade,val
+473441.8543078219,3984317.452125955,0,stepback_top,The Arcade,,423,The Arcade,val
+473442.17749238724,3984309.458656637,0,stepback_top,The Arcade,,428,The Arcade,val
+473446.0977649755,3984354.397287607,0,stepback_base,The Arcade,,496,The Arcade,val
+473446.1688858205,3984362.396971465,0,stepback_base,The Arcade,,426,The Arcade,val
+473445.81328159577,3984322.3985521756,0,stepback_top,The Arcade,,432,The Arcade,val
+473457.0152441424,3984325.810471576,0,stepback_base,The Arcade,,497,The Arcade,val
+473463.927157045,3984321.7823876613,0,stepback_base,The Arcade,,395,The Arcade,val
+473421.34459129727,3984340.429189991,0,stepback_base,The Arcade,,435,The Arcade,val
+473413.3476211451,3984340.2090346254,0,stepback_base,The Arcade,,479,The Arcade,val
+473445.06699030614,3984356.635182462,0,stepback_base,The Arcade,,496,The Arcade,val
+473447.37077849655,3984364.29628943,0,stepback_base,The Arcade,,397,The Arcade,val
+473420.61393505003,3984337.744652887,0,stepback_base,The Arcade,,439,The Arcade,val
+473412.95251249324,3984340.047391345,0,stepback_base,The Arcade,,488,The Arcade,val
+473441.2410240835,3984356.860006417,0,stepback_base,The Arcade,,481,The Arcade,val
+473444.15055458853,3984364.3121626317,0,stepback_base,The Arcade,,453,The Arcade,val
+473429.6029020635,3984327.0513815605,0,stepback_top,The Arcade,,519,The Arcade,val
+473413.12409138493,3984378.105798944,0,stepback_base,Street Fighter Wall,,447,Street Fighter Wall,train
+473419.7979856157,3984382.5170499906,0,stepback_base,Street Fighter Wall,,286,Street Fighter Wall,train
+473386.42851446196,3984360.460794757,0,stepback_top,Street Fighter Wall,,491,Street Fighter Wall,train
+473416.93558957643,3984367.060554595,0,stepback_base,Street Fighter Wall,,503,Street Fighter Wall,train
+473424.9220122252,3984366.5946648284,0,stepback_base,Street Fighter Wall,,495,Street Fighter Wall,train
+473384.98989898124,3984368.9241136615,0,stepback_top,Street Fighter Wall,,481,Street Fighter Wall,train
+473387.7366650652,3984365.615117406,0,stepback_top,Street Fighter Wall,,502,Street Fighter Wall,train
+473418.35863671725,3984374.9046196607,0,stepback_base,Street Fighter Wall,,309,Street Fighter Wall,train
+473380.08117215225,3984363.292741842,0,stepback_top,Street Fighter Wall,,413,Street Fighter Wall,train
+473416.8418008255,3984376.123171431,0,stepback_base,Street Fighter Wall,,345,Street Fighter Wall,train
+473423.96105332026,3984379.7723143324,0,stepback_base,Street Fighter Wall,,272,Street Fighter Wall,train
+473388.3647908463,3984361.5265998254,0,stepback_top,Street Fighter Wall,,486,Street Fighter Wall,train
+473399.95406206604,3984386.269613925,0,stepback_top,Street Fighter Wall,,428,Street Fighter Wall,train
+473405.48789522797,3984354.7517350223,0,stepback_base,Street Fighter Wall,,387,Street Fighter Wall,train
+473398.57060377556,3984394.1490836507,0,stepback_top,Street Fighter Wall,,440,Street Fighter Wall,train
+473387.70501610625,3984363.105775468,0,stepback_top,Street Fighter Wall,,503,Street Fighter Wall,train
+473411.6912137469,3984384.287426082,0,stepback_base,Street Fighter Wall,,400,Street Fighter Wall,train
+473381.7084666961,3984357.8103628145,0,stepback_top,Street Fighter Wall,,480,Street Fighter Wall,train
+473484.8902959292,3984212.4073421345,0,stepback_top,Walls Of Moria,,334,Walls Of Moria,train
+473482.93469173205,3984214.9435273125,0,stepback_base,Walls Of Moria,,351,Walls Of Moria,train
+473499.33786745416,3984222.1638099896,0,stepback_base,Walls Of Moria,,485,Walls Of Moria,train
+473499.32427387923,3984230.1637984402,0,stepback_base,Walls Of Moria,,442,Walls Of Moria,train
+473499.3922417539,3984190.163856186,0,stepback_top,Walls Of Moria,,430,Walls Of Moria,train
+473506.2522050828,3984188.96345732,0,stepback_base,Walls Of Moria,,475,Walls Of Moria,train
+473502.16932064673,3984182.083773121,0,stepback_base,Walls Of Moria,,452,Walls Of Moria,train
+473489.1302093197,3984188.539033564,0,stepback_top,Walls Of Moria,,541,Walls Of Moria,train
+473508.38384199695,3984184.5149040143,0,stepback_top,Walls Of Moria,,534,Walls Of Moria,train
+473506.92625693174,3984176.6488093175,0,stepback_top,Walls Of Moria,,492,Walls Of Moria,train
+473517.8757273116,3984225.4159902786,0,stepback_base,Walls Of Moria,,1139,Walls Of Moria,train
+473522.3620981827,3984232.0396204316,0,stepback_base,Walls Of Moria,,1499,Walls Of Moria,train
+473494.8599967119,3984187.8806046117,0,stepback_base,Walls Of Moria,,491,Walls Of Moria,train
+473493.0267439357,3984180.0934880557,0,stepback_base,Walls Of Moria,,558,Walls Of Moria,train
+473511.95491715684,3984187.8311335244,0,stepback_base,Walls Of Moria,,531,Walls Of Moria,train
+473509.4933287527,3984180.219262366,0,stepback_base,Walls Of Moria,,493,Walls Of Moria,train
+473495.1979535011,3984224.730245947,0,stepback_top,Walls Of Moria,,468,Walls Of Moria,train
+473503.0124160972,3984193.699065268,0,stepback_base,Walls Of Moria,,461,Walls Of Moria,train
+473493.244337852,3984232.488041117,0,stepback_top,Walls Of Moria,,337,Walls Of Moria,train
+473485.71120368846,3984216.044873688,0,stepback_top,Walls Of Moria,,320,Walls Of Moria,train
+473478.8048932788,3984220.082555761,0,stepback_top,Walls Of Moria,,426,Walls Of Moria,train
+473515.242921859,3984225.328672872,0,stepback_base,Walls Of Moria,,629,Walls Of Moria,train
+473514.52393791743,3984233.2962987474,0,stepback_base,Walls Of Moria,,478,Walls Of Moria,train
+473496.3088546334,3984226.9113878338,0,stepback_base,Walls Of Moria,,427,Walls Of Moria,train
+473491.4266750372,3984187.210451795,0,stepback_top,Walls Of Moria,,554,Walls Of Moria,train
+473514.65640671423,3984230.6121624922,0,stepback_base,Walls Of Moria,,545,Walls Of Moria,train
+473517.9380991771,3984237.90808564,0,stepback_base,Walls Of Moria,,1415,Walls Of Moria,train
+473487.7739290128,3984189.0276457258,0,stepback_top,Walls Of Moria,,528,Walls Of Moria,train
+473483.5921314034,3984182.207633354,0,stepback_top,Walls Of Moria,,373,Walls Of Moria,train
+473488.5993573268,3984222.9776570853,0,stepback_top,Walls Of Moria,,446,Walls Of Moria,train
+473485.04430786567,3984230.144359488,0,stepback_top,Walls Of Moria,,480,Walls Of Moria,train
+473527.21017947333,3984187.668015062,0,stepback_base,Walls Of Moria,,2223,Walls Of Moria,train
+473515.6104242566,3984225.9491550513,0,stepback_top,Walls Of Moria,,645,Walls Of Moria,train
+473520.8231818712,3984187.192531222,0,stepback_top,Walls Of Moria,,1796,Walls Of Moria,train
+473529.21558784315,3984193.5142021305,0,stepback_top,Walls Of Moria,,1722,Walls Of Moria,train
+473534.22191395744,3984187.2742743394,0,stepback_top,Walls Of Moria,,1675,Walls Of Moria,train
+473480.7256679539,3984197.4483241774,0,stepback_top,Walls Of Moria,,399,Walls Of Moria,train
+473473.23811495194,3984194.6311358553,0,stepback_top,Walls Of Moria,,381,Walls Of Moria,train
+473150.76735383546,3984849.4795119674,0,stepback_base,Spooky Dooky Wall,,495,Spooky Dooky Wall,train
+473129.3871052056,3984860.3829503483,0,stepback_top,Spooky Dooky Wall,,376,Spooky Dooky Wall,train
+473157.89410337876,3984845.845032507,0,stepback_base,Spooky Dooky Wall,,489,Spooky Dooky Wall,train
+473122.2603556623,3984864.0174298086,0,stepback_top,Spooky Dooky Wall,,382,Spooky Dooky Wall,train
+473149.16616692045,3984842.5734454426,0,stepback_base,Spooky Dooky Wall,,445,Spooky Dooky Wall,train
+473153.9843980936,3984836.187159483,0,stepback_base,Spooky Dooky Wall,,561,Spooky Dooky Wall,train
+473129.8932422278,3984868.1185892825,0,stepback_top,Spooky Dooky Wall,,432,Spooky Dooky Wall,train
+473150.7596332159,3984857.415385981,0,stepback_base,Spooky Dooky Wall,,411,Spooky Dooky Wall,train
+473126.7733300295,3984858.226101375,0,stepback_top,Spooky Dooky Wall,,410,Spooky Dooky Wall,train
+473158.75506761135,3984857.1451475164,0,stepback_base,Spooky Dooky Wall,,439,Spooky Dooky Wall,train
+473118.77789563406,3984858.49633984,0,stepback_top,Spooky Dooky Wall,,506,Spooky Dooky Wall,train
+473148.7954499929,3984867.369311205,0,stepback_base,Spooky Dooky Wall,,369,Spooky Dooky Wall,train
+473153.4579392851,3984873.870172194,0,stepback_base,Spooky Dooky Wall,,405,Spooky Dooky Wall,train
+473130.145492824,3984841.3658672487,0,stepback_top,Spooky Dooky Wall,,555,Spooky Dooky Wall,train
+473128.02929884905,3984865.0206686715,0,stepback_base,Spooky Dooky Wall,,379,Spooky Dooky Wall,train
+473122.6340089223,3984870.927516105,0,stepback_base,Spooky Dooky Wall,,449,Spooky Dooky Wall,train
+473149.61045855604,3984841.3932789364,0,stepback_top,Spooky Dooky Wall,,447,Spooky Dooky Wall,train
+473137.9900533906,3984837.026536979,0,stepback_top,Spooky Dooky Wall,,512,Spooky Dooky Wall,train
+473139.9886148532,3984868.9640658763,0,stepback_base,Spooky Dooky Wall,,497,Spooky Dooky Wall,train
+473137.49041302496,3984829.042154754,0,stepback_top,Spooky Dooky Wall,,444,Spooky Dooky Wall,train
+473483.18559534056,3984289.0196879487,0,stepback_base,Hanging Gardens,,408,Hanging Gardens,train
+473464.7119112788,3984273.699015732,0,stepback_top,Hanging Gardens,,491,Hanging Gardens,train
+473489.3434900278,3984294.1265786877,0,stepback_base,Hanging Gardens,,397,Hanging Gardens,train
+473458.5540165915,3984268.592124993,0,stepback_top,Hanging Gardens,,457,Hanging Gardens,train
+473748.5471780683,3984174.573601772,0,stepback_base,The Park,,819,The Park,train
+473752.9309165068,3984198.1698480267,0,stepback_top,The Park,,411,The Park,train
+473747.0859319222,3984166.708186354,0,stepback_base,The Park,,696,The Park,train
+473754.3921626529,3984206.0352634448,0,stepback_top,The Park,,451,The Park,train
+473753.09922864655,3984195.0374238994,0,stepback_base,The Park,,537,The Park,train
+473748.6678295192,3984171.4500819175,0,stepback_top,The Park,,785,The Park,train
+473754.576361689,3984202.899871227,0,stepback_base,The Park,,407,The Park,train
+473747.1906964767,3984163.58763459,0,stepback_top,The Park,,672,The Park,train
+473765.56936786865,3984183.3268972775,0,stepback_top,The Park,,851,The Park,train
+473734.54908621573,3984191.1845130846,0,stepback_base,The Park,,494,The Park,train
+473773.3244382819,3984181.362493326,0,stepback_top,The Park,,810,The Park,train
+473746.2563049774,3984172.8564455328,0,stepback_base,The Park,,798,The Park,train
+473749.9817033314,3984196.565545202,0,stepback_top,The Park,,385,The Park,train
+473745.01450552605,3984164.9534123098,0,stepback_base,The Park,,743,The Park,train
+473751.22350278276,3984204.468578425,0,stepback_top,The Park,,486,The Park,train
+473746.7206925925,3984200.2297419314,0,stepback_top,The Park,,498,The Park,train
+473750.32704373746,3984168.4336064523,0,stepback_base,The Park,,767,The Park,train
+473745.8191048062,3984208.1787758013,0,stepback_top,The Park,,837,The Park,train
+473818.80264005513,3984525.7785433643,0,stepback_base,The Carrion Cube,,434,The Carrion Cube,train
+473815.0906794655,3984502.067336128,0,stepback_top,The Carrion Cube,,909,The Carrion Cube,train
+473820.0399602517,3984533.6822791095,0,stepback_base,The Carrion Cube,,431,The Carrion Cube,train
+473813.8533592689,3984494.163600383,0,stepback_top,The Carrion Cube,,550,The Carrion Cube,train
+474310.4834610702,3984572.5297896196,0,stepback_base,Roman Wall,,457,Roman Wall,train
+474302.5992342207,3984611.745079584,0,stepback_top,Roman Wall,,434,Warthog Wall,val
+474317.5684928574,3984599.8038003235,0,stepback_top,Roman Wall,,450,Roman Wall,train
+474296.0332926201,3984576.1345132464,0,stepback_base,Roman Wall,,398,Roman Wall,train
+474322.9522929167,3984605.721122093,0,stepback_top,Roman Wall,,445,Roman Wall,train
+474311.64301646047,3984606.213458157,0,stepback_top,Roman Wall,,432,Roman Wall,train
+474314.94084958854,3984613.502099777,0,stepback_top,Roman Wall,,502,Roman Wall,train
+474318.41451476415,3984603.8907245873,0,stepback_top,Roman Wall,,439,Roman Wall,train
+474323.89533355634,3984609.7182991575,0,stepback_top,Roman Wall,,493,Roman Wall,train
+474309.0233136178,3984607.0557782957,0,stepback_top,Roman Wall,,457,Roman Wall,train
+474293.22124830575,3984579.2296263543,0,stepback_base,Roman Wall,,371,Roman Wall,train
+474312.9738299458,3984614.0123162814,0,stepback_top,Roman Wall,,504,Roman Wall,train
+474321.2249498834,3984598.6534179193,0,stepback_top,Roman Wall,,433,Roman Wall,train
+474297.98777294793,3984576.652654113,0,stepback_base,Roman Wall,,424,Roman Wall,train
+474327.03424411727,3984604.153608871,0,stepback_top,Roman Wall,,441,Roman Wall,train
+474319.73221746914,3984599.23209822,0,stepback_top,Roman Wall,,464,Roman Wall,train
+474327.6994307043,3984599.9556403854,0,stepback_top,Roman Wall,,492,Roman Wall,train
+474318.27538215177,3984596.7701452314,0,stepback_top,Roman Wall,,435,Roman Wall,train
+474300.71624387684,3984570.0180114275,0,stepback_base,Roman Wall,,395,Roman Wall,train
+474322.6651667205,3984603.4581786823,0,stepback_top,Roman Wall,,432,Roman Wall,train
+474314.43375176436,3984602.4197605783,0,stepback_base,Roman Wall,,439,Roman Wall,train
+474322.2440503977,3984604.1515906095,0,stepback_base,Roman Wall,,431,Roman Wall,train
+474283.192557231,3984595.4924404523,0,stepback_top,Roman Wall,,526,Warthog Wall,val
+474308.8078661335,3984571.2324042283,0,stepback_base,Roman Wall,,448,Roman Wall,train
+474290.1962908437,3984585.552247885,0,stepback_base,Roman Wall,,372,Roman Wall,train
+474282.32831905567,3984586.999666257,0,stepback_base,Roman Wall,,389,Warthog Wall,val
+474321.6681779959,3984579.762574399,0,stepback_top,Roman Wall,,432,Roman Wall,train
+474300.92933454306,3984570.3296324466,0,stepback_base,Roman Wall,,397,Roman Wall,train
+474298.2555282411,3984562.7896881592,0,stepback_base,Roman Wall,,349,Roman Wall,train
+474040.48491837736,3985220.9585179915,0,stepback_base,Goat Cave,,547,Goat Cave,train
+474068.9809027362,3985249.0294794184,0,stepback_top,Goat Cave,,275,Goat Cave,train
+474046.46170193015,3985214.886167583,0,stepback_base,Goat Cave,,576,Goat Cave,train
+474066.3716195794,3985249.5790368672,0,stepback_top,Goat Cave,,287,Goat Cave,train
+474042.9707288685,3985231.1232351214,0,stepback_base,Goat Cave,,440,Goat Cave,train
+474036.2197741235,3985226.8308453406,0,stepback_base,Goat Cave,,409,Goat Cave,train
+474069.97454784845,3985248.292794245,0,stepback_top,Goat Cave,,273,Goat Cave,train
+474058.1059992118,3985223.7885956424,0,stepback_base,Goat Cave,,231,Goat Cave,train
+474055.30321942765,3985216.2956372495,0,stepback_base,Goat Cave,,269,Goat Cave,train
+474069.31711834826,3985253.760429215,0,stepback_top,Goat Cave,,307,Goat Cave,train
+474042.8198184988,3985232.464850123,0,stepback_base,Goat Cave,,409,Goat Cave,train
+474036.8584080286,3985227.1299100854,0,stepback_base,Goat Cave,,415,Goat Cave,train
+474066.6654603797,3985253.804610274,0,stepback_top,Goat Cave,,331,Goat Cave,train
+474058.866262423,3985253.7183667272,0,stepback_top,Goat Cave,,296,Goat Cave,train
+474062.0491746345,3985261.057921881,0,stepback_top,Goat Cave,,302,Goat Cave,train
+474064.9090965943,3985253.9528797297,0,stepback_top,Goat Cave,,329,Goat Cave,train
+474066.88100160426,3985261.7060462204,0,stepback_top,Goat Cave,,313,Goat Cave,train
+474053.7374182474,3985255.477524158,0,stepback_top,Goat Cave,,340,Goat Cave,train
+474068.49369184236,3985227.0829403508,0,stepback_base,Goat Cave,,233,Goat Cave,train
+474050.04834984866,3985262.5761701097,0,stepback_top,Goat Cave,,243,Goat Cave,train
+474060.5659804136,3985218.579179136,0,stepback_base,Goat Cave,,320,Goat Cave,train
+474039.706456676,3985230.448478586,0,stepback_top,Goat Cave,,457,Goat Cave,train
+474067.5191549927,3985214.6227459856,0,stepback_base,Goat Cave,,376,Goat Cave,train
+474032.7532820969,3985234.4049117365,0,stepback_top,Goat Cave,,399,Goat Cave,train
+474067.7084812268,3985252.438891061,0,stepback_top,Goat Cave,,313,Goat Cave,train
+474063.28667768784,3985220.745868904,0,stepback_base,Goat Cave,,314,Goat Cave,train
+474068.81393211155,3985260.3621466006,0,stepback_top,Goat Cave,,317,Goat Cave,train
+474383.130215859,3984435.7182363654,0,stepback_base,The Far East,,937,The Far East,val
+474375.6569999202,3984475.0139237056,0,stepback_top,The Far East,,760,The Far East,val
+474370.3451889381,3984471.3345710677,0,stepback_base,The Far East,,638,The Far East,val
+474384.929080241,3984434.0879589473,0,stepback_top,The Far East,,844,The Far East,val
+474364.19899920624,3984472.401242197,0,stepback_top,The Far East,,856,The Far East,val
+474380.7980223717,3984477.154112074,0,stepback_base,The Far East,,752,The Far East,val
+474382.8573591369,3984437.2071580966,0,stepback_top,The Far East,,955,The Far East,val
+474377.8867453468,3984434.0850407807,0,stepback_base,The Far East,,1020,The Far East,val
+474386.9942951371,3984473.0343993995,0,stepback_top,The Far East,,678,The Far East,val
+474377.55849067564,3984478.725726011,0,stepback_top,The Far East,,775,The Far East,val
+474372.3329705757,3984475.269399934,0,stepback_base,The Far East,,633,The Far East,val
+474374.8928761526,3984435.3513979367,0,stepback_top,The Far East,,964,The Far East,val
+474382.5755237723,3984430.4963581343,0,stepback_top,The Far East,,1006,The Far East,val
+474379.5414640293,3984478.064229411,0,stepback_top,The Far East,,734,The Far East,val
+474376.42657170835,3984430.2056139293,0,stepback_base,The Far East,,976,The Far East,val
+474385.3045694071,3984480.4765194817,0,stepback_top,The Far East,,752,The Far East,val
+474396.6254927999,3984451.862937783,0,stepback_base,The Far East,,935,The Far East,val
+474404.6132626639,3984452.3051284654,0,stepback_base,The Far East,,583,The Far East,val
+474378.7640850944,3984435.3961137007,0,stepback_base,The Far East,,983,The Far East,val
+474378.74850769475,3984427.396128867,0,stepback_base,The Far East,,944,The Far East,val
+474379.5388977448,3984473.621953884,0,stepback_base,The Far East,,781,The Far East,val
+474381.82472230523,3984481.2884397856,0,stepback_base,The Far East,,685,The Far East,val
+474385.4673154501,3984473.4278802047,0,stepback_base,The Far East,,728,The Far East,val
+474389.1566095869,3984480.526408839,0,stepback_base,The Far East,,785,The Far East,val
+474389.9028037173,3984469.972698636,0,stepback_top,The Far East,,632,The Far East,val
+474392.5091815979,3984477.536215962,0,stepback_top,The Far East,,693,The Far East,val
+474373.87411773246,3984473.059650855,0,stepback_base,The Far East,,616,The Far East,val
+474368.54682090244,3984433.4159892118,0,stepback_top,The Far East,,942,The Far East,val
+474373.0829717007,3984476.9586781706,0,stepback_base,The Far East,,722,The Far East,val
+474368.92312998406,3984437.175569734,0,stepback_top,The Far East,,889,The Far East,val
+474366.8433654382,3984438.8385607814,0,stepback_base,The Far East,,787,The Far East,val
+474362.5369975958,3984432.0965139107,0,stepback_base,The Far East,,1389,The Far East,val
+474393.8858637302,3984447.693126343,0,stepback_top,The Far East,,1109,The Far East,val
+474362.1206291743,3984443.8240342527,0,stepback_base,The Far East,,697,The Far East,val
+474401.82717236923,3984448.6603993657,0,stepback_top,The Far East,,638,The Far East,val
+474355.9004739749,3984445.2626807797,0,stepback_base,The Far East,,938,The Far East,val
+474395.85465378745,3984447.1767119966,0,stepback_top,The Far East,,1041,The Far East,val
+474398.4162315062,3984462.090047836,0,stepback_top,The Far East,,680,The Far East,val
+474405.00457590277,3984466.628078038,0,stepback_top,The Far East,,895,The Far East,val
+474370.4267559264,3984476.595984482,0,stepback_base,The Far East,,623,The Far East,val
+474399.0571149353,3984448.662088531,0,stepback_top,The Far East,,863,The Far East,val
+474387.39758933854,3984471.396686696,0,stepback_top,The Far East,,615,The Far East,val
+474360.342568035,3984454.307923655,0,stepback_base,The Far East,,1140,The Far East,val
+474394.1613446644,3984475.6688774563,0,stepback_top,The Far East,,696,The Far East,val
+474397.2803375513,3984451.0130889383,0,stepback_top,The Far East,,942,The Far East,val
+474404.8543707195,3984453.5887483815,0,stepback_top,The Far East,,618,The Far East,val
+474379.75459514203,3984432.305950848,0,stepback_base,The Far East,,1062,The Far East,val
+474380.0221700202,3984424.31042687,0,stepback_base,The Far East,,897,The Far East,val
+474358.09424373077,3984452.7572102523,0,stepback_base,The Far East,,1093,The Far East,val
+474351.16366058594,3984448.76133522,0,stepback_base,The Far East,,1014,The Far East,val
+474378.40739135817,3984477.8574834145,0,stepback_top,The Far East,,763,The Far East,val
+474376.8385045353,3984485.702137272,0,stepback_top,The Far East,,612,The Far East,val
+474354.52306497487,3984454.389021105,0,stepback_base,The Far East,,1004,The Far East,val
+474389.67661823967,3984473.4737713747,0,stepback_top,The Far East,,720,The Far East,val
+474378.5926233662,3984434.507687338,0,stepback_top,The Far East,,992,The Far East,val
+474382.3424630046,3984427.44095523,0,stepback_top,The Far East,,1004,The Far East,val
+474399.6063546947,3984466.366561193,0,stepback_top,The Far East,,799,The Far East,val
+474407.14172043785,3984469.0532437414,0,stepback_top,The Far East,,786,The Far East,val
+474381.91899153136,3984430.844234205,0,stepback_base,The Far East,,1038,The Far East,val
+474358.21459740994,3984463.0638198527,0,stepback_top,The Far East,,1018,The Far East,val
+474387.7432259867,3984439.3128057923,0,stepback_base,The Far East,,1103,The Far East,val
+474395.3522458848,3984436.8424179303,0,stepback_base,The Far East,,1190,The Far East,val
+474357.30714639433,3984449.1943572415,0,stepback_top,The Far East,,1007,The Far East,val
+474203.1227000484,3984596.2406753735,0,stepback_base,Magoo Rock,,530,Magoo Rock,val
+474195.1975719735,3984595.148729863,0,stepback_base,Magoo Rock,,408,Magoo Rock,val
+474234.82321234775,3984600.608457414,0,stepback_top,Magoo Rock,,227,Magoo Rock,val
+474201.513101253,3984598.8449591673,0,stepback_base,Magoo Rock,,533,Magoo Rock,val
+474193.5839453365,3984597.7826567376,0,stepback_base,Magoo Rock,,415,Magoo Rock,val
+474233.22972491896,3984603.0941688856,0,stepback_top,Magoo Rock,,276,Magoo Rock,val
+474235.19054800586,3984593.5176637103,0,stepback_base,Magoo Rock,,255,Magoo Rock,val
+474243.19036537065,3984593.4636069797,0,stepback_base,Magoo Rock,,400,Magoo Rock,val
+474234.9831796178,3984600.63971994,0,stepback_base,Magoo Rock,,223,Magoo Rock,val
+474242.7395755574,3984602.5988835436,0,stepback_base,Magoo Rock,,363,Magoo Rock,val
+474204.2277917199,3984607.5747068315,0,stepback_base,Magoo Rock,,347,Magoo Rock,val
+474196.8242188942,3984610.605731314,0,stepback_base,Magoo Rock,,433,Magoo Rock,val
+474233.84208302264,3984595.4506089007,0,stepback_top,Magoo Rock,,210,Magoo Rock,val
+474197.2585414585,3984590.2127651135,0,stepback_top,Magoo Rock,,420,Magoo Rock,val
+474189.3220297574,3984589.206891355,0,stepback_top,Magoo Rock,,419,Magoo Rock,val
+474230.30131489446,3984609.264645869,0,stepback_base,Magoo Rock,,492,Magoo Rock,val
+474236.6874794093,3984614.0830380064,0,stepback_base,Magoo Rock,,327,Magoo Rock,val
+474200.85560023476,3984599.1723701623,0,stepback_base,Magoo Rock,,510,Magoo Rock,val
+474193.3406926896,3984596.428984556,0,stepback_base,Magoo Rock,,429,Magoo Rock,val
+474230.9152304156,3984610.145912589,0,stepback_top,Magoo Rock,,489,Magoo Rock,val
+474236.10401351174,3984588.3339901124,0,stepback_base,Magoo Rock,,394,Magoo Rock,val
+474243.9960348078,3984587.0240283334,0,stepback_base,Magoo Rock,,355,Magoo Rock,val
+474103.24354318436,3984769.7336299713,0,stepback_top,The Tool Buttress,,408,The Tool Buttress,train
+474072.2236532109,3984777.592791888,0,stepback_base,The Tool Buttress,,379,The Tool Buttress,train
+474110.99851567775,3984767.7688394925,0,stepback_top,The Tool Buttress,,346,The Tool Buttress,train
+474104.20481790835,3984773.30064374,0,stepback_top,The Tool Buttress,,457,The Tool Buttress,train
+474072.8691512315,3984779.7872448466,0,stepback_base,The Tool Buttress,,386,The Tool Buttress,train
+474112.0387345776,3984771.678993464,0,stepback_top,The Tool Buttress,,395,The Tool Buttress,train
+474100.67030997557,3984783.3034109985,0,stepback_base,The Tool Buttress,,477,The Tool Buttress,train
+474078.7644476771,3984773.498657204,0,stepback_top,The Tool Buttress,,450,The Tool Buttress,train
+474107.97226407507,3984786.571662263,0,stepback_base,The Tool Buttress,,372,The Tool Buttress,train
+474071.4624935776,3984770.2304059397,0,stepback_top,The Tool Buttress,,328,The Tool Buttress,train
+474107.0736482457,3984772.8972631614,0,stepback_top,The Tool Buttress,,459,The Tool Buttress,train
+474075.1531298182,3984775.151260348,0,stepback_base,The Tool Buttress,,456,The Tool Buttress,train
+474115.0537778526,3984772.333763865,0,stepback_top,The Tool Buttress,,399,The Tool Buttress,train
+474096.0097709552,3984757.9750248305,0,stepback_base,The Tool Buttress,,380,The Tool Buttress,train
+474097.52853583655,3984750.120513182,0,stepback_base,The Tool Buttress,,366,The Tool Buttress,train
+474089.9347114297,3984789.393071424,0,stepback_top,The Tool Buttress,,380,The Tool Buttress,train
+474105.51382488204,3984772.9230877734,0,stepback_top,The Tool Buttress,,454,The Tool Buttress,train
+474076.3604663734,3984786.117089731,0,stepback_base,The Tool Buttress,,445,The Tool Buttress,train
+474112.8021645092,3984769.624587284,0,stepback_top,The Tool Buttress,,382,The Tool Buttress,train
+474078.0565784136,3984769.937844032,0,stepback_base,The Tool Buttress,,442,The Tool Buttress,train
+474094.2239956835,3984787.675223174,0,stepback_top,The Tool Buttress,,380,The Tool Buttress,train
+474072.6674393236,3984764.025384318,0,stepback_base,The Tool Buttress,,428,The Tool Buttress,train
+474099.61313477345,3984793.587682888,0,stepback_top,The Tool Buttress,,452,The Tool Buttress,train
+474104.649643672,3984766.9924148577,0,stepback_base,The Tool Buttress,,411,The Tool Buttress,train
+474080.65815058764,3984766.353462919,0,stepback_top,The Tool Buttress,,496,The Tool Buttress,train
+474112.64680803346,3984767.205398837,0,stepback_base,The Tool Buttress,,341,The Tool Buttress,train
+474072.66098622617,3984766.1404789397,0,stepback_top,The Tool Buttress,,353,The Tool Buttress,train
+474136.7033378632,3984712.6144003025,0,stepback_top,Rosie's Cantina Area,,374,Rosie's Cantina Area,test
+474146.80887814984,3984682.2519554817,0,stepback_base,Rosie's Cantina Area,,418,Rosie's Cantina Area,test
+474134.1769527915,3984720.205011508,0,stepback_top,Rosie's Cantina Area,,382,Nipple Stimulation Alcove,test
+474136.1452782189,3984713.2791237454,0,stepback_top,Rosie's Cantina Area,,388,Rosie's Cantina Area,test
+474139.42824062996,3984681.447973,0,stepback_base,Rosie's Cantina Area,,439,Rosie's Cantina Area,test
+474135.3245376161,3984721.236911432,0,stepback_top,Rosie's Cantina Area,,381,Nipple Stimulation Alcove,test
+474147.81268275226,3984688.0943027386,0,stepback_top,Rosie's Cantina Area,,373,Rosie's Cantina Area,test
+474131.61768471985,3984715.693615026,0,stepback_base,Rosie's Cantina Area,,436,Rosie's Cantina Area,test
+474151.86143226037,3984681.1944746664,0,stepback_top,Rosie's Cantina Area,,363,Rosie's Cantina Area,test
+474132.1938265406,3984713.6674562194,0,stepback_base,Rosie's Cantina Area,,426,Rosie's Cantina Area,test
+474127.3570776785,3984720.0397290043,0,stepback_base,Rosie's Cantina Area,,414,Nipple Stimulation Alcove,test
+474151.540821989,3984688.17836508,0,stepback_top,Rosie's Cantina Area,,383,Rosie's Cantina Area,test
+474125.28656656237,3984682.680619901,0,stepback_base,Rosie's Cantina Area,,430,Rosie's Cantina Area,test
+474151.72769058787,3984712.695065761,0,stepback_top,Rosie's Cantina Area,,441,Rosie's Cantina Area,test
+474150.96822989883,3984711.1225207867,0,stepback_top,Rosie's Cantina Area,,436,Rosie's Cantina Area,test
+474132.4691038474,3984685.0115588102,0,stepback_base,Rosie's Cantina Area,,457,Rosie's Cantina Area,test
+474155.5930114117,3984717.650261281,0,stepback_top,Rosie's Cantina Area,,523,Rosie's Cantina Area,test
+474155.2482725127,3984704.9734868016,0,stepback_top,Rosie's Cantina Area,,400,Rosie's Cantina Area,test
+474123.3076372507,3984703.025200617,0,stepback_base,Rosie's Cantina Area,,450,Rosie's Cantina Area,test
+474163.23343132815,3984705.460558348,0,stepback_top,Rosie's Cantina Area,,480,Rosie's Cantina Area,test
+474126.17536867573,3984690.613818186,0,stepback_base,Rosie's Cantina Area,,405,Rosie's Cantina Area,test
+474120.55275840085,3984684.922926015,0,stepback_base,Rosie's Cantina Area,,352,Rosie's Cantina Area,test
+474148.6658097754,3984713.377386868,0,stepback_top,Rosie's Cantina Area,,446,Rosie's Cantina Area,test
+474155.48649920936,3984694.1330542397,0,stepback_top,Rosie's Cantina Area,,396,Rosie's Cantina Area,test
+474123.81620569085,3984698.714812467,0,stepback_base,Rosie's Cantina Area,,423,Rosie's Cantina Area,test
+474163.404072589,3984692.987614683,0,stepback_top,Rosie's Cantina Area,,481,Rosie's Cantina Area,test
+474151.5001444216,3984689.1596869878,0,stepback_top,Rosie's Cantina Area,,376,Rosie's Cantina Area,test
+474123.00235960784,3984703.7156569213,0,stepback_base,Rosie's Cantina Area,,450,Rosie's Cantina Area,test
+474158.62459062506,3984685.5206945045,0,stepback_top,Rosie's Cantina Area,,562,Rosie's Cantina Area,test
+474135.7767476162,3984683.2251754897,0,stepback_base,Rosie's Cantina Area,,438,Rosie's Cantina Area,test
+474135.06783963455,3984675.2566468003,0,stepback_base,Rosie's Cantina Area,,379,Rosie's Cantina Area,test
+474138.6123795426,3984715.0992902475,0,stepback_top,Rosie's Cantina Area,,446,Rosie's Cantina Area,test
+474123.3863907978,3984695.7943672584,0,stepback_base,Rosie's Cantina Area,,366,Rosie's Cantina Area,test
+474116.6592998057,3984691.4646736453,0,stepback_base,Rosie's Cantina Area,,275,Rosie's Cantina Area,test
+474150.2947547662,3984713.1131417113,0,stepback_top,Rosie's Cantina Area,,443,Rosie's Cantina Area,test
+474157.76395658526,3984700.5886018127,0,stepback_top,Rosie's Cantina Area,,443,Rosie's Cantina Area,test
+474165.5604742291,3984702.381452233,0,stepback_top,Rosie's Cantina Area,,494,Rosie's Cantina Area,test
+474159.344462655,3984702.450182448,0,stepback_top,Rosie's Cantina Area,,433,Rosie's Cantina Area,test
+474167.24492013996,3984703.708264929,0,stepback_top,Rosie's Cantina Area,,508,Rosie's Cantina Area,test
+474129.13253947336,3984684.20579731,0,stepback_base,Rosie's Cantina Area,,455,Rosie's Cantina Area,test
+474126.13653135806,3984676.787985276,0,stepback_base,Rosie's Cantina Area,,424,Rosie's Cantina Area,test
+474141.1165719345,3984713.8770454465,0,stepback_top,Rosie's Cantina Area,,448,Rosie's Cantina Area,test
+474114.36119735776,3984744.9110786566,0,stepback_base,Nipple Stimulation Alcove,,316,Nipple Stimulation Alcove,test
+474119.2260415411,3984721.409306573,0,stepback_top,Nipple Stimulation Alcove,,384,Nipple Stimulation Alcove,test
+474112.73958263005,3984752.7450026846,0,stepback_base,Nipple Stimulation Alcove,,266,Nipple Stimulation Alcove,test
+474120.8476562688,3984713.575382545,0,stepback_top,Nipple Stimulation Alcove,,443,Rosie's Cantina Area,test
+474116.8294752616,3984724.287145622,0,stepback_base,Nipple Stimulation Alcove,,361,Nipple Stimulation Alcove,test
+474121.27618536225,3984747.871605957,0,stepback_top,Nipple Stimulation Alcove,,305,Nipple Stimulation Alcove,test
+474115.34723856143,3984716.425658844,0,stepback_base,Nipple Stimulation Alcove,,440,Nipple Stimulation Alcove,test
+474122.75842206244,3984755.733092735,0,stepback_top,Nipple Stimulation Alcove,,271,Nipple Stimulation Alcove,test
+474116.1508767372,3984722.0113369776,0,stepback_base,Nipple Stimulation Alcove,,408,Nipple Stimulation Alcove,test
+474124.62581801985,3984744.4651867645,0,stepback_top,Nipple Stimulation Alcove,,268,Nipple Stimulation Alcove,test
+474113.3258963097,3984714.526720382,0,stepback_base,Nipple Stimulation Alcove,,471,Nipple Stimulation Alcove,test
+474127.45079844736,3984751.9498033603,0,stepback_top,Nipple Stimulation Alcove,,330,Nipple Stimulation Alcove,test
+474099.5180383424,3984739.3729242766,0,stepback_base,Nipple Stimulation Alcove,,432,Nipple Stimulation Alcove,test
+474091.6852180676,3984740.9998620576,0,stepback_base,Nipple Stimulation Alcove,,495,Nipple Stimulation Alcove,test
+474130.8493194416,3984732.865173153,0,stepback_top,Nipple Stimulation Alcove,,386,Nipple Stimulation Alcove,test
+474118.1935735043,3984720.3370878906,0,stepback_base,Nipple Stimulation Alcove,,423,Nipple Stimulation Alcove,test
+474127.4459663486,3984742.4819118152,0,stepback_top,Nipple Stimulation Alcove,,245,Nipple Stimulation Alcove,test
+474115.1094425562,3984712.9554799157,0,stepback_base,Nipple Stimulation Alcove,,451,Nipple Stimulation Alcove,test
+474130.53009729664,3984749.86351979,0,stepback_top,Nipple Stimulation Alcove,,311,Nipple Stimulation Alcove,test
+474038.14753254224,3984792.055774263,0,stepback_base,Super Slab,,495,Super Slab,train
+474034.99017194525,3984799.4063575095,0,stepback_base,Super Slab,,481,Super Slab,train
+474050.77697493014,3984762.653441278,0,stepback_top,Super Slab,,500,Super Slab,train
+474031.5534533673,3984769.611510269,0,stepback_base,Super Slab,,519,Super Slab,train
+474023.646539424,3984768.394665212,0,stepback_base,Super Slab,,404,Super Slab,train
+474063.18110914045,3984774.4788904977,0,stepback_top,Super Slab,,541,Super Slab,train
+474059.9904948371,3984769.8993548234,0,stepback_base,Super Slab,,493,Super Slab,train
+474067.3926140846,3984766.8647822593,0,stepback_base,Super Slab,,398,Super Slab,train
+474030.3820178472,3984782.0376450797,0,stepback_top,Super Slab,,418,Super Slab,train
+474340.36852659035,3984537.288642895,0,stepback_base,Cliffs of Insanity,,1271,Cliffs of Insanity,train
+474333.91170488624,3984542.011931313,0,stepback_base,Cliffs of Insanity,,1382,Mexican Pillar,test
+474366.19581340696,3984518.3954892224,0,stepback_top,Cliffs of Insanity,,689,Cliffs of Insanity,train
+474364.92757945816,3984534.40164225,0,stepback_top,Cliffs of Insanity,,709,Cliffs of Insanity,train
+474334.50786650873,3984524.4698214666,0,stepback_base,Cliffs of Insanity,,1351,Cliffs of Insanity,train
+474372.53250769555,3984536.8845974454,0,stepback_top,Cliffs of Insanity,,710,Cliffs of Insanity,train
+474331.2537600891,3984521.7477516816,0,stepback_base,Cliffs of Insanity,,1562,Cliffs of Insanity,train
+474370.0632357258,3984531.4340616497,0,stepback_top,Cliffs of Insanity,,747,Cliffs of Insanity,train
+474362.50240865967,3984536.789611828,0,stepback_top,Cliffs of Insanity,,726,Cliffs of Insanity,train
+474331.7921855053,3984527.7961589983,0,stepback_base,Cliffs of Insanity,,1601,Cliffs of Insanity,train
+474370.17996444827,3984539.0379750356,0,stepback_top,Cliffs of Insanity,,667,Cliffs of Insanity,train
+474366.7858465503,3984531.5672845235,0,stepback_top,Cliffs of Insanity,,719,Cliffs of Insanity,train
+474336.2900950845,3984521.87145333,0,stepback_base,Cliffs of Insanity,,1268,Cliffs of Insanity,train
+474374.4097844167,3984533.991242322,0,stepback_top,Cliffs of Insanity,,778,Cliffs of Insanity,train
+474337.43913913437,3984515.2964747935,0,stepback_base,Cliffs of Insanity,,1241,Cliffs of Insanity,train
+474358.16371054377,3984549.5089307106,0,stepback_top,Cliffs of Insanity,,1175,Mexican Pillar,test
+474365.51004133956,3984537.6934798784,0,stepback_top,Cliffs of Insanity,,730,Cliffs of Insanity,train
+474335.0527106984,3984527.8776248363,0,stepback_base,Cliffs of Insanity,,1380,Cliffs of Insanity,train
+474373.12437399983,3984540.1474436386,0,stepback_top,Cliffs of Insanity,,677,Cliffs of Insanity,train
+474367.67163395975,3984535.896162384,0,stepback_top,Cliffs of Insanity,,729,Cliffs of Insanity,train
+474375.2305705529,3984538.515795484,0,stepback_top,Cliffs of Insanity,,594,Cliffs of Insanity,train
+474331.8040616567,3984524.814420856,0,stepback_base,Cliffs of Insanity,,1529,Cliffs of Insanity,train
+474371.7299211271,3984522.3801354277,0,stepback_top,Cliffs of Insanity,,790,Cliffs of Insanity,train
+474341.6481620543,3984515.590180442,0,stepback_top,Cliffs of Insanity,,1275,Cliffs of Insanity,train
+474339.36441386834,3984507.923075759,0,stepback_top,Cliffs of Insanity,,1352,Cliffs of Insanity,train
+474367.7297562452,3984529.0740674865,0,stepback_top,Cliffs of Insanity,,694,Cliffs of Insanity,train
+474337.6516235265,3984518.151341995,0,stepback_base,Cliffs of Insanity,,1255,Cliffs of Insanity,train
+474375.24928942486,3984531.8047488593,0,stepback_top,Cliffs of Insanity,,815,Cliffs of Insanity,train
+474331.54078262637,3984533.091638631,0,stepback_top,Cliffs of Insanity,,1433,Cliffs of Insanity,train
+474369.3450258145,3984532.3120614775,0,stepback_top,Cliffs of Insanity,,740,Cliffs of Insanity,train
+474340.07387566153,3984519.38148652,0,stepback_base,Cliffs of Insanity,,1214,Cliffs of Insanity,train
+474376.6628133527,3984535.544705217,0,stepback_top,Cliffs of Insanity,,683,Cliffs of Insanity,train
+474361.82062406675,3984542.5142520983,0,stepback_top,Cliffs of Insanity,,954,Cliffs of Insanity,train
+474333.4955798717,3984527.6249313834,0,stepback_base,Cliffs of Insanity,,1445,Cliffs of Insanity,train
+474368.90188511554,3984546.236582277,0,stepback_top,Cliffs of Insanity,,805,Cliffs of Insanity,train
+474334.0166988223,3984537.6112633976,0,stepback_top,Cliffs of Insanity,,1448,Mexican Pillar,test
+474327.973258649,3984542.8530980833,0,stepback_top,Cliffs of Insanity,,2178,Mexican Pillar,test
+474349.53357504547,3984510.6030307217,0,stepback_base,Cliffs of Insanity,,1098,Cliffs of Insanity,train
+474346.2567213459,3984503.304933036,0,stepback_base,Cliffs of Insanity,,1114,Cliffs of Insanity,train
+474362.6409898437,3984539.795421465,0,stepback_top,Cliffs of Insanity,,815,Cliffs of Insanity,train
+474277.9639980056,3984604.789518331,0,stepback_base,New Roman Wall,,534,New Roman Wall,train
+474271.44901671074,3984627.88832823,0,stepback_top,New Roman Wall,,344,New Roman Wall,train
+474280.1356584372,3984597.089915032,0,stepback_base,New Roman Wall,,509,Warthog Wall,val
+474269.27735627914,3984635.587931529,0,stepback_top,New Roman Wall,,388,New Roman Wall,train
+474269.95799905097,3984606.6660400284,0,stepback_base,New Roman Wall,,332,New Roman Wall,train
+474274.8201887065,3984630.1683614403,0,stepback_top,New Roman Wall,,384,New Roman Wall,train
+474268.3372691658,3984598.831932891,0,stepback_base,New Roman Wall,,399,New Roman Wall,train
+474276.4409185917,3984638.0024685776,0,stepback_top,New Roman Wall,,340,New Roman Wall,train
+474277.94285037287,3984600.9652332203,0,stepback_base,New Roman Wall,,538,Warthog Wall,val
+474278.77941278694,3984593.0090932436,0,stepback_base,New Roman Wall,,385,Warthog Wall,val
+474274.5966007166,3984632.7897931263,0,stepback_top,New Roman Wall,,381,New Roman Wall,train
+474269.42296004854,3984604.3846403733,0,stepback_base,New Roman Wall,,351,New Roman Wall,train
+474270.2591017466,3984628.370070681,0,stepback_top,New Roman Wall,,358,New Roman Wall,train
+474269.14424614917,3984596.389496937,0,stepback_base,New Roman Wall,,370,New Roman Wall,train
+474270.537815646,3984636.3652141173,0,stepback_top,New Roman Wall,,382,New Roman Wall,train
+474266.3211756667,3984607.990033519,0,stepback_base,New Roman Wall,,308,New Roman Wall,train
+474272.7318318743,3984631.1180141266,0,stepback_top,New Roman Wall,,366,New Roman Wall,train
+474264.1842902642,3984600.2807066496,0,stepback_base,New Roman Wall,,396,New Roman Wall,train
+474274.8687172768,3984638.827340996,0,stepback_top,New Roman Wall,,333,New Roman Wall,train
+474337.17055071215,3984537.8271966767,0,stepback_base,Mexican Pillar,,1386,Mexican Pillar,test
+474352.429975657,3984556.351503691,0,stepback_top,Mexican Pillar,,1090,Mexican Pillar,test
+474332.0840757305,3984531.6524276724,0,stepback_base,Mexican Pillar,,1483,Cliffs of Insanity,train
+474357.51645063865,3984562.5262726955,0,stepback_top,Mexican Pillar,,1055,Mexican Pillar,test
+474343.0830310931,3984557.90503158,0,stepback_top,Mexican Pillar,,1112,Mexican Pillar,test
+474343.7970790767,3984565.873101326,0,stepback_top,Mexican Pillar,,1451,Mexican Pillar,test
+474358.34809424885,3984553.0569781815,0,stepback_top,Mexican Pillar,,1160,Mexican Pillar,test
+474327.87324882735,3984543.295636238,0,stepback_base,Mexican Pillar,,2119,Mexican Pillar,test
+474365.9668056042,3984555.4973136676,0,stepback_top,Mexican Pillar,,1003,Mexican Pillar,test
+474248.1717188446,3984642.137835961,0,stepback_base,Wrangler wall,,339,Wrangler wall,train
+474255.3606485494,3984645.6477205316,0,stepback_base,Wrangler wall,,381,Wrangler wall,train
+474219.41600002546,3984628.098297678,0,stepback_top,Wrangler wall,,250,Wrangler wall,train
+474250.0766075612,3984640.7691675313,0,stepback_top,Wrangler wall,,362,Wrangler wall,train
+474222.39895296254,3984624.7084254585,0,stepback_base,Wrangler wall,,294,Wrangler wall,train
+474256.99602121086,3984644.7843530495,0,stepback_top,Wrangler wall,,412,Wrangler wall,train
+474250.1922294584,3984644.854520843,0,stepback_top,Wrangler wall,,404,Wrangler wall,train
+474222.4758737422,3984628.8606587136,0,stepback_base,Wrangler wall,,271,Wrangler wall,train
+474257.1213183875,3984648.852986375,0,stepback_top,Wrangler wall,,387,Wrangler wall,train
+474239.55139064987,3984624.908523688,0,stepback_base,Wrangler wall,,449,Wrangler wall,train
+474229.5520022791,3984646.7262282465,0,stepback_top,Wrangler wall,,384,Wrangler wall,train
+474242.88452010683,3984617.635955502,0,stepback_base,Wrangler wall,,288,Wrangler wall,train
+474226.2188728221,3984653.9987964327,0,stepback_top,Wrangler wall,,402,Wrangler wall,train
+474253.1960131508,3984640.1038706657,0,stepback_top,Wrangler wall,,434,Wrangler wall,train
+474225.4635351453,3984624.1379800336,0,stepback_base,Wrangler wall,,300,Wrangler wall,train
+474260.1291326522,3984644.0953433234,0,stepback_top,Wrangler wall,,451,Wrangler wall,train
+474235.0193310741,3984623.569967081,0,stepback_base,Wrangler wall,,246,Wrangler wall,train
+474227.94286012393,3984646.502990407,0,stepback_top,Wrangler wall,,373,Wrangler wall,train
+474237.37815472414,3984615.925625972,0,stepback_base,Wrangler wall,,286,Wrangler wall,train
+474225.5840364739,3984654.147331516,0,stepback_top,Wrangler wall,,401,Wrangler wall,train
+474228.45468196034,3984649.9559468613,0,stepback_base,Wrangler wall,,386,Wrangler wall,train
+474249.88057216554,3984639.1424724464,0,stepback_top,Wrangler wall,,351,Wrangler wall,train
+474221.3127185586,3984653.5604383326,0,stepback_base,Wrangler wall,,437,Wrangler wall,train
+474257.0225355673,3984635.537980975,0,stepback_top,Wrangler wall,,443,Wrangler wall,train
+474281.40853082645,3984591.2285513654,0,stepback_base,Warthog Wall,,421,Warthog Wall,val
+474276.1012864087,3984585.2424711213,0,stepback_base,Warthog Wall,,382,Warthog Wall,val
+474302.63750849734,3984615.172872342,0,stepback_top,Warthog Wall,,442,Warthog Wall,val
+474294.1554238113,3984614.8436858132,0,stepback_top,Warthog Wall,,413,Warthog Wall,val
+474293.7409850035,3984622.832943631,0,stepback_top,Warthog Wall,,412,New Roman Wall,train
+474097.9936909958,3984885.1853051586,0,stepback_base,Jungle Cliff,,439,Jungle Cliff,train
+474118.0704244943,3984898.3353915475,0,stepback_top,Jungle Cliff,,484,Jungle Cliff,train
+474091.3014464963,3984880.8019430293,0,stepback_base,Jungle Cliff,,314,Jungle Cliff,train
+474124.7626689938,3984902.718753677,0,stepback_top,Jungle Cliff,,346,Jungle Cliff,train
+474097.35972397256,3984881.866760664,0,stepback_base,Jungle Cliff,,418,Jungle Cliff,train
+474117.5831585904,3984894.7900997163,0,stepback_top,Jungle Cliff,,498,Jungle Cliff,train
+474090.6185791,3984877.55898098,0,stepback_base,Jungle Cliff,,276,Jungle Cliff,train
+474124.324303463,3984899.0978794005,0,stepback_top,Jungle Cliff,,353,Jungle Cliff,train
+474193.05472499394,3984551.7766354457,0,random,,,449,Magoo Rock,val
+474322.30221191695,3984980.4170985506,0,random,,,210,Jungle Cliff,train
+473155.0378744893,3985441.832438372,0,random,,,472,North Forty Routes,train
+474173.4842623067,3985127.4977334635,0,random,,,430,Goat Cave,train
+473577.4355209024,3985360.8146973182,0,random,,,1172,The Land Beyond Routes,test
+473994.4068772129,3985188.3510588733,0,random,,,281,Goat Cave,train
+473688.31986131263,3984200.8249899116,0,random,,,851,The Park,train
+473858.0764949152,3983929.8312801905,0,random,,,1223,The Park,train
+474275.0162258844,3984871.464028373,0,random,,,216,Jungle Cliff,train
+474168.82393993804,3984411.8991162116,0,random,,,381,Magoo Rock,val
+474493.47820975684,3985305.0247407644,0,random,,,413,Goat Cave,train
+474199.8154048471,3984146.766003989,0,random,,,374,The Far East,val
+473723.9091732365,3983896.6439020033,0,random,,,778,Crackhouse Alley,test
+473246.8286565738,3984956.6724854475,0,random,,,419,North Forty Routes,train
+474148.47587533185,3985428.3796843896,0,random,,,505,Goat Cave,train
+473508.76260547823,3984438.3212433574,0,random,,,764,The Arcade,val
+473728.23790257255,3984138.1972458637,0,random,,,550,The Park,train
+473678.7574079591,3985204.795236179,0,random,,,469,The Land Beyond Routes,test
+474080.5292160641,3984341.9883960555,0,random,,,374,Magoo Rock,val
+474282.0841074022,3985158.5071024094,0,random,,,222,Goat Cave,train
+473602.9062944575,3984302.126481874,0,random,,,1010,Walls Of Moria,train
+474053.3951764702,3984055.7509010583,0,random,,,437,The Park,train
+473316.488076698,3983836.2147768727,0,random,,,549,Crackhouse Alley,test
+474212.857263608,3984926.495484521,0,random,,,220,Jungle Cliff,train
+474088.0119008009,3985118.650512832,0,random,,,338,Goat Cave,train
+473711.9906497907,3984767.121601977,0,random,,,371,Kindergarten Boulder,train
+473224.69872973044,3984013.925829637,0,random,,,468,Crackhouse Alley,test
+474031.87597288296,3984605.2017592317,0,random,,,214,Rosie's Cantina Area,test
+473874.34097786277,3985092.565946265,0,random,,,2252,Goat Cave,train
+473980.4397838015,3984741.9795489674,0,random,,,509,Super Slab,train
+473865.13482406834,3984328.0316597866,0,random,,,975,The Park,train
+473058.2883846907,3984548.193072572,0,random,,,2291,Titanic Wall,val
+473338.89893409685,3984501.44907425,0,random,,,304,Prophecy Wall,test
+474314.3697210252,3984211.9365345826,0,random,,,874,The Far East,val
+473100.25762658997,3984290.6112397467,0,random,,,211,Prophecy Wall,test
+473459.5451994733,3984921.6296109697,0,random,,,340,Kindergarten Boulder,train
+473861.8136029544,3985123.9058036366,0,random,,,698,Goat Cave,train
+474025.63145774393,3984497.8974629347,0,random,,,378,Magoo Rock,val
+474254.232658262,3984100.889200253,0,random,,,365,The Far East,val
+473045.9109492894,3983973.3281907006,0,random,,,841,Crackhouse Alley,test
+474114.26696383033,3984589.9143888345,0,random,,,468,Magoo Rock,val
+473257.4905550986,3984654.8639854854,0,random,,,296,The Doomsday Wall,val
+473243.80919822975,3984978.679825924,0,random,,,465,North Forty Routes,train
+473692.5069914267,3984455.8348881523,0,random,,,373,The Carrion Cube,train
+473471.63643062464,3984869.172648025,0,random,,,461,Kindergarten Boulder,train
+473191.42389363435,3985419.0734706135,0,random,,,330,North Forty Routes,train
+474398.6255187084,3984984.2959199245,0,random,,,517,Jungle Cliff,train
+473417.21117562335,3985431.1433989727,0,random,,,491,The Land Beyond Routes,test
+474200.376432347,3985012.789728212,0,random,,,238,Jungle Cliff,train
+473697.40134776034,3984275.4509671363,0,random,,,878,The Park,train
+473158.4180464574,3985320.7470691283,0,random,,,231,North Forty Routes,train
+473707.1966792526,3984159.5754194027,0,random,,,503,The Park,train
+473478.42320140905,3984784.497368106,0,random,,,220,Kindergarten Boulder,train
+473281.1604689072,3985244.487263574,0,random,,,476,North Forty Routes,train
+474169.4832795669,3985017.0560197565,0,random,,,404,Jungle Cliff,train
+473671.03253846493,3984864.2414219114,0,random,,,381,Kindergarten Boulder,train
+473903.1428968058,3984901.6146727065,0,random,,,372,Super Slab,train
+473140.17561746266,3984513.519078305,0,random,,,527,Titanic Wall,val
+473074.7743118018,3984643.166760409,0,random,,,236,The Doomsday Wall,val
+473514.9253238101,3984063.663583176,0,random,,,280,Confederate Cracks,train
+473169.1253250605,3984798.468133034,0,random,,,368,Spooky Dooky Wall,train
+473271.7239398187,3985358.087090212,0,random,,,436,North Forty Routes,train
+473898.50568194245,3984399.20327992,0,random,,,358,The Carrion Cube,train
+473913.5532013623,3983861.8208182645,0,random,,,422,The Park,train
+474474.9423384358,3984623.786154112,0,random,,,407,Mexican Pillar,test
+474206.4604633752,3983961.1933450634,0,random,,,206,The Park,train
+473754.3533184783,3984637.721356494,0,random,,,394,The Carrion Cube,train
+474443.2835759343,3984772.074557815,0,random,,,424,Roman Wall,train
+473734.24446393107,3984266.7187884585,0,random,,,469,The Park,train
+473517.53309839236,3984687.4115062864,0,random,,,743,Kindergarten Boulder,train
+473681.44421420136,3983859.844530123,0,random,,,892,Crackhouse Alley,test
+474272.9712047912,3985310.06524243,0,random,,,497,Goat Cave,train
+473225.3890690152,3984742.73694303,0,random,,,221,The Doomsday Wall,val
+473177.0241102992,3984938.7486887663,0,random,,,310,Spooky Dooky Wall,train
+473440.6716142961,3984917.494133421,0,random,,,431,North Forty Routes,train
+474121.3449758546,3985098.616295862,0,random,,,273,Goat Cave,train
+473175.74938447704,3985342.9832925317,0,random,,,217,North Forty Routes,train
+473362.76478265633,3983886.0456761527,0,random,,,281,Crackhouse Alley,test
+473858.48524384515,3984439.088313222,0,random,,,1020,The Carrion Cube,train
+474278.3123474221,3985164.2896115123,0,random,,,391,Goat Cave,train
+473495.4984397139,3985404.1520867106,0,random,,,427,The Land Beyond Routes,test
+473455.45909077313,3984678.0999772283,0,random,,,285,Titanic Boulder,train
+473402.08651390945,3985376.2009082423,0,random,,,469,The Land Beyond Routes,test
+473262.5846603181,3983898.4793424294,0,random,,,536,Crackhouse Alley,test
+473675.6196542613,3985469.6134594535,0,random,,,390,The Land Beyond Routes,test
+474372.81411950465,3985065.385832775,0,random,,,1713,Jungle Cliff,train
+474371.46307430614,3985305.564531739,0,random,,,1097,Goat Cave,train
+473803.5225160789,3984347.895764583,0,random,,,575,The Carrion Cube,train
+474190.0868376229,3984921.2063399716,0,random,,,324,Jungle Cliff,train
+473581.802267907,3983980.65567962,0,random,,,952,Crackhouse Alley,test
+474151.5717842056,3984259.2315438897,0,random,,,362,The Far East,val
+474441.7362678418,3984223.595840914,0,random,,,889,The Far East,val
+473198.6802073601,3985202.1992055015,0,random,,,380,North Forty Routes,train
+473245.293761399,3984121.278032653,0,random,,,239,Walls Of Moria,train
+473926.4827034349,3985274.2491382533,0,random,,,429,Goat Cave,train
+473311.18401276553,3984338.600642767,0,random,,,485,Prophecy Wall,test
+474198.32100033265,3985435.5378432935,0,random,,,345,Goat Cave,train
+473775.85773036536,3984062.6243803483,0,random,,,855,The Park,train
+473032.5103924033,3984204.833492208,0,random,,,1144,Prophecy Wall,test
+473212.5213014512,3984947.734052132,0,random,,,417,Spooky Dooky Wall,train
+473197.26708624925,3984663.6280983584,0,random,,,554,The Doomsday Wall,val
+473316.2856726223,3985157.4461018806,0,random,,,442,North Forty Routes,train
+474103.65097583417,3985049.426805219,0,random,,,239,Jungle Cliff,train
+473211.3539673956,3984029.221083726,0,random,,,528,Crackhouse Alley,test
+474427.61067347246,3984483.290486398,0,random,,,656,The Far East,val
+473470.7761271761,3984634.200975475,0,random,,,199,Titanic Boulder,train
+474023.4183456949,3985408.668931905,0,random,,,402,Goat Cave,train
+473448.6309747551,3985357.5702316975,0,random,,,463,The Land Beyond Routes,test
+473049.1900404537,3984744.6636621514,0,random,,,1538,Spooky Dooky Wall,train
+473979.3049104106,3983999.610701571,0,random,,,482,The Park,train
+473225.5272741352,3984519.002774962,0,random,,,368,Titanic Boulder,train
+474486.6584906792,3984812.394088424,0,random,,,410,Roman Wall,train
+474435.9490754932,3985157.838094747,0,random,,,829,Goat Cave,train
+473724.9179010423,3985125.3405884486,0,random,,,375,The Land Beyond Routes,test
+473038.4664202229,3984004.994365715,0,random,,,880,Prophecy Wall,test
+474277.7609073608,3985145.328540181,0,random,,,296,Goat Cave,train
+473366.4704128883,3984704.1551724686,0,random,,,305,The Doomsday Wall,val
+473936.6112880038,3985262.9347514505,0,random,,,291,Goat Cave,train
+473932.16978140984,3984508.1532571316,0,random,,,196,The Carrion Cube,train
+473582.6059461539,3984530.225427346,0,random,,,430,The Arcade,val
+474006.7234529082,3985262.522971357,0,random,,,256,Goat Cave,train
+473704.3268380541,3984234.986342876,0,random,,,771,The Park,train
+473372.6113972889,3985061.0847637043,0,random,,,544,North Forty Routes,train
+474258.124013036,3983998.583707476,0,random,,,381,The Far East,val
+473112.86465113703,3984809.7261468144,0,random,,,500,Spooky Dooky Wall,train
+473234.435208458,3985191.506008239,0,random,,,469,North Forty Routes,train
+473485.10844975925,3984062.581979582,0,random,,,519,Confederate Cracks,train
+474417.54462024674,3984098.499334475,0,random,,,876,The Far East,val
+473445.995165305,3984078.73576314,0,random,,,216,Confederate Cracks,train
+473187.5822276524,3983859.0749965687,0,random,,,459,Crackhouse Alley,test
+473095.8181521731,3984113.6055780104,0,random,,,416,Prophecy Wall,test
+473092.74358897837,3984804.2707556626,0,random,,,527,Spooky Dooky Wall,train
+474050.6756380135,3984476.7441499773,0,random,,,375,Magoo Rock,val
+473496.79974886857,3984660.6371210814,0,random,,,364,Kindergarten Boulder,train
+474347.35560888477,3985235.3956449996,0,random,,,698,Goat Cave,train
+473077.61587370373,3984124.9760992406,0,random,,,1061,Prophecy Wall,test
+473372.73738653376,3984237.5533358445,0,random,,,458,Hanging Gardens,train
+473883.49765638215,3984514.273621257,0,random,,,1205,The Carrion Cube,train
+473086.44045071636,3984443.552082166,0,random,,,544,Titanic Wall,val
+473810.9965148362,3983992.60376313,0,random,,,831,The Park,train
+474283.9145930921,3983910.17207566,0,random,,,2328,The Far East,val
+474423.4562129898,3983988.360696159,0,random,,,752,The Far East,val
+474299.36225478264,3985320.8312209975,0,random,,,419,Goat Cave,train
+474507.02668755804,3985153.9660214772,0,random,,,908,Goat Cave,train
+474201.48600116343,3984889.4044352025,0,random,,,220,Jungle Cliff,train
+474200.75123354525,3984047.1275426694,0,random,,,201,The Far East,val
+473829.80155837117,3984676.7165668453,0,random,,,465,The Carrion Cube,train
+473599.2584885869,3984884.5623361636,0,random,,,968,Kindergarten Boulder,train
+473418.1172257373,3984055.7773125838,0,random,,,220,Crackhouse Alley,test
+473740.9447122221,3984515.3132495536,0,random,,,372,The Carrion Cube,train
+473366.3622996374,3984433.4328937894,0,random,,,375,Street Fighter Wall,train
+473570.70824264927,3984367.075938619,0,random,,,736,The Arcade,val
+473590.66852102685,3984961.140462395,0,random,,,962,Kindergarten Boulder,train
+473464.5578827999,3985397.450320223,0,random,,,484,The Land Beyond Routes,test
+474410.4861701257,3984621.4761969824,0,random,,,437,Mexican Pillar,test
+473512.63482415053,3984711.891240928,0,random,,,1045,Kindergarten Boulder,train
+474306.9751317267,3984906.1595042394,0,random,,,208,Jungle Cliff,train
+474239.52992616623,3984707.393213912,0,random,,,214,Wrangler wall,train
+473977.69014289405,3984301.840450682,0,random,,,285,The Park,train
+474133.4059979707,3984159.643786298,0,random,,,359,The Far East,val
+473212.9498052935,3984842.8017364866,0,random,,,429,Spooky Dooky Wall,train
+473156.4402647523,3985027.42451609,0,random,,,446,Spooky Dooky Wall,train
+473140.2502838497,3985376.028869161,0,random,,,396,North Forty Routes,train
+473221.05064112187,3985414.069834966,0,random,,,268,North Forty Routes,train
+474234.17376873613,3984808.479707501,0,random,,,227,Nipple Stimulation Alcove,test
+474206.2907799875,3985142.50578454,0,random,,,555,Goat Cave,train
+474455.80584107206,3984244.1793362955,0,random,,,818,The Far East,val
+473912.27114453627,3983981.621659397,0,random,,,421,The Park,train
+473952.1100757103,3984108.050162526,0,random,,,423,The Park,train
+473873.905029179,3984773.2394151352,0,random,,,871,Super Slab,train
+473722.78553480416,3984690.660637403,0,random,,,373,The Carrion Cube,train
+474177.7349325095,3985149.3541555763,0,random,,,439,Goat Cave,train
+473762.7439652332,3984818.2823503236,0,random,,,861,Kindergarten Boulder,train
+474433.2203617449,3984022.5545603735,0,random,,,685,The Far East,val
+473190.046033162,3983969.449793651,0,random,,,399,Crackhouse Alley,test
+474015.7819675036,3984518.1636695424,0,random,,,316,The Carrion Cube,train
+474193.612638489,3984937.0760452054,0,random,,,279,Jungle Cliff,train
+473520.6920805151,3985313.7229705565,0,random,,,439,The Land Beyond Routes,test
+474175.6105152407,3984272.6209623,0,random,,,384,The Far East,val
+473567.3481998171,3984345.4265109724,0,random,,,951,Hanging Gardens,train
+473251.9015640998,3984069.0681257886,0,random,,,524,Walls Of Moria,train
+474440.6892288223,3984550.160832029,0,random,,,405,Cliffs of Insanity,train
+473596.5562110261,3985034.0079034846,0,random,,,962,The Land Beyond Routes,test
+473855.64594801865,3985376.3607914215,0,random,,,2215,Goat Cave,train
+473585.92781115393,3985460.08843747,0,random,,,511,The Land Beyond Routes,test
+474107.2441512002,3985401.325209117,0,random,,,406,Goat Cave,train
+473192.1456648733,3985234.4040981047,0,random,,,231,North Forty Routes,train
+473984.0367119081,3984026.1829612013,0,random,,,384,The Park,train
+473909.4952322511,3984961.7258573673,0,random,,,201,Jungle Cliff,train
+473030.01589498215,3984577.3792290217,0,random,,,574,Titanic Wall,val
+474271.6084970031,3984313.785510073,0,random,,,301,The Far East,val
+473711.4291842765,3984557.4738652883,0,random,,,370,The Carrion Cube,train
+473472.27059403615,3985347.0129245264,0,random,,,362,The Land Beyond Routes,test
+474204.25977454626,3984007.3895661803,0,random,,,266,The Far East,val
+474533.6940465758,3985281.9400761663,0,random,,,896,Goat Cave,train
+473444.7557904324,3985211.7903724476,0,random,,,372,The Land Beyond Routes,test
+473173.7315953276,3985480.7721023127,0,random,,,229,North Forty Routes,train
+474027.7252631584,3984902.076352838,0,random,,,409,Jungle Cliff,train
+473149.3320830928,3985311.5122765903,0,random,,,238,North Forty Routes,train
+473055.5118066761,3984223.359512102,0,random,,,2351,Prophecy Wall,test
+473229.62309217954,3985112.0820332356,0,random,,,486,North Forty Routes,train
+473313.88611957093,3985334.072488359,0,random,,,479,North Forty Routes,train
+474013.3475665547,3983883.97311906,0,random,,,470,The Park,train
+473019.52110317594,3983909.668051364,0,random,,,870,Crackhouse Alley,test
+473936.47287675977,3985153.0638181577,0,random,,,202,Goat Cave,train
+473375.4981115578,3985232.5388379213,0,random,,,575,The Land Beyond Routes,test
+473098.62252087594,3985152.2049153973,0,random,,,212,Spooky Dooky Wall,train
+474427.96627816843,3985104.355346565,0,random,,,964,Jungle Cliff,train
+473072.5405139681,3984158.6115546026,0,random,,,397,Prophecy Wall,test
+473201.9872862195,3984660.6450030287,0,random,,,559,The Doomsday Wall,val
+474149.1263319443,3984868.723679148,0,random,,,469,Jungle Cliff,train
+474310.9004349457,3984081.3882959075,0,random,,,1361,The Far East,val
+474132.9905485993,3984144.117418299,0,random,,,382,The Park,train
+473424.6763201571,3985001.206033559,0,random,,,355,North Forty Routes,train
+474507.99495996826,3984838.098715229,0,random,,,964,Roman Wall,train
+473094.45135025145,3984846.0008818735,0,random,,,500,Spooky Dooky Wall,train
+473075.89875491714,3985290.141263677,0,random,,,322,North Forty Routes,train
+474094.7503750654,3984111.095609566,0,random,,,200,The Park,train
+473151.2870590402,3984128.350339118,0,random,,,425,Prophecy Wall,test
+474507.7237579725,3984584.414655823,0,random,,,398,Cliffs of Insanity,train
+474208.5153691369,3984879.3306736946,0,random,,,224,Jungle Cliff,train
+473885.30026808335,3984064.668592026,0,random,,,1643,The Park,train
+474455.80185675324,3984323.7078290167,0,random,,,1041,The Far East,val
+473893.85763355653,3984984.410025425,0,random,,,257,Jungle Cliff,train
+474002.6038256456,3985383.7473398754,0,random,,,407,Goat Cave,train
+473237.894984767,3984666.9824185735,0,random,,,420,The Doomsday Wall,val
+473628.1871970745,3984610.296772267,0,random,,,386,The Carrion Cube,train
+473193.2740342866,3984046.3687297096,0,random,,,513,Walls Of Moria,train
+473664.6347062267,3984837.1766302725,0,random,,,381,Kindergarten Boulder,train
+473980.303572144,3984506.891871347,0,random,,,201,The Carrion Cube,train
+473635.4384540079,3984184.8888801285,0,random,,,800,Confederate Cracks,train
+473909.5689072478,3984349.739506013,0,random,,,194,The Carrion Cube,train
+473066.2928779521,3984517.818327898,0,random,,,1339,Titanic Wall,val
+473885.3686516297,3984762.1977665117,0,random,,,506,Super Slab,train
+474007.4900502962,3984348.3685317584,0,random,,,245,The Carrion Cube,train
+474213.63273823104,3984734.6251801867,0,random,,,226,Rosie's Cantina Area,test
+473670.0020559555,3984862.091732827,0,random,,,385,Kindergarten Boulder,train
+473561.9507655556,3984674.2563441377,0,random,,,457,Kindergarten Boulder,train
+474136.1737115025,3985293.8842256,0,random,,,560,Goat Cave,train
+474417.6770483615,3984659.1557863727,0,random,,,423,Roman Wall,train
+473805.68588908715,3985150.391713315,0,random,,,820,The Land Beyond Routes,test
+473491.39357733104,3985212.5959217744,0,random,,,402,The Land Beyond Routes,test
+473765.7802839967,3984016.125748846,0,random,,,698,The Park,train
+473121.2635518665,3985220.2418634347,0,random,,,224,North Forty Routes,train
+473096.08157016995,3984289.3303144663,0,random,,,213,Prophecy Wall,test
+473490.5425510094,3985055.576530956,0,random,,,382,The Land Beyond Routes,test
+473033.6503774504,3985195.666946613,0,random,,,1632,Spooky Dooky Wall,train
+474319.17203596805,3984441.309190279,0,random,,,1933,The Far East,val
+473245.7955042532,3984820.350132884,0,random,,,426,Spooky Dooky Wall,train
+473193.96886109054,3984429.133964155,0,random,,,462,Prophecy Wall,test
+474474.7437800515,3985474.735643234,0,random,,,411,Goat Cave,train
+474190.2280221772,3984339.658336257,0,random,,,238,The Far East,val
+474061.28903223906,3984993.7466730876,0,random,,,236,Jungle Cliff,train
+473603.4610754005,3984886.7601204584,0,random,,,857,Kindergarten Boulder,train
+473027.61081961537,3984170.6762347403,0,random,,,928,Prophecy Wall,test
+473813.03559051064,3984095.5469548353,0,random,,,965,The Park,train
+473264.56830013206,3985210.8082087967,0,random,,,524,North Forty Routes,train
+474521.6282798952,3984745.9428127944,0,random,,,390,Roman Wall,train
+474292.4828173806,3985466.2075794195,0,random,,,420,Goat Cave,train
+473610.68530760915,3983956.7480462445,0,random,,,1154,Crackhouse Alley,test
+474164.6131558825,3984543.3205327797,0,random,,,353,Magoo Rock,val
+473727.8884090225,3984073.8598082326,0,random,,,699,The Park,train
+473287.50339538505,3985328.21122827,0,random,,,436,North Forty Routes,train
+473079.40860384924,3984210.133683227,0,random,,,425,Prophecy Wall,test
+473457.2021405489,3984636.876557593,0,random,,,208,Titanic Boulder,train
+473906.72705942683,3984642.0045865756,0,random,,,392,The Carrion Cube,train
+473139.6732574793,3984228.0679416596,0,random,,,311,Prophecy Wall,test
+474299.382767122,3984881.2880034265,0,random,,,209,Jungle Cliff,train
+474002.4753977875,3984935.3711018683,0,random,,,210,Jungle Cliff,train
+474176.1768338863,3983920.364702826,0,random,,,469,The Park,train
+473571.03797389683,3984718.6778718242,0,random,,,448,Kindergarten Boulder,train
+473528.0502365017,3985224.3637138344,0,random,,,430,The Land Beyond Routes,test
+473748.1142993086,3985098.583292603,0,random,,,874,The Land Beyond Routes,test
+474312.2509330883,3984661.076965168,0,random,,,380,New Roman Wall,train
+474400.10907292116,3984797.604795411,0,random,,,470,Roman Wall,train
+474309.5921065145,3984388.791110871,0,random,,,2053,The Far East,val
+473772.91944950336,3984705.218857856,0,random,,,404,The Carrion Cube,train
+473171.5330074011,3984484.906141109,0,random,,,443,Titanic Wall,val
+474411.9973626699,3984870.0841007866,0,random,,,441,Wrangler wall,train
+473303.806111115,3983865.1692582285,0,random,,,503,Crackhouse Alley,test
+474427.45477900596,3984567.246268477,0,random,,,403,Cliffs of Insanity,train
+473480.8334797841,3984816.4313283805,0,random,,,201,Kindergarten Boulder,train
+473022.3989067339,3984285.0365577503,0,random,,,528,Prophecy Wall,test
+474510.4399230174,3984852.714706124,0,random,,,896,Roman Wall,train
+473740.3775866723,3985086.6521374527,0,random,,,674,The Land Beyond Routes,test
+474390.60450486507,3985019.100627181,0,random,,,973,Jungle Cliff,train
+474482.0459224163,3985120.7666720184,0,random,,,445,Goat Cave,train
+474334.8289213783,3984013.2194110686,0,random,,,913,The Far East,val
+474129.61957725545,3984553.783549194,0,random,,,475,Magoo Rock,val
+473855.81504280824,3984908.6718678754,0,random,,,556,Super Slab,train
+474492.1300165021,3985456.683280826,0,random,,,781,Goat Cave,train
+473451.352103468,3985040.753315796,0,random,,,497,North Forty Routes,train
+474156.4488855513,3984398.578213674,0,random,,,365,Magoo Rock,val
+473200.3779822388,3983891.906603157,0,random,,,437,Crackhouse Alley,test
+474516.14205123397,3984595.0487067206,0,random,,,398,Cliffs of Insanity,train
+474504.50149805995,3984506.50235763,0,random,,,386,The Far East,val
+474223.1763311208,3983964.6578818248,0,random,,,322,The Far East,val
+473859.4155497815,3985154.0222472963,0,random,,,662,Goat Cave,train
+474423.2421259217,3985188.055023613,0,random,,,925,Goat Cave,train
+473067.6838044448,3984442.040094179,0,random,,,538,Titanic Wall,val

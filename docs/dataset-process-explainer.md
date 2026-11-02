@@ -137,13 +137,21 @@ There are two kinds, and both go through the same filter, `try_add`, using the 5
 
 The GPS files have a different format from everything above:
 
-- **Format:** `Waypoints_2026-10-2{4,5}.csv` / `.gpx` from a Garmin Montana 700i, with columns `name, lat, lon, ele_m, time, comment, description, symbol` in WGS84.
-- **What each point is:** a ground-truth label at a **specific route location**, not a wall pin.
+- **Format:** `Waypoints_2026-10-2{4,5}.csv` from a Garmin Montana 700i, in WGS84. The CSV columns were normalized to `name, area, area_name, route_index, lat, lon, ele_m, time, comment, description, symbol, mp_url`:
+  - `name` is the Mountain Project route name, or `?`.
+  - `area` is 0 = North Forty, 1 = West Side, 2 = East Side.
+  - `route_index` is the route's order in the Mountain Project listing, or `?`.
+  - `comment` is the label: `Climb` / `Nc` / `?`.
 
-  | File | Waypoints | `Climb` | `Nc` | Named route | Blank |
+  The `.gpx` files keep the original raw format.
+- **What each point is:** a ground-truth label at a **specific route location**, not a wall pin. A point is `Climb` if the note named a route or said "climb", and `Nc` if it said "Nc".
+
+  | File | Waypoints | `Climb` | `Nc` | `?` | Named route |
   |---|---|---|---|---|---|
-  | 10-24 | 120 | 41 | 40 | 35 | 4 |
-  | 10-25 | 69 | 44 | 19 | 5 | 1 |
+  | 10-24 | 120 | 77 | 41 | 2 | 35 |
+  | 10-25 | 69 | 49 | 19 | 1 | 5 |
+
+- **Loading:** `groundtruth.load_waypoints` / `snap_to_cliff`. The evaluation of the pseudolabels against these points is described in `docs/ground-truth-evaluation-plan.md` and run by `eval_pseudolabels.py`.
 
 - **Coverage:** all 189 points fall inside the study box.
 

@@ -138,8 +138,29 @@ class SplitConfig:
 
 
 @dataclass
+class GroundTruthConfig:
+    """Hand-gathered GPS waypoints (``data/handgathered``) used as ground truth."""
+
+    paths: tuple[Path, ...] = (
+        DATA_DIR / "handgathered" / "Waypoints_2026-10-24.csv",
+        DATA_DIR / "handgathered" / "Waypoints_2026-10-25.csv",
+    )
+    # handheld GPS under a cliff is ~3-10 m off and the waypoint is where the
+    # person stood, a few metres out from the face; MP pins use 30 m
+    snap_radius_m: float = 12.0
+    # a snapped cliff's base must be within this of the ground under the
+    # waypoint, so a tiered cliff can't snap onto the band above / below
+    max_dz_m: float = 6.0
+    # column around the waypoint whose low points give the standing height
+    ground_radius_m: float = 3.0
+    # distance tolerances used by every evaluation metric
+    tolerances_m: tuple[float, ...] = (5.0, 10.0, 15.0)
+
+
+@dataclass
 class ExperimentConfig:
     region: RegionConfig = field(default_factory=RegionConfig)
     label: LabelConfig = field(default_factory=LabelConfig)
     patch: PatchConfig = field(default_factory=PatchConfig)
     split: SplitConfig = field(default_factory=SplitConfig)
+    gt: GroundTruthConfig = field(default_factory=GroundTruthConfig)

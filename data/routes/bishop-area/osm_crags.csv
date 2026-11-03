@@ -1,0 +1,4 @@
+osm_type,osm_id,kind,name,lat,lon
+node,3294367890,crag,Warm Up Wall,37.512702,-118.571251
+node,4455674255,crag,Faulty Tower,37.5136603,-118.571345
+node,4455674256,crag,Great Wall of China,37.5166345,-118.570919

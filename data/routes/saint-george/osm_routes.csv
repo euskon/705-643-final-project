@@ -1,0 +1,2 @@
+osm_type,osm_id,osm_kind,name,grade,grade_system,length_m,is_boulder,is_sport,is_trad,mp_route_id_tag,openbeta_url,lat,lon,lat2,lon2,osm_crag
+node,12903158905,route_bottom,Quarantine,,,,False,False,False,,,37.2931,-113.6935,,,

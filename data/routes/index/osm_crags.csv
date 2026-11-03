@@ -1,0 +1,25 @@
+osm_type,osm_id,kind,name,lat,lon
+node,9763591080,crag,Missing Bottle Buttress,47.8193585,-121.5749573
+node,9763591095,crag,Walking Legend Wall,47.8169736,-121.5761619
+node,9763591102,crag,Beetle Bailey Slab,47.8167428,-121.5776339
+node,12247537055,crag,Lookout Point West Side,47.825119,-121.5588708
+node,13113494715,crag,Foodbar Crag,47.8191683,-121.5759769
+node,13124267019,crag,Gilligan's Toe,47.8191677,-121.5747371
+relation,19197812,crag,Hag Crag,47.8254825,-121.5571924
+relation,19289300,crag,Lookout Jr.,47.8259404,-121.557895
+relation,19289301,crag,Moai,47.8257844,-121.5579163
+relation,19289302,area,Planet Index,47.8257391,-121.5574889
+relation,19289303,crag,Lookout Point Apron Area,47.825563,-121.5581304
+relation,19289304,crag,Lookout Point Central Area,47.8252114,-121.5579915
+relation,19289305,area,Lookout Point,47.825119,-121.5588708
+relation,19289306,crag,Private Idaho,47.8249999,-121.5582139
+relation,19289460,crag,Great Northern Slab,47.8183364,-121.5724037
+relation,19289461,area,Lower Town Wall,47.818586,-121.5713089
+relation,19289464,area,Lower Lump,47.8168421,-121.5768979
+relation,19475080,crag,WOTI,47.8247391,-121.5599938
+relation,19555100,crag,Grandeur Buttress,47.8192171,-121.5756447
+relation,19555101,area,Inner Walls East Side,47.8192631,-121.5748472
+relation,19555102,crag,Toxic-Tang,47.8189783,-121.5756093
+relation,19555103,area,Inner Walls West Side,47.8191683,-121.5759769
+relation,19574305,crag,Garden Wall,47.8179116,-121.5735998
+relation,19574306,area,Index,47.82264,-121.5594011

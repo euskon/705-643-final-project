@@ -1,0 +1,4 @@
+osm_type,osm_id,kind,name,lat,lon
+node,8630377674,crag,Munchkinland,32.3890407,-110.7167834
+node,13812370289,crag,Barnum Rock,32.4010428,-110.6968944
+relation,18459590,area,Mount Lemmon,32.3890407,-110.7167834

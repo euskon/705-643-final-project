@@ -1,0 +1,3 @@
+osm_type,osm_id,osm_kind,name,grade,grade_system,length_m,is_boulder,is_sport,is_trad,mp_route_id_tag,openbeta_url,lat,lon,lat2,lon2,osm_crag
+node,6448058079,route_bottom,Crazy Streak,,,,False,False,False,,,37.2233411,-112.8904586,,,
+node,11128452124,route,Moonlight Buttress,,,,False,False,False,,,37.2777551,-112.9496058,,,

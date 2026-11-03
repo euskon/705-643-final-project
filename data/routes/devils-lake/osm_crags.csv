@@ -1,0 +1,28 @@
+osm_type,osm_id,kind,name,lat,lon
+node,6724864387,crag,Old Sandstone,43.4137094,-89.68623
+node,6725268268,crag,D'Arcy's Buttress,43.4135528,-89.7122708
+node,6725268269,crag,Pedestal Buttress,43.4135235,-89.7125306
+node,6725268270,crag,Gill's Buttress,43.4135645,-89.7128453
+node,6725268271,crag,Brinton's Buttress,43.413554,-89.7129945
+node,6725268272,crag,Four Brothers,43.4132279,-89.7148388
+node,6725268273,crag,Rainy Wednesday Tower,43.4135267,-89.7143622
+node,6725268274,crag,Pseudo Hawk's Nest,43.4134025,-89.7150888
+node,6725268275,crag,Hawk's Nest,43.4134739,-89.7156636
+node,6725268276,crag,Bill's Buttress,43.4135908,-89.7141057
+node,6725268277,crag,Moldy Buttress,43.4137038,-89.7138656
+node,6725268278,crag,Many Pines Buttress,43.4136747,-89.7136501
+node,6725268279,crag,Two Pines Buttress,43.4136179,-89.7133345
+node,6725279339,crag,The Monster,43.4133856,-89.7121228
+node,6725279340,crag,The Guillotine,43.4133446,-89.711825
+node,6725292551,crag,Minor Mass,43.4139867,-89.7189749
+node,6725292552,crag,Major Mass,43.4138211,-89.7197152
+node,6725292553,crag,Balanced Rock Wall,43.4142941,-89.7250675
+node,6725292554,crag,Birthday Rocks,43.4171429,-89.7268501
+node,6725292555,crag,Horse Rampart,43.4166418,-89.7261059
+node,6725292556,crag,Railroad Ampitheater,43.4181659,-89.7272054
+node,6726691491,crag,Cleopatra's Needle,43.4172989,-89.7384346
+node,6726691492,crag,Cleo's Ampitheater,43.4174612,-89.7384399
+node,6726691493,crag,Misery Rocks,43.4165288,-89.7390359
+node,6726691494,crag,Wiessner Wall,43.4175222,-89.7380636
+node,6726691495,crag,Great Chimney,43.4201862,-89.7383408
+node,6726691496,crag,Lost Face,43.4205138,-89.7381807

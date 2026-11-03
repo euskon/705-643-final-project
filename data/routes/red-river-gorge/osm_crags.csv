@@ -1,0 +1,123 @@
+osm_type,osm_id,kind,name,lat,lon
+node,358612170,crag,Hens Nest Rock,37.8231401,-83.5837992
+node,7312858807,crag,Dip Wall,37.8927072,-83.6525278
+node,7312973196,crag,Pebble Beach,37.8581656,-83.6703593
+node,7313037395,crag,Long Wall,37.8477001,-83.6675392
+node,7313075486,crag,Sassafras Rock,37.845853,-83.6416057
+node,7313102385,crag,Dunkan Rock,37.8404032,-83.6385072
+node,7313102690,crag,Fortress Wall,37.8372762,-83.6470107
+node,7313127889,crag,Mariba Fork,37.8979178,-83.5712392
+node,7314110512,crag,Military Wall,37.8145434,-83.6698408
+node,7314110613,crag,Left Flank,37.8172375,-83.66409
+node,7321846787,crag,Jewel Pinnacle,37.8320291,-83.6121534
+node,7321846799,crag,Tower Rock,37.8280884,-83.5973163
+node,7321846897,crag,Pinch-em Tight Ridge,37.8201919,-83.6306743
+node,7321846994,crag,Half Moon,37.8195578,-83.6213883
+node,7414697922,crag,Camp Store Crag,37.8119286,-83.5882228
+node,7414714198,crag,Eastern Skybridge Ridge,37.8147106,-83.5836702
+node,7414714209,crag,Western Sky Bridge Ridge,37.8126168,-83.5862739
+node,7414714299,crag,Lower Sky Bridge Ridge,37.8186597,-83.5775588
+node,7414757991,crag,Eagle Point Buttress,37.8261629,-83.5628881
+node,7414758200,crag,Funk Rock City,37.8030718,-83.5759227
+node,10805032697,crag,Phantasia Wall,37.8437724,-83.6424351
+node,11016466488,crag,Window Wall,37.8300656,-83.6270985
+node,11027993850,crag,Pistol Ridge,37.863351,-83.6743109
+node,11027993857,crag,Clearcut Wall,37.8664289,-83.6667784
+node,11040049750,crag,The Dome,37.8440028,-83.6567475
+node,11040049787,crag,Tarr Ridge,37.8398503,-83.6583189
+node,11369474532,crag,Middle Small Wall,37.8234109,-83.5887348
+node,11369474533,crag,Lower Small Wall,37.8214486,-83.5921425
+node,11616111793,crag,Wall Of Denial,37.8211118,-83.5604369
+node,11940073570,crag,Moonshiner’s Wall,37.8214195,-83.5739098
+node,11940073571,crag,Doorish Wall,37.8259701,-83.566249
+node,12061408033,crag,Ash Branch,37.7175936,-83.6311055
+node,13204853065,crag,Lumpy Wall,37.8889699,-83.6376643
+node,13204853072,crag,Muscle Beach,37.8737876,-83.6530053
+node,13204853073,crag,Backside,37.8883112,-83.6421176
+node,13204872111,crag,Bee Branch Rock,37.8919557,-83.713251
+node,13204872112,crag,Blackburn Rock,37.8799232,-83.7026752
+node,13206886834,crag,Asylum Wall,37.8468,-83.699699
+node,13207378155,crag,Coffin Ridge,37.8515927,-83.6523115
+node,13227755630,crag,Between Wall,37.8675,-83.6559
+node,13227755631,crag,Minas Tirith,37.8745707,-83.6602696
+node,13227755632,crag,Jazz Rock,37.8724,-83.6681
+node,13227755634,crag,Brighton Wall,37.8727,-83.6653
+node,13227755635,crag,Symphony Wall,37.8739,-83.6668
+node,13227755636,crag,Bear Wollor Hollor,37.8676,-83.6614
+node,13227755637,crag,Willie's Wall,37.8737,-83.6639
+node,13227917703,crag,Indian Creek,37.8949416,-83.6384834
+node,13227917724,crag,Board Wall,37.9000732,-83.635155
+node,13227917732,crag,Lost Ridge,37.9077,-83.6432
+node,13227917736,crag,Purple Valley,37.9014,-83.6388
+node,13228434773,crag,Wildcat Wall,37.7931463,-83.5685779
+node,13230619359,crag,Buzzard's Roost,37.8171886,-83.5878442
+relation,21776310,crag,Left End,37.6488708,-83.7153197
+relation,21776387,crag,The Backside,37.6491582,-83.7108204
+relation,21776388,crag,Theobroma Wall,37.6491575,-83.7115445
+relation,21776389,crag,Gilgamesh Alcove,37.649202,-83.7121326
+relation,21776390,crag,Oompa Loompa Land,37.6494881,-83.7124328
+relation,21776391,crag,J Rat's Back Wall,37.6495017,-83.7129591
+relation,21776392,crag,Gloop Slab,37.6491406,-83.7134862
+relation,21776393,crag,Malice Area,37.6495018,-83.7140901
+relation,21776394,crag,Snozzberries Wall,37.649934,-83.7145646
+relation,21776395,crag,Grandpa Joe's Wall,37.6498088,-83.7150176
+relation,21776396,crag,Cat's Demise Area,37.6494134,-83.7151689
+relation,21776496,crag,Undertow Wall,37.645593,-83.7098131
+relation,21776497,crag,Madness Cave,37.6462092,-83.7095
+relation,21776498,crag,GMC Wall,37.6465711,-83.7100775
+relation,21776499,crag,Warm-Up Wall,37.6463475,-83.7108098
+relation,21776500,crag,Buckeye Buttress,37.6458798,-83.7115444
+relation,21776536,crag,Northwest Side,37.6434333,-83.7083434
+relation,21776537,crag,Southeast Side,37.6444852,-83.7076219
+relation,21778100,crag,The Unlode,37.6418448,-83.7117781
+relation,21778130,crag,Main Wall,37.6446061,-83.7156071
+relation,21778131,crag,Left Wall,37.6437509,-83.7160726
+relation,21778180,crag,Right Side,37.6443645,-83.718664
+relation,21778181,crag,Center,37.6453434,-83.7182042
+relation,21778182,crag,Backside,37.6456975,-83.7180801
+relation,21778183,crag,Velo Pinnacles,37.64578,-83.7185558
+relation,21778258,crag,Right Side,37.6443574,-83.7227216
+relation,21778259,crag,Sail Wall,37.6439393,-83.7211152
+relation,21783107,crag,Star Wall,37.6460649,-83.722166
+relation,21783108,crag,Left Wall,37.6460597,-83.7219167
+relation,21783124,crag,Throwback Crag,37.6466395,-83.7227395
+relation,21783140,crag,The Shire,37.652022,-83.7102902
+relation,21783945,crag,North 40,37.6521446,-83.7074729
+relation,21784038,crag,Purgatory,37.6537111,-83.7097291
+relation,21784109,crag,Bronaugh Wall,37.6536052,-83.7112566
+relation,21784132,crag,Shady Grove,37.6540188,-83.7131902
+relation,21784195,crag,The Playground,37.6532902,-83.714652
+relation,21784224,crag,Left Field,37.6529568,-83.7152451
+relation,21784859,crag,Volunteer Wall,37.6539083,-83.7162129
+relation,21784939,crag,Right Side,37.6541627,-83.7173138
+relation,21784940,crag,Left Side,37.6531399,-83.7178074
+relation,21784976,crag,Curbside,37.6510208,-83.7188567
+relation,21785769,crag,Right Side,37.6513982,-83.7203786
+relation,21785770,crag,Main Wall,37.6507821,-83.7214592
+relation,21785771,crag,Left Side,37.6500572,-83.7223371
+relation,21785824,crag,Right Side,37.6519332,-83.7223181
+relation,21785825,crag,The Cave,37.6523253,-83.7228745
+relation,21785826,crag,Left Side,37.6520423,-83.723498
+relation,21786662,crag,Walk-By Wall,37.6525634,-83.7238468
+relation,21786663,crag,Main Wall,37.6531541,-83.7242423
+relation,21786664,crag,Left Wall,37.652932,-83.7248117
+relation,21786755,crag,Right Side,37.6405461,-83.6863918
+relation,21786756,crag,Main Wall,37.6405293,-83.6850506
+relation,21786757,crag,Left Side,37.6400991,-83.684299
+relation,21786808,crag,Right Side,37.65285,-83.7258527
+relation,21786809,crag,Back Wall,37.6530517,-83.7266102
+relation,21786810,crag,Left Side,37.6519231,-83.7277468
+relation,21786844,crag,In Between,37.6518975,-83.7290426
+relation,21786845,crag,Right Side,37.6526466,-83.7287384
+relation,21786846,crag,Vert Wall,37.6542641,-83.72805
+relation,21786847,crag,5.10 Cave,37.6546315,-83.7283654
+relation,21786848,crag,Left Side,37.6538631,-83.7299164
+relation,21786859,crag,Main Wall,37.6730084,-83.7356792
+relation,21786860,crag,The Notch,37.6724639,-83.7357144
+relation,21786902,crag,Mt. Olive Rock,37.6289842,-83.7695776
+relation,21786932,crag,The Crossroads,37.6757685,-83.7329386
+relation,21786959,crag,Gold Coast,37.6763913,-83.7341923
+relation,21786971,crag,Solar Collector,37.6778128,-83.7351132
+relation,21787003,crag,Bright Side,37.679099,-83.7361274
+relation,21787015,crag,The Dark Side,37.6782196,-83.7372677
+relation,21787080,crag,Gun Crag,37.7481885,-83.6692202

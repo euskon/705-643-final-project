@@ -1,0 +1,50 @@
+osm_type,osm_id,kind,name,lat,lon
+node,4337985155,crag,Loggerhead Buttress,37.7300585,-119.6238873
+node,4337985156,crag,Schultz's Ridge,37.7287347,-119.6256039
+relation,14151086,area,Camp 4 Climbing,37.7423877,-119.60368
+relation,14151094,crag,Presidential Boulder,37.7264491,-119.6057131
+relation,15956638,crag,Manure Pile Buttress,37.7299585,-119.6191911
+relation,19340167,crag,Grack Area,37.7299998,-119.5641609
+relation,19340168,crag,Goodrich Pinnacle,37.7320993,-119.5655697
+relation,19340169,crag,Monday Morning Slab,37.733013,-119.5659864
+relation,19342808,crag,Southwest Face,37.7292901,-119.6366138
+relation,19342809,crag,El Capitan Base,37.729059,-119.6374792
+relation,19342885,area,El Capitan Picnic Area,37.7290829,-119.6228593
+relation,19342886,crag,Lower Brother,37.7347677,-119.612512
+relation,19342902,crag,Southwest Face,37.7400301,-119.5392368
+relation,19348138,crag,Reed's Pinnacle,37.7241746,-119.700412
+relation,19348139,crag,Five and Dime Cliff,37.723374,-119.6994198
+relation,19348140,crag,Knob Hill,37.727827,-119.7123242
+relation,19348141,crag,The Rostrum,37.7192678,-119.7078131
+relation,19348167,crag,Torque Spanner Boulder,37.7428639,-119.6034106
+relation,14151087,crag,Five Open Books,37.7487506,-119.5985701
+relation,14151105,crag,Ahwahnee Boulders,37.7477163,-119.5747635
+relation,15956565,crag,Swan Slab,37.7452416,-119.6000559
+relation,18637167,crag,Central Royal Arches,37.7482932,-119.5702887
+relation,19340186,crag,Church Bowl,37.7491925,-119.5799027
+relation,19340193,crag,Western Royal Arches,37.7487445,-119.5723627
+relation,19340203,crag,Sunnyside Bench,37.7512445,-119.5943059
+relation,19340204,crag,Lower Falls Amphitheatre,37.7504997,-119.597484
+relation,19347955,crag,North Dome,37.7557655,-119.5617799
+relation,21170875,crag,Hetch Hetchy Dome,37.9653434,-119.7528548
+node,3653662038,crag,Bunny Slopes,37.8443598,-119.4475757
+node,3683429077,crag,,37.8790759,-119.3947096
+node,4337963389,crag,North Wall,37.8639499,-119.4192052
+node,5097050395,crag,Guide Cracks,37.8784646,-119.4126169
+node,6839494879,crag,North Buttress,37.8614804,-119.3991367
+relation,6565918,crag,Puppy Boulders,37.8743306,-119.3454626
+relation,19347895,crag,Northwest Face,37.8804519,-119.3511201
+relation,19347897,area,Tuolumne Meadows,37.8617179,-119.4211427
+relation,19347908,crag,West Face,37.8807363,-119.4142813
+relation,19347909,area,DAFF Dome,37.8788369,-119.4135471
+relation,19347931,area,South Flank,37.8784646,-119.4126169
+relation,19347932,crag,West Face,37.86199,-119.4221278
+relation,19347933,area,Mariuolumne Dome,37.8639499,-119.4192052
+relation,19347934,crag,Dozier Dome,37.8503126,-119.4350504
+relation,19347940,area,Pywiack Dome,37.8465432,-119.4439811
+relation,19347941,crag,Tenaya Peak,37.8312848,-119.4434176
+relation,19347949,crag,Stately Pleasure Dome,37.8357354,-119.4577484
+relation,19347950,crag,Cathedral Peak,37.8474369,-119.4050597
+relation,19348158,crag,West Face (Center),37.8586417,-119.4279504
+relation,19348175,crag,Mount Conness,37.966519,-119.3243976
+relation,19350480,crag,Matthes Crest,37.8231545,-119.3974781

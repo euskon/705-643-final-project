@@ -1,0 +1,72 @@
+osm_type,osm_id,kind,name,lat,lon
+node,3374769975,crag,Wake Up Wall,36.1672902,-115.4538422
+node,5244601680,crag,Coco Crag,36.1464109,-115.423013
+node,5244601681,crag,Jabba the Hutt Rock,36.1461424,-115.422321
+node,5249704953,crag,Brass Wall,36.1253441,-115.4909919
+node,5311546063,crag,Romper Room,36.0786725,-115.478218
+node,6183182205,crag,Cut Your Teeth Crag,36.1534096,-115.431783
+node,6183182230,crag,The Echove,36.079739,-115.47989
+node,6742314610,crag,Rose Tower,36.1174078,-115.488545
+node,6743983579,crag,Sunny and Steep,36.1698417,-115.423309
+node,6743983580,crag,Winter Heat Wall,36.1687711,-115.422518
+node,6743983581,crag,Cannabis Crag,36.167309,-115.417896
+node,6744014698,crag,Sweet Pain Wall,36.1559659,-115.43669
+node,6744017864,crag,The Pier,36.1609677,-115.446481
+node,7113165567,crag,Stone Wall,36.1563229,-115.4371649
+node,7113165834,crag,Sonic Youth Cliff,36.16576,-115.4531161
+node,11517876791,crag,Running Man Wall,36.1601959,-115.4423923
+relation,16862466,crag,Kraft Crags,36.1605513,-115.4165696
+relation,17066342,crag,Spectrum Area,36.125013,-115.4909859
+relation,17066343,area,Pine Creek Canyon,36.1253441,-115.4909919
+relation,18455423,crag,Cannibal Crag,36.1488356,-115.422821
+relation,19339184,crag,Dark Shadows Wall,36.1241827,-115.4949797
+relation,19339185,crag,East Face,36.1224626,-115.4926792
+relation,19339186,crag,Southeast Buttress,36.1222266,-115.4932453
+relation,19339188,crag,Solar Slab (Upper Tier),36.1040601,-115.488673
+relation,19339189,crag,Solar Slab (Lower Tier),36.1034181,-115.4873667
+relation,19339210,area,Juniper Canyon,36.1174078,-115.488545
+relation,19339224,crag,Jackrabbit Buttress,36.1152451,-115.4878108
+relation,19339225,crag,Brownstone Wall,36.1153671,-115.4938285
+relation,19339383,crag,Out of Control Area,36.1249318,-115.492236
+relation,19339384,crag,Rainbow Wall,36.1106455,-115.4960069
+relation,19339385,crag,Cloud Tower,36.1126285,-115.4890869
+relation,19339410,crag,Tuna and Chips Wall,36.148541,-115.4293351
+relation,19339411,area,Calico I,36.1464537,-115.4319173
+relation,19339484,crag,"Lower Level, Right Wall",36.1554152,-115.4360849
+relation,19339485,crag,"Lower Level, Left Wall",36.1553109,-115.436132
+relation,19339488,area,Calico II,36.1538503,-115.4373468
+relation,19377090,crag,Strawberry Hill Buttress,36.0803648,-115.4811596
+relation,19377091,crag,Lotta Balls Wall,36.0778633,-115.4777878
+relation,19377092,area,First Creek Canyon,36.0786725,-115.478218
+relation,19377106,crag,Scrambler's Wall,36.1495333,-115.4311655
+relation,19377108,crag,Dickies Cliff,36.1512688,-115.4279355
+relation,19377109,area,Guardian Angel Pass East,36.1534096,-115.431783
+relation,19383223,crag,Challenger Wall,36.1187978,-115.4974366
+relation,19393931,area,Calico Hills Trail,36.1605818,-115.4444367
+relation,19397811,area,Wake-Up Wall Area,36.1665251,-115.4534791
+relation,19861413,crag,Yin and Yang Cliff,36.167896,-115.426829
+relation,19861414,area,Kraft Mountain,36.1685754,-115.4206025
+relation,20009835,crag,Whiskey Peak North Face,36.0344566,-115.4627881
+relation,20009837,crag,Black Velvet Wall,36.036133,-115.4677548
+relation,20018478,crag,Meetup Wall,36.1569833,-115.4364727
+relation,20018479,crag,Great Red Book,36.1559626,-115.4346894
+relation,20018480,crag,Hunter S. Thompson Dome,36.156145,-115.4361057
+relation,20030113,crag,Black Wall (Happy Acres),36.1521424,-115.4306815
+relation,20030114,crag,Gnat Man Crag,36.151357,-115.4283837
+relation,20030115,crag,Cowlick Crag,36.1519596,-115.4277659
+relation,20033496,crag,Case Face,36.1588805,-115.5003916
+relation,20033497,crag,Children's Crag,36.160854,-115.5008723
+relation,20033498,crag,White Trash Cliff,36.1720979,-115.5017591
+relation,20033499,crag,Outhouse Crag,36.1614949,-115.4984154
+relation,20033501,crag,Mother's Crag,36.1626353,-115.5043259
+relation,20033520,crag,Classic Rock Wall,36.1455635,-115.428024
+relation,20033521,crag,Cactus Massacre,36.1468079,-115.4275571
+relation,20033522,crag,Child's Play Wall,36.1469505,-115.4273295
+relation,20033523,crag,Circus Cliff,36.1471047,-115.4292442
+relation,20033524,crag,Panty Wall,36.1497333,-115.4298031
+relation,20033525,crag,Upper Hamlet,36.1505141,-115.4310743
+relation,20033526,crag,Riding Hood Wall,36.1491531,-115.4268422
+relation,20033527,area,Red Spring,36.1462767,-115.422667
+relation,20033624,crag,Bubble Butt Boulder,36.1609279,-115.415417
+relation,20033625,area,Main Area,36.1596513,-115.4168006
+relation,20033626,area,The Pearl Area,36.1596873,-115.4143611

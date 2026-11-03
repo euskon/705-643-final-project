@@ -1,0 +1,2 @@
+osm_type,osm_id,osm_kind,name,grade,grade_system,length_m,is_boulder,is_sport,is_trad,mp_route_id_tag,openbeta_url,lat,lon,lat2,lon2,osm_crag
+way,1521445485,route,Trough,5.4,yds_class,,False,False,True,105861086,,33.760418,-116.6847476,33.7598694,-116.6844244,

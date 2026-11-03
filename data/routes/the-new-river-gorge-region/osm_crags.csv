@@ -1,0 +1,4 @@
+osm_type,osm_id,kind,name,lat,lon
+node,10277405860,area,Party Buttress Area,38.0556792,-81.0625082
+node,10277405890,area,Fern Point Area,38.0560363,-81.0631722
+node,10277405931,area,Honeymooner Area,38.0543,-81.0582128

@@ -1,0 +1,42 @@
+osm_type,osm_id,kind,name,lat,lon
+node,12105559750,crag,Veteran's Club,47.5522568,-120.7608614
+node,12105571171,crag,Stones Throw,47.5512953,-120.7617409
+node,12105584249,crag,Little Italy,47.5701318,-120.785789
+node,12105603902,crag,Sugar Shack,47.6123675,-120.8641969
+node,12107162133,crag,Central Park,47.5451339,-120.7259961
+node,12641693217,crag,Barney's Rubble,47.5432619,-120.7356486
+node,12641693218,crag,Domestic Dome,47.5451625,-120.7376511
+node,12848298308,crag,Carnival Boulders,47.5554748,-120.7683761
+relation,19149014,area,Playground Point,47.5423894,-120.7255463
+relation,19149027,crag,Carnival Crag,47.5557378,-120.7674562
+relation,19278555,crag,Clamshell Cave,47.5451205,-120.7291328
+relation,19278626,area,Clamshell,47.5431763,-120.7267954
+relation,19302892,area,Domestic Dome Area,47.5451625,-120.7376511
+relation,19302893,crag,Icicle Buttress,47.5483754,-120.7519894
+relation,19302894,crag,Eightmile Rock,47.5554401,-120.7705206
+relation,19302895,area,Eightmile Area,47.5517761,-120.7613012
+relation,19302896,area,Little Italy Area,47.5701318,-120.785789
+relation,19302897,area,Icicle Creek,47.5778147,-120.7999228
+relation,19339808,crag,Upper Castle,47.5995644,-120.7121691
+relation,19339839,crag,February Buttress,47.5884629,-120.6812532
+relation,19630630,crag,Cooper's Buttress,47.5560963,-120.766893
+relation,19630631,area,Carnival Area,47.55539,-120.7679298
+relation,19630829,crag,Hobo Gulch East Side,47.5882049,-120.6795296
+relation,19630830,crag,Hobo Gulch West Side,47.5882799,-120.6801658
+relation,20504516,crag,Middle Tier,47.5434819,-120.7224027
+relation,20504517,crag,Upper Tier,47.5435506,-120.7224215
+relation,20504518,crag,Lower Tier,47.5431772,-120.7220467
+relation,20803065,crag,Puzzle Palace,47.5923658,-120.6859413
+relation,20803066,crag,Clam's Holler,47.589558,-120.6886242
+relation,21073515,crag,Snow Creek Wall,47.5280266,-120.7186411
+relation,21180057,crag,Bambino,47.5703787,-120.7856798
+relation,21180058,crag,Little Italy,47.5701413,-120.7858184
+relation,21860404,crag,,47.5446707,-120.7328384
+relation,21860405,crag,The Real Thing Boulder,47.5446819,-120.7326404
+relation,21860406,crag,Busted Boulder,47.5445829,-120.7324897
+relation,21860559,crag,Forestland Bluff,47.5450202,-120.7330292
+relation,21860560,crag,The Physical Boulder,47.5452217,-120.7324392
+relation,21860561,crag,,47.5453495,-120.7324998
+relation,21860562,crag,Sunny and Steep Boulder,47.5452863,-120.7326313
+relation,21860563,crag,Dirty and Deep Boulder,47.5451442,-120.7326453
+relation,21860564,crag,Scarecrow Boulder,47.5447127,-120.7322559

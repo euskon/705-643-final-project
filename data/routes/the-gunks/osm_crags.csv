@@ -1,0 +1,29 @@
+osm_type,osm_id,kind,name,lat,lon
+node,2443280214,crag,Breakfast Wall,41.7397809,-74.2184332
+node,2443280217,crag,Breaker Wall,41.7398759,-74.2180708
+node,9177439418,crag,Khadeja Wall,41.7391124,-74.2205594
+node,12920571925,crag,Blocky Wall,41.7399081,-74.2178492
+relation,13264257,area,Peter’s Kill,41.7426905,-74.2157924
+relation,17729374,area,Near Trapps,41.7320926,-74.1976566
+relation,17729380,area,The Trapps,41.7464317,-74.1805409
+relation,19345607,crag,Big Slab Area,41.7395535,-74.2150195
+relation,19345608,crag,Psycho Area,41.739695,-74.2152873
+relation,19345609,crag,Oops Block Area,41.7397289,-74.2153885
+relation,19345610,crag,Drive In Area,41.7397867,-74.2157686
+relation,19345611,crag,Little Havana,41.7394891,-74.2147459
+relation,19345612,crag,Chalkboard Wall,41.7392931,-74.2144733
+relation,19345613,crag,The Golden Wall,41.7389775,-74.2141235
+relation,19345614,crag,Hugh's Roof Area,41.7389093,-74.2134019
+relation,19345615,crag,East Pillar Area,41.7388273,-74.212678
+relation,19345616,crag,Peterskill East Cliff,41.7395393,-74.2141357
+relation,19345617,crag,LA Wall,41.7390742,-74.2195264
+relation,19345618,crag,Bunk Bed Wall,41.7388522,-74.2199681
+relation,19345619,area,Peterskill West Cliff,41.7393232,-74.2198739
+relation,19345633,area,Dickie Barre,41.7437469,-74.2129475
+relation,19345653,crag,Peterskill Middle Cliff,41.7399681,-74.218217
+relation,19345964,crag,High Exposure Buttress Area,41.74589,-74.1778201
+relation,19345966,crag,Guide's Wall,41.7416715,-74.1817209
+relation,19345980,crag,The Uberfall,41.7370795,-74.1890518
+relation,19525749,crag,Mac Wall,41.739771,-74.1839609
+relation,19525754,crag,Yellow Wall,41.7470306,-74.1765745
+relation,19601109,crag,Terror Dome,41.7398092,-74.2159255

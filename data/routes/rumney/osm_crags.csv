@@ -1,0 +1,10 @@
+osm_type,osm_id,kind,name,lat,lon
+relation,14000108,area,Rumney Climbing Crag,43.8032187,-71.8399612
+relation,15834620,area,Buffalo Corral,43.8029414,-71.8491768
+relation,19345881,crag,Jimmy Cliff,43.8043174,-71.8405525
+relation,19345882,crag,Main Clifff,43.8022368,-71.8364328
+relation,19345885,crag,Buffalo Pit,43.8038569,-71.8498814
+relation,19345886,crag,Venus Wall,43.8019174,-71.8373895
+relation,19345887,crag,Orange Crush Wall,43.8030169,-71.8354085
+relation,19345888,crag,Meadows,43.8022062,-71.8316592
+relation,19345889,crag,Parking Lot Wall,43.8025588,-71.8309098

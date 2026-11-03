@@ -1,0 +1,3 @@
+osm_type,osm_id,osm_kind,name,grade,grade_system,length_m,is_boulder,is_sport,is_trad,mp_route_id_tag,openbeta_url,lat,lon,lat2,lon2,osm_crag,mp_route_id,mp_name,mp_wall,mp_location,mp_rating,mp_length_m,match_type,match_score,dist_to_mp_pin_m
+node,6448058079,route_bottom,Crazy Streak,,,,False,False,False,,,37.2233411,-112.8904586,,,,114075478,Crazy Streak,Crazy Quilt Mesa,Crazy Quilt Mesa > East Side > Zion National Park > Southwest Utah > Utah,5.8+,304.8,name,1.0,253.1
+node,11128452124,route,Moonlight Buttress,,,,False,False,False,,,37.2777551,-112.9496058,,,,105717718,The Moonlight Buttress (Clean Aid),Moonlight Buttress,Moonlight Buttress > Zion National Park > Southwest Utah > Utah,5.8 C1,365.76,name,1.0,11.7

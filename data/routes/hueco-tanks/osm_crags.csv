@@ -1,0 +1,9 @@
+osm_type,osm_id,kind,name,lat,lon
+node,3367779257,crag,Scary Boulder,31.9224818,-106.0480632
+node,3367779259,crag,The New Meadow,31.923219,-106.0438884
+node,5682351357,crag,The Grenade,31.9221438,-106.0439256
+node,11374240129,crag,Ghetto Simulator,31.9199405,-106.0460232
+node,11374240130,crag,Power of Silence,31.9250164,-106.0431062
+node,11374240131,crag,Martini Roof,31.9216564,-106.0426759
+relation,19394102,area,North Mountain,31.9224784,-106.0453696
+relation,19394103,area,West Mountain,31.9089844,-106.0472059

@@ -1,0 +1,12 @@
+[out:json][timeout:180];
+(
+  node["climbing"="route_bottom"](40.396788,-105.576799,40.429252,-105.497391);
+  node["climbing"="route"](40.396788,-105.576799,40.429252,-105.497391);
+  way["climbing"="route"](40.396788,-105.576799,40.429252,-105.497391);
+);
+out tags geom;
+(
+  relation["climbing"~"^(crag|area)$"](40.396788,-105.576799,40.429252,-105.497391);
+  node["climbing"~"^(crag|area)$"](40.396788,-105.576799,40.429252,-105.497391);
+);
+out tags center;

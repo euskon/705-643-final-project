@@ -1,0 +1,8 @@
+[out:json][timeout:300];
+area["ISO3166-1"="US"][admin_level=2]->.us;
+(
+  node["climbing"="route_bottom"](area.us);
+  node["climbing"="route"](area.us);
+  way["climbing"="route"](area.us);
+);
+out tags center;

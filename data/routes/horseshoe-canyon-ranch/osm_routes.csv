@@ -1,0 +1,3 @@
+osm_type,osm_id,osm_kind,name,grade,grade_system,length_m,is_boulder,is_sport,is_trad,mp_route_id_tag,openbeta_url,lat,lon,lat2,lon2,osm_crag
+node,2720115656,route,Static Cling,,,,True,False,False,,,36.0086452,-93.2939218,,,
+node,2720115660,route,Kindergarten Traverse,,,,True,False,False,,,36.0086884,-93.2939204,,,

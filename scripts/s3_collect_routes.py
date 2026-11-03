@@ -33,11 +33,8 @@ import pandas as pd
 
 from crag import crossref, mp, openclimbing, registry, wandb_utils
 from crag.cli import parse_list, setup_logging
-from crag.paths import AREAS_JSON, ROUTES_DIR, add_import_paths
-
-add_import_paths()
-from config import GroundTruthConfig  # noqa: E402
-from groundtruth import load_waypoints  # noqa: E402
+from crag.groundtruth import load_waypoints
+from crag.paths import AREAS_JSON, ROUTES_DIR
 
 log = logging.getLogger("collect_routes")
 HAND_SLUG = "horseshoe-canyon-ranch"
@@ -47,7 +44,7 @@ COLUMNS = ["route_uid", "slug", "source", "label", "name", "lat", "lon", "lat2",
 
 
 def handgathered_rows() -> pd.DataFrame:
-    gt = load_waypoints(GroundTruthConfig())
+    gt = load_waypoints()
     gt = gt[gt["label"] >= 0]
     out = pd.DataFrame(
         {

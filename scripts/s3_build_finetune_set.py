@@ -43,13 +43,10 @@ import pandas as pd
 from crag import finetune_data, registry, tiles, wandb_utils
 from crag.cli import parse_list, setup_logging
 from crag.crop import AreaCloud
+from crag.groundtruth import load_waypoints
 from crag.negatives import NegativeConfig, build_area_samples, validate_on_handgathered
-from crag.paths import AREAS_JSON, PRETRAIN_DIR, ROUTES_DIR, add_import_paths
+from crag.paths import AREAS_JSON, PRETRAIN_DIR, ROUTES_DIR
 from crag.pseudolabels import PseudoLabelConfig, area_pins, process_area
-
-add_import_paths()
-from config import GroundTruthConfig  # noqa: E402
-from groundtruth import load_waypoints  # noqa: E402
 
 log = logging.getLogger("build_finetune")
 
@@ -179,7 +176,7 @@ def main() -> None:
     if not args.no_validate and (Path(PRETRAIN_DIR) / finetune_data_hand_slug() / "stage").exists():
         hand_area = next((a for a in reg["areas"] if a["slug"] == finetune_data_hand_slug()), None)
         if hand_area:
-            v = validate_on_handgathered(AreaCloud(hand_area["slug"]), load_waypoints(GroundTruthConfig()), registry.area_crs(hand_area), cfg, repeats=5)
+            v = validate_on_handgathered(AreaCloud(hand_area["slug"]), load_waypoints(to_work=registry.area_crs(hand_area).to_work), registry.area_crs(hand_area), cfg, repeats=5)
             report["band_validation_horseshoe"] = v
             log.info("band-negative precision vs documentation coverage (Horseshoe Canyon):\n%s", pd.DataFrame(v["by_coverage"]).to_string(index=False))
     (out / "report.json").write_text(json.dumps(report, indent=1, default=str))

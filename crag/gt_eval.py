@@ -20,14 +20,14 @@ import pandas as pd
 import torch
 from sklearn.metrics import average_precision_score, roc_auc_score
 
+from crag import registry
 from crag.crop import AreaCloud, voxel_block
 from crag.datasets import BlockSpec, make_item
+from crag.groundtruth import load_waypoints
 from crag.paths import add_import_paths
 from crag.train import model_forward
 
 add_import_paths()
-from config import GroundTruthConfig  # noqa: E402
-from groundtruth import load_waypoints  # noqa: E402
 from openpoints.transforms import build_transforms_from_cfg  # noqa: E402
 
 log = logging.getLogger(__name__)
@@ -51,9 +51,11 @@ def score_waypoints(
     batch_size: int = 8,
 ) -> tuple[dict, pd.DataFrame]:
     device = next(model.parameters()).device
-    gt = load_waypoints(GroundTruthConfig())
-    gt = gt[gt["label"] >= 0].reset_index(drop=True)
     cloud = AreaCloud(slug)
+    reg_area = next((a for a in registry.load()["areas"] if a["slug"] == slug), None)
+    # waypoints in the same metric CRS as the area's tiles
+    gt = load_waypoints(to_work=registry.area_crs(reg_area).to_work if reg_area else None)
+    gt = gt[gt["label"] >= 0].reset_index(drop=True)
     tf = build_transforms_from_cfg("val", transforms_cfg) if transforms_cfg else None
     keys = [k.strip() for k in spec.feature_keys.split(",")]
     model.eval()

@@ -10,7 +10,7 @@ Classes (``CLASSES``; ``IGNORE = -1`` is masked out of the loss):
  2    steep_terrain   last return, slope >= 30 deg but not a "steep" cliff point
  3    cliff           the PoC's "steep" rule: slope >= 60 deg and single return
  4    climbable       cliff point inside a Mountain Project route cylinder
-                      (``labeling.build_positives``: pin snapped to the cliff,
+                      (``crag.labeling.build_positives``: pin snapped to the cliff,
                       2.5 m radius, from the cliff base up the route length)
  -1   ignore          cliff point within ``ignore_buffer_m`` (40 m) of a crag
                       pin / route cylinder but not in a cylinder - possibly
@@ -48,13 +48,18 @@ import pandas as pd
 from scipy.spatial import cKDTree
 
 from crag import mp
-from crag.paths import LIDAR_DIR, PRETRAIN_DIR, add_import_paths
+from crag.labeling import (
+    LabelConfig,
+    PatchConfig,
+    PointCloud,
+    build_negatives,
+    build_positives,
+    compute_normals,
+    slope_deg,
+)
+from crag.paths import LIDAR_DIR, PRETRAIN_DIR
 from crag.registry import area_crs
 from crag.tiles import Tile, load_tile
-
-add_import_paths()
-from config import LabelConfig, PatchConfig  # noqa: E402
-from labeling import PointCloud, build_negatives, build_positives, compute_normals, slope_deg  # noqa: E402
 
 log = logging.getLogger(__name__)
 

@@ -2,18 +2,19 @@
 
 Steps (each has a runnable script in ``scripts/``; see ``docs/pipeline.md``):
 
-1. ``registry``/``mp``/``ept_index``/``tiles``/``pseudolabels``/``blocks`` -
+1. ``registry``/``mp``/``ept_index``/``tiles``/``labeling``/``pseudolabels`` -
    build the area registry, download USGS LiDAR tiles incrementally and turn
    them into pseudolabelled training blocks.
 2. ``models``/``train``/``datasets`` - pretrain an OpenPoints (PointNeXt /
    PointNet++) backbone on the pseudolabels.
-3. ``openclimbing``/``crossref``/``negatives`` - route-level GPS from
-   OpenStreetMap (what openclimbing.org renders), matched to Mountain Project,
-   plus verified hard negatives.
+3. ``openclimbing``/``crossref``/``groundtruth``/``negatives`` - route-level
+   GPS from OpenStreetMap (what openclimbing.org renders), matched to Mountain
+   Project, plus the hand-gathered waypoints and verified hard negatives.
 4. ``finetune`` - fine-tune the pretrained backbone with a swappable head.
 
-The legacy single-area proof of concept (``labeling.py``, ``usgs_ept.py``, ...
-in the repo root) is reused, not replaced.
+The cliff heuristics (``labeling``), waypoint loading/snapping (``groundtruth``)
+and the EPT reader (``tiles.read_ept``) were carried over from the single-area
+proof of concept, which lives on unchanged in ``proof-of-concept/``.
 """
 
 import os as _os

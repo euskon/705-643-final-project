@@ -34,7 +34,7 @@ import torch
 from scipy.spatial import cKDTree
 from sklearn.metrics import f1_score, precision_recall_curve, roc_auc_score
 
-from config import PROJECT_DIR, ExperimentConfig
+from config import POC_DIR, ExperimentConfig
 from dataset import normalize_patch, resample
 from groundtruth import AREAS, load_waypoints, snap_to_cliff
 from labeling import (
@@ -50,7 +50,7 @@ from model import PointNet2Cls
 from mountain_project import filter_bbox, load_routes
 from usgs_ept import load_region, lonlat_to_work
 
-OUT_DIR = PROJECT_DIR / "runs" / "gt_eval"
+OUT_DIR = POC_DIR / "runs" / "gt_eval"
 PROFILE_HEIGHT_M = 15.0  # route_profile height when no route length is known
 
 
@@ -512,7 +512,7 @@ def main() -> None:
                _md(pin_err.describe().loc[["count", "50%", "mean", "max"]]), "\n"]
 
     if not args.no_model:
-        ckpt = PROJECT_DIR / "runs" / f"hcr-{args.mode}" / "best.pt"
+        ckpt = POC_DIR / "runs" / f"hcr-{args.mode}" / "best.pt"
         if ckpt.exists():
             from trainer import pick_device
             model = load_checkpoint(ckpt, pick_device())

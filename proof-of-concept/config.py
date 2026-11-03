@@ -11,7 +11,10 @@ from __future__ import annotations
 from dataclasses import dataclass, field
 from pathlib import Path
 
-PROJECT_DIR = Path(__file__).resolve().parent
+# this folder: proof-of-concept outputs (LiDAR cache, samples, runs)
+POC_DIR = Path(__file__).resolve().parent
+# repository root: shared inputs (hand-gathered waypoints, MP route CSVs, weights)
+PROJECT_DIR = POC_DIR.parent
 DATA_DIR = PROJECT_DIR / "data"
 PRETRAINED_DIR = PROJECT_DIR / "pretrained"
 
@@ -68,7 +71,7 @@ class RegionConfig:
 
     @property
     def cache_dir(self) -> Path:
-        return DATA_DIR / self.name
+        return POC_DIR / "data" / self.name
 
 
 @dataclass

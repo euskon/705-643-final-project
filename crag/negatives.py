@@ -2,7 +2,7 @@
 
 Positives: verified route starts (OSM matched to MP, or hand-gathered Climb
 waypoints) snapped onto the nearest LiDAR cliff column whose base is at the
-ground height of the start point (``groundtruth._snap_one``: 12 m search,
+ground height of the start point (``crag.groundtruth.snap_one``: 12 m search,
 6 m height tolerance).
 
 Negatives, hardest first, each with a ``source`` and a ``confidence``:
@@ -44,12 +44,8 @@ import pandas as pd
 from scipy.spatial import cKDTree
 
 from crag.crop import AreaCloud
-from crag.paths import add_import_paths
-
-add_import_paths()
-from config import ExperimentConfig  # noqa: E402
-from groundtruth import _snap_one  # noqa: E402
-from labeling import PointCloud  # noqa: E402
+from crag.groundtruth import GroundTruthConfig, snap_one
+from crag.labeling import LabelConfig, PointCloud
 
 log = logging.getLogger(__name__)
 DEFAULT_ROUTE_LENGTH_M = 15.0
@@ -95,10 +91,10 @@ def _ground_z(pc: PointCloud, xy, r: float = 3.0) -> float:
     return float(np.quantile(pc.xyz[idx, 2], 0.1)) if len(idx) else np.inf
 
 
-def snap_routes(cloud: AreaCloud, routes: pd.DataFrame, crs, exp: ExperimentConfig | None = None) -> pd.DataFrame:
+def snap_routes(cloud: AreaCloud, routes: pd.DataFrame, crs, label: LabelConfig | None = None, gt: GroundTruthConfig | None = None) -> pd.DataFrame:
     """Snap route start points onto the cliff. Adds ``x, y`` (start), ``snap_*``, ``base_z``,
     ``top_z``, ``out_dx/dy``, ``status``. Route *ways* use their lower end."""
-    exp = exp or ExperimentConfig()
+    label, gt = label or LabelConfig(), gt or GroundTruthConfig()
     out = []
     for r in routes.itertuples(index=False):
         xy = crs.to_work(r.lon, r.lat)
@@ -111,7 +107,7 @@ def snap_routes(cloud: AreaCloud, routes: pd.DataFrame, crs, exp: ExperimentConf
             xy2 = crs.to_work(r.lon2, r.lat2)
             if _ground_z(pc, xy2) < _ground_z(pc, xy):
                 xy = xy2
-        s = _snap_one(pc, np.asarray(xy, float), exp)
+        s = snap_one(pc, np.asarray(xy, float), label, gt)
         row.update(x=float(xy[0]), y=float(xy[1]), **s)
         if s["status"] == "ok":
             length = r.length_m if pd.notna(getattr(r, "length_m", np.nan)) and r.length_m > 0 else DEFAULT_ROUTE_LENGTH_M

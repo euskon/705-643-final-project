@@ -115,7 +115,13 @@ checkpoint is uploaded as a model artifact at the end of a run.
 
 ## Where the old proof of concept fits
 
-`labeling.py`, `usgs_ept.py`, `groundtruth.py`, `config.py` are reused
-unchanged in behaviour. `labeling.build_positives` and `usgs_ept.read_ept`
-gained an optional CRS argument (defaults keep UTM 15N). The notebook,
-`trainer.py`, `model.py` and `eval_pseudolabels.py` still work as before.
+The single-area proof of concept lives, self-contained, in
+`proof-of-concept/` (notebook, PointNet++ model/trainer, inference,
+`eval_pseudolabels.py`, its docs and outputs). The parts this pipeline reuses
+were copied into `crag/`, with the same behaviour and defaults:
+
+| proof of concept | pipeline | change |
+|---|---|---|
+| `labeling.py` (normals, `PointCloud`, route cylinders, negatives) + `config.LabelConfig` | `crag/labeling.py` | `build_positives` takes the area's CRS converters; patch/sample code dropped |
+| `groundtruth.py` + `config.GroundTruthConfig` | `crag/groundtruth.py` | `snap_one` (was `_snap_one`); waypoints projected to the area's UTM zone |
+| `usgs_ept.read_ept` | `crag.tiles.read_ept` | output CRS required |

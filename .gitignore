@@ -12,6 +12,7 @@ data/pretrain/
 data/finetune/
 pretrained/*
 runs/*
+proof-of-concept/runs/
 wandb/
 **/__pycache__/
 *.pyc

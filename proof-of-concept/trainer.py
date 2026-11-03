@@ -44,7 +44,7 @@ from sklearn.metrics import (
 )
 from torch.utils.data import DataLoader
 
-from config import PROJECT_DIR
+from config import POC_DIR
 from model import build_model, count_parameters
 
 MODES = ("scratch", "head", "finetune")
@@ -83,7 +83,7 @@ class TrainConfig:
     early_stop_patience: int = 12
     seed: int = 42
     device: str = "auto"
-    output_dir: str = str(PROJECT_DIR / "runs")
+    output_dir: str = str(POC_DIR / "runs")
 
 
 def binary_metrics(

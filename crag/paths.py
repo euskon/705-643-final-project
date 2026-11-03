@@ -33,12 +33,11 @@ KEYS_FILE = PROJECT_DIR / ".keys"
 
 
 def add_import_paths() -> None:
-    """Make ``openpoints`` (PointNeXt submodule) and the legacy root modules importable."""
+    """Make ``openpoints`` (the PointNeXt submodule) importable and quiet its warnings."""
     import warnings
 
-    for p in (POINTNEXT_DIR, PROJECT_DIR):
-        if str(p) not in sys.path:
-            sys.path.insert(0, str(p))
+    if str(POINTNEXT_DIR) not in sys.path:
+        sys.path.insert(0, str(POINTNEXT_DIR))
     # OpenPoints predates torch 2.x: silence its deprecation noise only
     warnings.filterwarnings("ignore", category=FutureWarning, message=r".*torch\.cuda\.amp.*")
     warnings.filterwarnings("ignore", category=UserWarning, module=r"openpoints.*")

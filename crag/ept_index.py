@@ -30,7 +30,8 @@ import numpy as np
 import requests
 from pyproj import Geod
 from shapely.geometry import Point, shape
-from shapely.ops import transform as shp_transform, unary_union
+from shapely.ops import transform as shp_transform
+from shapely.ops import unary_union
 from shapely.prepared import prep
 
 from crag.geo import WGS84, transformer

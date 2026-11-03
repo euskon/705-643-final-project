@@ -96,13 +96,15 @@ columns don't outweigh thin route cylinders.
 
    | simulated coverage *f* | band precision | negatives per run |
    |---|---|---|
-   | 0.30 | 0.45 | 38 |
-   | 0.50 | 0.79 | 66 |
-   | 0.75 | 0.82 | 94 |
+   | 0.30 | 0.39 | 37 |
+   | 0.50 | 0.59 | 68 |
+   | 0.75 | 0.79 | 94 |
    | 0.90 | 0.93 | 115 |
 
-   *(5 repeats per f. Only ~5-7 negatives per run land within 8 m of an
-   unseen label, so this is directional evidence, not a precise estimate.)*
+   *(5 repeats per f, current code, re-measured 2026-11-02. Only ~5-9
+   negatives per run land within 8 m of an unseen label, so this is
+   directional evidence, not a precise estimate. The 0.6 `min_coverage`
+   default sits between the 0.59 and 0.79 rows.)*
    An earlier run that used only the 40 **named** waypoints as documentation
    (≈ 30% coverage, coverage gate bypassed) gave precision 0.25, worse than
    random cliff (≈ the 32% Nc base rate). **The coverage gate is essential.**

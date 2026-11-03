@@ -20,6 +20,7 @@ Tile file contents::
 
 from __future__ import annotations
 
+import json
 import logging
 import math
 import multiprocessing as mp
@@ -32,13 +33,41 @@ from pathlib import Path
 import numpy as np
 
 from crag import ept_index
-from crag.paths import LIDAR_DIR, add_import_paths
+from crag.paths import LIDAR_DIR
 from crag.registry import area_crs
 
-add_import_paths()
-from usgs_ept import read_ept  # noqa: E402  (legacy module, reused)
-
 log = logging.getLogger(__name__)
+
+# LAS classes dropped while streaming: 7 = low noise, 18 = high noise
+NOISE_CLASSES = (7, 18)
+
+
+def read_ept(ept_url: str, bounds_ept: tuple[float, float, float, float], out_srs: str, retries: int = 4) -> np.ndarray:
+    """One PDAL pipeline: EPT read inside ``bounds_ept`` (Web Mercator) -> drop noise -> ``out_srs``.
+
+    ``readers.ept`` only downloads the octree nodes that intersect the bounds.
+    Returns PDAL's structured array (fields X, Y, Z, Classification, ...).
+    """
+    import pdal  # imported here so planning / loading tiles doesn't need PDAL
+
+    minx, miny, maxx, maxy = bounds_ept
+    # filters.range ORs ranges on one dimension, so "not 7 and not 18" needs filters.expression
+    not_noise = " && ".join(f"Classification != {c}" for c in NOISE_CLASSES)
+    stages = [
+        {"type": "readers.ept", "filename": ept_url, "bounds": f"([{minx}, {maxx}], [{miny}, {maxy}])"},
+        {"type": "filters.expression", "expression": not_noise},
+        {"type": "filters.reprojection", "out_srs": out_srs},
+    ]
+    # S3 occasionally drops a read; retry with backoff before giving up
+    for attempt in range(retries):
+        try:
+            pipeline = pdal.Pipeline(json.dumps(stages))
+            pipeline.execute()
+            return pipeline.arrays[0]
+        except RuntimeError:
+            if attempt == retries - 1:
+                raise
+            time.sleep(2**attempt)
 
 
 @dataclass(frozen=True)
@@ -122,7 +151,7 @@ def download_tile(area: dict, tile: Tile, retries: int = 4) -> dict:
     url = ept_index.dataset_by_name(ds_name)["url"]
     x1, y1 = tile.x0 + tile.size, tile.y0 + tile.size
     t0 = time.time()
-    arr = read_ept(url, crs.work_bounds_to_ept(tile.x0, tile.y0, x1, y1), retries=retries, out_srs=crs.crs)
+    arr = read_ept(url, crs.work_bounds_to_ept(tile.x0, tile.y0, x1, y1), out_srs=crs.crs, retries=retries)
     x, y = arr["X"], arr["Y"]
     keep = (x >= tile.x0) & (x < x1) & (y >= tile.y0) & (y < y1)
     arr = arr[keep]

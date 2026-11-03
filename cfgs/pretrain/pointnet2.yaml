@@ -1,0 +1,45 @@
+# PointNet++ (single-scale grouping, OpenPoints re-implementation), initialised
+# from the official OpenPoints S3DIS (area 5) checkpoint - the second
+# backbone, comparable to the yanx27 PointNet++ used in the proof of concept
+# but trained for segmentation. Architecture identical to
+# third_party/PointNeXt/cfgs/s3dis/pointnet++.yaml.
+# For PointNet++ MSG use pointnet2-msg.yaml (no released S3DIS weights; trains from scratch).
+model:
+  NAME: BaseSeg
+  encoder_args:
+    NAME: PointNet2Encoder
+    in_channels: 4
+    width: null
+    strides: [4, 4, 4, 4]
+    layers: 3
+    use_res: False
+    mlps: [[[32, 32, 64]],
+           [[64, 64, 128]],
+           [[128, 128, 256]],
+           [[256, 256, 512]]]
+    radius: 0.1
+    num_samples: 32
+    sampler: fps
+    aggr_args:
+      NAME: convpool
+      feature_type: dp_fj
+      anisotropic: False
+      reduction: max
+    group_args:
+      NAME: ballquery
+      use_xyz: True
+    conv_args:
+      order: conv-norm-act
+    act_args:
+      act: relu
+    norm_args:
+      norm: bn
+  decoder_args:
+    NAME: PointNet2Decoder
+    fp_mlps: [[128, 128, 128], [256, 128], [256, 256], [256, 256]]
+  cls_args:
+    NAME: SegHead
+    num_classes: 5
+    in_channels: null
+
+pretrained_path: pretrained/openpoints/s3dis-pointnet2/checkpoint/s3dis-train-pointnet++-ngpus1-seed5583-20220506-155113-AobHJJtq8wdeMfRbcHpZGD_ckpt_best.pth

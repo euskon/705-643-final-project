@@ -1,0 +1,72 @@
+# ==============================================================================
+# Pretraining defaults (merged under every cfgs/pretrain/<model>.yaml).
+# Task: per-point segmentation of the 5 pseudolabel classes
+#   ground, vegetation, steep_terrain, cliff, climbable  (+ ignore = -1)
+# Hardware target: one RTX 3080 (10 GB).
+# ==============================================================================
+
+dataset:
+  split_mode: area          # area: registry split per area | tile: hash 200 m tiles (few-area runs)
+  num_points: 8192          # points per block (resampled); keep 8192-16384 on 10 GB
+  voxel_m: 0.25             # must match s1_pseudolabel.py
+  coord_scale: 0.16         # 0.04 m (S3DIS voxel) / 0.25 m (ours): same neighbourhood density as pretraining
+  feature_keys: pos,heights # 4 channels -> the S3DIS checkpoints' first layer loads
+  samples_per_epoch: 20000  # blocks drawn (weighted, with replacement) per epoch
+  max_val_blocks: 3000      # deterministic validation subset
+  oversample:
+    cliff: 2.0              # extra sampling weight for blocks with cliff points
+    climbable: 20.0         # ... and with climbable (route-cylinder) points
+
+num_classes: 5
+ignore_index: -1
+
+datatransforms:
+  train: [PointsToTensor, PointCloudScaling, PointCloudXYZAlign, PointCloudRotationZ, PointCloudJitter]
+  val: [PointsToTensor, PointCloudXYZAlign]
+  kwargs:
+    gravity_dim: 2
+    scale: [0.9, 1.1]
+    anisotropic: False      # isotropic: anisotropic z-scaling would change slopes (= the labels)
+    jitter_sigma: 0.005     # in scaled units (~3 cm)
+    jitter_clip: 0.02
+
+batch_size: 8
+val_batch_size: 8
+grad_accum_steps: 4         # effective batch 32
+dataloader:
+  num_workers: 6
+
+epochs: 100
+use_amp: True
+optimizer:
+  NAME: adamw
+  lr: 0.001
+  weight_decay: 1.0e-4
+lr_mult:                    # per-part LR multipliers (encoder / decoder / head)
+  encoder: 1.0
+  decoder: 1.0
+  head: 1.0
+sched: cosine               # per optimizer step, after linear warmup
+warmup_epochs: 5
+min_lr: 1.0e-5
+grad_norm_clip: 10
+
+criterion_args:
+  NAME: CrossEntropy
+  label_smoothing: 0.1      # noisy pseudolabel boundaries
+class_weights: sqrt_inverse # null | sqrt_inverse | inverse (from training-set point counts)
+
+checkpoint:
+  min_delta: 0.001          # best.pt only when val loss drops by more than this
+early_stop_patience: 15     # epochs without such an improvement (0 = never stop early)
+resume: auto                # auto: continue from <run_dir>/last.pt if it exists
+
+pretrained_path: null       # set per model
+pretrained_parts: [encoder, decoder]
+
+seed: 42
+log_every: 50
+wandb:
+  group: pretrain
+  tags: [pretrain]
+  log_best_artifact: True

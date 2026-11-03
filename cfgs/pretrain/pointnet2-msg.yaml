@@ -1,0 +1,41 @@
+# PointNet++ MSG (multi-scale grouping) - the configuration suggested in the
+# research notes. OpenPoints releases no S3DIS MSG checkpoint, so this trains
+# from scratch (pretrained_path: null); useful as a no-transfer baseline.
+model:
+  NAME: BaseSeg
+  encoder_args:
+    NAME: PointNet2Encoder
+    in_channels: 4
+    width: null
+    strides: [4, 4, 4, 4]
+    layers: 3
+    use_res: False
+    mlps: [[[16, 16, 32], [32, 32, 64]],
+           [[64, 64, 128], [64, 96, 128]],
+           [[128, 196, 256], [128, 196, 256]],
+           [[256, 256, 512], [256, 384, 512]]]
+    radius: [[0.1, 0.2], [0.2, 0.4], [0.4, 0.8], [0.8, 1.6]]
+    num_samples: [[16, 32], [16, 32], [16, 32], [16, 32]]
+    sampler: fps
+    aggr_args:
+      NAME: convpool
+      feature_type: dp_fj
+      reduction: max
+    group_args:
+      NAME: ballquery
+      use_xyz: True
+    conv_args:
+      order: conv-norm-act
+    act_args:
+      act: relu
+    norm_args:
+      norm: bn
+  decoder_args:
+    NAME: PointNet2Decoder
+    fp_mlps: [[128, 128], [256, 256], [512, 512], [512, 512]]
+  cls_args:
+    NAME: SegHead
+    num_classes: 5
+    in_channels: null
+
+pretrained_path: null

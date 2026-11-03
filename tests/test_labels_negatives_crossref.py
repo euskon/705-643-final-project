@@ -127,3 +127,22 @@ def test_block_codes_and_augmentation():
     local = (xyz - [0, 0, 100]).astype(np.float32)
     sq = augment_negative(local, codes, "squash", np.array([1.0, 0.0]))
     assert sq is not None and (sq[1] == 1).sum() == 0 and sq[0][:, 2].max() < local[:, 2].max()
+
+
+def test_assign_splits_balances_giant_group():
+    import pandas as pd
+
+    from crag.finetune_data import assign_splits
+
+    # one area: a giant group (60% of samples) plus 20 small groups
+    rows = [{"slug": "a", "group": "a:big", "label": i % 2, "source": "band" if i % 3 == 0 else "osm"} for i in range(600)]
+    for g in range(20):
+        rows += [{"slug": "a", "group": f"a:g{g}", "label": i % 2, "source": "band" if i % 3 == 0 else "osm"} for i in range(20)]
+    rows += [{"slug": "hold", "group": "hold:0", "label": 1, "source": "handgathered"}]
+    s = pd.DataFrame(rows)
+    split = pd.Series(assign_splits(s, 0.15, 0.15, test_areas=("hold",)), index=s.index)
+    assert (split[s["slug"] == "hold"] == "test").all()
+    assert (split[s["group"] == "a:big"] == "train").all()  # the giant group can't swamp val/test
+    a = split[s["slug"] == "a"].value_counts(normalize=True)
+    assert abs(a["val"] - 0.15) < 0.05 and abs(a["test"] - 0.15) < 0.05
+    assert (s.assign(split=split).groupby("group")["split"].nunique() == 1).all()  # groups stay whole

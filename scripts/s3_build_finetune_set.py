@@ -98,6 +98,9 @@ def main() -> None:
         r = routes[routes["slug"] == slug]
         if r.empty:
             continue
+        if not (area.get("usgs") or {}).get("datasets"):
+            log.warning("%s: %d routes but no USGS LiDAR coverage - skipped", slug, len(r))
+            continue
         crs = registry.area_crs(area)
         crs_by_slug[slug] = crs
         if not args.no_download:

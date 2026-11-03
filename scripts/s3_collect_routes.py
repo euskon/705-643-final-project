@@ -86,7 +86,7 @@ def main() -> None:
     setup_logging()
 
     reg = registry.load(args.registry)
-    verified, summary = [], []
+    verified, summary, failed = [], [], []
     for area in registry.areas(reg, parse_list(args.areas)):
         slug = area["slug"]
         if not area.get("bbox"):
@@ -94,7 +94,14 @@ def main() -> None:
             continue
         out_dir = ROUTES_DIR / slug
         out_dir.mkdir(parents=True, exist_ok=True)
-        osm, osm_crags = openclimbing.routes_in_bbox(area["bbox"], refresh=args.refresh)
+        pins = np.array([[c["lon"], c["lat"]] for c in area.get("crags", []) if not c.get("default_pin")] or [[area["lon"], area["lat"]]])
+        try:
+            osm, osm_crags = openclimbing.routes_in_bbox(area["bbox"], refresh=args.refresh, points=pins)
+        except Exception as exc:  # one unreachable area must not lose the others; re-run retries it
+            log.error("%s: OSM query failed (%s) - skipped; re-run to retry (finished queries are cached)", slug, exc)
+            failed.append(slug)
+            summary.append({"slug": slug, "status": "failed"})
+            continue
         osm.to_csv(out_dir / "osm_routes.csv", index=False)
         osm_crags.to_csv(out_dir / "osm_crags.csv", index=False)
         row = {"slug": slug, "osm_routes": len(osm)}
@@ -163,6 +170,9 @@ def main() -> None:
         run.log({"routes/summary": wandb.Table(dataframe=sm.astype(str)), "routes/match_types": wandb.Table(dataframe=allv["match_type"].value_counts().rename_axis("type").reset_index())})
         run.summary.update({"verified_positives": int((allv["label"] == 1).sum()), "verified_negatives": int((allv["label"] == 0).sum())})
         run.finish()
+    if failed:
+        log.error("%d area(s) failed and are missing from verified_routes.csv: %s", len(failed), ",".join(failed))
+        sys.exit(1)
 
 
 if __name__ == "__main__":

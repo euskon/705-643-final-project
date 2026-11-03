@@ -42,11 +42,12 @@ log = logging.getLogger(__name__)
 NOISE_CLASSES = (7, 18)
 
 
-def read_ept(ept_url: str, bounds_ept: tuple[float, float, float, float], out_srs: str, retries: int = 4) -> np.ndarray:
+def read_ept(ept_url: str, bounds_ept: tuple[float, float, float, float], out_srs: str, retries: int = 4) -> np.ndarray | None:
     """One PDAL pipeline: EPT read inside ``bounds_ept`` (Web Mercator) -> drop noise -> ``out_srs``.
 
     ``readers.ept`` only downloads the octree nodes that intersect the bounds.
-    Returns PDAL's structured array (fields X, Y, Z, Classification, ...).
+    Returns PDAL's structured array (fields X, Y, Z, Classification, ...), or
+    ``None`` when the dataset has no points there (PDAL then yields no array).
     """
     import pdal  # imported here so planning / loading tiles doesn't need PDAL
 
@@ -63,7 +64,8 @@ def read_ept(ept_url: str, bounds_ept: tuple[float, float, float, float], out_sr
         try:
             pipeline = pdal.Pipeline(json.dumps(stages))
             pipeline.execute()
-            return pipeline.arrays[0]
+            arrays = pipeline.arrays
+            return arrays[0] if arrays else None
         except RuntimeError:
             if attempt == retries - 1:
                 raise
@@ -135,26 +137,38 @@ def plan_tiles_for_points(area: dict, lonlat: np.ndarray, radius_m: float = 100.
 
 
 def download_tile(area: dict, tile: Tile, retries: int = 4) -> dict:
-    """Fetch one tile (if not cached). Returns a small status dict."""
+    """Fetch one tile (if not cached). Returns a small status dict.
+
+    Tries every registry dataset whose boundary contains the tile centre, in
+    rank order, and keeps the first that actually has points in the tile
+    (boundaries are coarse outlines with holes). Tiles with no data anywhere
+    get an empty marker file (``no_coverage`` / ``empty``) so they are not retried.
+    """
     path = tile_path(area["slug"], tile)
     if path.exists():
         return {"tile": tile.id, "status": "cached"}
     crs = area_crs(area)
     lon, lat = crs.to_lonlat(*tile.center)
     names = [d["name"] for d in area.get("usgs", {}).get("datasets", [])]
-    ds_name = ept_index.dataset_for_point(names, float(lon), float(lat)) if names else None
+    candidates = ept_index.datasets_for_point(names, float(lon), float(lat)) if names else []
     path.parent.mkdir(parents=True, exist_ok=True)
     meta = {"origin": np.array([tile.x0, tile.y0]), "epsg": crs.epsg, "tile_size": tile.size}
-    if ds_name is None:
-        np.savez(path, xyz=np.zeros((0, 3), np.float32), dataset="", **_empty_fields(), **meta)
-        return {"tile": tile.id, "status": "no_coverage"}
-    url = ept_index.dataset_by_name(ds_name)["url"]
     x1, y1 = tile.x0 + tile.size, tile.y0 + tile.size
     t0 = time.time()
-    arr = read_ept(url, crs.work_bounds_to_ept(tile.x0, tile.y0, x1, y1), out_srs=crs.crs, retries=retries)
-    x, y = arr["X"], arr["Y"]
-    keep = (x >= tile.x0) & (x < x1) & (y >= tile.y0) & (y < y1)
-    arr = arr[keep]
+    arr, ds_name = None, None
+    for name in candidates:
+        url = ept_index.dataset_by_name(name)["url"]
+        got = read_ept(url, crs.work_bounds_to_ept(tile.x0, tile.y0, x1, y1), out_srs=crs.crs, retries=retries)
+        if got is None:
+            continue
+        x, y = got["X"], got["Y"]
+        got = got[(x >= tile.x0) & (x < x1) & (y >= tile.y0) & (y < y1)]
+        if len(got):
+            arr, ds_name = got, name
+            break
+    if arr is None:
+        np.savez(path, xyz=np.zeros((0, 3), np.float32), dataset="", **_empty_fields(), **meta)
+        return {"tile": tile.id, "status": "empty" if candidates else "no_coverage", "tried": candidates}
     xyz = np.stack([arr["X"] - tile.x0, arr["Y"] - tile.y0, arr["Z"]], axis=1)
     xyz, first = np.unique(xyz, axis=0, return_index=True)  # overlapping EPT nodes
     arr = arr[first]

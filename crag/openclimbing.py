@@ -180,8 +180,49 @@ def parse_elements(data: dict) -> tuple[pd.DataFrame, pd.DataFrame]:
     return routes, pd.DataFrame(crags)
 
 
-def routes_in_bbox(bbox_lonlat, refresh: bool = False) -> tuple[pd.DataFrame, pd.DataFrame]:
-    return parse_elements(overpass(bbox_query(bbox_lonlat), refresh=refresh))
+def bbox_cells(bbox_lonlat, max_cell_deg: float = 0.3, points: np.ndarray | None = None, margin_deg: float = 0.02) -> list[tuple]:
+    """Split a bbox into a grid of cells no larger than ``max_cell_deg`` on a side.
+
+    With ``points`` (lon, lat), cells with no point within ``margin_deg`` are
+    dropped, since there is no crag there to query. A bbox that already fits is
+    returned unchanged, so its cached query stays valid.
+    """
+    w, s, e, n = map(float, bbox_lonlat)
+    nx, ny = max(1, int(np.ceil((e - w) / max_cell_deg))), max(1, int(np.ceil((n - s) / max_cell_deg)))
+    if nx == 1 and ny == 1:
+        return [(w, s, e, n)]
+    xs, ys = np.linspace(w, e, nx + 1), np.linspace(s, n, ny + 1)
+    cells = []
+    for i in range(nx):
+        for j in range(ny):
+            c = (round(xs[i], 6), round(ys[j], 6), round(xs[i + 1], 6), round(ys[j + 1], 6))
+            if points is not None and len(points):
+                p = np.asarray(points, float)
+                inside = (p[:, 0] >= c[0] - margin_deg) & (p[:, 0] <= c[2] + margin_deg) & (p[:, 1] >= c[1] - margin_deg) & (p[:, 1] <= c[3] + margin_deg)
+                if not inside.any():
+                    continue
+            cells.append(c)
+    return cells
+
+
+def routes_in_bbox(bbox_lonlat, refresh: bool = False, points: np.ndarray | None = None, max_cell_deg: float = 0.3) -> tuple[pd.DataFrame, pd.DataFrame]:
+    """OSM routes + crags inside a bbox.
+
+    One query per cell (see :func:`bbox_cells`). A single query over a large area
+    (Lake Tahoe is ~80 x 95 km) times out on the public Overpass servers (502/504).
+    Elements are de-duplicated across cells before parsing.
+    """
+    cells = bbox_cells(bbox_lonlat, max_cell_deg, points)
+    if len(cells) > 1:
+        log.info("Overpass: bbox split into %d cells", len(cells))
+    seen, elements = set(), []
+    for c in cells:
+        for el in overpass(bbox_query(c), refresh=refresh).get("elements", []):
+            k = (el.get("type"), el.get("id"))
+            if k not in seen:
+                seen.add(k)
+                elements.append(el)
+    return parse_elements({"elements": elements})
 
 
 def cluster_points(lonlat: np.ndarray, eps_m: float = 1500.0) -> np.ndarray:

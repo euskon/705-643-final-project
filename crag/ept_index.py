@@ -147,10 +147,17 @@ def rank_datasets(
     return keep
 
 
+def datasets_for_point(names: list[str], lon: float, lat: float) -> list[str]:
+    """Every dataset (in registry order) whose boundary contains the point.
+
+    The boundaries are coarse outlines, so "contains" can still mean "no points
+    here"; callers fall back to the next dataset when a read comes back empty.
+    """
+    pt = Point(lon, lat)
+    return [n for n in names if dataset_by_name(n)["prepared"].contains(pt)]
+
+
 def dataset_for_point(names: list[str], lon: float, lat: float) -> str | None:
     """First dataset (in registry order) whose boundary contains the point."""
-    pt = Point(lon, lat)
-    for n in names:
-        if dataset_by_name(n)["prepared"].contains(pt):
-            return n
-    return None
+    found = datasets_for_point(names, lon, lat)
+    return found[0] if found else None

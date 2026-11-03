@@ -73,17 +73,33 @@ def assign_groups(samples: pd.DataFrame, group_m: float) -> np.ndarray:
 
 
 def assign_splits(samples: pd.DataFrame, val_frac: float, test_frac: float, test_areas=(), val_areas=(), seed: str = "ft") -> np.ndarray:
+    """Whole spatial groups -> train / val / test, balanced within each area.
+
+    Hashing each group independently lets one giant group (dense crags chain
+    into connected components of ~2k samples) land in val or test and swamp
+    it. Instead, each area's groups are placed largest first, each into the
+    split furthest below its target share, measured on three counts at once:
+    samples, positives and hard (``band``) negatives - so val/test keep enough
+    of the cases the hard-negative metrics need. Ties break on a stable hash;
+    groups always stay whole (no spatial leakage).
+    """
     split = np.empty(len(samples), dtype=object)
-    for g, sub in samples.groupby("group"):
-        slug = sub["slug"].iloc[0]
-        if slug in test_areas:
-            s = "test"
-        elif slug in val_areas:
-            s = "val"
-        else:
-            u = registry.stable_fraction(seed + g)
-            s = "test" if u < test_frac else "val" if u < test_frac + val_frac else "train"
-        split[sub.index] = s
+    targets = {"train": 1.0 - val_frac - test_frac, "val": val_frac, "test": test_frac}
+    for slug, area in samples.groupby("slug"):
+        if slug in test_areas or slug in val_areas:
+            split[area.index] = "test" if slug in test_areas else "val"
+            continue
+        counts = pd.DataFrame({"n": 1, "pos": (area["label"] == 1).astype(int), "band": (area["source"] == "band").astype(int)}, index=area.index)
+        per_group = counts.groupby(area["group"]).sum()
+        totals = per_group.sum().clip(lower=1).astype(float)
+        filled = {k: pd.Series(0.0, index=per_group.columns) for k in targets}
+        order = sorted(per_group.index, key=lambda g: (-per_group.loc[g, "n"], registry.stable_fraction(seed + g)))
+        for g in order:
+            # mean relative deficit over the three counts the group actually contains
+            dims = per_group.columns[per_group.loc[g] > 0]
+            s = max(targets, key=lambda k: (float(((targets[k] * totals[dims] - filled[k][dims]) / totals[dims]).mean()), k == "train"))
+            filled[s] += per_group.loc[g]
+            split[area.index[area["group"] == g]] = s
     return split
 
 

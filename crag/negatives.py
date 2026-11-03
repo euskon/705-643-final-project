@@ -49,6 +49,7 @@ from crag.labeling import LabelConfig, PointCloud
 
 log = logging.getLogger(__name__)
 DEFAULT_ROUTE_LENGTH_M = 15.0
+SNAP_COLS = ("snap_x", "snap_y", "snap_dist_m", "ground_z", "base_z", "top_z", "out_dx", "out_dy", "n_steep_snap")
 
 
 @dataclass
@@ -114,7 +115,12 @@ def snap_routes(cloud: AreaCloud, routes: pd.DataFrame, crs, label: LabelConfig 
             row["top_z"] = s["base_z"] + float(length)
         out.append(row)
     df = pd.DataFrame(out)
-    ll = crs.to_lonlat(df.get("snap_x", df["x"]).fillna(df["x"]).to_numpy(), df.get("snap_y", df["y"]).fillna(df["y"]).to_numpy())
+    # the snap columns only appear when some route snapped; an area with no
+    # LiDAR (or no cliff near any route) must still return the full schema
+    for c in SNAP_COLS:
+        if c not in df:
+            df[c] = np.nan
+    ll = crs.to_lonlat(df["snap_x"].fillna(df["x"]).to_numpy(), df["snap_y"].fillna(df["y"]).to_numpy())
     df["snap_lon"], df["snap_lat"] = ll[:, 0], ll[:, 1]
     return df
 

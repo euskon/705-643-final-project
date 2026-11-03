@@ -168,3 +168,39 @@ Problem: we have very few hard negatives, so the dataset is severely imbalanced.
 Before writing code, propose the data-collection approach and the negative-sampling strategy, including how you'd verify that the negatives are actually negative.
 
 Again once we are ready to implement the data-collection and negative-sampling strategies, create easily runnable scripts for each step, ensuring that the process is reproducible and can be easily invoked by others. Use the key provided in the separate file to track the progress and results of these steps in weights and balances.
+
+
+# FINAL OUTPUT:
+All four steps are implemented and their scripts are tested. Per your instruction, I built the datasets but didn't run any training or the full LiDAR download. All 18 tests pass, including GPU checks of both backbones, and each training and eval script ran end to end on Horseshoe Canyon data in a few-step smoke mode. Nothing is committed yet.
+
+Step 1: area registry and pseudolabelled pretraining data
+- Registry: registry/areas.json is the single registry file. Adding an area means adding one line with its slug, name and Mountain Project ID; the build script fills in the rest and only processes what's missing.
+- What it holds: the 50 most-viewed areas from a list of 61 well-known US areas I picked by hand. Mountain Project publishes no popularity ranking, so I ranked by page views.
+  - Horseshoe Canyon Ranch ranks #35, so it fills one of the 50 slots. It's marked as held out and never used in pretraining, which leaves 49 pretraining areas: 39 train / 5 val / 5 test.
+  - Each area has its crags (name and coordinates), a bounding box and the USGS LiDAR dataset(s) to download.
+- LiDAR coverage gaps:
+  - No USGS coverage, so they contribute nothing: Smith Rock, Index, Shelf Road, Custer State Park, Queen Creek, Exit 38 and Mount Charleston. Oregon and Washington LiDAR is mostly hosted by the states, not USGS.
+  - Partial coverage: Red Rocks, Yosemite (about 0%), Lake Tahoe, Big and Little Cottonwood, Zion and Sedona.
+  - Mostly bouldering: Joe's Valley and Hueco have very few roped routes.
+  - That leaves roughly 40 areas with useful data. To replace weak ones, add candidates and re-run the build; the steps are in docs/registry-schema.md.
+- Download size: the estimate is 4,836 tiles, about 29 GB. Downloads resume where they stopped. Pseudolabels use the existing approach, and the backbone is saved separately from the head (backbone.pt).
+
+Step 2: pretraining compares PointNeXt-S and PointNet++, both starting from public S3DIS weights, with PointNeXt as a git submodule.
+- It uses your RTX 3080 settings: 8 × 8192 points per batch, gradient accumulation of 4, mixed precision.
+- The best checkpoint is saved whenever validation loss improves by more than 0.001, runs resume after interruption, and everything is tracked in W&B.
+- GPU memory is much lower than expected (0.45–0.82 GB per step), so batch 32 or 16384 points also fit.
+
+Step 3: real route locations and hard negatives
+- Route coordinates: these come from OpenStreetMap, which is what openclimbing.org edits, plus your Horseshoe Canyon waypoints: 126 climbs and 60 non-climbable points. Mountain Project coordinates are used only to match route names, never as locations.
+- Data is thin: only about 2,600 route-level points exist across the US, and about 1,600 are in Red River Gorge, so the fine-tuning set is Red River Gorge-heavy. Horseshoe Canyon is the test area.
+- Negatives are only reliable where routes are well documented: I checked hard negatives (non-climbable points 10–40 m from known routes) against your Horseshoe data. About 45% were truly non-climbable when 30% of a wall's routes were mapped, and about 93% at 90%. So negatives are only generated on walls with at least 60% of routes mapped.
+- Rationale: the full write-up is in docs/step3-routes-and-hard-negatives.md.
+
+Step 4: fine-tuning has six strategies, compared on validation data: linear probe, decoder + head, full fine-tune with lower learning rates for earlier layers, gradual
+unfreezing, from scratch, and S3DIS weights only. Each saves its best he reasoning on frozen layers, learning rates and epochs is indocs/step4-finetuning-strategy.md.
+
+Order to run (full runbook in docs/pipeline.md):
+1. make lidar pseudolabels (Step 1 data).
+2. make survey routes finetune-data (Step 3 data). This has to come before pretraining because it marks the fine-tuning test crags, which pretraining then skips.
+3. make pretrain, then make eval-pretrain.
+4. make sweep compare.

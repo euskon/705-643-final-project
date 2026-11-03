@@ -1,0 +1,12 @@
+# Baseline - start from the official S3DIS checkpoint, skipping our LiDAR
+# pseudolabel pretraining (measures what Step 2 adds). Full fine-tuning,
+# discriminative LRs.
+init:
+  arch: cfgs/pretrain/pointnext-s.yaml
+  weights: pretrained/openpoints/s3dis-pointnext-s/checkpoint/s3dis-train-pointnext-s-ngpus1-seed1742-20220525-162639-Gz4ViiL95b6KP9MMH2ytG3_ckpt_best.pth
+freeze: []
+lr_mult:
+  encoder: 0.1
+  decoder: 0.5
+  head: 1.0
+epochs: 40

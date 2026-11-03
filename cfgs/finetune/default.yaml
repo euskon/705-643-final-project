@@ -1,0 +1,71 @@
+# ==============================================================================
+# Fine-tuning defaults (merged under every cfgs/finetune/<strategy>.yaml).
+# Task: per-point "climbable" vs "not climbable" on the cylinders of verified
+# samples (data/finetune/<dataset.name>), scored per sample.
+# ==============================================================================
+
+dataset:
+  name: v1                    # data/finetune/<name> from s3_build_finetune_set.py
+  label_mode: center_only     # center_only | all_cylinders | with_background (crag/finetune_data.py)
+  num_points: 8192
+  voxel_m: 0.25
+  coord_scale: 0.16
+  feature_keys: pos,heights
+  samples_per_epoch: 4000     # class-balanced, confidence-weighted sampling with replacement
+  min_confidence: 0.0
+  exclude_sources: []         # e.g. [far_cliff, aug_squash, aug_layback] for ablations
+
+num_classes: 2
+ignore_index: -1
+
+init:
+  arch: runs/pretrain/pointnext-s            # pretraining run dir (or a cfgs/pretrain/*.yaml)
+  weights: runs/pretrain/pointnext-s/backbone.pt   # null = random init
+  parts: [encoder, decoder]                  # the head is always new (2 classes)
+
+freeze: []                    # parts frozen at the start: encoder / decoder / head
+unfreeze_schedule: null       # {epoch: [parts]} to unfreeze later (gradual unfreezing)
+lr_mult:
+  encoder: 1.0
+  decoder: 1.0
+  head: 1.0
+
+datatransforms:
+  train: [PointsToTensor, PointCloudScaling, PointCloudXYZAlign, PointCloudRotationZ, PointCloudJitter]
+  val: [PointsToTensor, PointCloudXYZAlign]
+  kwargs:
+    gravity_dim: 2
+    scale: [0.9, 1.1]
+    anisotropic: False
+    jitter_sigma: 0.005
+    jitter_clip: 0.02
+
+batch_size: 8
+val_batch_size: 8
+grad_accum_steps: 2
+dataloader:
+  num_workers: 6
+epochs: 40
+use_amp: True
+optimizer:
+  NAME: adamw
+  lr: 5.0e-4
+  weight_decay: 1.0e-4
+warmup_epochs: 2
+min_lr: 1.0e-6
+grad_norm_clip: 10
+criterion_args:
+  NAME: CrossEntropy
+  label_smoothing: 0.0
+class_weights: null           # the sampler already balances the classes
+
+checkpoint:
+  min_delta: 0.001            # best.pt only when val loss drops by more than this
+early_stop_patience: 10
+resume: auto
+seed: 42
+log_every: 25
+wandb:
+  group: finetune
+  tags: [finetune]
+  log_best_artifact: True

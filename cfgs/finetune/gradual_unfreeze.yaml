@@ -1,0 +1,13 @@
+# Strategy D - gradual unfreezing (ULMFiT-style): head only, then the decoder
+# from epoch 5, then the encoder from epoch 10, with discriminative LRs.
+freeze: [encoder, decoder]
+unfreeze_schedule:
+  5: [decoder]
+  10: [encoder]
+optimizer:
+  lr: 5.0e-4
+lr_mult:
+  encoder: 0.1
+  decoder: 0.5
+  head: 1.0
+epochs: 40

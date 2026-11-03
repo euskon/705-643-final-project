@@ -1,0 +1,7 @@
+# Baseline - same architecture, random initialisation (no pretraining at all).
+init:
+  weights: null
+freeze: []
+optimizer:
+  lr: 1.0e-3
+epochs: 60

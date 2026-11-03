@@ -1,4 +1,34 @@
-# Crag detection PoC — Horseshoe Canyon Ranch, Jasper AR
+# Crag detection from USGS LiDAR
+
+**Multi-area pipeline (current):** pseudolabelled pretraining on the 50 most
+popular Mountain Project areas, then fine-tuning on route-level GPS
+(OpenStreetMap / openclimbing.org + hand-gathered ground truth) with verified
+hard negatives, using OpenPoints (PointNeXt-S / PointNet++). Runbook:
+**[docs/pipeline.md](docs/pipeline.md)**.
+
+```bash
+bash scripts/setup_env.sh && conda activate crag-pointnext && make test
+python scripts/s1_rank_areas.py && python scripts/s1_build_registry.py      # step 1: registry
+python scripts/s1_download_lidar.py && python scripts/s1_pseudolabel.py     # step 1: data
+python scripts/s2_pretrain.py --cfg cfgs/pretrain/pointnext-s.yaml          # step 2
+python scripts/s2_eval_pretrain.py --run runs/pretrain/pointnext-s
+python scripts/s3_collect_routes.py && python scripts/s3_build_finetune_set.py   # step 3
+bash scripts/s4_sweep.sh                                                    # step 4
+```
+
+| path | role |
+|---|---|
+| `registry/` | `areas.json` (one entry per area), MP candidates + ranking, held-out regions |
+| `crag/` | the pipeline package (registry, MP, EPT index, tiles, pseudolabels, datasets, models, trainer, OSM routes, cross-reference, negatives, fine-tuning) |
+| `scripts/` | `s1_*` ... `s4_*` entry points, `setup_env.sh` |
+| `cfgs/` | pretraining (`pointnext-s`, `pointnet2`, `pointnet2-msg`) and fine-tuning strategy configs |
+| `third_party/PointNeXt` | OpenPoints / PointNeXt submodule |
+| `docs/` | runbook, registry schema, Step 3 / Step 4 design notes |
+| `tests/` | `python -m pytest tests` |
+
+---
+
+## Proof of concept: Horseshoe Canyon Ranch, Jasper AR
 
 Fine-tunes a ModelNet40-pretrained PointNet++ to classify 5 m columns of USGS
 3DEP LiDAR as **climbable / not climbable**, with Mountain Project route

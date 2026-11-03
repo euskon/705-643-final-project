@@ -1,0 +1,7 @@
+# Strategy A - linear probe: backbone (encoder + decoder) frozen incl. BatchNorm
+# statistics; only the new SegHead trains. Measures how linearly separable
+# "climbable" is in the pretrained features. Cheapest, least overfitting.
+freeze: [encoder, decoder]
+optimizer:
+  lr: 1.0e-3
+epochs: 30

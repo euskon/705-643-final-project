@@ -1,0 +1,6 @@
+# Strategy B - freeze the encoder (the convolutional backbone), train decoder + head.
+# Keeps the generic geometry features, adapts the per-point upsampling path.
+freeze: [encoder]
+optimizer:
+  lr: 1.0e-3
+epochs: 40

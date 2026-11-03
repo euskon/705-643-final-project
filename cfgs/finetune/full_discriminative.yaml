@@ -1,0 +1,10 @@
+# Strategy C - everything trains, discriminative learning rates:
+# encoder 0.1x, decoder 0.5x, head 1x of the base LR (pretrained layers move slowly).
+freeze: []
+optimizer:
+  lr: 5.0e-4
+lr_mult:
+  encoder: 0.1
+  decoder: 0.5
+  head: 1.0
+epochs: 40

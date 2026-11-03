@@ -1,0 +1,27 @@
+"""Multi-area climbing-crag pipeline: registry -> LiDAR -> pseudolabels -> pretrain -> fine-tune.
+
+Steps (each has a runnable script in ``scripts/``; see ``docs/pipeline.md``):
+
+1. ``registry``/``mp``/``ept_index``/``tiles``/``pseudolabels``/``blocks`` -
+   build the area registry, download USGS LiDAR tiles incrementally and turn
+   them into pseudolabelled training blocks.
+2. ``models``/``train``/``datasets`` - pretrain an OpenPoints (PointNeXt /
+   PointNet++) backbone on the pseudolabels.
+3. ``openclimbing``/``crossref``/``negatives`` - route-level GPS from
+   OpenStreetMap (what openclimbing.org renders), matched to Mountain Project,
+   plus verified hard negatives.
+4. ``finetune`` - fine-tune the pretrained backbone with a swappable head.
+
+The legacy single-area proof of concept (``labeling.py``, ``usgs_ept.py``, ...
+in the repo root) is reused, not replaced.
+"""
+
+import os as _os
+import sys as _sys
+
+# PDAL/PROJ find their database through PROJ_DATA, which `conda activate` sets.
+# Set it here too so `<env>/bin/python scripts/...` works without activation.
+_proj = _os.path.join(_sys.prefix, "share", "proj")
+if _os.path.isdir(_proj):
+    _os.environ.setdefault("PROJ_DATA", _proj)
+    _os.environ.setdefault("PROJ_LIB", _proj)

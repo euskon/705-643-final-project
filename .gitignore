@@ -1,5 +1,23 @@
+# large / regenerable data (scripts rebuild these; see docs/pipeline.md)
 data/**/*.npz
 data/**/*.npy
+data/raw/*
+# scraped / downloaded caches are committed so nothing has to be re-fetched
+!data/raw/mp/
+!data/raw/overpass/
+!data/raw/usgs/
+data/raw/mp/.last_request
+data/lidar/
+data/pretrain/
+data/finetune/
 pretrained/*
 runs/*
-__pycache__/*
+wandb/
+**/__pycache__/
+*.pyc
+.pytest_cache/
+
+# secrets
+.keys
+*.key
+.env

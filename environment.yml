@@ -1,0 +1,45 @@
+# Environment for the multi-area pretraining / fine-tuning pipeline.
+#
+#   bash scripts/setup_env.sh          # creates it, then compiles OpenPoints' CUDA ops
+#   conda activate crag-pointnext
+#
+# Torch comes from the PyTorch cu124 wheel index so it matches the CUDA 12.4
+# toolkit (/usr/local/cuda-12.4) used to compile OpenPoints' pointnet2_batch
+# extension (ball query / FPS / grouping). PDAL (USGS EPT streaming) comes from
+# conda-forge; only libpdal-core is needed (readers.ept + core filters).
+name: crag-pointnext
+channels:
+  - conda-forge
+dependencies:
+  - python=3.11
+  - pip
+  - numpy
+  - scipy
+  - pandas
+  - scikit-learn
+  - matplotlib
+  - tqdm
+  - requests
+  - pyyaml
+  - h5py
+  - shapely          # USGS EPT boundary polygons vs. area bounding boxes
+  - pyproj
+  - libpdal-core
+  - python-pdal
+  - ipykernel
+  - nbclient
+  - pytest
+  - ninja            # faster CUDA extension builds
+  - pip:
+      - --extra-index-url https://download.pytorch.org/whl/cu124
+      - torch==2.6.0+cu124
+      # OpenPoints runtime deps (subset of third_party/PointNeXt/requirements.txt
+      # actually imported by the models/transforms/optim/scheduler we use)
+      - easydict>=1.10
+      - multimethod>=1.9
+      - termcolor>=2.0
+      - shortuuid
+      - tensorboard>=2.14
+      - protobuf>=4.23
+      - gdown            # PointNeXt model-zoo checkpoints live on Google Drive
+      - wandb

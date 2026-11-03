@@ -246,12 +246,20 @@ def place_route_cylinders(
 
 
 def build_positives(
-    pc: PointCloud, routes: pd.DataFrame, cfg: LabelConfig
+    pc: PointCloud,
+    routes: pd.DataFrame,
+    cfg: LabelConfig,
+    to_work=lonlat_to_work,
+    to_lonlat=work_to_lonlat,
 ) -> pd.DataFrame:
-    """One row per placed route cylinder (kept or rejected, with the reason)."""
+    """One row per placed route cylinder (kept or rejected, with the reason).
+
+    ``to_work`` / ``to_lonlat`` convert between lon/lat and the point cloud's
+    metric CRS (UTM 15N by default; the multi-area pipeline passes its own).
+    """
     rows, taken = [], []
     for (wall, lat, lon), grp in routes.groupby(["wall", "lat", "lon"], sort=False):
-        pin = lonlat_to_work(lon, lat)
+        pin = to_work(lon, lat)
         if cfg.drop_default_pin_routes and grp["default_pin"].iloc[0]:
             rows.append(
                 {
@@ -307,7 +315,7 @@ def build_positives(
             )
     df = pd.DataFrame(rows)
     if "x" in df:
-        lonlat = work_to_lonlat(df["x"], df["y"])
+        lonlat = to_lonlat(df["x"], df["y"])
         df["lon"], df["lat"] = lonlat[:, 0], lonlat[:, 1]
     return df
 

@@ -61,9 +61,13 @@ def ept_bounds(
 
 
 def read_ept(
-    ept_url: str, bounds_ept: tuple[float, float, float, float], retries: int = 4
+    ept_url: str,
+    bounds_ept: tuple[float, float, float, float],
+    retries: int = 4,
+    out_srs: str = WORK_CRS,
 ) -> np.ndarray:
-    """Run one PDAL pipeline: EPT read inside ``bounds_ept`` -> drop noise -> UTM 15N.
+    """Run one PDAL pipeline: EPT read inside ``bounds_ept`` -> drop noise -> ``out_srs``
+    (UTM 15N by default; the multi-area pipeline passes each area's UTM zone).
 
     Returns PDAL's structured array (fields X, Y, Z, Classification, ...).
     """
@@ -78,7 +82,7 @@ def read_ept(
             "bounds": f"([{minx}, {maxx}], [{miny}, {maxy}])",
         },
         {"type": "filters.expression", "expression": not_noise},
-        {"type": "filters.reprojection", "out_srs": WORK_CRS},
+        {"type": "filters.reprojection", "out_srs": out_srs},
     ]
     # S3 occasionally drops a read; retry with backoff before giving up
     for attempt in range(retries):

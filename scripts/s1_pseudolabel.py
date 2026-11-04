@@ -2,7 +2,7 @@
 """Step 1d - turn downloaded LiDAR tiles into pseudolabelled pretraining blocks.
 
 For every area with tiles in ``data/lidar/<slug>/`` this runs the existing
-labeling heuristics (normals -> cliff points -> MP route cylinders) and writes
+terrain rules (surface normals -> ground / vegetation / steep_terrain / cliff) and writes
 per-point classes, cut into voxel-downsampled blocks, to
 ``data/pretrain/<slug>/`` (see ``crag/pseudolabels.py`` for the classes).
 Areas whose tiles and config are unchanged are skipped, so this is safe to
@@ -91,7 +91,7 @@ def main() -> None:
         import wandb
 
         run.log({"pretrain_dataset/areas": wandb.Table(dataframe=df)})
-        run.summary.update({"blocks": int(df["blocks"].sum()), "points": int(df["points"].sum()), "areas": len(df), "route_cylinders": int(df["route_cylinders_ok"].sum())})
+        run.summary.update({"blocks": int(df["blocks"].sum()), "points": int(df["points"].sum()), "areas": len(df), "blocks_with_cliff": int(df["blocks_with_cliff"].sum())})
         run.finish()
 
 

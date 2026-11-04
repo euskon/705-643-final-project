@@ -43,11 +43,11 @@ def block_spec(cfg) -> BlockSpec:
 
 
 def select_eval_blocks(index: pd.DataFrame, max_blocks: int, seed: int = 0) -> pd.DataFrame:
-    """Deterministic evaluation subset: every block with climbable points, then cliff, then the rest."""
+    """Deterministic evaluation subset: blocks with the most cliff points first, then a random rest."""
     if not max_blocks or len(index) <= max_blocks:
         return index.reset_index(drop=True)
     rng = np.random.default_rng(seed)
-    pri = np.where(index["n_climbable"] > 0, 0, np.where(index["n_cliff"] > 0, 1, 2))
+    pri = np.where(index["n_cliff"] >= 200, 0, np.where(index["n_cliff"] > 0, 1, 2))
     order = np.lexsort((rng.random(len(index)), pri))
     keep = np.sort(order[:max_blocks])
     return index.iloc[keep].reset_index(drop=True)
@@ -63,7 +63,8 @@ def build_datasets(cfg, areas: list[str] | None = None) -> dict:
         sub = index[index["split"] == split]
         if split != "train":
             sub = select_eval_blocks(sub, int(cfg_get(cfg, "dataset.max_val_blocks", 3000)))
-        out[split] = BlockDataset(sub, spec, tcfg, train=split == "train", oversample=dict(cfg_get(cfg, "dataset.oversample", {})))
+        out[split] = BlockDataset(sub, spec, tcfg, train=split == "train", oversample=dict(cfg_get(cfg, "dataset.oversample", {}) or {}),
+                                  window=dict(cfg_get(cfg, "dataset.window", {}) or {}) or None)
         log.info("%s: %d blocks from %d areas", split, len(sub), sub["slug"].nunique())
     return out
 

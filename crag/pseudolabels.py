@@ -1,4 +1,4 @@
-"""Per-point pseudolabels for pretraining, built with the existing labeling heuristics.
+"""Per-point pseudolabels for pretraining: generic terrain geometry, no route information.
 
 Classes (``CLASSES``; ``IGNORE = -1`` is masked out of the loss):
 
@@ -7,31 +7,31 @@ Classes (``CLASSES``; ``IGNORE = -1`` is masked out of the loss):
 ====  ==============  ==========================================================
  0    ground          last return, slope < ``ground_slope_deg`` (30 deg)
  1    vegetation      not the last return of its pulse, or LAS class 3/4/5
- 2    steep_terrain   last return, slope >= 30 deg but not a "steep" cliff point
- 3    cliff           the PoC's "steep" rule: slope >= 60 deg and single return
- 4    climbable       cliff point inside a Mountain Project route cylinder
-                      (``crag.labeling.build_positives``: pin snapped to the cliff,
-                      2.5 m radius, from the cliff base up the route length)
- -1   ignore          cliff point within ``ignore_buffer_m`` (40 m) of a crag
-                      pin / route cylinder but not in a cylinder - possibly
-                      climbable rock we can't place a route on; also LAS
-                      buildings (6)
+ 2    steep_terrain   any other last return (30-60 deg)
+ 3    cliff           last return on a steep (>= 60 deg) surface: a single
+                      return (the pulse hit nothing first, bare rock) or the
+                      last return of a pulse that clipped foliage first
+                      (``multi_return_rock``)
+ -1   ignore          LAS buildings (6)
 ====  ==============  ==========================================================
 
-Classes 0-3 teach generic terrain geometry; class 4 vs 3 is the noisy
-"rock near documented routes vs other rock" signal. MP pins are only used here
-(pretraining), never as route locations for fine-tuning.
+Slope comes from a PCA of each point's neighbourhood fitted on
+the *surface* returns only (last returns that are not LAS vegetation,
+:func:`crag.labeling.surface_geometry`), so tree canopy never tilts the
+normal of the rock behind it.
+
+Whether rock is *climbable* is left entirely to fine-tuning (verified route
+locations, ``crag.finetune_data``); Mountain Project pins aren't used here.
 
 Processing an area (all incremental, keyed by a hash of the config):
 
-A. per tile, with a ``halo_m`` border from the neighbouring tiles: normals ->
-   slope -> classes 0-3 (``stage/<tile>.npz``);
-B. per area: route cylinders from MP routes on the points near crag pins
-   (``positives.csv``; stepback negatives as a by-product, ``negatives.csv``);
-C. per tile: classes 4 / ignore, then cut the tile into ``block_size_m``
-   blocks, voxel-downsample each to ``voxel_m`` and write memory-mappable
-   arrays (``blocks/<tile>.{points,labels,feat}.npy`` + ``.meta.npz``), plus
-   the area ``index.csv`` the training dataset reads.
+A. per tile, with a ``halo_m`` border from the neighbouring tiles: normals +
+   planarity -> classes (``stage/<tile>.npz``; also read by ``crag.crop`` for
+   the fine-tuning set, so "cliff" means the same thing everywhere);
+B. per tile: cut into ``block_size_m`` blocks, voxel-downsample each to
+   ``voxel_m`` and write memory-mappable arrays
+   (``blocks/<tile>.{points,labels,feat}.npy`` + ``.meta.npz``), plus the area
+   ``index.csv`` the training dataset reads.
 """
 
 from __future__ import annotations
@@ -45,25 +45,15 @@ from pathlib import Path
 
 import numpy as np
 import pandas as pd
-from scipy.spatial import cKDTree
 
-from crag import mp
-from crag.labeling import (
-    LabelConfig,
-    PatchConfig,
-    PointCloud,
-    build_negatives,
-    build_positives,
-    compute_normals,
-    slope_deg,
-)
+from crag.labeling import LabelConfig, compute_normals, slope_deg, surface_geometry
 from crag.paths import LIDAR_DIR, PRETRAIN_DIR
 from crag.registry import area_crs
 from crag.tiles import Tile, load_tile
 
 log = logging.getLogger(__name__)
 
-CLASSES = ("ground", "vegetation", "steep_terrain", "cliff", "climbable")
+CLASSES = ("ground", "vegetation", "steep_terrain", "cliff")
 IGNORE = -1
 VEG_LAS_CLASSES = (3, 4, 5)
 BUILDING_LAS_CLASS = 6
@@ -73,8 +63,23 @@ BUILDING_LAS_CLASS = 6
 class PseudoLabelConfig:
     label: LabelConfig = field(default_factory=LabelConfig)
     ground_slope_deg: float = 30.0
+    # fit normals on surface points only (last returns, not LAS vegetation),
+    # so canopy never enters a rock point's PCA neighbourhood
+    surface_normals: bool = True
+    # optional gate: a cliff point must also sit on a flat patch, planarity
+    # (l2-l3)/l1 of its PCA neighbourhood >= this. Off (None) by default:
+    # airborne LiDAR samples vertical faces sparsely, in scan lines, so real
+    # walls often look linear and the gate erased most of them
+    # (scripts/s1_check_rock_rule.py: cliff points next to known rock fell
+    # 3-7x at 0.5 and what was left was mostly speckle)
+    min_planarity: float | None = None
+    # steep *last return of a multi-return pulse* - the pulse clipped foliage
+    # and then hit the surface: "cliff", "ignore" (left out of the loss) or
+    # "steep_terrain". "cliff" by default: these points sit in walls as often
+    # as single-return cliff points do and fill in tree-lined faces
+    # (Red River Gorge: ~3x the cliff points next to known routes)
+    multi_return_rock: str = "cliff"
     halo_m: float = 5.0  # neighbour points used for normals at tile edges
-    crag_context_m: float = 60.0  # points this close to a crag pin feed route placement
     block_size_m: float = 20.0
     voxel_m: float = 0.25
     min_block_points: int = 512
@@ -117,30 +122,62 @@ class _TileCache:
         return t
 
 
-def base_classes(normals: np.ndarray, rn: np.ndarray, nr: np.ndarray, las: np.ndarray, cfg: PseudoLabelConfig) -> tuple[np.ndarray, np.ndarray]:
-    """(classes 0-3 / ignore, steep mask) from normals and return info."""
+def surface_mask(rn: np.ndarray, nr: np.ndarray, las: np.ndarray) -> np.ndarray:
+    """Returns that can lie on the ground / rock surface: last of their pulse, not LAS vegetation."""
+    return (rn >= nr) & ~np.isin(las, VEG_LAS_CLASSES)
+
+
+def base_classes(
+    normals: np.ndarray, rn: np.ndarray, nr: np.ndarray, las: np.ndarray, cfg: PseudoLabelConfig, planarity: np.ndarray | None = None
+) -> tuple[np.ndarray, np.ndarray]:
+    """(class per point, cliff mask) from normals, planarity and return info.
+
+    * vegetation: not the last return of its pulse, or LAS class 3/4/5;
+    * ground: last return, slope < ``ground_slope_deg``;
+    * cliff: single return (the pulse hit nothing before the surface) on a
+      steep (>= ``label.steep_slope_deg``) patch (and planar, if ``min_planarity``);
+    * steep last return of a multi-return pulse: ``multi_return_rock``;
+    * steep_terrain: every other last return (30-60 deg, or failing the planarity gate);
+    * ignore: LAS buildings.
+    """
     slope = slope_deg(normals)
-    steep = slope >= cfg.label.steep_slope_deg
-    if cfg.label.steep_single_return_only:
-        steep &= nr == 1
     last = rn >= nr
+    planar = np.ones(len(slope), bool) if (planarity is None or cfg.min_planarity is None) else planarity >= cfg.min_planarity
+    rock = last & (slope >= cfg.label.steep_slope_deg) & planar
+    single = nr == 1
     cls = np.full(len(slope), 2, np.int8)
     cls[last & (slope < cfg.ground_slope_deg)] = 0
-    cls[steep] = 3
+    if not cfg.label.steep_single_return_only:
+        single = np.ones(len(slope), bool)
+    cls[rock & single] = 3
+    multi_rock = rock & ~single
+    if cfg.multi_return_rock == "cliff":
+        cls[multi_rock] = 3
+    elif cfg.multi_return_rock == "ignore":
+        cls[multi_rock] = IGNORE
+    elif cfg.multi_return_rock != "steep_terrain":
+        raise ValueError(f"multi_return_rock={cfg.multi_return_rock!r}")
     cls[(~last) | np.isin(las, VEG_LAS_CLASSES)] = 1
     cls[las == BUILDING_LAS_CLASS] = IGNORE
-    return cls, steep & (cls == 3)
+    return cls, cls == 3
 
 
-def stage_tile(slug: str, tile_id: str, cache: _TileCache, cfg: PseudoLabelConfig, out: Path) -> dict:
+def tile_geometry(xyz: np.ndarray, rn: np.ndarray, nr: np.ndarray, las: np.ndarray, cfg: PseudoLabelConfig) -> tuple[np.ndarray, np.ndarray | None]:
+    """(normals, planarity) of a tile + halo, per ``cfg``."""
+    lab = cfg.label
+    if cfg.surface_normals:
+        return surface_geometry(xyz, surface_mask(rn, nr, las), lab.normal_k, lab.normal_voxel_m)
+    return compute_normals(xyz, lab.normal_k, lab.normal_voxel_m), None
+
+
+def tile_with_halo(tile_id: str, cache: _TileCache, halo_m: float) -> dict | None:
+    """The tile's points first, then the neighbouring tiles' points within ``halo_m`` of it."""
     t = cache.get(tile_id)
-    n = 0 if t is None else len(t["xyz"])
-    if n == 0:
-        np.savez(out, n=0, digest=cfg.digest())
-        return {"tile": tile_id, "n": 0}
-    tile = Tile.from_id(tile_id, cfg.tile_size_m)
-    parts = [t["xyz_abs"]]
-    h = cfg.halo_m
+    if t is None or len(t["xyz"]) == 0:
+        return None
+    tile = Tile.from_id(tile_id, cache.size)
+    keys = ("xyz_abs", "return_number", "number_of_returns", "classification")
+    parts = {k: [t[k]] for k in keys}
     for dx in (-1, 0, 1):
         for dy in (-1, 0, 1):
             if dx == dy == 0:
@@ -150,26 +187,34 @@ def stage_tile(slug: str, tile_id: str, cache: _TileCache, cfg: PseudoLabelConfi
                 continue
             p = nb["xyz_abs"]
             keep = (
-                (p[:, 0] >= tile.x0 - h) & (p[:, 0] < tile.x0 + tile.size + h)
-                & (p[:, 1] >= tile.y0 - h) & (p[:, 1] < tile.y0 + tile.size + h)
+                (p[:, 0] >= tile.x0 - halo_m) & (p[:, 0] < tile.x0 + tile.size + halo_m)
+                & (p[:, 1] >= tile.y0 - halo_m) & (p[:, 1] < tile.y0 + tile.size + halo_m)
             )
-            parts.append(p[keep])
-    xyz = np.concatenate(parts)
-    normals = compute_normals(xyz, cfg.label.normal_k, cfg.label.normal_voxel_m)[:n]
-    cls, steep = base_classes(normals, t["return_number"], t["number_of_returns"], t["classification"], cfg)
-    np.savez(
-        out,
-        n=n,
-        digest=cfg.digest(),
-        normals=normals.astype(np.float16),
-        cls=cls,
-        steep=steep,
-    )
+            for k in keys:
+                parts[k].append(nb[k][keep])
+    out = {k: np.concatenate(v) for k, v in parts.items()}
+    out["n"] = len(t["xyz"])
+    return out
+
+
+def stage_tile(slug: str, tile_id: str, cache: _TileCache, cfg: PseudoLabelConfig, out: Path) -> dict:
+    h = tile_with_halo(tile_id, cache, cfg.halo_m)
+    if h is None:
+        np.savez(out, n=0, digest=cfg.digest())
+        return {"tile": tile_id, "n": 0}
+    n = h["n"]
+    rn, nr, las = h["return_number"], h["number_of_returns"], h["classification"]
+    normals, planarity = tile_geometry(h["xyz_abs"], rn, nr, las, cfg)
+    normals = normals[:n]
+    planarity = None if planarity is None else planarity[:n]
+    cls, steep = base_classes(normals, rn[:n], nr[:n], las[:n], cfg, planarity)
+    extra = {} if planarity is None else {"planarity": planarity.astype(np.float16)}
+    np.savez(out, n=n, digest=cfg.digest(), normals=normals.astype(np.float16), cls=cls, steep=steep, **extra)
     return {"tile": tile_id, "n": n}
 
 
 # ---------------------------------------------------------------------------
-# B. per-area route cylinders (the proof of concept's positives)
+# crag pins (used by the fine-tuning set builder)
 # ---------------------------------------------------------------------------
 
 
@@ -184,76 +229,9 @@ def area_pins(area: dict, crs) -> tuple[np.ndarray, np.ndarray]:
     return xy, xy[ok]
 
 
-def build_area_positives(area: dict, tile_ids: list[str], cache: _TileCache, cfg: PseudoLabelConfig) -> tuple[pd.DataFrame, pd.DataFrame]:
-    crs = area_crs(area)
-    _, pins = area_pins(area, crs)
-    if len(pins) == 0 or not area.get("mp_id"):
-        return pd.DataFrame(), pd.DataFrame()
-    pin_tree = cKDTree(pins)
-    xyz, nrm, nr = [], [], []
-    stage_dir = area_dir(area["slug"]) / "stage"
-    for tid in tile_ids:
-        t = cache.get(tid)
-        if t is None or len(t["xyz"]) == 0:
-            continue
-        near = pin_tree.query(t["xyz_abs"][:, :2], distance_upper_bound=cfg.crag_context_m)[0] < np.inf
-        if not near.any():
-            continue
-        with np.load(stage_dir / f"{tid}.npz") as s:
-            normals = s["normals"]
-        xyz.append(t["xyz_abs"][near])
-        nrm.append(normals[near].astype(np.float32))
-        nr.append(t["number_of_returns"][near])
-    if not xyz:
-        return pd.DataFrame(), pd.DataFrame()
-    xyz, nrm, nr = np.concatenate(xyz), np.concatenate(nrm), np.concatenate(nr)
-    pc = PointCloud.build(xyz, cfg.label, normals=nrm, number_of_returns=nr)
-    try:
-        routes = mp.load_routes(area["mp_id"], area_pin=(area["lat"], area["lon"]))
-    except Exception as exc:
-        log.warning("%s: no MP routes available (%s) - no climbable class", area["slug"], exc)
-        return pd.DataFrame(), pd.DataFrame()
-    # only walls whose pin sits on downloaded LiDAR can be snapped
-    rxy = crs.to_work(routes["lon"].to_numpy(), routes["lat"].to_numpy())
-    on_lidar = cKDTree(xyz[::50, :2]).query(rxy, distance_upper_bound=cfg.label.snap_search_radius_m)[0] < np.inf
-    routes = routes[on_lidar].reset_index(drop=True)
-    if routes.empty:
-        return pd.DataFrame(), pd.DataFrame()
-    positives = build_positives(pc, routes, cfg.label, to_work=crs.to_work, to_lonlat=crs.to_lonlat)
-    ok = positives[positives.get("status", pd.Series(dtype=str)) == "ok"].reset_index(drop=True)
-    negatives = pd.DataFrame()
-    if len(ok):
-        lab = LabelConfig(**{**asdict(cfg.label), "n_random_negatives": 0})
-        negatives = build_negatives(pc, ok, pins, lab, PatchConfig())
-    return positives, negatives
-
-
 # ---------------------------------------------------------------------------
-# C. final labels + blocks
+# B. blocks
 # ---------------------------------------------------------------------------
-
-
-def final_labels(xyz_abs: np.ndarray, cls: np.ndarray, positives_ok: pd.DataFrame, anchors_xy: np.ndarray, cfg: PseudoLabelConfig) -> np.ndarray:
-    lab = cls.copy()
-    cliff = np.flatnonzero(cls == 3)
-    if len(cliff) == 0:
-        return lab
-    climbable = np.zeros(len(cliff), bool)
-    if len(positives_ok):
-        cyl = positives_ok[["x", "y"]].to_numpy()
-        tree = cKDTree(cyl)
-        hits = tree.query_ball_point(xyz_abs[cliff, :2], cfg.label.route_radius_m)
-        base, top = positives_ok["base_z"].to_numpy(), positives_ok["top_z"].to_numpy()
-        z = xyz_abs[cliff, 2]
-        for k, h in enumerate(hits):
-            if h:
-                h = np.asarray(h)
-                climbable[k] = np.any((z[k] >= base[h]) & (z[k] <= top[h]))
-    lab[cliff[climbable]] = 4
-    if len(anchors_xy):
-        d = cKDTree(anchors_xy).query(xyz_abs[cliff, :2], distance_upper_bound=cfg.label.ignore_buffer_m)[0]
-        lab[cliff[(~climbable) & (d < np.inf)]] = IGNORE
-    return lab
 
 
 def make_blocks(xyz_abs: np.ndarray, labels: np.ndarray, intensity: np.ndarray, tile: Tile, cfg: PseudoLabelConfig, seed: int) -> dict:
@@ -321,7 +299,7 @@ def write_blocks(out_dir: Path, tile_id: str, blocks: dict, digest: str) -> None
 
 
 def process_area(area: dict, cfg: PseudoLabelConfig, force: bool = False) -> dict:
-    """Run A -> B -> C for one area; skip whatever is already up to date."""
+    """Run A -> B for one area; skip whatever is already up to date."""
     slug = area["slug"]
     src = LIDAR_DIR / slug
     tile_ids = sorted(
@@ -354,16 +332,7 @@ def process_area(area: dict, cfg: PseudoLabelConfig, force: bool = False) -> dic
             log.info("%s: stage A %d/%d (%s: %d pts)", slug, k, len(tile_ids), tid, r["n"])
 
     # B
-    positives, negatives = build_area_positives(area, tile_ids, cache, cfg)
-    positives.to_csv(out / "positives.csv", index=False)
-    negatives.to_csv(out / "negatives.csv", index=False)
-    ok = positives[positives["status"] == "ok"] if "status" in positives else pd.DataFrame()
     crs = area_crs(area)
-    all_pins, _ = area_pins(area, crs)
-    anchors = np.vstack([all_pins, ok[["x", "y"]].to_numpy()]) if len(ok) else all_pins
-    log.info("%s: %d route cylinders placed (%d ok)", slug, len(positives), len(ok))
-
-    # C
     block_dir = out / "blocks"
     index = []
     for k, tid in enumerate(tile_ids):
@@ -371,8 +340,7 @@ def process_area(area: dict, cfg: PseudoLabelConfig, force: bool = False) -> dic
         if t is None or len(t["xyz"]) == 0:
             continue
         with np.load(stage_dir / f"{tid}.npz") as s:
-            cls = s["cls"]
-        labels = final_labels(t["xyz_abs"], cls, ok, anchors, cfg)
+            labels = s["cls"]
         seed = int(hashlib.sha1(f"{slug}/{tid}".encode()).hexdigest()[:8], 16)
         blocks = make_blocks(t["xyz_abs"], labels, t["intensity"].astype(np.float32), Tile.from_id(tid, cfg.tile_size_m), cfg, seed)
         write_blocks(block_dir, tid, blocks, digest)
@@ -396,9 +364,7 @@ def process_area(area: dict, cfg: PseudoLabelConfig, force: bool = False) -> dic
         "tiles": len(tile_ids),
         "blocks": int(len(index)),
         "points": int(index["stop"].sub(index["start"]).sum()) if len(index) else 0,
-        "route_cylinders_ok": int(len(ok)),
-        "stepback_negatives": int(len(negatives)),
-        "blocks_with_climbable": int((index["n_climbable"] > 0).sum()) if len(index) else 0,
+        "blocks_with_cliff": int((index["n_cliff"] > 0).sum()) if len(index) else 0,
         **{f"pts_{k}": v for k, v in counts.items()},
     }
     state_path.write_text(json.dumps({"digest": digest, "tiles": tile_ids, "config": asdict(cfg), "summary": summary}, indent=1, default=str))

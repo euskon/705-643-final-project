@@ -35,7 +35,7 @@ model:
     fp_mlps: [[128, 128], [256, 256], [512, 512], [512, 512]]
   cls_args:
     NAME: SegHead
-    num_classes: 5
+    num_classes: 4
     in_channels: null
 
 pretrained_path: null

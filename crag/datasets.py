@@ -148,6 +148,14 @@ class BlockDataset(Dataset):
     background code 2 -> ignore); ``center_codes`` adds a boolean ``center``
     mask of points whose *stored* code is in it (the fine-tuning sample's own
     cylinder, used for per-sample scores).
+
+    ``window`` (pretraining, training split only) replaces the fixed grid
+    block with a ``block_size_m`` window at a random offset, stitched from
+    the block and its grid neighbours in this index: with probability
+    ``rock_center_prob`` it is centred on a random ``rock_class`` point of the
+    block (the way fine-tuning blocks are centred on the rock being scored),
+    otherwise anywhere inside the block. So a cliff is no longer always cut
+    where the 20 m grid happens to fall. Evaluation keeps the fixed blocks.
     """
 
     def __init__(
@@ -161,6 +169,7 @@ class BlockDataset(Dataset):
         oversample: dict | None = None,
         label_map: dict | None = None,
         center_codes: tuple[int, ...] | None = None,
+        window: dict | None = None,
     ):
         self.index = index.reset_index(drop=True)
         self.spec = spec
@@ -176,6 +185,14 @@ class BlockDataset(Dataset):
             for k, v in label_map.items():
                 self.lut[int(k) + 128] = int(v)
         self.center_codes = center_codes
+        self.window = dict(window) if (window and train) else None
+        if self.window:
+            bs = float(self.window.get("block_size_m", 20.0))
+            self.window["block_size_m"] = bs
+            gx = np.floor(self.index["cx"].to_numpy() / bs).astype(np.int64)
+            gy = np.floor(self.index["cy"].to_numpy() / bs).astype(np.int64)
+            self._grid = {(sl, a, b): k for k, (sl, a, b) in enumerate(zip(self.index["slug"], gx, gy))}
+            self._gxy = np.stack([gx, gy], 1)
 
     def __len__(self) -> int:
         return len(self.index)
@@ -191,24 +208,61 @@ class BlockDataset(Dataset):
         return self.index[[f"n_{c}" for c in self.class_names]].sum().to_numpy(dtype=np.float64)
 
     def __getitem__(self, i: int) -> dict:
-        r = self.index.iloc[i]
-        pts, labs, feat = self.maps.get(r["slug"], r["tile"])
-        a, b = int(r["start"]), int(r["stop"])
         # train: from the (seeded) worker stream -> reproducible given the run seed;
         # eval: fixed per item -> identical validation points every epoch
         rng = np.random.default_rng(np.random.randint(0, 2**31)) if self.train else np.random.default_rng(i)
-        n, N = b - a, self.spec.num_points
-        sel = rng.choice(n, N, replace=n < N) + a
-        sel.sort()  # contiguous-ish reads from the memmap
-        pos = np.asarray(pts[sel], dtype=np.float32) * self.spec.coord_scale
-        raw = np.asarray(labs[sel], dtype=np.int64)
+        local, raw, inten = self._window(i, rng) if self.window else self._block(i)
+        n, N = len(local), self.spec.num_points
+        sel = np.sort(rng.choice(n, N, replace=n < N))
+        pos = local[sel] * self.spec.coord_scale
+        raw = raw[sel]
         y = self.lut[raw + 128] if self.lut is not None else raw
-        inten = np.asarray(feat[sel], dtype=np.float32)[:, None]
+        inten = inten[sel][:, None]
         item = make_item(pos, y, inten, self.keys, self.transform)
         if self.center_codes is not None:
             item["center"] = torch.from_numpy(np.isin(raw, self.center_codes))
         item["index"] = i
         return item
+
+    def _block(self, i: int) -> tuple[np.ndarray, np.ndarray, np.ndarray]:
+        """(local xyz float32, raw label codes int64, intensity float32) of stored block ``i``."""
+        r = self.index.iloc[i]
+        pts, labs, feat = self.maps.get(r["slug"], r["tile"])
+        a, b = int(r["start"]), int(r["stop"])
+        return np.asarray(pts[a:b], np.float32), np.asarray(labs[a:b], np.int64), np.asarray(feat[a:b], np.float32)
+
+    def _window(self, i: int, rng: np.random.Generator) -> tuple[np.ndarray, np.ndarray, np.ndarray]:
+        """A ``block_size_m`` window at a random offset from block ``i``, stitched from its neighbours."""
+        bs = self.window["block_size_m"]
+        half = bs / 2
+        pts0, lab0, feat0 = self._block(i)
+        rock = np.flatnonzero(lab0 == int(self.window.get("rock_class", 3)))
+        if len(rock) and rng.random() < float(self.window.get("rock_center_prob", 0.5)):
+            ux, uy = pts0[rock[rng.integers(len(rock))], :2]
+        else:
+            ux, uy = rng.uniform(-half, half, 2)
+        r0 = self.index.iloc[i]
+        cx0, cy0, z0 = float(r0["cx"]), float(r0["cy"]), float(r0["zmin"])
+        gx, gy = self._gxy[i]
+        parts = []
+        for dx in (-1, 0, 1):
+            for dy in (-1, 0, 1):
+                k = i if dx == dy == 0 else self._grid.get((r0["slug"], gx + dx, gy + dy))
+                if k is None:
+                    continue
+                r = self.index.iloc[k]
+                ox, oy = float(r["cx"]) - cx0 - ux, float(r["cy"]) - cy0 - uy
+                if abs(ox) >= bs or abs(oy) >= bs:
+                    continue  # no overlap with the window
+                p, lab, f = (pts0, lab0, feat0) if k == i else self._block(k)
+                p = p + np.array([ox, oy, float(r["zmin"]) - z0], np.float32)
+                m = (np.abs(p[:, 0]) <= half) & (np.abs(p[:, 1]) <= half)
+                parts.append((p[m], lab[m], f[m]))
+        p = np.concatenate([q[0] for q in parts])
+        if len(p) < 64:
+            return pts0, lab0, feat0
+        p[:, 2] -= p[:, 2].min()
+        return p, np.concatenate([q[1] for q in parts]), np.concatenate([q[2] for q in parts])
 
 
 def make_item(pos: np.ndarray, y: np.ndarray, intensity: np.ndarray, keys: list[str], transform=None) -> dict:

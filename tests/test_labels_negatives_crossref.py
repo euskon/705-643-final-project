@@ -7,49 +7,99 @@ from scipy.spatial import cKDTree
 from crag import crossref
 from crag.finetune_data import LABEL_MODES, augment_negative, block_codes
 from crag.negatives import NegativeConfig, band_candidates, greedy_select
-from crag.pseudolabels import IGNORE, PseudoLabelConfig, base_classes, final_labels, make_blocks
+from crag.datasets import BlockDataset, BlockSpec
+from crag.labeling import compute_normals, slope_deg, surface_geometry
+from crag.pseudolabels import IGNORE, META_COLS, PseudoLabelConfig, base_classes, make_blocks, write_blocks
 from crag.tiles import Tile
 
 
 def test_base_classes():
-    cfg = PseudoLabelConfig()
+    cfg = PseudoLabelConfig(min_planarity=0.5, multi_return_rock="ignore")
     up, wall, slope45 = [0, 0, 1], [1, 0, 0], [0.7071, 0, 0.7071]
-    normals = np.array([up, wall, wall, slope45, up], float)
-    rn = np.array([1, 1, 1, 1, 1])
-    nr = np.array([1, 1, 2, 1, 3])  # point 2: steep but multi-return (last return of 2); point 4: 1st of 3 -> canopy
-    las = np.ones(5, np.uint8)
-    cls, steep = base_classes(normals, rn, nr, las, cfg)
-    # ground, cliff, steep_terrain (not single-return), steep_terrain (45 deg), vegetation
-    assert cls.tolist() == [0, 3, 1, 2, 1]  # non-last returns are canopy, whatever the slope
-    assert steep.tolist()[:2] == [False, True]
+    normals = np.array([up, wall, wall, slope45, up, wall], float)
+    rn = np.array([1, 1, 2, 1, 1, 1])
+    nr = np.array([1, 1, 2, 1, 3, 1])  # point 2: last of 2 returns; point 4: 1st of 3 -> canopy
+    planarity = np.array([0.9, 0.9, 0.9, 0.9, 0.9, 0.1])  # point 5: steep but not a flat patch (trunk / branch)
+    las = np.ones(6, np.uint8)
+    cls, cliff = base_classes(normals, rn, nr, las, cfg, planarity)
+    # ground, cliff, multi-return rock -> ignore, steep_terrain (45 deg), vegetation, steep_terrain (not planar)
+    assert cls.tolist() == [0, 3, IGNORE, 2, 1, 2]
+    assert cliff.tolist() == [False, True, False, False, False, False]
+    for mode, code in (("cliff", 3), ("steep_terrain", 2)):
+        c = PseudoLabelConfig(min_planarity=0.5, multi_return_rock=mode)
+        assert base_classes(normals, rn, nr, las, c, planarity)[0][2] == code
     las[0] = 6
-    assert base_classes(normals, rn, nr, las, cfg)[0][0] == IGNORE
+    assert base_classes(normals, rn, nr, las, cfg, planarity)[0][0] == IGNORE
+    d = base_classes(normals, rn, nr, las, PseudoLabelConfig(), planarity)[0]  # defaults: no planarity gate, multi-return rock = cliff
+    assert d.tolist() == [IGNORE, 3, 3, 2, 1, 3]
+    las[1] = 3  # LAS vegetation wins over geometry
+    assert base_classes(normals, rn, nr, las, cfg, planarity)[0][1] == 1
 
 
-def test_final_labels_and_blocks():
+def test_surface_geometry_ignores_canopy():
+    rng = np.random.default_rng(0)
+    # a vertical rock face (x = 0) with a blob of foliage hanging 1 m in front of it
+    face = np.column_stack([rng.normal(0, 0.02, 3000), rng.uniform(0, 20, 3000), rng.uniform(0, 20, 3000)])
+    leaves = rng.normal([1.0, 10.0, 10.0], 0.6, (3000, 3))
+    xyz = np.vstack([face, leaves])
+    surface = np.r_[np.ones(3000, bool), np.zeros(3000, bool)]
+    normals, planarity = surface_geometry(xyz, surface, k=12, voxel_m=0.5)
+    near = (np.abs(face[:, 1] - 10) < 1.5) & (np.abs(face[:, 2] - 10) < 1.5)  # rock right behind the leaves
+    assert slope_deg(normals[:3000][near]).min() > 80
+    assert np.median(planarity[:3000]) > 0.5
+    mixed = compute_normals(xyz, 12, 0.5)  # the old all-points fit is pulled off the wall by the leaves
+    assert slope_deg(mixed[:3000][near]).min() < slope_deg(normals[:3000][near]).min()
+    line = np.column_stack([rng.normal(0, 0.02, 500), rng.normal(0, 0.02, 500), rng.uniform(0, 20, 500)])  # a trunk
+    assert np.median(surface_geometry(line, np.ones(500, bool), k=12, voxel_m=0.5)[1]) < 0.3
+
+
+def test_blocks():
     cfg = PseudoLabelConfig()
     rng = np.random.default_rng(0)
     # a 40 m tall wall along x = 0, plus flat ground
     wall = np.column_stack([np.zeros(4000), rng.uniform(0, 100, 4000), rng.uniform(100, 140, 4000)])
     ground = np.column_stack([rng.uniform(1, 100, 6000), rng.uniform(0, 100, 6000), np.full(6000, 100.0)])
     xyz = np.vstack([wall, ground])
-    cls = np.r_[np.full(4000, 3), np.zeros(6000)].astype(np.int8)
-    pos = pd.DataFrame({"x": [0.0], "y": [10.0], "base_z": [100.0], "top_z": [115.0]})
-    anchors = np.array([[0.0, 10.0], [0.0, 98.0]])  # 40 m ignore buffers leave y in (50, 58) free
-    lab = final_labels(xyz, cls, pos, anchors, cfg)
-    d20 = np.hypot(xyz[:, 0], xyz[:, 1] - 10)
-    in_cyl = (d20 <= 2.5) & (xyz[:, 2] <= 115) & (cls == 3)
-    assert (lab[in_cyl] == 4).all() and in_cyl.any()
-    assert (lab[(cls == 3) & (d20 > 2.5) & (d20 < 30)] == IGNORE).all()  # near a pin, not in a cylinder
-    far = (cls == 3) & (xyz[:, 1] > 51) & (xyz[:, 1] < 57)
-    assert (lab[far] == 3).all()  # > 40 m from every anchor
-    assert (lab[cls == 0] == 0).all()
+    lab = np.r_[np.full(4000, 3), np.zeros(6000)].astype(np.int8)
     blocks = make_blocks(xyz, lab, np.ones(len(xyz), np.float32), Tile(-100.0, 0.0, 200.0), cfg, seed=1)
     meta = blocks["meta"]
+    assert meta.shape[1] == len(META_COLS)
     assert meta[-1, 2] == len(blocks["points"]) == len(blocks["labels"])
     assert (meta[:, 1][1:] == meta[:, 2][:-1]).all()  # contiguous offsets
     assert np.abs(blocks["points"][:, :2]).max() <= cfg.block_size_m / 2 + 1e-4
     assert (blocks["points"][:, 2] >= 0).all()
+    assert set(np.unique(blocks["labels"])) <= {0, 3}
+
+
+def test_window_sampling(tmp_path):
+    cfg = PseudoLabelConfig()
+    rng = np.random.default_rng(0)
+    # ground over a 200 m tile with a wall along x = 10 (the edge between two grid blocks)
+    ground = np.column_stack([rng.uniform(0, 200, 60000), rng.uniform(0, 200, 60000), np.full(60000, 100.0)])
+    wall = np.column_stack([np.full(8000, 10.0), rng.uniform(0, 200, 8000), rng.uniform(100, 130, 8000)])
+    xyz = np.vstack([ground, wall])
+    lab = np.r_[np.zeros(60000), np.full(8000, 3)].astype(np.int8)
+    tile = Tile(-10.0, 0.0, 200.0)
+    blocks = make_blocks(xyz, lab, np.ones(len(xyz), np.float32), tile, cfg, seed=1)
+    write_blocks(tmp_path / "a" / "blocks", tile.id, blocks, "x")
+    index = pd.DataFrame(blocks["meta"], columns=META_COLS)
+    index.insert(0, "tile", tile.id)
+    index.insert(0, "slug", "a")
+    spec = BlockSpec(num_points=2048)
+    plain = BlockDataset(index, spec, None, train=True, root=tmp_path)
+    win = BlockDataset(index, spec, None, train=True, root=tmp_path, window={"block_size_m": 20.0, "rock_center_prob": 1.0})
+    np.random.seed(0)
+    k = int(np.flatnonzero(index["n_cliff"].to_numpy() > 0)[0])
+    for ds in (plain, win):
+        it = ds[k]
+        assert it["pos"].shape == (2048, 3) and it["y"].shape == (2048,)
+    local, raw, _ = win._window(k, np.random.default_rng(1))
+    assert np.abs(local[:, :2]).max() <= 10.0 + 1e-4 and local[:, 2].min() == 0
+    # centred on rock: the wall runs through the middle of the window, not along its edge
+    rock_x = local[raw == 3, 0]
+    assert len(rock_x) and np.abs(rock_x).max() < 1.0
+    assert not win.window is None and plain.window is None
+    assert BlockDataset(index, spec, None, train=False, root=tmp_path, window={"block_size_m": 20.0}).window is None  # eval: fixed blocks
 
 
 def test_crossref_tiers():

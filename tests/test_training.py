@@ -122,6 +122,7 @@ gpu = pytest.mark.skipif(not torch.cuda.is_available(), reason="OpenPoints CUDA 
 @pytest.mark.parametrize("name", ["pointnext-s", "pointnet2"])
 def test_openpoints_models_load_and_fit_memory(name, tmp_path):
     from crag.pretrain import build_model_from, load_cfg
+    from crag.pseudolabels import CLASSES
 
     c = load_cfg(f"cfgs/pretrain/{name}.yaml")
     model, report = build_model_from(c)
@@ -133,10 +134,10 @@ def test_openpoints_models_load_and_fit_memory(name, tmp_path):
     data = {"pos": torch.rand(B, N, 3, device="cuda") * 3.2, "x": torch.rand(B, 4, N, device="cuda")}
     with torch.autocast("cuda", dtype=torch.float16):
         out = model(data)
-        loss = nn.functional.cross_entropy(out.float(), torch.randint(0, 5, (B, N), device="cuda"))
+        loss = nn.functional.cross_entropy(out.float(), torch.randint(0, len(CLASSES), (B, N), device="cuda"))
     loss.backward()
     opt.step()
-    assert out.shape == (B, 5, N)
+    assert out.shape == (B, len(CLASSES), N)
     assert torch.cuda.max_memory_allocated() / 1e9 < 8.0  # fits a 10 GB RTX 3080 at batch 8 x 8192
     # backbone round trip into a fresh 2-class model
     torch.save({"encoder": model.encoder.state_dict(), "decoder": model.decoder.state_dict()}, tmp_path / "backbone.pt")

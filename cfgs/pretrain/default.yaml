@@ -1,7 +1,8 @@
 # ==============================================================================
 # Pretraining defaults (merged under every cfgs/pretrain/<model>.yaml).
-# Task: per-point segmentation of the 5 pseudolabel classes
-#   ground, vegetation, steep_terrain, cliff, climbable  (+ ignore = -1)
+# Task: per-point segmentation of the 4 pseudolabel classes
+#   ground, vegetation, steep_terrain, cliff  (+ ignore = -1)
+#   (terrain geometry only; climbability is learned in fine-tuning)
 # Hardware target: one RTX 3080 (10 GB).
 # ==============================================================================
 
@@ -13,11 +14,13 @@ dataset:
   feature_keys: pos,heights # 4 channels -> the S3DIS checkpoints' first layer loads
   samples_per_epoch: 20000  # blocks drawn (weighted, with replacement) per epoch
   max_val_blocks: 3000      # deterministic validation subset
-  oversample:
-    cliff: 2.0              # extra sampling weight for blocks with cliff points
-    climbable: 20.0         # ... and with climbable (route-cylinder) points
+  oversample: {}            # {class: extra sampling weight for blocks containing it}; most blocks hold some cliff, so none
+  window:                   # training blocks: a 20 m window at a random offset instead of the fixed grid block
+    block_size_m: 20.0      # must match s1_pseudolabel.py
+    rock_center_prob: 0.5   # ... centred on a random cliff point this often (like fine-tuning blocks)
+    rock_class: 3           # cliff
 
-num_classes: 5
+num_classes: 4
 ignore_index: -1
 
 datatransforms:

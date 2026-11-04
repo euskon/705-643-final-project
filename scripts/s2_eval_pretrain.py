@@ -7,8 +7,11 @@ Reports, for the checkpoint's own config:
   confusion matrix) on the held-out **val** and **test** areas, overall and
   per area;
 * a real-label check on the hand-gathered Horseshoe Canyon Ranch waypoints
-  (never used in pretraining): AUROC of P(climbable) for Climb vs Nc, next
-  to the surface-normal heuristic (needs that area's tiles + pseudolabels).
+  (never used in pretraining). Climb and Nc waypoints are both rock, so the
+  useful number is how much P(cliff) the model puts next to them
+  (``gt/mean_score_climb`` / ``gt/mean_score_nc``); Climb-vs-Nc AUROC of
+  P(cliff) is reported too and should sit near 0.5 - pretraining has no
+  notion of climbability (needs that area's tiles + pseudolabels).
 
     python scripts/s2_eval_pretrain.py --run runs/pretrain/pointnext-s
     python scripts/s2_eval_pretrain.py --run runs/pretrain/pointnet2 --ckpt last.pt --no-gt
@@ -90,7 +93,7 @@ def main() -> None:
         for slug, sub in ds.index.groupby("slug"):
             sds = BlockDataset(sub, ds.spec, cfg_get(cfg, "datatransforms"), train=False)
             r = run_eval(model, DataLoader(sds, batch_size=args.batch_size, num_workers=args.num_workers), pretrain.CLASS_NAMES, ign, device)
-            per_area[slug] = {k: r[k] for k in ("loss", "oa", "miou", "iou_cliff", "iou_climbable")}
+            per_area[slug] = {k: r[k] for k in ("loss", "oa", "miou", "iou_cliff")}
         results[f"{split}_per_area"] = per_area
 
     if not args.no_gt:
@@ -99,8 +102,7 @@ def main() -> None:
         try:
             gt_metrics, gt_df = score_waypoints(
                 model, pretrain.block_spec(cfg), cfg_get(cfg, "datatransforms"),
-                positive_classes=[pretrain.CLASS_NAMES.index("climbable")],
-                rock_classes=[pretrain.CLASS_NAMES.index("cliff"), pretrain.CLASS_NAMES.index("climbable")],
+                positive_classes=[pretrain.CLASS_NAMES.index("cliff")],
             )
             results["ground_truth"] = gt_metrics
             gt_df.to_csv(run / f"gt_scores_{Path(args.ckpt).stem}.csv", index=False)

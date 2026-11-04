@@ -5,7 +5,7 @@
 * **Model:** the pretrained backbone (`encoder` = convolutional set-abstraction
   stages, `decoder` = feature propagation) from `runs/pretrain/<model>/backbone.pt`,
   plus a **fresh 2-class SegHead** (not climbable / climbable). The pretraining head
-  (5 pseudolabel classes) is discarded.
+  (4 pseudolabel classes) is discarded.
 * **Labels:** per point, on each sample's own cylinder only (`label_mode:
   center_only`). **Score per sample** = mean P(climbable) over its cylinder.
 * **Data:** `data/finetune/<name>` from Step 3. Train/val = spatially

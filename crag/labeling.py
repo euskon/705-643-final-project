@@ -1,29 +1,18 @@
-"""Cliff-labelling heuristics shared by pseudolabelling (Step 1) and route snapping (Step 3).
+"""Normals and cliff points, shared by pseudolabelling (Step 1) and route snapping (Step 3).
 
 Carried over from the Horseshoe Canyon Ranch proof of concept
-(``proof-of-concept/labeling.py``), minus its patch/sample code:
+(``proof-of-concept/labeling.py``); its Mountain Project route-cylinder and
+negative-sampling code (``place_route_cylinders``, ``build_positives``,
+``build_negatives``) stayed there - pretraining no longer has a climbable
+class and fine-tuning snaps verified route starts instead (``crag.negatives``).
 
-1. **Normals** - local PCA over ``normal_k`` neighbours (on a voxel-thinned
-   copy, so the normal scale doesn't change with point density); slope =
-   angle between the normal and vertical. Points steeper than
-   ``steep_slope_deg`` (and, by default, single-return, to drop tree canopy)
-   are "cliff" points.
-2. **Snap** - an MP wall pin is usually 10-30 m off the rock, so within
-   ``snap_search_radius_m`` of the pin we look for columns that actually hold
-   a cliff (>= ``min_steep_points`` steep points inside a 2.5 m cylinder) and
-   greedily place route cylinders there, nearest-to-pin first, at least
-   ``route_spacing_m`` apart. A wall gets at most one cylinder per MP route.
-3. **Route cylinder** - each cylinder spans the cliff base (5th percentile Z)
-   up to base + the MP route length; it is ``ok`` only if the LiDAR actually
-   saw rock in that height range (``route_profile`` diagnostics).
-4. **Negatives** - contextual step-backs out from / over the wall along its
-   normal, plus optional random far-field points; a candidate that is itself
-   mostly cliff could be unlisted rock, so it is skipped rather than labelled 0.
-
-The changes from the proof of concept: ``build_positives`` takes the
-area's CRS converters (no UTM 15N default), and ``PatchConfig`` keeps only the
-fields ``build_negatives`` uses. ``LabelConfig`` is unchanged field for field,
-so pseudolabel digests (``crag.pseudolabels``) stay the same.
+* :func:`compute_normals` - local PCA over ``normal_k`` neighbours on a
+  voxel-thinned copy (so the normal scale doesn't change with point density),
+  every point fitted (the proof of concept's rule).
+* :func:`surface_geometry` - the same fit on surface returns only (last
+  returns, not LAS vegetation), plus planarity; what pseudolabels use.
+* :class:`PointCloud` - points + 2D trees of all and of steep points for
+  column queries; :func:`wall_direction` - which way a wall faces.
 """
 
 from __future__ import annotations
@@ -38,7 +27,7 @@ from tqdm.auto import tqdm
 
 @dataclass
 class LabelConfig:
-    """How Mountain Project routes become climbable / non-climbable patches."""
+    """Normal estimation and the cliff-column rule shared by pseudolabels and route snapping."""
 
     # local-PCA neighbourhood used for surface normals
     normal_k: int = 12
@@ -54,40 +43,11 @@ class LabelConfig:
     # pulse that hits bare rock returns once, so only count single returns as
     # cliff
     steep_single_return_only: bool = True
-    # MP wall pins are ~10-30 m off; look this far for the cliff line
-    snap_search_radius_m: float = 30.0
-    # minimum spacing between neighbouring route cylinders on one wall
-    route_spacing_m: float = 3.0
-    # radius of the cylinder whose points belong to a route (the label region)
+    # radius of a route's cylinder (the points scored as that route)
     route_radius_m: float = 2.5
-    # a route cylinder with fewer steep points than this inside its height
-    # range is "unseen by the LiDAR" and is dropped (and reported)
+    # a cliff column needs at least this many cliff points inside the
+    # cylinder before a route / waypoint can snap to it
     min_steep_points: int = 8
-    # how far to step away from a route, along the wall normal, for the
-    # contextual negatives (cliff top plateau and talus at the base)
-    stepback_m: tuple[float, ...] = (12.0, 20.0)
-    # random negatives must be at least this far from every MP wall pin and
-    # every positive (unknown band around crags is ignored, not labelled 0)
-    ignore_buffer_m: float = 40.0
-    # random negatives that are mostly cliff are probably unlisted rock rather
-    # than true negatives, so they are ignored too
-    max_steep_fraction_random_neg: float = 0.25
-    n_random_negatives: int = 300
-    # drop routes whose MP pin is a default (shared / area) pin, see crag.mp.parse_routes
-    drop_default_pin_routes: bool = True
-
-
-@dataclass
-class PatchConfig:
-    """Context column around a candidate negative (``build_negatives``)."""
-
-    # horizontal radius of the column; must not overlap a route's column
-    radius_m: float = 5.0
-    # columns with fewer points than this are skipped (no LiDAR there)
-    min_points: int = 64
-
-
-DEFAULT_ROUTE_LENGTH_M = 15.0
 
 
 # ---------------------------------------------------------------------------
@@ -111,24 +71,68 @@ def compute_normals(
     wall direction only need the line, not the sign.
     """
     if voxel_m:
-        keys = np.floor((xyz - xyz.min(axis=0)) / voxel_m).astype(np.int64)
-        _, first = np.unique(keys, axis=0, return_index=True)
-        thin = xyz[first]
-        _, nearest = cKDTree(thin).query(xyz, workers=-1)
-        return compute_normals(thin, k, voxel_m=None, chunk=chunk)[nearest]
+        thin, nearest = _voxel_thin(xyz, voxel_m)
+        return compute_normals(xyz[thin], k, voxel_m=None, chunk=chunk)[nearest]
+    return _local_pca(xyz, k, chunk)[0]
+
+
+def _voxel_thin(xyz: np.ndarray, voxel_m: float) -> tuple[np.ndarray, np.ndarray]:
+    """(indices of one point per voxel, index into them of every point's nearest thinned point)."""
+    keys = np.floor((xyz - xyz.min(axis=0)) / voxel_m).astype(np.int64)
+    _, first = np.unique(keys, axis=0, return_index=True)
+    _, nearest = cKDTree(xyz[first]).query(xyz, workers=-1)
+    return first, nearest
+
+
+def _local_pca(xyz: np.ndarray, k: int, chunk: int = 200_000) -> tuple[np.ndarray, np.ndarray]:
+    """(unit normals with n_z >= 0, eigenvalues sorted ascending) of each point's ``k`` neighbours."""
     centred = xyz - xyz.mean(axis=0)
     tree = cKDTree(centred)
+    k = min(k, len(centred))
     normals = np.empty_like(centred, dtype=np.float32)
-    for start in tqdm(range(0, len(centred), chunk), desc="normals"):
+    evals = np.empty_like(centred, dtype=np.float32)
+    for start in tqdm(range(0, len(centred), chunk), desc="normals", disable=len(centred) <= chunk):
         stop = min(start + chunk, len(centred))
         _, idx = tree.query(centred[start:stop], k=k, workers=-1)
         nbrs = centred[idx]  # (n, k, 3)
         nbrs = nbrs - nbrs.mean(axis=1, keepdims=True)
         cov = np.einsum("nki,nkj->nij", nbrs, nbrs) / k
-        _, vecs = np.linalg.eigh(cov)
+        vals, vecs = np.linalg.eigh(cov)
         normals[start:stop] = vecs[:, :, 0]  # eigenvector of the smallest eigenvalue
+        evals[start:stop] = vals
     normals[normals[:, 2] < 0] *= -1
-    return normals
+    return normals, evals
+
+
+def surface_geometry(
+    xyz: np.ndarray, surface: np.ndarray, k: int = 12, voxel_m: float | None = 0.5, chunk: int = 200_000
+) -> tuple[np.ndarray, np.ndarray]:
+    """(normals, planarity) per point, fitted on the ``surface`` points only.
+
+    ``surface`` marks the returns that can lie on the ground / rock surface
+    (last returns that are not LAS vegetation). Fitting only on them keeps
+    tree canopy out of the PCA neighbourhood, so rock under foliage gets the
+    normal of the rock, not of the leaves in front of it. Same voxel thinning
+    and ``k`` as :func:`compute_normals`. Every point (surface or not) takes
+    the values of its nearest thinned surface point.
+
+    ``planarity = (l2 - l3) / l1`` from the PCA eigenvalues ``l1 >= l2 >= l3``:
+    near 1 for a flat patch (a rock face), near 0 for a line (a trunk or
+    branch) or a scattered blob (foliage).
+    """
+    surface = np.asarray(surface, bool)
+    if surface.sum() < 3:
+        surface = np.ones(len(xyz), bool)
+    s_idx = np.flatnonzero(surface)
+    s_xyz = xyz[s_idx]
+    if voxel_m:
+        thin, _ = _voxel_thin(s_xyz, voxel_m)
+        s_xyz = s_xyz[thin]
+    normals, evals = _local_pca(s_xyz, k, chunk)
+    l1 = np.maximum(evals[:, 2], 1e-12)
+    planarity = np.clip((evals[:, 1] - evals[:, 0]) / l1, 0.0, 1.0).astype(np.float32)
+    _, nearest = cKDTree(s_xyz).query(xyz, workers=-1)
+    return normals[nearest], planarity[nearest]
 
 
 def slope_deg(normals: np.ndarray) -> np.ndarray:
@@ -202,233 +206,3 @@ def wall_direction(pc: PointCloud, idx: np.ndarray) -> np.ndarray:
     if (pc.xyz[lo, :2].mean(0) - pc.xyz[hi, :2].mean(0)) @ d < 0:
         d = -d
     return d
-
-
-def route_profile(
-    pc: PointCloud, idx: np.ndarray, base_z: float, top_z: float, out_dir: np.ndarray
-) -> dict:
-    """Feasibility diagnostics for one route cylinder.
-
-    * ``coverage`` - fraction of 1 m height bins between base and top that
-      hold at least one steep return (1.0 = LiDAR saw the whole route).
-    * ``lean_deg`` - angle of the wall from vertical, from a line fit of the
-      steep points' outward offset against height: < 0 the wall lays back
-      (slab-ish), ~0 vertical face, > 0 the top sticks out (overhang).
-    * ``max_gap_m`` - the tallest run of empty height bins (a hidden roof
-      usually shows up as a gap).
-    """
-    sel = idx[pc.steep[idx]]
-    z = pc.xyz[sel, 2]
-    keep = (z >= base_z) & (z <= top_z)
-    sel, z = sel[keep], z[keep]
-    edges = np.arange(base_z, top_z + 1.0, 1.0)
-    hist = np.histogram(z, bins=edges)[0] if len(edges) > 1 else np.zeros(1)
-    filled = hist > 0
-    gaps, run = [], 0
-    for f in filled:
-        run = 0 if f else run + 1
-        gaps.append(run)
-    lean = np.nan
-    if len(sel) >= 3 and np.ptp(z) > 1.0:
-        offset = pc.xyz[sel, :2] @ out_dir
-        lean = float(np.degrees(np.arctan(np.polyfit(z, offset, 1)[0])))
-    return {
-        "n_steep": int(len(sel)),
-        "coverage": float(filled.mean()) if len(filled) else 0.0,
-        "max_gap_m": float(max(gaps) if gaps else 0.0),
-        "lean_deg": lean,
-    }
-
-
-# ---------------------------------------------------------------------------
-# positives
-# ---------------------------------------------------------------------------
-
-
-def place_route_cylinders(
-    pc: PointCloud,
-    pin_xy: np.ndarray,
-    n_routes: int,
-    cfg: LabelConfig,
-    taken: list[np.ndarray] | None = None,
-) -> np.ndarray:
-    """Greedy cylinder centres on the cliff line nearest to a wall pin, shape (m, 2).
-
-    ``taken`` holds centres already placed for other walls; the spacing rule
-    applies to them too (and new centres are appended), so two walls with
-    near-identical pins can't claim the same patch - which would otherwise
-    put one patch in two splits.
-    """
-    taken = [] if taken is None else taken
-    near = pc.steep_tree_xy.query_ball_point(pin_xy, cfg.snap_search_radius_m)
-    if not near:
-        return np.empty((0, 2))
-    cand = pc.xyz[pc.steep_idx[near], :2]
-    cand = cand[np.argsort(np.linalg.norm(cand - pin_xy, axis=1))]
-    # thin the candidates first so the loop below stays short
-    _, first = np.unique(
-        np.round(cand / 0.5).astype(np.int64), axis=0, return_index=True
-    )
-    cand = cand[np.sort(first)]
-    centres: list[np.ndarray] = []
-    for c in cand:
-        if len(centres) >= n_routes:
-            break
-        if (
-            taken
-            and np.min(np.linalg.norm(np.asarray(taken) - c, axis=1))
-            < cfg.route_spacing_m
-        ):
-            continue
-        n_steep = len(pc.steep_tree_xy.query_ball_point(c, cfg.route_radius_m))
-        if n_steep >= cfg.min_steep_points:
-            centres.append(c)
-            taken.append(c)
-    return np.asarray(centres).reshape(-1, 2)
-
-
-def build_positives(
-    pc: PointCloud,
-    routes: pd.DataFrame,
-    cfg: LabelConfig,
-    to_work,
-    to_lonlat,
-) -> pd.DataFrame:
-    """One row per placed route cylinder (kept or rejected, with the reason).
-
-    ``to_work`` / ``to_lonlat`` convert between lon/lat and the point cloud's
-    metric CRS (the area's UTM zone, see :class:`crag.geo.AreaCRS`).
-    """
-    rows, taken = [], []
-    for (wall, lat, lon), grp in routes.groupby(["wall", "lat", "lon"], sort=False):
-        pin = to_work(lon, lat)
-        if cfg.drop_default_pin_routes and grp["default_pin"].iloc[0]:
-            rows.append(
-                {
-                    "wall": wall,
-                    "pin_x": pin[0],
-                    "pin_y": pin[1],
-                    "status": "default_pin",
-                }
-            )
-            continue
-        grp = grp.sort_values("length_m", ascending=False)
-        centres = place_route_cylinders(pc, pin, len(grp), cfg, taken)
-        if len(centres) == 0:
-            rows.append(
-                {
-                    "wall": wall,
-                    "pin_x": pin[0],
-                    "pin_y": pin[1],
-                    "status": "no_cliff_found",
-                }
-            )
-            continue
-        fallback = grp["length_m"].median()
-        fallback = DEFAULT_ROUTE_LENGTH_M if np.isnan(fallback) else fallback
-        for c, (_, route) in zip(centres, grp.iterrows()):
-            idx = pc.column(c, cfg.route_radius_m)
-            base_z = float(np.quantile(pc.xyz[idx, 2], 0.05))
-            length = route["length_m"] if np.isfinite(route["length_m"]) else fallback
-            out_dir = wall_direction(pc, idx)
-            prof = route_profile(pc, idx, base_z, base_z + length, out_dir)
-            rows.append(
-                {
-                    "wall": wall,
-                    "route": route["route"],
-                    "route_id": route["route_id"],
-                    "route_type": route["route_type"],
-                    "rating": route["rating"],
-                    "pin_x": pin[0],
-                    "pin_y": pin[1],
-                    "x": c[0],
-                    "y": c[1],
-                    "snap_dist_m": float(np.linalg.norm(c - pin)),
-                    "base_z": base_z,
-                    "top_z": base_z + length,
-                    "length_m": length,
-                    "out_dx": out_dir[0],
-                    "out_dy": out_dir[1],
-                    **prof,
-                    "status": "ok"
-                    if prof["n_steep"] >= cfg.min_steep_points
-                    else "unseen_by_lidar",
-                }
-            )
-    df = pd.DataFrame(rows)
-    if "x" in df:
-        lonlat = to_lonlat(df["x"], df["y"])
-        df["lon"], df["lat"] = lonlat[:, 0], lonlat[:, 1]
-    return df
-
-
-# ---------------------------------------------------------------------------
-# negatives
-# ---------------------------------------------------------------------------
-
-
-def steep_fraction(pc: PointCloud, center_xy, radius: float) -> tuple[float, int]:
-    idx = pc.column(center_xy, radius)
-    return (float(pc.steep[idx].mean()) if len(idx) else 0.0), len(idx)
-
-
-def build_negatives(
-    pc: PointCloud,
-    positives: pd.DataFrame,
-    wall_pins: np.ndarray,
-    cfg: LabelConfig,
-    patch: PatchConfig,
-    seed: int = 0,
-) -> pd.DataFrame:
-    """Contextual step-back negatives + random far-field negatives."""
-    rng = np.random.default_rng(seed)
-    pos_xy = positives[["x", "y"]].to_numpy()
-    pos_tree = cKDTree(pos_xy)
-    anchors = cKDTree(np.vstack([pos_xy, wall_pins]))
-    rows, ignored = [], 0
-
-    def try_add(c, source, wall):
-        nonlocal ignored
-        frac, n = steep_fraction(pc, c, patch.radius_m)
-        if n < patch.min_points:
-            return False
-        if frac > cfg.max_steep_fraction_random_neg:
-            ignored += 1  # probably rock nobody has logged: ignore, don't label 0
-            return False
-        rows.append(
-            {
-                "x": c[0],
-                "y": c[1],
-                "source": source,
-                "wall": wall,
-                "steep_frac": frac,
-                "n_points": n,
-            }
-        )
-        return True
-
-    # contextual: out from the face (talus) and back over the top (plateau)
-    for _, p in positives.iterrows():
-        out = np.array([p["out_dx"], p["out_dy"]])
-        for dist in cfg.stepback_m:
-            for sign, name in ((1, "stepback_base"), (-1, "stepback_top")):
-                c = np.array([p["x"], p["y"]]) + sign * dist * out
-                # must not overlap any route's input patch
-                if pos_tree.query(c)[0] < patch.radius_m + cfg.route_radius_m:
-                    continue
-                try_add(c, name, p["wall"])
-
-    # random far-field terrain inside the region
-    minx, miny, maxx, maxy = pc.bounds_xy
-    pad = patch.radius_m
-    n_random, attempts = 0, 0
-    while n_random < cfg.n_random_negatives and attempts < cfg.n_random_negatives * 50:
-        attempts += 1
-        c = rng.uniform([minx + pad, miny + pad], [maxx - pad, maxy - pad])
-        if anchors.query(c)[0] < cfg.ignore_buffer_m:
-            continue
-        n_random += try_add(c, "random", None)
-
-    df = pd.DataFrame(rows)
-    df.attrs["ignored_mostly_cliff"] = ignored
-    return df

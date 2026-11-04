@@ -37,14 +37,19 @@ compile `pointnet2_batch`.
 | 1a | `python scripts/s1_rank_areas.py` | MP page views for each candidate in `registry/mp_candidates.csv` (1 cached request/area, 60 s apart) | `registry/mp_ranked.csv` |
 | 1b | `python scripts/s1_build_registry.py` | top 50 + Horseshoe Canyon (holdout) -> crags (MP sub-area pins with routes), bbox, UTM zone, USGS EPT dataset(s), split | `registry/areas.json`, `data/mountain_project/route_finder_<id>.csv` |
 | 1c | `python scripts/s1_download_lidar.py --dry-run` then without `--dry-run` | 200 m UTM tiles within 150 m of crags, from USGS 3DEP EPT (resumable, worker processes) | `data/lidar/<slug>/E…_N….npz` |
-| 1d | `python scripts/s1_pseudolabel.py` | normals -> 5 per-point classes (existing heuristics) -> 20 m blocks voxelised at 0.25 m | `data/pretrain/<slug>/`, `data/pretrain/summary.csv` |
+| 1d | `python scripts/s1_pseudolabel.py` | surface normals -> 4 per-point terrain classes -> 20 m blocks voxelised at 0.25 m | `data/pretrain/<slug>/`, `data/pretrain/summary.csv` |
 
 * **Adding an area:** append `{"slug": "...", "name": "...", "mp_id": 123}`
   to `registry/areas.json`, then re-run 1b-1d. They only process what is missing.
 * **Registry schema:** `docs/registry-schema.md`.
-* **Classes:** ground, vegetation, steep_terrain, cliff, climbable (cliff
-  inside a Mountain Project route cylinder), plus ignore (-1). See the docstring of
-  `crag/pseudolabels.py`. MP pins are used here only, never as route locations.
+* **Classes:** ground, vegetation, steep_terrain, cliff, plus ignore (-1).
+  Cliff = a last return on a steep (>= 60 deg) surface, with normals fitted
+  on surface returns only (last returns, not LAS vegetation) so canopy can't
+  tilt them; steep last returns of pulses that clipped foliage first count as
+  cliff too (tree-lined walls). Pretraining learns terrain geometry only;
+  climbable vs not is left to fine-tuning. See the docstring of
+  `crag/pseudolabels.py`; `python scripts/s1_check_rock_rule.py` compares
+  rock rules on the known rock (verified routes + hand waypoints).
 * **Splits:** whole areas (registry `split`: train/val/test, deterministic
   hash; `holdout` = never used, e.g. Horseshoe Canyon). Blocks inside
   `registry/heldout_regions.json` (fine-tuning test crags, written by 3c)
@@ -78,8 +83,12 @@ python scripts/s2_eval_pretrain.py --run runs/pretrain/pointnext-s     # best ch
 * **Coordinates:** fixed scale `0.04 / 0.25 = 0.16` instead of per-block unit
   sphere, so the S3DIS filters see the same neighbourhood density and metric
   size stays meaningful (see the docstring of `crag/datasets.py`).
+* **Training blocks** are 20 m windows at a random offset (half of them
+  centred on a cliff point, as fine-tuning blocks are centred on the rock
+  being scored), stitched from the stored grid blocks (`dataset.window`).
+  Validation uses the fixed grid blocks.
 * The eval script also scores the 186 hand-gathered Horseshoe waypoints
-  (Climb vs Nc AUROC of P(climbable)) next to the steepness heuristic.
+  (P(cliff) next to known rock) next to the steepness heuristic.
 
 ## Step 3: route-level GPS and hard negatives
 
@@ -122,6 +131,6 @@ were copied into `crag/`, with the same behaviour and defaults:
 
 | proof of concept | pipeline | change |
 |---|---|---|
-| `labeling.py` (normals, `PointCloud`, route cylinders, negatives) + `config.LabelConfig` | `crag/labeling.py` | `build_positives` takes the area's CRS converters; patch/sample code dropped |
+| `labeling.py` (normals, `PointCloud`) + `config.LabelConfig` | `crag/labeling.py` | adds `surface_geometry` (surface-only normals + planarity); route-cylinder / negative code not carried over |
 | `groundtruth.py` + `config.GroundTruthConfig` | `crag/groundtruth.py` | `snap_one` (was `_snap_one`); waypoints projected to the area's UTM zone |
 | `usgs_ept.read_ept` | `crag.tiles.read_ept` | output CRS required |

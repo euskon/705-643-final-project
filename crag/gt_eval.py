@@ -1,10 +1,12 @@
 """Score a segmentation checkpoint on the hand-gathered Horseshoe Canyon Ranch waypoints.
 
-For each ``Climb`` (1) / ``Nc`` (0) waypoint: cut the same kind of block the
-model was trained on, centred on the waypoint, predict per-point class
-probabilities, and summarise the points within ``radius_m`` (horizontal) of
-the waypoint as one score (90th percentile, robust to a few stray points;
-the waypoint is where the person stood, a few metres off the face).
+Every ``Climb`` (1) / ``Nc`` (0) waypoint first goes through the wall check
+(``crag.negatives.snap_routes``): it is moved to the foot of the nearest real
+wall, and waypoints with no wall within reach are left out (``gt/n_off_wall``).
+For each remaining one: cut the same kind of block the model was trained on,
+centred on the checked position, predict per-point class probabilities, and
+summarise the points within ``radius_m`` (horizontal) as one score (90th
+percentile, robust to a few stray points).
 
 Reported: AUROC / average precision of Climb vs Nc for the model's
 "positive" probability, plus the surface-normal heuristic (fraction of steep
@@ -24,6 +26,7 @@ from crag import registry
 from crag.crop import AreaCloud, voxel_block
 from crag.datasets import BlockSpec, make_item
 from crag.groundtruth import load_waypoints
+from crag.negatives import snap_routes
 from crag.paths import add_import_paths
 from crag.train import model_forward
 
@@ -54,8 +57,16 @@ def score_waypoints(
     cloud = AreaCloud(slug)
     reg_area = next((a for a in registry.load()["areas"] if a["slug"] == slug), None)
     # waypoints in the same metric CRS as the area's tiles
-    gt = load_waypoints(to_work=registry.area_crs(reg_area).to_work if reg_area else None)
+    crs = registry.area_crs(reg_area) if reg_area else None
+    gt = load_waypoints(to_work=crs.to_work if crs else None)
     gt = gt[gt["label"] >= 0].reset_index(drop=True)
+    n_all = len(gt)
+    if crs is not None:
+        chk = snap_routes(cloud, pd.DataFrame({"route_uid": gt["gt_id"], "label": gt["label"], "lat": gt["lat"], "lon": gt["lon"],
+                                                "lat2": np.nan, "lon2": np.nan, "length_m": np.nan}), crs)
+        ok = (chk["status"] == "ok").to_numpy()
+        gt = gt[ok].assign(x=chk.loc[ok, "snap_x"].to_numpy(), y=chk.loc[ok, "snap_y"].to_numpy()).reset_index(drop=True)
+    n_off_wall = n_all - len(gt)
     tf = build_transforms_from_cfg("val", transforms_cfg) if transforms_cfg else None
     keys = [k.strip() for k in spec.feature_keys.split(",")]
     model.eval()
@@ -99,6 +110,7 @@ def score_waypoints(
     y = df.loc[ok, "label"].to_numpy()
     metrics = {
         "gt/n": int(ok.sum()),
+        "gt/n_off_wall": int(n_off_wall),
         "gt/n_climb": int((y == 1).sum()),
         "gt/n_nc": int((y == 0).sum()),
         "gt/auroc_climb_vs_nc": _safe(roc_auc_score, y, df.loc[ok, "score"]),

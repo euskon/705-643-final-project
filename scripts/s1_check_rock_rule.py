@@ -17,7 +17,9 @@ rule variant, and reports:
 Variants: ``old`` (normals from all points, single return, slope >= 60),
 ``surface`` (normals from last non-vegetation returns only), ``surface+p<t>``
 (plus planarity >= t), and ``... +multi`` (also counting steep, planar last
-returns of multi-return pulses). ``--plots`` writes top-down and side views.
+returns of multi-return pulses), ``... +wall`` (only within ``wall.near_m`` of
+the bare-earth wall mask, ``crag.walls`` - the current default is
+``surface +multi +wall``). ``--plots`` writes top-down and side views.
 
     python scripts/s1_check_rock_rule.py
     python scripts/s1_check_rock_rule.py --areas horseshoe-canyon-ranch,red-river-gorge --plots
@@ -41,12 +43,13 @@ from crag.labeling import compute_normals, slope_deg, surface_geometry  # noqa: 
 from crag.paths import LIDAR_DIR, ROUTES_DIR  # noqa: E402
 from crag.pseudolabels import VEG_LAS_CLASSES, PseudoLabelConfig, _TileCache, surface_mask, tile_with_halo  # noqa: E402
 from crag.tiles import Tile  # noqa: E402
+from crag.walls import point_wall_distance  # noqa: E402
 
 DEFAULT_AREAS = "horseshoe-canyon-ranch,red-river-gorge,leavenworth,the-gunks,lake-tahoe,joshua-tree-national-park,rumney"
 PLANARITY = (0.3, 0.5, 0.7)
 
 
-def variants(slope_old, slope_new, plan, rn, nr, las, steep_deg):
+def variants(slope_old, slope_new, plan, rn, nr, las, steep_deg, near_wall=None):
     last = rn >= nr
     ok = last & ~np.isin(las, VEG_LAS_CLASSES)
     single = nr == 1
@@ -55,6 +58,9 @@ def variants(slope_old, slope_new, plan, rn, nr, las, steep_deg):
         "surface": ok & single & (slope_new >= steep_deg),
         "surface +multi": ok & (slope_new >= steep_deg),
     }
+    if near_wall is not None:
+        out["surface +multi +wall"] = out["surface +multi"] & near_wall
+        out["surface +wall"] = out["surface"] & near_wall
     for t in PLANARITY:
         rock = ok & (slope_new >= steep_deg) & (plan >= t)
         out[f"surface+p{t}"] = rock & single
@@ -96,7 +102,8 @@ def check_area(area, pts_xy, cfg, args, plot_dir=None):
             & (pts_xy[:, 1] >= tile.y0 + args.radius_m) & (pts_xy[:, 1] < tile.y0 + size - args.radius_m)
         )
         q = pts_xy[inside]
-        V = variants(slope_deg(n_old), slope_deg(n_new), plan, rn[:n], nr[:n], las[:n], cfg.label.steep_slope_deg)
+        wd = point_wall_distance(xyz, surface_mask(rn, nr, las), cfg.wall, ground=las == 2)[:n]
+        V = variants(slope_deg(n_old), slope_deg(n_new), plan, rn[:n], nr[:n], las[:n], cfg.label.steep_slope_deg, wd <= cfg.wall.near_m)
         n_pts_total += n
         for name, m in V.items():
             a = acc.setdefault(name, {"cliff": 0, "isolated": 0, "hits": [], "near5": []})
@@ -127,7 +134,7 @@ def plot_tile(path, xyz, V, q, rn, nr, las, slope_new, half=20.0):
     matplotlib.use("Agg")
     import matplotlib.pyplot as plt
 
-    names = ["old", "surface", "surface +multi"]
+    names = ["old", "surface +multi", "surface +multi +wall"]
     c = q[len(q) // 2]
     m = (np.abs(xyz[:, 0] - c[0]) <= half) & (np.abs(xyz[:, 1] - c[1]) <= half)
     if m.sum() < 100:

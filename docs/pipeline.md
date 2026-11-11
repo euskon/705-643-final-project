@@ -46,7 +46,10 @@ compile `pointnet2_batch`.
   Cliff = a last return on a steep (>= 60 deg) surface, with normals fitted
   on surface returns only (last returns, not LAS vegetation) so canopy can't
   tilt them; steep last returns of pulses that clipped foliage first count as
-  cliff too (tree-lined walls). Pretraining learns terrain geometry only;
+  cliff too (tree-lined walls). A cliff point must also be within 2 m of a
+  **bare-earth wall** (`crag/walls.py`: 1 m ground-elevation grid, slope
+  >= 50 deg with >= 4 m of height change), which removes steep-looking
+  speckle on forest floors. Pretraining learns terrain geometry only;
   climbable vs not is left to fine-tuning. See the docstring of
   `crag/pseudolabels.py`; `python scripts/s1_check_rock_rule.py` compares
   rock rules on the known rock (verified routes + hand waypoints).
@@ -88,7 +91,9 @@ python scripts/s2_eval_pretrain.py --run runs/pretrain/pointnext-s     # best ch
   being scored), stitched from the stored grid blocks (`dataset.window`).
   Validation uses the fixed grid blocks.
 * The eval script also scores the 186 hand-gathered Horseshoe waypoints
-  (P(cliff) next to known rock) next to the steepness heuristic.
+  (P(cliff) next to known rock) next to the steepness heuristic, after the
+  same wall check fine-tuning uses (off-wall waypoints are left out and
+  counted in `gt/n_off_wall`).
 
 ## Step 3: route-level GPS and hard negatives
 
@@ -97,10 +102,22 @@ Proposal, findings and verification: `docs/step3-routes-and-hard-negatives.md`.
 ```bash
 python scripts/s3_survey_openclimbing.py --resolve-mp   # 3a: best-documented US areas (route-level GPS)
 python scripts/s3_collect_routes.py                      # 3b: OSM routes per area x MP routes + hand GT
-python scripts/s3_build_finetune_set.py --name v1        # 3c: snap, negatives, verification, blocks, splits
+python scripts/s3_build_finetune_set.py --name v3        # 3c: wall check, negatives, verification, blocks, splits
+python scripts/plot_hcr_waypoints.py --dataset v3        # optional: maps of the Horseshoe waypoints vs walls
 ```
 
-Outputs: `data/routes/verified_routes.csv`, `data/finetune/v1/` (with `index.csv`,
+**Wall check (every route GPS point, before any training or testing use).**
+Route starts from OpenStreetMap and the hand-gathered waypoints mark roughly
+where someone stands, often several metres from the rock, plus GPS error.
+`crag.groundtruth.snap_one` moves each point to the foot of the nearest real
+wall within 20 m: a column of cliff points at least 4 m tall whose base is
+within 6 m of the ground height where the point is. Points with no such wall
+are rejected (`off_wall`) and never used. The build writes `wall_check.csv`
+(counts per area / source / status) and `rejected_points.csv`. The same check
+runs in the pretraining evaluation on the hand-gathered waypoints. Audit
+figures: `docs/hcr-waypoint-audit.md`.
+
+Outputs: `data/routes/verified_routes.csv`, `data/finetune/<name>/` (with `index.csv`,
 `report.json`, `samples.geojson` to open in QGIS/Google Earth, and
 `review_negatives.csv`, a sheet for manual checking).
 

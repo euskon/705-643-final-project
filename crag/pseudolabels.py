@@ -11,7 +11,8 @@ Classes (``CLASSES``; ``IGNORE = -1`` is masked out of the loss):
  3    cliff           last return on a steep (>= 60 deg) surface: a single
                       return (the pulse hit nothing first, bare rock) or the
                       last return of a pulse that clipped foliage first
-                      (``multi_return_rock``)
+                      (``multi_return_rock``), within 2 m of a bare-earth wall
+                      (``crag.walls``; ``wall_gate``)
  -1   ignore          LAS buildings (6)
 ====  ==============  ==========================================================
 
@@ -26,8 +27,10 @@ locations, ``crag.finetune_data``); Mountain Project pins aren't used here.
 Processing an area (all incremental, keyed by a hash of the config):
 
 A. per tile, with a ``halo_m`` border from the neighbouring tiles: normals +
-   planarity -> classes (``stage/<tile>.npz``; also read by ``crag.crop`` for
-   the fine-tuning set, so "cliff" means the same thing everywhere);
+   planarity + distance to the nearest wall (``wall_dist``) -> classes
+   (``stage/<tile>.npz``; also read by ``crag.crop`` for the fine-tuning set
+   and the route-point wall check, so "cliff" and "wall" mean the same thing
+   everywhere);
 B. per tile: cut into ``block_size_m`` blocks, voxel-downsample each to
    ``voxel_m`` and write memory-mappable arrays
    (``blocks/<tile>.{points,labels,feat}.npy`` + ``.meta.npz``), plus the area
@@ -50,6 +53,7 @@ from crag.labeling import LabelConfig, compute_normals, slope_deg, surface_geome
 from crag.paths import LIDAR_DIR, PRETRAIN_DIR
 from crag.registry import area_crs
 from crag.tiles import Tile, load_tile
+from crag.walls import WallConfig, point_wall_distance
 
 log = logging.getLogger(__name__)
 
@@ -57,6 +61,7 @@ CLASSES = ("ground", "vegetation", "steep_terrain", "cliff")
 IGNORE = -1
 VEG_LAS_CLASSES = (3, 4, 5)
 BUILDING_LAS_CLASS = 6
+GROUND_LAS_CLASS = 2
 
 
 @dataclass
@@ -79,7 +84,13 @@ class PseudoLabelConfig:
     # as single-return cliff points do and fill in tree-lined faces
     # (Red River Gorge: ~3x the cliff points next to known routes)
     multi_return_rock: str = "cliff"
-    halo_m: float = 5.0  # neighbour points used for normals at tile edges
+    # a cliff point must also sit on / next to a bare-earth wall (crag.walls:
+    # DEM slope >= 50 deg with >= 4 m relief, within wall.near_m). Removes the
+    # steep-normal speckle on forest floors (tree bases, logs, rough ground)
+    # that otherwise passes every point-level test (docs/hcr-waypoint-audit.md)
+    wall_gate: bool = True
+    wall: WallConfig = field(default_factory=WallConfig)
+    halo_m: float = 10.0  # neighbour points used for normals / the wall mask at tile edges
     block_size_m: float = 20.0
     voxel_m: float = 0.25
     min_block_points: int = 512
@@ -128,14 +139,16 @@ def surface_mask(rn: np.ndarray, nr: np.ndarray, las: np.ndarray) -> np.ndarray:
 
 
 def base_classes(
-    normals: np.ndarray, rn: np.ndarray, nr: np.ndarray, las: np.ndarray, cfg: PseudoLabelConfig, planarity: np.ndarray | None = None
+    normals: np.ndarray, rn: np.ndarray, nr: np.ndarray, las: np.ndarray, cfg: PseudoLabelConfig, planarity: np.ndarray | None = None,
+    wall_dist: np.ndarray | None = None,
 ) -> tuple[np.ndarray, np.ndarray]:
-    """(class per point, cliff mask) from normals, planarity and return info.
+    """(class per point, cliff mask) from normals, planarity, wall distance and return info.
 
     * vegetation: not the last return of its pulse, or LAS class 3/4/5;
     * ground: last return, slope < ``ground_slope_deg``;
     * cliff: single return (the pulse hit nothing before the surface) on a
-      steep (>= ``label.steep_slope_deg``) patch (and planar, if ``min_planarity``);
+      steep (>= ``label.steep_slope_deg``) patch (and planar, if ``min_planarity``),
+      within ``wall.near_m`` of a bare-earth wall (if ``wall_gate`` and ``wall_dist`` given);
     * steep last return of a multi-return pulse: ``multi_return_rock``;
     * steep_terrain: every other last return (30-60 deg, or failing the planarity gate);
     * ignore: LAS buildings.
@@ -144,6 +157,8 @@ def base_classes(
     last = rn >= nr
     planar = np.ones(len(slope), bool) if (planarity is None or cfg.min_planarity is None) else planarity >= cfg.min_planarity
     rock = last & (slope >= cfg.label.steep_slope_deg) & planar
+    if cfg.wall_gate and wall_dist is not None:
+        rock &= wall_dist <= cfg.wall.near_m
     single = nr == 1
     cls = np.full(len(slope), 2, np.int8)
     cls[last & (slope < cfg.ground_slope_deg)] = 0
@@ -207,9 +222,11 @@ def stage_tile(slug: str, tile_id: str, cache: _TileCache, cfg: PseudoLabelConfi
     normals, planarity = tile_geometry(h["xyz_abs"], rn, nr, las, cfg)
     normals = normals[:n]
     planarity = None if planarity is None else planarity[:n]
-    cls, steep = base_classes(normals, rn[:n], nr[:n], las[:n], cfg, planarity)
+    wall_dist = point_wall_distance(h["xyz_abs"], surface_mask(rn, nr, las), cfg.wall, ground=las == GROUND_LAS_CLASS)[:n]
+    cls, steep = base_classes(normals, rn[:n], nr[:n], las[:n], cfg, planarity, wall_dist)
     extra = {} if planarity is None else {"planarity": planarity.astype(np.float16)}
-    np.savez(out, n=n, digest=cfg.digest(), normals=normals.astype(np.float16), cls=cls, steep=steep, **extra)
+    np.savez(out, n=n, digest=cfg.digest(), normals=normals.astype(np.float16), cls=cls, steep=steep,
+             wall_dist=wall_dist.astype(np.float16), **extra)
     return {"tile": tile_id, "n": n}
 
 

@@ -1,0 +1,592 @@
+{
+ "name": "v3",
+ "negative_config": {
+  "exclusion_m": 7.5,
+  "band_min_m": 10.0,
+  "band_max_m": 40.0,
+  "doc_radius_m": 75.0,
+  "doc_min_routes": 3,
+  "min_coverage": 0.6,
+  "grid_m": 2.0,
+  "neg_spacing_m": 6.0,
+  "band_per_positive": 1.0,
+  "stepback_m": [
+   12.0,
+   20.0
+  ],
+  "max_stepback_steep_frac": 0.25,
+  "far_min_m": 300.0,
+  "far_per_area": 40,
+  "cylinder_m": 2.5,
+  "min_steep_points": 8
+ },
+ "strategies": [
+  "handgathered_nc",
+  "band",
+  "stepback",
+  "far_cliff"
+ ],
+ "aug": "",
+ "positives_snapped": 1566,
+ "positives_total": 1660,
+ "snap_status": {
+  "ok": 1566,
+  "no_lidar": 72,
+  "off_wall": 22
+ },
+ "wall_check": [
+  {
+   "slug": "horseshoe-canyon-ranch",
+   "source": "handgathered",
+   "label": 1,
+   "status": "off_wall",
+   "n": 3
+  },
+  {
+   "slug": "horseshoe-canyon-ranch",
+   "source": "handgathered",
+   "label": 1,
+   "status": "ok",
+   "n": 123
+  },
+  {
+   "slug": "horseshoe-canyon-ranch",
+   "source": "handgathered_nc",
+   "label": 0,
+   "status": "off_wall",
+   "n": 2
+  },
+  {
+   "slug": "horseshoe-canyon-ranch",
+   "source": "handgathered_nc",
+   "label": 0,
+   "status": "ok",
+   "n": 58
+  },
+  {
+   "slug": "joshua-tree-national-park",
+   "source": "osm",
+   "label": 1,
+   "status": "off_wall",
+   "n": 1
+  },
+  {
+   "slug": "joshua-tree-national-park",
+   "source": "osm",
+   "label": 1,
+   "status": "ok",
+   "n": 9
+  },
+  {
+   "slug": "lake-tahoe",
+   "source": "osm",
+   "label": 1,
+   "status": "off_wall",
+   "n": 1
+  },
+  {
+   "slug": "lake-tahoe",
+   "source": "osm",
+   "label": 1,
+   "status": "ok",
+   "n": 17
+  },
+  {
+   "slug": "leavenworth",
+   "source": "osm",
+   "label": 1,
+   "status": "no_lidar",
+   "n": 2
+  },
+  {
+   "slug": "leavenworth",
+   "source": "osm",
+   "label": 1,
+   "status": "ok",
+   "n": 60
+  },
+  {
+   "slug": "red-river-gorge",
+   "source": "osm",
+   "label": 1,
+   "status": "off_wall",
+   "n": 16
+  },
+  {
+   "slug": "red-river-gorge",
+   "source": "osm",
+   "label": 1,
+   "status": "ok",
+   "n": 1271
+  },
+  {
+   "slug": "red-rocks",
+   "source": "osm",
+   "label": 1,
+   "status": "no_lidar",
+   "n": 21
+  },
+  {
+   "slug": "red-rocks",
+   "source": "osm",
+   "label": 1,
+   "status": "ok",
+   "n": 36
+  },
+  {
+   "slug": "rumney",
+   "source": "osm",
+   "label": 1,
+   "status": "ok",
+   "n": 6
+  },
+  {
+   "slug": "saint-george",
+   "source": "osm",
+   "label": 1,
+   "status": "off_wall",
+   "n": 1
+  },
+  {
+   "slug": "tahquitz-suicide-rocks",
+   "source": "osm",
+   "label": 1,
+   "status": "ok",
+   "n": 1
+  },
+  {
+   "slug": "the-gunks",
+   "source": "osm",
+   "label": 1,
+   "status": "ok",
+   "n": 43
+  },
+  {
+   "slug": "yosemite-national-park",
+   "source": "osm",
+   "label": 1,
+   "status": "no_lidar",
+   "n": 47
+  },
+  {
+   "slug": "zion-national-park",
+   "source": "osm",
+   "label": 1,
+   "status": "no_lidar",
+   "n": 2
+  }
+ ],
+ "samples_by_split_label": [
+  {
+   "split": "test",
+   "label": 0,
+   "n": 928
+  },
+  {
+   "split": "test",
+   "label": 1,
+   "n": 317
+  },
+  {
+   "split": "train",
+   "label": 0,
+   "n": 3044
+  },
+  {
+   "split": "train",
+   "label": 1,
+   "n": 1058
+  },
+  {
+   "split": "val",
+   "label": 0,
+   "n": 716
+  },
+  {
+   "split": "val",
+   "label": 1,
+   "n": 191
+  }
+ ],
+ "samples_by_source": {
+  "stepback": 3002,
+  "osm": 1443,
+  "band": 1331,
+  "far_cliff": 297,
+  "handgathered": 123,
+  "handgathered_nc": 58
+ },
+ "samples_by_area": [
+  {
+   "slug": "horseshoe-canyon-ranch",
+   "count": 348,
+   "positives": 123
+  },
+  {
+   "slug": "joshua-tree-national-park",
+   "count": 27,
+   "positives": 9
+  },
+  {
+   "slug": "lake-tahoe",
+   "count": 83,
+   "positives": 17
+  },
+  {
+   "slug": "leavenworth",
+   "count": 280,
+   "positives": 60
+  },
+  {
+   "slug": "red-river-gorge",
+   "count": 5092,
+   "positives": 1271
+  },
+  {
+   "slug": "red-rocks",
+   "count": 118,
+   "positives": 36
+  },
+  {
+   "slug": "rumney",
+   "count": 35,
+   "positives": 6
+  },
+  {
+   "slug": "saint-george",
+   "count": 40,
+   "positives": 0
+  },
+  {
+   "slug": "tahquitz-suicide-rocks",
+   "count": 43,
+   "positives": 1
+  },
+  {
+   "slug": "the-gunks",
+   "count": 163,
+   "positives": 43
+  },
+  {
+   "slug": "zion-national-park",
+   "count": 25,
+   "positives": 0
+  }
+ ],
+ "negative_features_by_source": [
+  {
+   "source": "band",
+   "cliff_height_m": 14.917,
+   "n_steep": 33.234,
+   "multi_frac": 0.394,
+   "dist_to_route_m": 18.438,
+   "confidence": 0.9318039068369646
+  },
+  {
+   "source": "far_cliff",
+   "cliff_height_m": 12.954,
+   "n_steep": 95.168,
+   "multi_frac": 0.248,
+   "dist_to_route_m": 7209.633,
+   "confidence": 0.39999999999999997
+  },
+  {
+   "source": "handgathered_nc",
+   "cliff_height_m": 11.687,
+   "n_steep": 16.828,
+   "multi_frac": 0.24,
+   "dist_to_route_m": 19.034,
+   "confidence": 1.0
+  },
+  {
+   "source": "stepback",
+   "cliff_height_m": 2.602,
+   "n_steep": 5.671,
+   "multi_frac": 0.386,
+   "dist_to_route_m": 14.167,
+   "confidence": 0.9000000000000002
+  }
+ ],
+ "band_validation_horseshoe": {
+  "per_run": [
+   {
+    "doc_fraction": 0.3,
+    "repeat": 0,
+    "n_documented": 32,
+    "band_n": 32,
+    "band_confirmed": 5,
+    "band_contradicted": 4,
+    "band_precision": 0.5555555555555556,
+    "random_precision": 0.0,
+    "random_confirmed": 0,
+    "random_contradicted": 4
+   },
+   {
+    "doc_fraction": 0.3,
+    "repeat": 1,
+    "n_documented": 38,
+    "band_n": 38,
+    "band_confirmed": 6,
+    "band_contradicted": 10,
+    "band_precision": 0.375,
+    "random_precision": 0.6666666666666666,
+    "random_confirmed": 2,
+    "random_contradicted": 1
+   },
+   {
+    "doc_fraction": 0.3,
+    "repeat": 2,
+    "n_documented": 28,
+    "band_n": 28,
+    "band_confirmed": 2,
+    "band_contradicted": 8,
+    "band_precision": 0.2,
+    "random_precision": 1.0,
+    "random_confirmed": 1,
+    "random_contradicted": 0
+   },
+   {
+    "doc_fraction": 0.3,
+    "repeat": 3,
+    "n_documented": 28,
+    "band_n": 28,
+    "band_confirmed": 3,
+    "band_contradicted": 9,
+    "band_precision": 0.25,
+    "random_precision": 0.2,
+    "random_confirmed": 1,
+    "random_contradicted": 4
+   },
+   {
+    "doc_fraction": 0.3,
+    "repeat": 4,
+    "n_documented": 34,
+    "band_n": 34,
+    "band_confirmed": 5,
+    "band_contradicted": 7,
+    "band_precision": 0.4166666666666667,
+    "random_precision": 0.0,
+    "random_confirmed": 0,
+    "random_contradicted": 2
+   },
+   {
+    "doc_fraction": 0.5,
+    "repeat": 0,
+    "n_documented": 58,
+    "band_n": 58,
+    "band_confirmed": 6,
+    "band_contradicted": 10,
+    "band_precision": 0.375,
+    "random_precision": 0.7142857142857143,
+    "random_confirmed": 5,
+    "random_contradicted": 2
+   },
+   {
+    "doc_fraction": 0.5,
+    "repeat": 1,
+    "n_documented": 64,
+    "band_n": 64,
+    "band_confirmed": 7,
+    "band_contradicted": 12,
+    "band_precision": 0.3684210526315789,
+    "random_precision": 0.8333333333333334,
+    "random_confirmed": 5,
+    "random_contradicted": 1
+   },
+   {
+    "doc_fraction": 0.5,
+    "repeat": 2,
+    "n_documented": 69,
+    "band_n": 69,
+    "band_confirmed": 7,
+    "band_contradicted": 8,
+    "band_precision": 0.4666666666666667,
+    "random_precision": 0.8,
+    "random_confirmed": 4,
+    "random_contradicted": 1
+   },
+   {
+    "doc_fraction": 0.5,
+    "repeat": 3,
+    "n_documented": 61,
+    "band_n": 61,
+    "band_confirmed": 7,
+    "band_contradicted": 7,
+    "band_precision": 0.5,
+    "random_precision": 0.8,
+    "random_confirmed": 4,
+    "random_contradicted": 1
+   },
+   {
+    "doc_fraction": 0.5,
+    "repeat": 4,
+    "n_documented": 60,
+    "band_n": 60,
+    "band_confirmed": 7,
+    "band_contradicted": 10,
+    "band_precision": 0.4117647058823529,
+    "random_precision": 0.375,
+    "random_confirmed": 3,
+    "random_contradicted": 5
+   },
+   {
+    "doc_fraction": 0.75,
+    "repeat": 0,
+    "n_documented": 101,
+    "band_n": 101,
+    "band_confirmed": 9,
+    "band_contradicted": 2,
+    "band_precision": 0.8181818181818182,
+    "random_precision": 1.0,
+    "random_confirmed": 8,
+    "random_contradicted": 0
+   },
+   {
+    "doc_fraction": 0.75,
+    "repeat": 1,
+    "n_documented": 91,
+    "band_n": 91,
+    "band_confirmed": 9,
+    "band_contradicted": 0,
+    "band_precision": 1.0,
+    "random_precision": 1.0,
+    "random_confirmed": 4,
+    "random_contradicted": 0
+   },
+   {
+    "doc_fraction": 0.75,
+    "repeat": 2,
+    "n_documented": 86,
+    "band_n": 86,
+    "band_confirmed": 11,
+    "band_contradicted": 2,
+    "band_precision": 0.8461538461538461,
+    "random_precision": 0.8333333333333334,
+    "random_confirmed": 5,
+    "random_contradicted": 1
+   },
+   {
+    "doc_fraction": 0.75,
+    "repeat": 3,
+    "n_documented": 92,
+    "band_n": 92,
+    "band_confirmed": 11,
+    "band_contradicted": 11,
+    "band_precision": 0.5,
+    "random_precision": 0.5384615384615384,
+    "random_confirmed": 7,
+    "random_contradicted": 6
+   },
+   {
+    "doc_fraction": 0.75,
+    "repeat": 4,
+    "n_documented": 100,
+    "band_n": 100,
+    "band_confirmed": 10,
+    "band_contradicted": 4,
+    "band_precision": 0.7142857142857143,
+    "random_precision": 0.9,
+    "random_confirmed": 9,
+    "random_contradicted": 1
+   },
+   {
+    "doc_fraction": 0.9,
+    "repeat": 0,
+    "n_documented": 106,
+    "band_n": 106,
+    "band_confirmed": 10,
+    "band_contradicted": 3,
+    "band_precision": 0.7692307692307693,
+    "random_precision": 0.8333333333333334,
+    "random_confirmed": 5,
+    "random_contradicted": 1
+   },
+   {
+    "doc_fraction": 0.9,
+    "repeat": 1,
+    "n_documented": 107,
+    "band_n": 107,
+    "band_confirmed": 10,
+    "band_contradicted": 4,
+    "band_precision": 0.7142857142857143,
+    "random_precision": 0.875,
+    "random_confirmed": 7,
+    "random_contradicted": 1
+   },
+   {
+    "doc_fraction": 0.9,
+    "repeat": 2,
+    "n_documented": 113,
+    "band_n": 113,
+    "band_confirmed": 10,
+    "band_contradicted": 0,
+    "band_precision": 1.0,
+    "random_precision": 1.0,
+    "random_confirmed": 7,
+    "random_contradicted": 0
+   },
+   {
+    "doc_fraction": 0.9,
+    "repeat": 3,
+    "n_documented": 116,
+    "band_n": 116,
+    "band_confirmed": 10,
+    "band_contradicted": 0,
+    "band_precision": 1.0,
+    "random_precision": 1.0,
+    "random_confirmed": 7,
+    "random_contradicted": 0
+   },
+   {
+    "doc_fraction": 0.9,
+    "repeat": 4,
+    "n_documented": 108,
+    "band_n": 108,
+    "band_confirmed": 10,
+    "band_contradicted": 5,
+    "band_precision": 0.6666666666666666,
+    "random_precision": 0.4,
+    "random_confirmed": 2,
+    "random_contradicted": 3
+   }
+  ],
+  "by_coverage": [
+   {
+    "doc_fraction": 0.3,
+    "band_precision": 0.359,
+    "random_precision": 0.373,
+    "band_n": 32.0,
+    "band_confirmed": 4.2,
+    "band_contradicted": 7.6
+   },
+   {
+    "doc_fraction": 0.5,
+    "band_precision": 0.424,
+    "random_precision": 0.705,
+    "band_n": 62.4,
+    "band_confirmed": 6.8,
+    "band_contradicted": 9.4
+   },
+   {
+    "doc_fraction": 0.75,
+    "band_precision": 0.776,
+    "random_precision": 0.854,
+    "band_n": 94.0,
+    "band_confirmed": 10.0,
+    "band_contradicted": 3.8
+   },
+   {
+    "doc_fraction": 0.9,
+    "band_precision": 0.83,
+    "random_precision": 0.822,
+    "band_n": 110.0,
+    "band_confirmed": 10.0,
+    "band_contradicted": 2.4
+   }
+  ],
+  "match_m": 8.0,
+  "n_climb": 123,
+  "n_nc": 58,
+  "n_off_wall": 5
+ }
+}

@@ -38,6 +38,8 @@ class AreaCloud:
                     with np.load(sp) as s:
                         if int(s["n"]) == len(xyz):
                             t["steep"], t["cls"], t["normals"] = s["steep"], s["cls"], s["normals"]
+                            if "wall_dist" in s:
+                                t["wall_dist"] = s["wall_dist"]
             else:
                 t = None
         self._cache[tid] = t
@@ -47,9 +49,10 @@ class AreaCloud:
 
     def crop(self, cx: float, cy: float, half: float) -> dict:
         """Points with |x-cx|,|y-cy| <= half: ``xyz`` (abs), ``intensity``, ``steep``, ``cls``,
-        ``normals``, ``multi`` (non-last return)."""
+        ``normals``, ``multi`` (non-last return), ``wall_dist`` (m to the bare-earth wall; NaN
+        without stage files)."""
         s = self.size
-        parts = {k: [] for k in ("xyz", "intensity", "steep", "cls", "normals", "multi")}
+        parts = {k: [] for k in ("xyz", "intensity", "steep", "cls", "normals", "multi", "wall_dist")}
         for i in range(math.floor((cx - half) / s), math.floor((cx + half) / s) + 1):
             for j in range(math.floor((cy - half) / s), math.floor((cy + half) / s) + 1):
                 t = self._tile(Tile(i * s, j * s, s).id)
@@ -63,9 +66,10 @@ class AreaCloud:
                 parts["cls"].append(t["cls"][m] if "cls" in t else np.full(m.sum(), -1, np.int8))
                 parts["normals"].append(t["normals"][m].astype(np.float32) if "normals" in t else np.zeros((m.sum(), 3), np.float32))
                 parts["multi"].append(t["return_number"][m] < t["number_of_returns"][m])  # non-last return = canopy
+                parts["wall_dist"].append(t["wall_dist"][m].astype(np.float32) if "wall_dist" in t else np.full(m.sum(), np.nan, np.float32))
         if not parts["xyz"]:
             return {"xyz": np.zeros((0, 3)), "intensity": np.zeros(0, np.float32), "steep": np.zeros(0, bool), "cls": np.zeros(0, np.int8),
-                    "normals": np.zeros((0, 3), np.float32), "multi": np.zeros(0, bool)}
+                    "normals": np.zeros((0, 3), np.float32), "multi": np.zeros(0, bool), "wall_dist": np.zeros(0, np.float32)}
         return {k: np.concatenate(v) for k, v in parts.items()}
 
     def has_stage(self) -> bool:

@@ -7,7 +7,10 @@ Canyon Ranch waypoints. For each area this script
 
 1. makes sure LiDAR exists around every route (downloads missing tiles and
    computes normals / cliff points for them),
-2. snaps route starts onto the cliff (positives),
+2. runs the wall check on every route GPS point (``crag.groundtruth.snap_one``):
+   each is moved to the foot of the nearest real wall within 20 m, or rejected
+   as ``off_wall`` (``wall_check.csv``, ``rejected_points.csv``); only points
+   that pass become positives (or, for Nc waypoints, negatives),
 3. generates negatives (``--strategies``; see ``crag/negatives.py``) and
    verifies them (exclusion radius, documentation coverage, geometry),
 4. cuts one block per sample, assigns spatial train/val/test splits
@@ -22,7 +25,8 @@ Canyon Ranch waypoints. For each area this script
     python scripts/s3_build_finetune_set.py --areas red-river-gorge,horseshoe-canyon-ranch --wandb online
 
 Output: ``data/finetune/<name>/`` with ``index.csv`` (one row per sample
-block), ``samples.csv``, ``positives_all.csv``, ``report.json``,
+block), ``samples.csv``, ``positives_all.csv``, ``wall_check.csv``,
+``rejected_points.csv``, ``report.json``,
 ``samples.geojson``, ``review_negatives.csv`` and the block arrays.
 """
 
@@ -125,10 +129,17 @@ def main() -> None:
         pos["slug"], neg["slug"] = slug, slug
         all_pos.append(pos)
         all_neg.append(neg)
-        log.info("%s: %d/%d positives snapped, negatives %s", slug, int((pos["status"] == "ok").sum()), len(pos), neg["source"].value_counts().to_dict() if len(neg) else {})
+        log.info("%s: wall check %s, negatives %s", slug, pos.groupby("label")["status"].value_counts().to_dict(), neg["source"].value_counts().to_dict() if len(neg) else {})
 
     pos_all = pd.concat(all_pos, ignore_index=True)
     pos_all.to_csv(out / "positives_all.csv", index=False)
+    # the wall check: every route GPS point (label 1 routes / Climb, label 0 Nc) and what happened to it
+    wall_check = pos_all.groupby(["slug", "source", "label", "status"]).size().rename("n").reset_index()
+    wall_check.to_csv(out / "wall_check.csv", index=False)
+    pos_all[pos_all["status"] != "ok"].to_csv(out / "rejected_points.csv", index=False)
+    log.info("wall check (all route GPS points): %s; median distance GPS -> wall foot %.1f m",
+             pos_all["status"].value_counts().to_dict(), float(pos_all.loc[pos_all["status"] == "ok", "snap_dist_m"].median()))
+    pos_all = pos_all[pos_all["label"] == 1]  # Nc points are negatives (already added by build_area_samples)
     ok = pos_all[pos_all["status"] == "ok"].copy()
     P = pd.DataFrame({
         "sample_id": ok["route_uid"], "slug": ok["slug"], "label": 1, "source": ok["source"], "confidence": np.where(ok["match_type"] == "fuzzy", 0.9, 1.0),
@@ -171,6 +182,7 @@ def main() -> None:
         "positives_snapped": int(len(ok)),
         "positives_total": int(len(pos_all)),
         "snap_status": pos_all["status"].value_counts().to_dict(),
+        "wall_check": wall_check.to_dict("records"),
         "samples_by_split_label": index.groupby(["split", "label"]).size().rename("n").reset_index().to_dict("records"),
         "samples_by_source": index["source"].value_counts().to_dict(),
         "samples_by_area": index.groupby("slug")["label"].agg(["count", "sum"]).rename(columns={"sum": "positives"}).reset_index().to_dict("records"),

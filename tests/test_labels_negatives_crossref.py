@@ -2,6 +2,7 @@
 
 import numpy as np
 import pandas as pd
+import pytest
 from scipy.spatial import cKDTree
 
 from crag import crossref
@@ -11,6 +12,9 @@ from crag.datasets import BlockDataset, BlockSpec
 from crag.labeling import compute_normals, slope_deg, surface_geometry
 from crag.pseudolabels import IGNORE, META_COLS, PseudoLabelConfig, base_classes, make_blocks, write_blocks
 from crag.tiles import Tile
+from crag.groundtruth import GroundTruthConfig, snap_one
+from crag.labeling import LabelConfig, PointCloud
+from crag.walls import WallConfig, point_wall_distance, wall_grid
 
 
 def test_base_classes():
@@ -34,6 +38,54 @@ def test_base_classes():
     assert d.tolist() == [IGNORE, 3, 3, 2, 1, 3]
     las[1] = 3  # LAS vegetation wins over geometry
     assert base_classes(normals, rn, nr, las, cfg, planarity)[0][1] == 1
+    # wall gate: a steep point more than wall.near_m from the bare-earth wall is steep_terrain, not cliff
+    las[:] = 1
+    wall_dist = np.array([0, 1.0, 0, 0, 0, 9.0])
+    assert base_classes(normals, rn, nr, las, PseudoLabelConfig(), planarity, wall_dist)[0].tolist() == [0, 3, 3, 2, 1, 2]
+    assert base_classes(normals, rn, nr, las, PseudoLabelConfig(wall_gate=False), planarity, wall_dist)[0][5] == 3
+
+
+def _cliff_scene(rng, height=15.0):
+    """Flat valley floor (z=0, x<0), a vertical face at x in [0, 1], a plateau (z=height, x>1),
+    and a 10 m tree trunk standing on the valley floor at (-20, 50)."""
+    floor = np.column_stack([rng.uniform(-50, 0, 20000), rng.uniform(0, 100, 20000), rng.normal(0, 0.03, 20000)])
+    face = np.column_stack([rng.uniform(0, 1, 6000), rng.uniform(0, 100, 6000), rng.uniform(0, height, 6000)])
+    top = np.column_stack([rng.uniform(1, 30, 12000), rng.uniform(0, 100, 12000), height + rng.normal(0, 0.03, 12000)])
+    trunk = np.column_stack([-20 + rng.normal(0, 0.1, 400), 50 + rng.normal(0, 0.1, 400), rng.uniform(0, 10, 400)])
+    xyz = np.vstack([floor, face, top, trunk])
+    kind = np.repeat(["floor", "face", "top", "trunk"], [len(floor), len(face), len(top), len(trunk)])
+    return xyz, kind
+
+
+def test_wall_mask_finds_walls_not_trees():
+    xyz, kind = _cliff_scene(np.random.default_rng(0))
+    g = wall_grid(xyz, np.ones(len(xyz), bool))
+    d = point_wall_distance(xyz, np.ones(len(xyz), bool))
+    assert np.median(d[kind == "face"]) <= 1.0
+    assert d[kind == "trunk"].min() > 10  # the trunk's lowest point is the DEM; it never makes a wall
+    assert g.distance(np.array([[-8.0, 50.0]]))[0] == pytest.approx(8, abs=2)
+    low = _cliff_scene(np.random.default_rng(0), height=2.0)[0]  # a 2 m step is not a wall
+    assert not wall_grid(low, np.ones(len(low), bool)).wall.any()
+
+
+def _scene_pc(xyz, steep):
+    from scipy.spatial import cKDTree as T
+    si = np.flatnonzero(steep)
+    return PointCloud(xyz=xyz, normals=np.zeros_like(xyz), steep=steep, tree_xy=T(xyz[:, :2]), steep_idx=si,
+                      steep_tree_xy=T(xyz[si, :2]), wall_dist=point_wall_distance(xyz, np.ones(len(xyz), bool)))
+
+
+def test_wall_check_moves_points_to_the_wall_or_rejects_them():
+    xyz, kind = _cliff_scene(np.random.default_rng(1))
+    pc = _scene_pc(xyz, kind == "face")
+    s = snap_one(pc, np.array([-9.0, 50.0]), LabelConfig(), GroundTruthConfig())  # stood 9 m out on the valley floor
+    assert s["status"] == "ok"
+    assert s["snap_dist_m"] == pytest.approx(9, abs=1.5) and s["snap_x"] < 1.5
+    assert s["wall_dist_m"] == pytest.approx(9, abs=2) and s["wall_height_m"] > 10
+    assert snap_one(pc, np.array([-35.0, 50.0]), LabelConfig(), GroundTruthConfig())["status"] == "off_wall"  # too far
+    # steep points on a 2 m step (e.g. a boulder edge) are not a wall to climb
+    low, lk = _cliff_scene(np.random.default_rng(1), height=2.0)
+    assert snap_one(_scene_pc(low, lk == "face"), np.array([-3.0, 50.0]), LabelConfig(), GroundTruthConfig())["status"] == "off_wall"
 
 
 def test_surface_geometry_ignores_canopy():

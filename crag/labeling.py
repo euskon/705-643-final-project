@@ -150,6 +150,7 @@ class PointCloud:
     tree_xy: cKDTree  # 2D tree for vertical-column queries
     steep_idx: np.ndarray  # indices of steep points
     steep_tree_xy: cKDTree
+    wall_dist: np.ndarray | None = None  # per point, metres to the bare-earth wall (crag.walls)
 
     @classmethod
     def build(

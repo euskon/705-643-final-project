@@ -1,9 +1,11 @@
 """Verified positives and hard negatives for fine-tuning (proposal: docs/step3-routes-and-hard-negatives.md).
 
-Positives: verified route starts (OSM matched to MP, or hand-gathered Climb
-waypoints) snapped onto the nearest LiDAR cliff column whose base is at the
-ground height of the start point (``crag.groundtruth.snap_one``: 12 m search,
-6 m height tolerance).
+Positives: verified route starts (OpenStreetMap routes matched to Mountain
+Project, or hand-gathered Climb waypoints) that pass the wall check
+(``crag.groundtruth.snap_one``): moved to the foot of the nearest real wall
+within 20 m whose base is at the ground height of the start point (6 m
+tolerance). Points with no such wall (``off_wall``) are dropped, Nc
+waypoints included.
 
 Negatives, hardest first, each with a ``source`` and a ``confidence``:
 
@@ -49,7 +51,7 @@ from crag.labeling import LabelConfig, PointCloud
 
 log = logging.getLogger(__name__)
 DEFAULT_ROUTE_LENGTH_M = 15.0
-SNAP_COLS = ("snap_x", "snap_y", "snap_dist_m", "ground_z", "base_z", "top_z", "out_dx", "out_dy", "n_steep_snap")
+SNAP_COLS = ("snap_x", "snap_y", "snap_dist_m", "ground_z", "wall_dist_m", "base_z", "wall_height_m", "top_z", "out_dx", "out_dy", "n_steep_snap")
 
 
 @dataclass
@@ -83,6 +85,7 @@ def local_pc(cloud: AreaCloud, cx: float, cy: float, half: float) -> tuple[Point
         tree_xy=cKDTree(c["xyz"][:, :2]),
         steep_idx=steep_idx,
         steep_tree_xy=cKDTree(c["xyz"][steep_idx, :2] if len(steep_idx) else np.zeros((1, 2)) + 1e12),
+        wall_dist=c["wall_dist"] if "wall_dist" in c and np.isfinite(c["wall_dist"]).any() else None,
     )
     return pc, c
 
@@ -93,8 +96,12 @@ def _ground_z(pc: PointCloud, xy, r: float = 3.0) -> float:
 
 
 def snap_routes(cloud: AreaCloud, routes: pd.DataFrame, crs, label: LabelConfig | None = None, gt: GroundTruthConfig | None = None) -> pd.DataFrame:
-    """Snap route start points onto the cliff. Adds ``x, y`` (start), ``snap_*``, ``base_z``,
-    ``top_z``, ``out_dx/dy``, ``status``. Route *ways* use their lower end."""
+    """The wall check for route start points (see ``crag.groundtruth.snap_one``).
+
+    Adds ``x, y`` (start), ``snap_*``, ``wall_dist_m``, ``base_z``, ``wall_height_m``,
+    ``top_z``, ``out_dx/dy`` and ``status``: ``ok``, ``off_wall`` (no real wall
+    within the search radius) or ``no_lidar``. Only ``ok`` points may be used.
+    Route *ways* use their lower end."""
     label, gt = label or LabelConfig(), gt or GroundTruthConfig()
     out = []
     for r in routes.itertuples(index=False):
@@ -257,7 +264,9 @@ def far_cliff_negatives(cloud: AreaCloud, block_index: pd.DataFrame, anchors_xy:
 def build_area_samples(cloud: AreaCloud, routes: pd.DataFrame, all_known_lonlat: np.ndarray, crs, coverage_by_wall: dict, cfg: NegativeConfig,
                        block_index: pd.DataFrame | None = None, crag_pins_xy: np.ndarray | None = None, strategies=("handgathered_nc", "band", "stepback", "far_cliff"),
                        default_coverage: float | None = None) -> tuple[pd.DataFrame, pd.DataFrame]:
-    """(positives, negatives) for one area. ``routes`` has label 1 (routes) and 0 (hand Nc)."""
+    """(wall-checked route points, negatives) for one area. ``routes`` has label 1 (routes) and 0
+    (hand Nc); the first frame holds all of them with their ``status``, the usable positives
+    are ``label == 1`` and ``status == "ok"``."""
     snapped = snap_routes(cloud, routes, crs)
     pos = snapped[snapped["label"] == 1].reset_index(drop=True)
     nc = snapped[snapped["label"] == 0].reset_index(drop=True)
@@ -267,10 +276,10 @@ def build_area_samples(cloud: AreaCloud, routes: pd.DataFrame, all_known_lonlat:
     if len(known_xy) == 0:
         known_xy = np.array([[1e12, 1e12]])
     negs = []
+    nc = nc[nc["status"] == "ok"]  # an Nc point off the wall says nothing about the rock
     if "handgathered_nc" in strategies and len(nc):
-        x = nc["snap_x"].where(nc["status"] == "ok", nc["x"]).to_numpy()
-        y = nc["snap_y"].where(nc["status"] == "ok", nc["y"]).to_numpy()
-        d = pd.DataFrame({"x": x, "y": y, "source": "handgathered_nc", "confidence": 1.0, "route_uid": nc["route_uid"], "base_z": nc.get("base_z")})
+        d = pd.DataFrame({"x": nc["snap_x"].to_numpy(), "y": nc["snap_y"].to_numpy(), "source": "handgathered_nc", "confidence": 1.0,
+                          "route_uid": nc["route_uid"].to_numpy(), "base_z": nc["base_z"].to_numpy()})
         negs.append(d)
     n_ok = int((pos["status"] == "ok").sum())
     if "band" in strategies:
@@ -313,7 +322,7 @@ def build_area_samples(cloud: AreaCloud, routes: pd.DataFrame, all_known_lonlat:
         ll = crs.to_lonlat(neg["x"].to_numpy(), neg["y"].to_numpy())
         neg["lon"], neg["lat"] = ll[:, 0], ll[:, 1]
         neg["label"] = 0
-    return pos, neg
+    return snapped, neg  # every route GPS point with its wall-check status (label 1 and Nc)
 
 
 def validate_on_handgathered(cloud: AreaCloud, gt: pd.DataFrame, crs, cfg: NegativeConfig, doc_fractions=(0.3, 0.5, 0.75, 0.9),
@@ -332,12 +341,15 @@ def validate_on_handgathered(cloud: AreaCloud, gt: pd.DataFrame, crs, cfg: Negat
     reported for random cliff columns (baseline) - its precision is about the
     share of Nc among labelled rock.
     """
+    # every label goes through the wall check first; off-wall points are left out
     gt = gt[gt["label"] >= 0].reset_index(drop=True)
-    climb = gt[gt["label"] == 1].reset_index(drop=True)
-    routes = pd.DataFrame({"route_uid": climb["gt_id"], "label": 1, "lat": climb["lat"], "lon": climb["lon"], "lat2": np.nan, "lon2": np.nan, "length_m": np.nan, "mp_wall": "hand"})
-    snapped_all = snap_routes(cloud, routes, crs)
-    lab_xy = crs.to_work(gt["lon"].to_numpy(), gt["lat"].to_numpy())
-    labels = gt["label"].to_numpy()
+    checked = snap_routes(cloud, pd.DataFrame({"route_uid": gt["gt_id"], "label": gt["label"], "lat": gt["lat"], "lon": gt["lon"], "lat2": np.nan,
+                                               "lon2": np.nan, "length_m": np.nan, "mp_wall": "hand"}), crs)
+    checked = checked[checked["status"] == "ok"].reset_index(drop=True)
+    snapped_all = checked[checked["label"] == 1].reset_index(drop=True)
+    climb = snapped_all
+    lab_xy = checked[["snap_x", "snap_y"]].to_numpy()
+    labels = checked["label"].to_numpy()
     rng = np.random.default_rng(seed)
     lo, hi = lab_xy.min(0) - 30, lab_xy.max(0) + 30
 
@@ -371,11 +383,11 @@ def validate_on_handgathered(cloud: AreaCloud, gt: pd.DataFrame, crs, cfg: Negat
         for rep in range(repeats):
             doc = rng.random(len(climb)) < f
             pos = snapped_all[doc].reset_index(drop=True)
-            known = pos.loc[pos["status"] == "ok", ["snap_x", "snap_y"]].to_numpy()
+            known = pos[["snap_x", "snap_y"]].to_numpy()
             if len(known) < 3:
                 continue
             # labels the generator saw (documented Climb points) are excluded from scoring
-            seen = np.zeros(len(gt), bool)
+            seen = np.zeros(len(labels), bool)
             seen[np.flatnonzero(labels == 1)[doc]] = True
             band = band_candidates(cloud, pos, known, {"hand": 1.0}, cfg)
             band = greedy_select(band, len(known), cfg.neg_spacing_m)
@@ -387,4 +399,4 @@ def validate_on_handgathered(cloud: AreaCloud, gt: pd.DataFrame, crs, cfg: Negat
     df = pd.DataFrame(results)
     summary = df.groupby("doc_fraction")[["band_precision", "random_precision", "band_n", "band_confirmed", "band_contradicted"]].mean().round(3)
     return {"per_run": df.to_dict("records"), "by_coverage": summary.reset_index().to_dict("records"), "match_m": match_m,
-            "n_climb": int(len(climb)), "n_nc": int((labels == 0).sum())}
+            "n_climb": int(len(climb)), "n_nc": int((labels == 0).sum()), "n_off_wall": int(len(gt) - len(checked))}

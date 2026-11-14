@@ -3,7 +3,7 @@
 
     python scripts/model2d_sweep.py                                       # 2 inputs x 3 strategies x 3 seeds = 18 runs
     python scripts/model2d_sweep.py --inputs gradient --strategies full_discriminative --seeds 0,1,2
-    python scripts/model2d_sweep.py --extra data.position_channel=false   # the same grid without the position channel
+    python scripts/model2d_sweep.py --extra data.position_channel=true    # the same grid with the position channel
     python scripts/model2d_sweep.py --extra pretrain=pseudolabel          # -> runs/model2d/pseudolabel/ (next step)
 
 Runs that already have ``eval_best.json`` are skipped, so an interrupted sweep

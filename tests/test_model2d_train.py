@@ -108,9 +108,10 @@ def test_load_cfg_overrides():
 def test_run_dir_groups_by_pretrain_stage():
     cfg = m2.load_cfg("scratch", ["seed=1"])
     assert cfg["pretrain"] == "none"
-    assert m2.run_dir(cfg) == m2.RUNS_DIR / "no_pseudolabel" / "gradient-scratch-s1"
+    assert m2.run_dir(cfg) == m2.RUNS_DIR / "no_pseudolabel" / "gradient-scratch-nopos-s1"
     assert m2.run_dir(cfg, "smoke") == m2.RUNS_DIR / "no_pseudolabel" / "smoke"
     pl = m2.load_cfg("scratch", ["seed=1", "pretrain=pseudolabel"])
-    assert m2.run_dir(pl) == m2.RUNS_DIR / "pseudolabel" / "gradient-scratch-s1"
+    assert m2.run_dir(pl) == m2.RUNS_DIR / "pseudolabel" / "gradient-scratch-nopos-s1"
+    assert m2.run_name(m2.load_cfg("scratch", ["seed=1", "data.position_channel=true"])) == "gradient-scratch-s1"
     with pytest.raises(ValueError):
         m2.run_dir(m2.load_cfg("scratch", ["pretrain=imagenet"]))

@@ -7,7 +7,7 @@
 data:
   name: v3                    # data/raster/<name> from scripts/model2d_rasterize.py
   input: gradient             # gradient (2 ch, Rafique et al. 2022) | inbetween (zmin, zmax, count: 3 ch)
-  position_channel: true      # + distance-from-centre channel (crag/model2d_train.py docstring)
+  position_channel: false     # true = + distance-from-centre channel (crag/model2d_train.py docstring); no gain in the sweep
   samples_per_epoch: 4000     # class-balanced, confidence-weighted sampling with replacement (as 3D)
   min_confidence: 0.0
   exclude_sources: []         # e.g. [far_cliff] for ablations

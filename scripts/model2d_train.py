@@ -3,7 +3,7 @@
 
     python scripts/model2d_train.py --strategy full_discriminative
     python scripts/model2d_train.py --strategy scratch data.input=inbetween seed=1
-    python scripts/model2d_train.py --strategy linear_probe data.position_channel=false
+    python scripts/model2d_train.py --strategy linear_probe data.position_channel=true
     python scripts/model2d_train.py --strategy full_discriminative epochs=2 --name smoke   # quick pipeline check
 
 Config = ``cfgs/model2d/default.yaml`` + ``cfgs/model2d/<strategy>.yaml`` +

@@ -1,0 +1,6 @@
+# Baseline: what ImageNet pretraining buys (as cfgs/finetune/scratch.yaml).
+model:
+  pretrained: false
+optimizer:
+  lr: 1.0e-3
+epochs: 60

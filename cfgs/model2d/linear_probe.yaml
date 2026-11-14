@@ -1,0 +1,6 @@
+# Frozen ImageNet backbone (incl. BatchNorm statistics), only the head trains (as cfgs/finetune/linear_probe.yaml).
+# Note: the first layer is frozen too, so the position channel keeps its small random weights and is barely used here.
+freeze: [backbone]
+optimizer:
+  lr: 1.0e-3
+epochs: 30

@@ -1,0 +1,8 @@
+# Everything trains; the pretrained backbone at a tenth of the head's rate (as cfgs/finetune/full_discriminative.yaml).
+freeze: []
+optimizer:
+  lr: 5.0e-4
+lr_mult:
+  backbone: 0.1
+  head: 1.0
+epochs: 40

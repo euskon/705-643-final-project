@@ -1,0 +1,44 @@
+# ==============================================================================
+# 2D model defaults (merged under every cfgs/model2d/<strategy>.yaml).
+# Task: P(climbable) at the centre of a top-down LiDAR image (data/raster/<name>).
+# Non-input settings copy cfgs/finetune/default.yaml so 2D vs 3D compares inputs.
+# ==============================================================================
+
+data:
+  name: v3                    # data/raster/<name> from scripts/model2d_rasterize.py
+  input: gradient             # gradient (2 ch, Rafique et al. 2022) | inbetween (zmin, zmax, count: 3 ch)
+  position_channel: true      # + distance-from-centre channel (crag/model2d_train.py docstring)
+  samples_per_epoch: 4000     # class-balanced, confidence-weighted sampling with replacement (as 3D)
+  min_confidence: 0.0
+  exclude_sources: []         # e.g. [far_cliff] for ablations
+
+# What happens before fine-tuning; also picks the run folder (crag/model2d_train.py run_dir):
+#   none        -> runs/model2d/no_pseudolabel/  ImageNet weights (model.pretrained), or random for scratch
+#   pseudolabel -> runs/model2d/pseudolabel/     + pretraining on the 4 LiDAR terrain pseudolabel classes (next step)
+pretrain: none
+
+model:
+  arch: resnet18             # any torchvision ResNet (resnet34, resnet50, ...)
+  pretrained: true            # ImageNet weights; false = random init
+  input_size: 224             # 40 x 40 images are enlarged to this before the network
+  position_init_std: 0.001    # first-layer weights of the position channel start this small
+
+freeze: []                    # parts frozen: backbone / head
+lr_mult:
+  backbone: 1.0
+  head: 1.0
+
+augment: true                 # random rotation by 90 deg steps + mirror flip, before the gradient is taken
+batch_size: 16                # = 3D effective batch (8 x grad accumulation 2)
+epochs: 40
+use_amp: true
+optimizer:
+  lr: 5.0e-4
+  weight_decay: 1.0e-4
+warmup_epochs: 2
+min_lr: 1.0e-6
+grad_norm_clip: 10
+checkpoint:
+  min_delta: 0.001            # best.pt only when val loss drops by more than this
+early_stop_patience: 10
+seed: 0

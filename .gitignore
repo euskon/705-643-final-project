@@ -9,7 +9,7 @@ data/raw/*
 data/raw/mp/.last_request
 data/lidar/
 data/pretrain/
-data/finetune/
+data/finetune/**/*.npy
 pretrained/*
 runs/*
 proof-of-concept/runs/

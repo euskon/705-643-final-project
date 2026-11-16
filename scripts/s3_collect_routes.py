@@ -40,7 +40,8 @@ log = logging.getLogger("collect_routes")
 HAND_SLUG = "horseshoe-canyon-ranch"
 
 COLUMNS = ["route_uid", "slug", "source", "label", "name", "lat", "lon", "lat2", "lon2", "grade", "length_m",
-           "mp_route_id", "mp_name", "mp_wall", "match_type", "is_boulder", "osm_type", "osm_id"]
+           "mp_route_id", "mp_name", "mp_wall", "match_type", "is_boulder", "osm_type", "osm_id",
+           "presnapped", "snap_status", "judge_result", "judge_confidence", "area_name"]
 
 
 def handgathered_rows() -> pd.DataFrame:
@@ -66,9 +67,23 @@ def handgathered_rows() -> pd.DataFrame:
             "is_boulder": False,
             "osm_type": None,
             "osm_id": None,
+            "presnapped": gt["presnapped"].to_numpy(bool),
+            "snap_status": gt["snap_status"],
+            "judge_result": gt["judge_result"],
+            "judge_confidence": gt["judge_confidence"],
+            "area_name": gt["area_name"],
         }
     )
     return out
+
+
+def check_hand_rows(allv: pd.DataFrame) -> None:
+    """The Horseshoe rows of verified_routes.csv must equal the working waypoint files' lat/lon."""
+    h = handgathered_rows().set_index("route_uid")
+    v = allv[allv["source"].isin(["handgathered", "handgathered_nc"])].set_index("route_uid")
+    common = h.index.intersection(v.index)
+    assert len(common) == len(h), f"verified_routes.csv is missing {len(h) - len(common)} hand-gathered points"
+    assert np.allclose(v.loc[common, ["lat", "lon"]].to_numpy(float), h.loc[common, ["lat", "lon"]].to_numpy(float), atol=1e-9), "Horseshoe rows differ from the waypoint files"
 
 
 def main() -> None:
@@ -156,6 +171,8 @@ def main() -> None:
         summary.append({"slug": HAND_SLUG + " (hand)", "verified": int((h["label"] == 1).sum()), "verified_negatives": int((h["label"] == 0).sum())})
     allv = pd.concat(verified, ignore_index=True)[COLUMNS] if verified else pd.DataFrame(columns=COLUMNS)
     allv = allv.drop_duplicates("route_uid").reset_index(drop=True)
+    if not args.no_handgathered:
+        check_hand_rows(allv)
     ROUTES_DIR.mkdir(parents=True, exist_ok=True)
     allv.to_csv(ROUTES_DIR / "verified_routes.csv", index=False)
     sm = pd.DataFrame(summary).fillna(0)

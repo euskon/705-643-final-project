@@ -1,0 +1,8 @@
+run,epoch,val,rrg_test,hcr_climb_vs_nc,hcr_high_medium,hcr_pair_acc,hcr_auroc_near,n_seeds,val_gap_over_B,rrg_test_gap_over_B,hcr_climb_vs_nc_gap_over_B
+chk-chan-a-posheights,11.0,0.734,0.671,0.72,0.732,0.75,0.562,2.0,-0.026,-0.093,0.03
+chk-chan-b-hag,15.0,0.752,0.715,0.643,0.679,0.75,0.562,2.0,-0.008,-0.049,-0.047
+chk-chan-c-shape,4.5,0.766,0.699,0.648,0.667,0.625,0.562,2.0,0.006,-0.065,-0.042
+chk-chan-d-returns,5.0,0.733,0.697,0.633,0.651,0.625,0.531,2.0,-0.027,-0.067,-0.057
+chk-chan-e-intensity,8.0,0.778,0.678,0.73,0.738,0.5,0.5,2.0,0.018,-0.086,0.04
+chk-chan-f-walldist,3.5,0.762,0.734,0.575,0.571,0.875,0.656,2.0,0.002,-0.03,-0.115
+BASELINE wall geometry (group B),,0.76,0.764,0.69,,,,,0.0,0.0,0.0

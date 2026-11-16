@@ -5,7 +5,7 @@ model:
   NAME: BaseSeg
   encoder_args:
     NAME: PointNet2Encoder
-    in_channels: 4
+    in_channels: 4          # overridden by the code: feature_dim(dataset.feature_keys)
     width: null
     strides: [4, 4, 4, 4]
     layers: 3

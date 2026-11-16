@@ -1,0 +1,5 @@
+[
+  {"gt_id": "Waypoints_2026-10-24#98", "choice": "custom", "custom_east_m": -19.0, "custom_north_m": -1.5, "confidence": "low", "reason": "The only candidate slid 14.7 m south past #99 and #100, breaking walking order. Judge b's spot sits at the foot of the ~10 m main wall in the profile (about -19 m), straight in from the raw point and between #97 and #99."},
+  {"gt_id": "Waypoints_2026-10-24#109", "choice": "custom", "custom_east_m": 0.4, "custom_north_m": 2.6, "confidence": "low", "reason": "The automatic snap lands exactly on #111's snap and south of #110's (recorded later), so the order is reversed. Judge a's spot on the same wall just north of #110's snap keeps 108-109-110-111-112 in walking order."},
+  {"gt_id": "Waypoints_2026-10-24#111", "choice": 1, "confidence": "medium", "reason": "The snap is 2 m onto the wall straight in front. Once #109 moves north it no longer overlaps, and it sits south of #110 and north of #112, as the raw points do."}
+]

@@ -5,17 +5,19 @@
 # ==============================================================================
 
 dataset:
-  name: v3                    # data/finetune/<name> from s3_build_finetune_set.py
+  name: v4                    # data/finetune/<name> from s3_build_finetune_set.py
   label_mode: center_only     # center_only | all_cylinders | with_background (crag/finetune_data.py)
-  num_points: 8192
+  num_points: 4096          # points per block (resampled); about the real block size, so few copies
   voxel_m: 0.25
-  coord_scale: 0.16
-  feature_keys: pos,heights
+  coord_scale: 0.067        # from the measured point spacing: first radius 0.1 = 1.5 m on the ground (3 / 6 / 12 m later); beat 2 m in the V4 scale test
+  feature_keys: hag,vert,planarity,intensity_rank   # chosen by the V4 channel test (return flags and wall distance dropped)
   samples_per_epoch: 4000     # class-balanced, confidence-weighted sampling with replacement
   min_confidence: 0.0
+  thin: {}                    # e.g. {prob: 0.5, max_frac: 0.4} (labelled points never dropped; off)
   exclude_sources: []         # e.g. [far_cliff, aug_squash, aug_layback] for ablations
 
 num_classes: 2
+loss_weighting: per_sample    # every sample counts once in the loss (crag/train.py)
 ignore_index: -1
 
 init:
@@ -37,12 +39,12 @@ datatransforms:
     gravity_dim: 2
     scale: [0.9, 1.1]
     anisotropic: False
-    jitter_sigma: 0.005
-    jitter_clip: 0.02
+    jitter_sigma: 0.002     # scaled units: 0.03 m x coord_scale
+    jitter_clip: 0.008      # 0.12 m x coord_scale
 
-batch_size: 8
-val_batch_size: 8
-grad_accum_steps: 2
+batch_size: 16
+val_batch_size: 16
+grad_accum_steps: 1           # effective batch 16
 dataloader:
   num_workers: 6
 epochs: 40

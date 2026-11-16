@@ -19,7 +19,7 @@ from torch.utils.data import WeightedRandomSampler
 
 from crag import models
 from crag.datasets import BlockDataset, feature_dim
-from crag.finetune_data import FT_CLASSES, LABEL_MODES, dataset_dir
+from crag.finetune_data import FT_CLASSES, LABEL_MODES, blocks_root, dataset_dir
 from crag.paths import PROJECT_DIR, add_import_paths
 from crag.pretrain import block_spec, load_cfg
 from crag.train import cfg_get
@@ -48,11 +48,26 @@ def architecture(cfg) -> EasyConfig:
     return mcfg
 
 
+def check_scale(cfg, ckpt_path: Path) -> None:
+    """Stop when a backbone was trained at another ``coord_scale`` than this run uses (1% tolerance).
+    Checkpoints without our config (the S3DIS ones) only warn."""
+    ck = torch.load(ckpt_path, map_location="cpu", weights_only=False) if Path(ckpt_path).suffix in (".pt", ".pth") else {}
+    theirs = cfg_get(ck.get("cfg", {}) or {}, "dataset.coord_scale") if isinstance(ck, dict) else None
+    ours = float(cfg_get(cfg, "dataset.coord_scale", 0.067))
+    if theirs is None:
+        log.warning("%s records no coord_scale (not one of our runs) - scale check skipped", ckpt_path)
+        return
+    if abs(float(theirs) - ours) > 0.01 * ours:
+        raise ValueError(f"backbone {ckpt_path} was trained at coord_scale={theirs} but this run uses {ours}: retrain the backbone or set dataset.coord_scale")
+
+
 def build_model(cfg):
     cfg.model = architecture(cfg)
-    keys = str(cfg_get(cfg, "dataset.feature_keys", "pos,heights"))
-    if int(cfg.model.encoder_args.in_channels) != feature_dim(keys):
-        raise ValueError(f"architecture in_channels={cfg.model.encoder_args.in_channels} != feature_dim({keys!r})")
+    keys = str(cfg_get(cfg, "dataset.feature_keys", "hag,vert,planarity,ret_pos,single"))
+    n = feature_dim(keys)
+    if int(cfg.model.encoder_args.in_channels) != n:
+        log.info("first layer rebuilt: backbone had %s channels, fine-tuning uses %d (%s)", cfg.model.encoder_args.in_channels, n, keys)
+    cfg.model.encoder_args.in_channels = n
     model = models.build_model(cfg.model)
     report = None
     weights = cfg_get(cfg, "init.weights")
@@ -60,13 +75,15 @@ def build_model(cfg):
         p = _abs(weights)
         if p.is_dir():
             p = p / "backbone.pt"
+        check_scale(cfg, p)
         report = models.load_pretrained(model, p, tuple(cfg_get(cfg, "init.parts", ["encoder", "decoder"])))
+        models.check_first_layer_only(report)
     models.set_frozen(model, tuple(cfg_get(cfg, "freeze", []) or []))
     return model, report
 
 
 def load_index(cfg) -> pd.DataFrame:
-    name = str(cfg_get(cfg, "dataset.name", "v1"))
+    name = str(cfg_get(cfg, "dataset.name", "v4"))
     index = pd.read_csv(dataset_dir(name) / "index.csv")
     srcs = cfg_get(cfg, "dataset.exclude_sources", []) or []
     if srcs:
@@ -79,7 +96,9 @@ def build_datasets(cfg, index: pd.DataFrame | None = None) -> dict:
     index = load_index(cfg) if index is None else index
     spec = block_spec(cfg)
     mode = str(cfg_get(cfg, "dataset.label_mode", "center_only"))
-    root = dataset_dir(str(cfg_get(cfg, "dataset.name", "v1")))
+    root = blocks_root(str(cfg_get(cfg, "dataset.name", "v4")))
+    per_sample = str(cfg_get(cfg, "loss_weighting", "per_point")) == "per_sample"
+    thin = dict(cfg_get(cfg, "dataset.thin", {}) or {}) or None
     out = {"index": index}
     for split in ("train", "val", "test"):
         sub = index[index["split"] == split]
@@ -89,7 +108,7 @@ def build_datasets(cfg, index: pd.DataFrame | None = None) -> dict:
         if len(sub) and sub["label"].nunique() < 2:
             log.warning("%s split has only label %s samples - metrics will be degenerate", split, sub["label"].iloc[0])
         out[split] = BlockDataset(sub, spec, cfg_get(cfg, "datatransforms"), train=split == "train", root=root, class_names=FT_CLASSES,
-                                  label_map=LABEL_MODES[mode], center_codes=(0, 1))
+                                  label_map=LABEL_MODES[mode], center_codes=(0, 1), thin=thin, sample_weights_per_point=per_sample)
         log.info("%s: %d samples (%d pos / %d neg) from %d areas", split, len(sub), int((sub["label"] == 1).sum()), int((sub["label"] == 0).sum()), sub["slug"].nunique())
     return out
 
@@ -129,7 +148,9 @@ class SampleScoreHook:
         idx = np.asarray(st["idx"])
         score = np.asarray(st["score"], dtype=float)
         rows = self.ds.index.iloc[idx]
-        self.last_predictions = rows.assign(score=score)[["sample_id", "slug", "source", "label", "confidence", "split", "score", "lon", "lat"]]
+        cols = [c for c in ("sample_id", "slug", "source", "label", "confidence", "split", "score", "lon", "lat", "x", "y", "pair_id", "has_opposite_neighbour",
+                            "judge_result", "judge_confidence") if c in rows or c == "score"]
+        self.last_predictions = rows.assign(score=score)[cols]
         return sample_metrics(self.last_predictions, self.threshold)
 
 
@@ -147,8 +168,54 @@ def sample_metrics(pred: pd.DataFrame, threshold: float = 0.5) -> dict:
         hard = p["source"].isin(HARD_NEGATIVE_SOURCES) | (p["label"] == 1)
         if (p.loc[hard, "label"] == 0).any():
             out["sample_auroc_hard"] = float(roc_auc_score(p.loc[hard, "label"], p.loc[hard, "score"]))
+    out.update(pair_metrics(p))
     for src, g in p.groupby("source"):
         # positives: recall; negatives: specificity (fraction correctly scored below threshold)
         ok = (g["score"] >= threshold) if g["label"].iloc[0] == 1 else (g["score"] < threshold)
         out[f"acc_{src}"] = float(ok.mean())
+    return out
+
+
+def _boot_ci(vals: np.ndarray, n_boot: int = 1000, seed: int = 0) -> tuple[float, float]:
+    if len(vals) < 2:
+        return float("nan"), float("nan")
+    rng = np.random.default_rng(seed)
+    m = vals[rng.integers(0, len(vals), (n_boot, len(vals)))].mean(1)
+    return float(np.quantile(m, 0.025)), float(np.quantile(m, 0.975))
+
+
+def pair_metrics(p: pd.DataFrame, reach_m: float = 5.0) -> dict:
+    """Close climbable / not-climbable pairs (feet within ``reach_m``, same area):
+    ``pair_acc`` = share where the climbable sample scores higher (0.5 = guessing; ties 0.5),
+    with a 95% bootstrap range; ``auroc_isolated`` / ``auroc_near`` = AUROC of samples with no /
+    some opposite-label sample within ``reach_m``."""
+    out = {}
+    if not {"x", "y"} <= set(p) or p.empty:
+        return out
+    near = np.zeros(len(p), bool)
+    wins = []
+    for _, g in p.groupby("slug"):
+        pos, neg = g[g["label"] == 1], g[g["label"] == 0]
+        if pos.empty or neg.empty:
+            continue
+        from scipy.spatial import cKDTree
+
+        tree = cKDTree(neg[["x", "y"]].to_numpy(float))
+        for i, (xy, s) in enumerate(zip(pos[["x", "y"]].to_numpy(float), pos["score"].to_numpy())):
+            js = tree.query_ball_point(xy, reach_m)
+            if js:
+                near[p.index.get_indexer([pos.index[i]])] = True
+                near[p.index.get_indexer(neg.index[js])] = True
+                for j in js:
+                    t = neg["score"].iloc[j]
+                    wins.append(1.0 if s > t else 0.5 if s == t else 0.0)
+    out["pair_n"] = len(wins)
+    if wins:
+        w = np.asarray(wins)
+        out["pair_acc"] = float(w.mean())
+        out["pair_acc_lo"], out["pair_acc_hi"] = _boot_ci(w)
+    y, s = p["label"].to_numpy(), p["score"].to_numpy()
+    for name, m in (("auroc_isolated", ~near), ("auroc_near", near)):
+        if m.sum() and len(np.unique(y[m])) == 2:
+            out[name] = float(roc_auc_score(y[m], s[m]))
     return out

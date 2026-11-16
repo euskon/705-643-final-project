@@ -1,0 +1,271 @@
+{
+ "name": "v4-hcr-b",
+ "n_samples": 2522,
+ "group_A": {
+  "columns": [
+   "n_lab",
+   "lab_z_med",
+   "lab_z_span",
+   "lab_rel_height",
+   "lab_xy_dist",
+   "strip_width_m",
+   "has_opposite_neighbour"
+  ],
+  "val": {
+   "auroc": 0.655,
+   "lo": 0.593,
+   "hi": 0.708,
+   "n": 391,
+   "n_pos": 133
+  },
+  "rrg_test": {
+   "auroc": 0.685,
+   "lo": 0.623,
+   "hi": 0.746,
+   "n": 276,
+   "n_pos": 121
+  },
+  "test": {
+   "auroc": 0.681,
+   "lo": 0.627,
+   "hi": 0.735,
+   "n": 358,
+   "n_pos": 166
+  },
+  "hcr_all": {
+   "auroc": 0.32,
+   "lo": 0.018,
+   "hi": 0.742,
+   "n": 30,
+   "n_pos": 25
+  },
+  "hcr_climb_vs_nc": {
+   "auroc": 0.32,
+   "lo": 0.018,
+   "hi": 0.742,
+   "n": 30,
+   "n_pos": 25
+  }
+ },
+ "group_B": {
+  "columns": [
+   "block_height",
+   "wall_height_m",
+   "wall_top_m",
+   "rock_share"
+  ],
+  "val": {
+   "auroc": 0.764,
+   "lo": 0.715,
+   "hi": 0.812,
+   "n": 391,
+   "n_pos": 133
+  },
+  "rrg_test": {
+   "auroc": 0.768,
+   "lo": 0.712,
+   "hi": 0.823,
+   "n": 276,
+   "n_pos": 121
+  },
+  "test": {
+   "auroc": 0.778,
+   "lo": 0.734,
+   "hi": 0.823,
+   "n": 358,
+   "n_pos": 166
+  },
+  "hcr_all": {
+   "auroc": 0.528,
+   "lo": 0.23,
+   "hi": 0.901,
+   "n": 30,
+   "n_pos": 25
+  },
+  "hcr_climb_vs_nc": {
+   "auroc": 0.528,
+   "lo": 0.23,
+   "hi": 0.901,
+   "n": 30,
+   "n_pos": 25
+  }
+ },
+ "single": {
+  "n_lab": {
+   "all": 0.518,
+   "val": 0.582,
+   "rrg_test": 0.456,
+   "test": 0.489,
+   "hcr_all": 0.46,
+   "hcr_climb_vs_nc": 0.46
+  },
+  "lab_z_med": {
+   "all": 0.611,
+   "val": 0.59,
+   "rrg_test": 0.568,
+   "test": 0.542,
+   "hcr_all": 0.256,
+   "hcr_climb_vs_nc": 0.256
+  },
+  "lab_z_span": {
+   "all": 0.712,
+   "val": 0.69,
+   "rrg_test": 0.67,
+   "test": 0.673,
+   "hcr_all": 0.384,
+   "hcr_climb_vs_nc": 0.384
+  },
+  "lab_rel_height": {
+   "all": 0.518,
+   "val": 0.571,
+   "rrg_test": 0.521,
+   "test": 0.498,
+   "hcr_all": 0.48,
+   "hcr_climb_vs_nc": 0.48
+  },
+  "lab_xy_dist": {
+   "all": 0.647,
+   "val": 0.618,
+   "rrg_test": 0.584,
+   "test": 0.584,
+   "hcr_all": 0.608,
+   "hcr_climb_vs_nc": 0.608
+  },
+  "strip_width_m": {
+   "all": 0.5,
+   "val": 0.5,
+   "rrg_test": 0.5,
+   "test": 0.502,
+   "hcr_all": 0.76,
+   "hcr_climb_vs_nc": 0.76
+  },
+  "has_opposite_neighbour": {
+   "all": 0.5,
+   "val": 0.5,
+   "rrg_test": 0.5,
+   "test": 0.498,
+   "hcr_all": 0.24,
+   "hcr_climb_vs_nc": 0.24
+  },
+  "block_height": {
+   "all": 0.63,
+   "val": 0.57,
+   "rrg_test": 0.588,
+   "test": 0.556,
+   "hcr_all": 0.24,
+   "hcr_climb_vs_nc": 0.24
+  },
+  "wall_height_m": {
+   "all": 0.734,
+   "val": 0.708,
+   "rrg_test": 0.688,
+   "test": 0.698,
+   "hcr_all": 0.416,
+   "hcr_climb_vs_nc": 0.416
+  },
+  "wall_top_m": {
+   "all": 0.735,
+   "val": 0.708,
+   "rrg_test": 0.689,
+   "test": 0.699,
+   "hcr_all": 0.416,
+   "hcr_climb_vs_nc": 0.416
+  },
+  "rock_share": {
+   "all": 0.775,
+   "val": 0.736,
+   "rrg_test": 0.782,
+   "test": 0.8,
+   "hcr_all": 0.592,
+   "hcr_climb_vs_nc": 0.592
+  }
+ },
+ "group_B_climb_vs_far_cliff": {
+  "columns": [
+   "block_height",
+   "wall_height_m",
+   "wall_top_m",
+   "rock_share"
+  ],
+  "val": {
+   "auroc": 0.793,
+   "lo": 0.675,
+   "hi": 0.908,
+   "n": 159,
+   "n_pos": 133
+  },
+  "test": {
+   "auroc": 0.825,
+   "lo": 0.718,
+   "hi": 0.914,
+   "n": 209,
+   "n_pos": 166
+  },
+  "all": {
+   "auroc": 0.861,
+   "lo": 0.824,
+   "hi": 0.896,
+   "n": 1453,
+   "n_pos": 1251
+  }
+ },
+ "channels": {
+  "hag": {
+   "label": {
+    "val": 0.562,
+    "hcr_climb_vs_nc": 0.24
+   },
+   "area_hcr_vs_rrg": 0.144,
+   "flag_area_identifier": false
+  },
+  "vert": {
+   "label": {
+    "val": 0.524,
+    "hcr_climb_vs_nc": 0.688
+   },
+   "area_hcr_vs_rrg": 0.498,
+   "flag_area_identifier": false
+  },
+  "planarity": {
+   "label": {
+    "val": 0.648,
+    "hcr_climb_vs_nc": 0.752
+   },
+   "area_hcr_vs_rrg": 0.656,
+   "flag_area_identifier": false
+  },
+  "ret_pos": {
+   "label": {
+    "val": 0.5,
+    "hcr_climb_vs_nc": 0.5
+   },
+   "area_hcr_vs_rrg": 0.5,
+   "flag_area_identifier": false
+  },
+  "single": {
+   "label": {
+    "val": 0.556,
+    "hcr_climb_vs_nc": 0.74
+   },
+   "area_hcr_vs_rrg": 0.679,
+   "flag_area_identifier": false
+  },
+  "intensity": {
+   "label": {
+    "val": 0.509,
+    "hcr_climb_vs_nc": 0.84
+   },
+   "area_hcr_vs_rrg": 0.46,
+   "flag_area_identifier": false
+  },
+  "wall_dist": {
+   "label": {
+    "val": 0.44,
+    "hcr_climb_vs_nc": 0.52
+   },
+   "area_hcr_vs_rrg": 0.464,
+   "flag_area_identifier": false
+  }
+ },
+ "group_A_pass": false
+}

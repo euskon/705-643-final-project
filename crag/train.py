@@ -151,6 +151,7 @@ class Trainer:
         )
         self.class_weights = None if class_weights is None else torch.as_tensor(class_weights, dtype=torch.float32, device=self.device)
         self.label_smoothing = float(cfg_get(cfg, "criterion_args.label_smoothing", 0.0))
+        self.per_sample = str(cfg_get(cfg, "loss_weighting", "per_point")) == "per_sample"
         self.optimizer = torch.optim.AdamW(
             models.param_groups(model, float(cfg_get(cfg, "optimizer.lr", 1e-3)), float(cfg_get(cfg, "optimizer.weight_decay", 1e-4)), cfg_get(cfg, "lr_mult")),
         )
@@ -229,14 +230,16 @@ class Trainer:
         log.info("resumed from %s at epoch %d (best val loss %.4f)", path, self.epoch, self.best_val)
 
     # -- loss / eval --------------------------------------------------------------
-    def loss_fn(self, logits: torch.Tensor, y: torch.Tensor) -> torch.Tensor:
+    def loss_fn(self, logits: torch.Tensor, y: torch.Tensor, w: torch.Tensor | None = None) -> torch.Tensor:
+        if self.per_sample and w is not None:
+            return per_sample_loss(logits, y, w, self.ignore_index, self.class_weights, self.label_smoothing)
         return F.cross_entropy(logits.float(), y, weight=self.class_weights, ignore_index=self.ignore_index, label_smoothing=self.label_smoothing)
 
     def forward(self, batch: dict) -> torch.Tensor:
         return model_forward(self.model, batch, self.device)
 
     def evaluate(self, loader: DataLoader | None = None, limit: int = 0) -> dict:
-        return run_eval(self.model, loader or self.val_loader, self.class_names, self.ignore_index, self.device, self.use_amp, limit, self.val_hook)
+        return run_eval(self.model, loader or self.val_loader, self.class_names, self.ignore_index, self.device, self.use_amp, limit, self.val_hook, self.per_sample)
 
     # -- main loop --------------------------------------------------------------
     def fit(self, wandb_mode: str = "online", wandb_project: str = wandb_utils.DEFAULT_PROJECT, run_name: str | None = None, job_type: str = "pretrain") -> dict:
@@ -328,7 +331,8 @@ class Trainer:
             y = batch["y"].to(self.device, non_blocking=True)
             with torch.autocast("cuda", dtype=torch.float16, enabled=self.use_amp):
                 logits = self.forward(batch)
-            loss = self.loss_fn(logits, y)
+            w = batch["w"].to(self.device, non_blocking=True) if "w" in batch else None
+            loss = self.loss_fn(logits, y, w)
             if not torch.isfinite(loss):
                 log.warning("non-finite loss at step %d (all points ignored?) - skipping batch", self.step)
                 self.optimizer.zero_grad(set_to_none=True)
@@ -387,6 +391,18 @@ class Trainer:
             self.wandb_run.log(log_d, step=self.step)
 
 
+def per_sample_loss(logits, y, w, ignore_index: int, class_weights=None, label_smoothing: float = 0.0, reduction: str = "mean") -> torch.Tensor:
+    """Cross-entropy per point x ``w`` (1 / labelled points of its sample), summed, divided by
+    the number of samples that have labelled points: every sample counts once."""
+    ce = F.cross_entropy(logits.float(), y.clamp(min=0), weight=class_weights, reduction="none", label_smoothing=label_smoothing)
+    ce = torch.where(y == ignore_index, torch.zeros_like(ce), ce)
+    total = (ce * w).sum()
+    if reduction == "sum":
+        return total
+    n = (w.sum(1) > 0).sum().clamp(min=1)
+    return total / n
+
+
 def model_forward(model, batch: dict, device) -> torch.Tensor:
     pos = batch["pos"].to(device, non_blocking=True)
     x = batch["x"].to(device, non_blocking=True).transpose(1, 2).contiguous()
@@ -394,9 +410,10 @@ def model_forward(model, batch: dict, device) -> torch.Tensor:
 
 
 @torch.no_grad()
-def run_eval(model, loader, class_names, ignore_index: int, device, use_amp: bool = True, limit: int = 0, hook=None) -> dict:
-    """Mean per-point CE (unweighted, unsmoothed - comparable across runs), OA, mIoU,
-    per-class IoU/recall, confusion matrix; plus whatever ``hook`` adds."""
+def run_eval(model, loader, class_names, ignore_index: int, device, use_amp: bool = True, limit: int = 0, hook=None, per_sample: bool = False) -> dict:
+    """Mean CE (unsmoothed - comparable across runs; per point, or per sample when
+    ``per_sample`` and the batches carry ``w``), OA, mIoU, per-class IoU/recall, confusion
+    matrix; plus whatever ``hook`` adds."""
     model.eval()
     meter = ConfusionMeter(len(class_names), ignore_index, device)
     total, n_valid = 0.0, 0
@@ -407,10 +424,15 @@ def run_eval(model, loader, class_names, ignore_index: int, device, use_amp: boo
         y = batch["y"].to(device, non_blocking=True)
         with torch.autocast("cuda", dtype=torch.float16, enabled=use_amp and device.type == "cuda"):
             logits = model_forward(model, batch, device)
-        valid = int((y != ignore_index).sum())
-        if valid:
-            total += float(F.cross_entropy(logits.float(), y, ignore_index=ignore_index, reduction="sum"))
-            n_valid += valid
+        if per_sample and "w" in batch:
+            w = batch["w"].to(device, non_blocking=True)
+            total += float(per_sample_loss(logits, y, w, ignore_index, reduction="sum"))
+            n_valid += int((w.sum(1) > 0).sum())
+        else:
+            valid = int((y != ignore_index).sum())
+            if valid:
+                total += float(F.cross_entropy(logits.float(), y, ignore_index=ignore_index, reduction="sum"))
+                n_valid += valid
         meter.update(logits, y)
         if hook:
             hook.update(state, batch, logits)

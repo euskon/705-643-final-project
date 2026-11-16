@@ -126,19 +126,20 @@ def test_openpoints_models_load_and_fit_memory(name, tmp_path):
 
     c = load_cfg(f"cfgs/pretrain/{name}.yaml")
     model, report = build_model_from(c)
-    assert report["loaded"] > 50 and not report["mismatched"]
+    assert report["loaded"] > 50
+    models.check_first_layer_only(report)  # our channels differ from S3DIS rgb+height: only the first layer starts fresh
     model = model.cuda().train()
     opt = torch.optim.AdamW(model.parameters(), 1e-3)
     torch.cuda.reset_peak_memory_stats()
-    B, N = 8, 8192
-    data = {"pos": torch.rand(B, N, 3, device="cuda") * 3.2, "x": torch.rand(B, 4, N, device="cuda")}
+    B, N = 16, 4096
+    data = {"pos": torch.rand(B, N, 3, device="cuda") * 3.2, "x": torch.rand(B, c.model.encoder_args.in_channels, N, device="cuda")}
     with torch.autocast("cuda", dtype=torch.float16):
         out = model(data)
         loss = nn.functional.cross_entropy(out.float(), torch.randint(0, len(CLASSES), (B, N), device="cuda"))
     loss.backward()
     opt.step()
     assert out.shape == (B, len(CLASSES), N)
-    assert torch.cuda.max_memory_allocated() / 1e9 < 8.0  # fits a 10 GB RTX 3080 at batch 8 x 8192
+    assert torch.cuda.max_memory_allocated() / 1e9 < 8.0  # fits a 10 GB RTX 3080 at batch 16 x 4096
     # backbone round trip into a fresh 2-class model
     torch.save({"encoder": model.encoder.state_dict(), "decoder": model.decoder.state_dict()}, tmp_path / "backbone.pt")
     c.model.cls_args.num_classes = 2

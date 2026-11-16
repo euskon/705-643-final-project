@@ -35,10 +35,10 @@ def load_cfg(path: str | Path, overrides: list[str] | None = None) -> EasyConfig
 
 def block_spec(cfg) -> BlockSpec:
     return BlockSpec(
-        num_points=int(cfg_get(cfg, "dataset.num_points", 8192)),
+        num_points=int(cfg_get(cfg, "dataset.num_points", 4096)),
         voxel_m=float(cfg_get(cfg, "dataset.voxel_m", 0.25)),
-        coord_scale=float(cfg_get(cfg, "dataset.coord_scale", 0.16)),
-        feature_keys=str(cfg_get(cfg, "dataset.feature_keys", "pos,heights")),
+        coord_scale=float(cfg_get(cfg, "dataset.coord_scale", 0.067)),
+        feature_keys=str(cfg_get(cfg, "dataset.feature_keys", "hag,planarity")),
     )
 
 
@@ -56,6 +56,13 @@ def select_eval_blocks(index: pd.DataFrame, max_blocks: int, seed: int = 0) -> p
 def build_datasets(cfg, areas: list[str] | None = None) -> dict:
     index = load_block_index(split_mode=str(cfg_get(cfg, "dataset.split_mode", "area")), areas=areas)
     index = index[index["split"] != "holdout"]
+    from crag.channels import read_channels_json
+    from crag.paths import PRETRAIN_DIR
+
+    top = read_channels_json(PRETRAIN_DIR)
+    bad = [s for s in index["slug"].unique() if read_channels_json(PRETRAIN_DIR / s) != top]
+    if bad:
+        raise ValueError(f"areas whose blocks carry other channels than data/pretrain/channels.json ({top}): {bad} - run scripts/s1_add_channels.py --rebuild-blocks")
     spec = block_spec(cfg)
     tcfg = cfg_get(cfg, "datatransforms")
     out = {"index": index}
@@ -64,7 +71,7 @@ def build_datasets(cfg, areas: list[str] | None = None) -> dict:
         if split != "train":
             sub = select_eval_blocks(sub, int(cfg_get(cfg, "dataset.max_val_blocks", 3000)))
         out[split] = BlockDataset(sub, spec, tcfg, train=split == "train", oversample=dict(cfg_get(cfg, "dataset.oversample", {}) or {}),
-                                  window=dict(cfg_get(cfg, "dataset.window", {}) or {}) or None)
+                                  window=dict(cfg_get(cfg, "dataset.window", {}) or {}) or None, thin=dict(cfg_get(cfg, "dataset.thin", {}) or {}) or None)
         log.info("%s: %d blocks from %d areas", split, len(sub), sub["slug"].nunique())
     return out
 
@@ -80,13 +87,16 @@ def class_weights(counts: np.ndarray, mode: str | None) -> np.ndarray | None:
 
 
 def build_model_from(cfg) -> tuple:
-    keys = str(cfg_get(cfg, "dataset.feature_keys", "pos,heights"))
-    if int(cfg.model.encoder_args.in_channels) != feature_dim(keys):
-        raise ValueError(f"model.encoder_args.in_channels={cfg.model.encoder_args.in_channels} but feature_keys={keys!r} gives {feature_dim(keys)}")
+    keys = str(cfg_get(cfg, "dataset.feature_keys", "hag,planarity"))
+    n = feature_dim(keys)
+    if int(cfg.model.encoder_args.in_channels) != n:
+        log.info("in_channels set from feature_keys %r: %s -> %d", keys, cfg.model.encoder_args.in_channels, n)
+    cfg.model.encoder_args.in_channels = n
     model = models.build_model(cfg.model)
     report = None
     if cfg_get(cfg, "pretrained_path"):
         report = models.load_pretrained(model, cfg.pretrained_path, tuple(cfg_get(cfg, "pretrained_parts", ["encoder", "decoder"])))
+        models.check_first_layer_only(report)
     return model, report
 
 

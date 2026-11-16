@@ -1,0 +1,506 @@
+[
+ {
+  "gt_id": "Waypoints_2026-10-24#0",
+  "choice": "none",
+  "confidence": "medium",
+  "reason": "Raw point is in open slope about 90 m from the North Forty wall where its neighbours sit; no wall within reach and no candidates. Likely a bad GPS fix on the approach."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#1",
+  "choice": "none",
+  "confidence": "medium",
+  "reason": "Off-wall point with no candidates, about 60 m from the wall its route neighbours are on; no nearby tall wall to place it on."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#2",
+  "choice": 1,
+  "confidence": "high",
+  "reason": "Snap moved 0.5 m onto the foot of the main wall at standing height."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#3",
+  "choice": "custom",
+  "custom_east_m": -2.0,
+  "custom_north_m": 12.0,
+  "confidence": "low",
+  "reason": "Candidate 1 lands within 1 m of #2 snap though raw points are ~4 m apart along the wall, and candidate 2 goes the wrong way; placed on the wall foot edge a few metres east of #2 (moved north to touch the wall mask)."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#4",
+  "choice": 1,
+  "confidence": "medium",
+  "reason": "Snap goes straight in to the foot of the main wall; GPS sits ~12 m out on the downhill side like its neighbours."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#5",
+  "choice": 1,
+  "confidence": "low",
+  "reason": "Snap goes straight in to the main wall foot, following the raw point which is west of #4; route order and raw order disagree here."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#6",
+  "choice": 2,
+  "confidence": "low",
+  "reason": "Candidate 1 coincides with #4's snap; candidate 2 is on the same wall 2.6 m east, keeping neighbours apart and in walking order."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#7",
+  "choice": 2,
+  "confidence": "low",
+  "reason": "Candidate 1 would coincide with #6's spot; candidate 2 on the same wall a few metres east keeps the sequence."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#8",
+  "choice": 1,
+  "confidence": "medium",
+  "reason": "Snap straight in to the main wall foot, consistent with the neighbouring routes' offset."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#9",
+  "choice": 4,
+  "confidence": "low",
+  "reason": "Candidate 1 is the same spot as #8's snap; candidate 4 is on the same wall ~2.7 m east, keeping Ace in the Hole after Green Goblin."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#10",
+  "choice": 1,
+  "confidence": "low",
+  "reason": "Snap goes straight in to the main wall foot amid a crowded run of routes; slightly west of Ace in the Hole's spot but within GPS error, and the alternatives coincide with neighbours."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#11",
+  "choice": 1,
+  "confidence": "medium",
+  "reason": "Snap straight in to the main wall foot, between the Trapeze Artist spots, at the expected ~15-20 m downhill offset seen across this stretch."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#12",
+  "choice": 1,
+  "confidence": "low",
+  "reason": "Snap on the main wall foot a couple of metres east of Big Top; this route name repeats #10, so the spot is uncertain."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#13",
+  "choice": 1,
+  "confidence": "low",
+  "reason": "Snap on the main wall foot in the crowded Big Hand / Fat Top / Fat Hand group, whose raw points are within about a metre of each other."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#14",
+  "choice": 2,
+  "confidence": "low",
+  "reason": "Candidate 1 is the same spot as Big Hand's snap; candidate 2 is 2 m east on the same wall, keeping route order."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#15",
+  "choice": 1,
+  "confidence": "low",
+  "reason": "Snap straight in to the main wall foot; it lands near Fat Top's spot, but their raw points are close together and candidate 2 is a far, different face."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#16",
+  "choice": 2,
+  "confidence": "medium",
+  "reason": "Candidates 1 and 2 are 1.4 m apart on the same wall foot; taking 2 (west) leaves candidate 1 for Side Show, which comes next."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#17",
+  "choice": 1,
+  "confidence": "medium",
+  "reason": "Snap at the wall foot just east of Dancing Outlaw, close to standing height."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#18",
+  "choice": 1,
+  "confidence": "low",
+  "reason": "Snap at the inside corner where the wall turns northeast, straight in from the raw point; the wall column there is thin, but candidate 3 next to it would be Lion Tamer's spot."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#19",
+  "choice": 1,
+  "confidence": "low",
+  "reason": "Raw point is 1.2 m from Summer Rain's, so the same corner spot is acceptable; both are routes at the bend in the wall."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#20",
+  "choice": 1,
+  "confidence": "medium",
+  "reason": "Snap at the foot of the wall where it bends northeast, at standing height; candidate 2 is only a metre away."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#21",
+  "choice": 1,
+  "confidence": "high",
+  "reason": "Short 3 m move to the wall foot at standing height, east of Lion Tamer and west of Count Chalkula."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#22",
+  "choice": 1,
+  "confidence": "high",
+  "reason": "1.6 m move onto the wall foot at standing height; in order after Frankenberry."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#23",
+  "choice": 1,
+  "confidence": "high",
+  "reason": "0.9 m move to the foot of a 17 m wall at standing height."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#24",
+  "choice": 2,
+  "confidence": "medium",
+  "reason": "Candidate 1 is 4.9 m up the wall face; candidate 2 is at the foot at standing height. It sits next to Crimp Scampi, but their raw points are only 0.6 m apart."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#25",
+  "choice": 1,
+  "confidence": "high",
+  "reason": "2 m move straight in to the wall foot at standing height."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#26",
+  "choice": 1,
+  "confidence": "medium",
+  "reason": "Snap to the wall foot at standing height; it leaves candidate 2 (just west) for Honorary Brave, keeping the two about 2 m apart."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#27",
+  "choice": 1,
+  "confidence": "medium",
+  "reason": "1 m move to the wall foot, about 2 m west of Emma's Got a Mullet."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#28",
+  "choice": 1,
+  "confidence": "high",
+  "reason": "0.2 m move; on the foot of a tall wall with many cliff points."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#29",
+  "choice": 1,
+  "confidence": "low",
+  "reason": "0.4 m move, but the standing height is 8 m above the neighbouring foot, so the spot is on a ledge or step of the wall; the wall above is only about 6.6 m."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#30",
+  "choice": 1,
+  "confidence": "high",
+  "reason": "0.5 m move to the foot of the tall wall, about at standing height."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#31",
+  "choice": 1,
+  "confidence": "medium",
+  "reason": "3 m move to the wall foot at standing height; first of three points walking southwest along this face."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#32",
+  "choice": 2,
+  "confidence": "medium",
+  "reason": "Candidate 2 sits between #31's and #33's spots on the same wall foot, keeping walking order and spacing; candidate 1 would pass #33."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#33",
+  "choice": 1,
+  "confidence": "medium",
+  "reason": "Snap to the wall foot about 3.5 m southwest of #32's spot, following the walking direction."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#34",
+  "choice": "custom",
+  "custom_east_m": 0.0,
+  "custom_north_m": -3.5,
+  "confidence": "low",
+  "reason": "Raw point is on the top edge of the wall and the snaps are part way up the face (4.7 m below standing height); moved to the foot of the same wall just south, near the Emma's Got a Mullet stretch."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#35",
+  "choice": "custom",
+  "custom_east_m": 2.0,
+  "custom_north_m": -4.5,
+  "confidence": "low",
+  "reason": "No snap (too short): the raw point is on the lip of the wall, about 16 m above its foot. Placed at the foot just below, near the corner, assuming the GPS error went into the hill."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#36",
+  "choice": "none",
+  "confidence": "low",
+  "reason": "Raw point is on the bench above the wall, about 10 m from any foot; the snap slid 16 m along the face to a spot 5.6 m below standing height. The foot below (south or east) is ambiguous and the south one is Groovy's."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#37",
+  "choice": "none",
+  "confidence": "low",
+  "reason": "No snap (too short); the raw point is on the bench top about 10 m from the wall rim, and no wall foot it clearly belongs to is within GPS error."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#38",
+  "choice": 1,
+  "confidence": "high",
+  "reason": "1 m move to the foot of the wall at standing height."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#39",
+  "choice": 1,
+  "confidence": "medium",
+  "reason": "2.4 m move to the wall foot, between the Nc point and Count Chalkula; candidate 2 nearby would also do."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#40",
+  "choice": 1,
+  "confidence": "medium",
+  "reason": "Snap goes straight in to the main wall foot about 7 m upslope, keeping it apart from the Nc point at #38; candidate 2 is on a low bench closer to the Nc spot."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#41",
+  "choice": 1,
+  "confidence": "medium",
+  "reason": "1.9 m move to the foot of the wall at standing height."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#42",
+  "choice": 2,
+  "confidence": "medium",
+  "reason": "Candidate 2 is at the foot at standing height and keeps it east of #43's spot in walking order (heading west); candidate 1 would sit 1.9 m from #43."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#43",
+  "choice": 1,
+  "confidence": "low",
+  "reason": "Snap is 2.4 m above standing height but keeps it about 3.5 m west of #42; candidate 2 would go back east."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#44",
+  "choice": 1,
+  "confidence": "high",
+  "reason": "1 m move to the wall foot at standing height."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#45",
+  "choice": 1,
+  "confidence": "low",
+  "reason": "Raw point is on the lip of the wall; every candidate is part way down the face, on a wall only 6 m tall by the grid. Kept the nearest one horizontally, but the true foot is about 10 m lower."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#46",
+  "choice": 1,
+  "confidence": "medium",
+  "reason": "1.2 m move to the wall foot at standing height."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#47",
+  "choice": 1,
+  "confidence": "medium",
+  "reason": "1.3 m move to the wall foot at standing height."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#48",
+  "choice": 1,
+  "confidence": "high",
+  "reason": "0.5 m move to the wall foot at standing height."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#49",
+  "choice": 1,
+  "confidence": "medium",
+  "reason": "1.1 m move to the wall foot. It is next to Climb #47, but their raw points are only 1.6 m apart (a blank stretch beside a route)."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#50",
+  "choice": 1,
+  "confidence": "high",
+  "reason": "0.2 m move to the wall foot at standing height."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#51",
+  "choice": 1,
+  "confidence": "high",
+  "reason": "2 m move to the foot of the east face of the fin at standing height."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#52",
+  "choice": 1,
+  "confidence": "high",
+  "reason": "0.3 m move to the foot of the outer face at standing height."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#53",
+  "choice": 1,
+  "confidence": "high",
+  "reason": "0.6 m move to the wall foot at standing height."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#54",
+  "choice": 1,
+  "confidence": "medium",
+  "reason": "0.5 m move to the outer wall foot, 1 m below standing height; follows #53 along the same face."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#55",
+  "choice": 1,
+  "confidence": "medium",
+  "reason": "0.4 m move; the point is inside the narrow slot between two fins, on a 6.7 m wall at standing height."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#56",
+  "choice": 1,
+  "confidence": "medium",
+  "reason": "0.3 m move to the foot of the slot wall at standing height."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#57",
+  "choice": 1,
+  "confidence": "low",
+  "reason": "Raw point is on the rim above the slot and the snap foot is 5 m below standing height; it is still the nearest wall, right next to Climb #56."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#58",
+  "choice": 1,
+  "confidence": "medium",
+  "reason": "0.8 m move to the slot wall foot, 2.8 m below standing height; candidate 2 is on another face."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#59",
+  "choice": 1,
+  "confidence": "low",
+  "reason": "Raw point is on the uphill slope above the fins with no wall facing it; the only candidate slid 6.6 m into the slot north end, 5 m below standing height, but it is plausible next to #56."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#60",
+  "choice": 1,
+  "confidence": "low",
+  "reason": "Raw point is on top of a fin in the middle of the ring of walls, so no foot is near standing height. The snap on the west side is plausible as the person walked from the slot (#59) to the south foot (#61), but uncertain."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#61",
+  "choice": 1,
+  "confidence": "medium",
+  "reason": "Snap goes straight in to the south foot of the fins, about 6 m upslope, at the usual downhill offset."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#62",
+  "choice": 1,
+  "confidence": "medium",
+  "reason": "Snap straight in to the same south foot, about 3.5 m west of #61, in walking order."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#63",
+  "choice": 2,
+  "confidence": "low",
+  "reason": "Candidate 1 is within 0.5 m of Nc #64's spot, though the raw points are 11 m apart, and its wall column is thin. Candidate 2 on the same wall keeps the sequence #62 -> #63 -> #64."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#64",
+  "choice": 1,
+  "confidence": "medium",
+  "reason": "Snap to the wall foot about 7 m upslope, near standing height, west of #63."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#65",
+  "choice": 1,
+  "confidence": "medium",
+  "reason": "Snap straight in to the wall foot about 9 m upslope, continuing west from #64; candidate 2 is equally plausible, 2.6 m east."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#66",
+  "choice": 1,
+  "confidence": "low",
+  "reason": "Snap straight in to a 10 m wall about 9 m upslope, 4 m above standing height; it is close to #68's spot, but their along-wall raw separation is small."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#68",
+  "choice": 1,
+  "confidence": "medium",
+  "reason": "4 m move to the wall foot near standing height, just west of #66."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#69",
+  "choice": 1,
+  "confidence": "medium",
+  "reason": "2.5 m move to the wall foot at standing height, continuing west."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#70",
+  "choice": 1,
+  "confidence": "medium",
+  "reason": "3.6 m move to the foot of the north wall, about 1 m above standing height, continuing the Nc run west."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#71",
+  "choice": 1,
+  "confidence": "medium",
+  "reason": "3.8 m move to the north wall foot near standing height; candidate 2 is essentially the same spot."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#72",
+  "choice": 1,
+  "confidence": "medium",
+  "reason": "Raw point is in the gully bottom; the only candidate is straight up to the north wall, which all the neighbouring Nc points follow. It is 5.8 m above standing height but consistent."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#73",
+  "choice": 1,
+  "confidence": "medium",
+  "reason": "Snap straight up from the gully to the north wall foot, in sequence with the neighbouring Nc points."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#74",
+  "choice": 1,
+  "confidence": "low",
+  "reason": "Snap to the north wall about 4 m west of #73's spot, keeping walking order; candidate 2 is #73's own spot. The wall column there is thin."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#75",
+  "choice": 1,
+  "confidence": "low",
+  "reason": "Still on the north wall, continuing west from #74; that wall is only 6.0 m tall by the grid here (borderline). Candidate 3 is the tall wall to the south, which the walk reaches only next."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#76",
+  "choice": 1,
+  "confidence": "medium",
+  "reason": "Snap to the wall foot at the corner where the walk turns onto the southwest wall, at standing height."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#77",
+  "choice": 1,
+  "confidence": "medium",
+  "reason": "3 m move to the foot of the southwest wall near standing height, heading south from #76."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#78",
+  "choice": 1,
+  "confidence": "medium",
+  "reason": "3.2 m move to the same face south of #77, keeping order; the raw point sits in a narrow passage between two walls."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#79",
+  "choice": 1,
+  "confidence": "high",
+  "reason": "0.8 m move to the wall foot at standing height."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#80",
+  "choice": 1,
+  "confidence": "high",
+  "reason": "0.5 m move to the wall foot at standing height."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#81",
+  "choice": 1,
+  "confidence": "high",
+  "reason": "0.4 m move to the wall foot at standing height."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#82",
+  "choice": 1,
+  "confidence": "low",
+  "reason": "Snap goes straight in to the south foot of the fins about 7 m upslope; it lands near Climb #61, which is allowed for an Nc. Candidate 2, 3.5 m east, is also plausible."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#83",
+  "choice": 1,
+  "confidence": "low",
+  "reason": "Snap goes straight in to the same south foot, about 2.7 m west of #82, matching their raw spacing; it sits between Climbs #61 and #62."
+ }
+]

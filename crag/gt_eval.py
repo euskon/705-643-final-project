@@ -1,16 +1,14 @@
 """Score a segmentation checkpoint on the hand-gathered Horseshoe Canyon Ranch waypoints.
 
-Every ``Climb`` (1) / ``Nc`` (0) waypoint first goes through the wall check
-(``crag.negatives.snap_routes``): it is moved to the foot of the nearest real
-wall, and waypoints with no wall within reach are left out (``gt/n_off_wall``).
-For each remaining one: cut the same kind of block the model was trained on,
-centred on the checked position, predict per-point class probabilities, and
-summarise the points within ``radius_m`` (horizontal) as one score (90th
-percentile, robust to a few stray points).
+The waypoints are the saved, judged positions (``presnapped``; plan 4): the wall
+check only confirms them. Each is then centred on its wall foot and scored
+exactly like a fine-tuning sample: the same block, the same face strip and the
+same 4 x 12 point pick (``crag.finetune_data``), the run's own channels and
+scale. Score = mean "positive" probability over the picked points.
 
-Reported: AUROC / average precision of Climb vs Nc for the model's
-"positive" probability, plus the surface-normal heuristic (fraction of steep
-points) as a reference.
+Reported: AUROC / AP of Climb vs Nc, also without the judges' ``unresolved``
+points and on high + medium confidence only, plus the surface-normal
+heuristic (share of steep points) as a reference.
 """
 
 from __future__ import annotations
@@ -23,10 +21,12 @@ import torch
 from sklearn.metrics import average_precision_score, roc_auc_score
 
 from crag import registry
+from crag.channels import CHANNELS, point_channels
 from crag.crop import AreaCloud, voxel_block
-from crag.datasets import BlockSpec, make_item
+from crag.datasets import BlockSpec, make_item, resample_keep
+from crag.finetune_data import StripConfig, face_strip_mask, pick_points
 from crag.groundtruth import load_waypoints
-from crag.negatives import snap_routes
+from crag.negatives import centre_on_foot, snap_routes, waypoint_frame
 from crag.paths import add_import_paths
 from crag.train import model_forward
 
@@ -61,9 +61,9 @@ def score_waypoints(
     gt = load_waypoints(to_work=crs.to_work if crs else None)
     gt = gt[gt["label"] >= 0].reset_index(drop=True)
     n_all = len(gt)
+    strip = StripConfig()
     if crs is not None:
-        chk = snap_routes(cloud, pd.DataFrame({"route_uid": gt["gt_id"], "label": gt["label"], "lat": gt["lat"], "lon": gt["lon"],
-                                                "lat2": np.nan, "lon2": np.nan, "length_m": np.nan}), crs)
+        chk = snap_routes(cloud, waypoint_frame(gt), crs)
         ok = (chk["status"] == "ok").to_numpy()
         gt = gt[ok].assign(x=chk.loc[ok, "snap_x"].to_numpy(), y=chk.loc[ok, "snap_y"].to_numpy()).reset_index(drop=True)
     n_off_wall = n_all - len(gt)
@@ -81,27 +81,37 @@ def score_waypoints(
         for p, (r, near, steep_frac) in zip(prob, meta):
             pos_p = p[positive_classes].sum(0)[near]
             rock_p = p[rock_classes].sum(0)[near] if rock_classes else pos_p
-            rows.append({**r, "n_near": int(near.sum()), "score": float(np.quantile(pos_p, 0.9)) if near.any() else np.nan,
-                         "rock_score": float(np.quantile(rock_p, 0.9)) if near.any() else np.nan, "heuristic_steep_frac": steep_frac})
+            rows.append({**r, "n_near": int(near.sum()), "score": float(pos_p.mean()) if near.any() else np.nan,
+                         "rock_score": float(rock_p.mean()) if near.any() else np.nan, "heuristic_steep_frac": steep_frac})
         batch.clear()
         meta.clear()
 
     for i, w in gt.iterrows():
-        crop = cloud.crop(w["x"], w["y"], block_size_m / 2)
+        base = {"gt_id": w["gt_id"], "label": int(w["label"]), "name": w["name"], "judge_result": w.get("judge_result", ""), "judge_confidence": w.get("judge_confidence", "")}
+        f = centre_on_foot(cloud, None, np.array([w["x"], w["y"]]))
+        crop = cloud.crop(f["foot_x"], f["foot_y"], block_size_m / 2) if f["status"] == "ok" else {"xyz": np.zeros((0, 3))}
         if len(crop["xyz"]) < 64:
-            rows.append({"gt_id": w["gt_id"], "label": int(w["label"]), "name": w["name"], "n_near": 0, "score": np.nan, "rock_score": np.nan, "heuristic_steep_frac": np.nan})
+            rows.append({**base, "n_near": 0, "score": np.nan, "rock_score": np.nan, "heuristic_steep_frac": np.nan})
             continue
         rng = np.random.default_rng(i)
-        idx, local, _ = voxel_block(crop["xyz"], w["x"], w["y"], spec.voxel_m, 40000, rng)
-        sel = rng.choice(len(idx), spec.num_points, replace=len(idx) < spec.num_points)
-        loc = local[sel]
-        near = np.hypot(loc[:, 0], loc[:, 1]) <= radius_m
-        d_all = np.hypot(crop["xyz"][:, 0] - w["x"], crop["xyz"][:, 1] - w["y"]) <= radius_m
+        idx, local, _ = voxel_block(crop["xyz"], f["foot_x"], f["foot_y"], spec.voxel_m, 40000, rng)
+        xyz = crop["xyz"][idx]
+        m, _ = face_strip_mask(xyz, crop["steep"][idx], (f["foot_x"], f["foot_y"]), f["base_z"], (f["out_dx"], f["out_dy"]), strip, wall_height_m=f.get("wall_height_m"))
+        own = np.flatnonzero(m)
+        own = own[pick_points(xyz[own, 2] - f["base_z"], strip, rng)]
+        keep = np.zeros(len(idx), bool)
+        keep[own] = True
+        sel = resample_keep(keep, spec.num_points, rng)
+        loc, near = local[sel], keep[sel]
+        d_all = np.hypot(crop["xyz"][:, 0] - f["foot_x"], crop["xyz"][:, 1] - f["foot_y"]) <= radius_m
         steep_frac = float(crop["steep"][d_all].mean()) if d_all.any() else np.nan
-        inten = (crop["intensity"][idx][sel] / max(np.percentile(crop["intensity"], 99), 1.0)).clip(0, 1)[:, None]
-        item = make_item(loc * spec.coord_scale, np.zeros(len(loc), np.int64), inten.astype(np.float32), keys, tf)
+        ch = point_channels(crop, idx[sel], CHANNELS)
+        cols = {k: ch[:, j].astype(np.float32) for j, k in enumerate(CHANNELS)}
+        item = make_item(loc * spec.coord_scale, np.zeros(len(loc), np.int64), cols, keys, tf)
+        if int(item["x"].shape[1]) != int(sum(1 if k not in ("pos",) else 3 for k in keys)):
+            raise AssertionError("channel count differs from the run's feature_keys")
         batch.append(item)
-        meta.append(({"gt_id": w["gt_id"], "label": int(w["label"]), "name": w["name"]}, near, steep_frac))
+        meta.append((base, near, steep_frac))
         if len(batch) == batch_size:
             flush()
     flush()
@@ -119,6 +129,10 @@ def score_waypoints(
         "gt/mean_score_climb": float(df.loc[ok & (df["label"] == 1), "score"].mean()),
         "gt/mean_score_nc": float(df.loc[ok & (df["label"] == 0), "score"].mean()),
     }
+    for tag, m in (("no_unresolved", df["judge_result"].astype(str) != "unresolved"), ("high_medium", df["judge_confidence"].astype(str) != "low")):
+        mm = ok & m
+        metrics[f"gt/auroc_climb_vs_nc_{tag}"] = _safe(roc_auc_score, df.loc[mm, "label"].to_numpy(), df.loc[mm, "score"])
+        metrics[f"gt/n_{tag}"] = int(mm.sum())
     h = ok & df["heuristic_steep_frac"].notna()
     metrics["gt/auroc_heuristic_steep_frac"] = _safe(roc_auc_score, df.loc[h, "label"], df.loc[h, "heuristic_steep_frac"])
     return metrics, df

@@ -72,11 +72,21 @@ def main() -> None:
         p = hook.last_predictions
         preds.append(p)
         res["per_area"] = {slug: finetune.sample_metrics(g, args.threshold) for slug, g in p.groupby("slug")}
+        hand = p[(p["slug"] == "horseshoe-canyon-ranch") & p["source"].isin(["handgathered", "handgathered_nc"])]
+        if len(hand):
+            res["hcr_climb_vs_nc"] = finetune.sample_metrics(hand, args.threshold)
+            hm = hand[hand.get("judge_confidence", pd.Series("", index=hand.index)).astype(str) != "low"]
+            res["hcr_climb_vs_nc_high_medium"] = finetune.sample_metrics(hm, args.threshold)
+            res["hcr_all"] = res["per_area"].get("horseshoe-canyon-ranch", {})
         results[split] = res
         log.info("%s: point loss %.4f  IoU(climbable) %.3f | sample AUROC %.3f  AP %.3f  bal.acc %.3f  hard-neg AUROC %s",
                  split, res["loss"], res.get("iou_climbable", float("nan")), res.get("sample_auroc", float("nan")), res.get("sample_ap", float("nan")),
                  res.get("sample_bal_acc", float("nan")), round(res["sample_auroc_hard"], 3) if "sample_auroc_hard" in res else "n/a")
         log.info("  per-source accuracy: %s", {k[4:]: round(v, 3) for k, v in res.items() if k.startswith("acc_")})
+        if "hcr_climb_vs_nc" in res:
+            h = res["hcr_climb_vs_nc"]
+            log.info("  Horseshoe Climb vs Nc: AUROC %s (n=%d), high+medium %s, pairs %s acc %s", round(h.get("sample_auroc", float("nan")), 3), h["sample_n"],
+                     round(res["hcr_climb_vs_nc_high_medium"].get("sample_auroc", float("nan")), 3), h.get("pair_n"), round(h.get("pair_acc", float("nan")), 3))
     stem = Path(args.ckpt).stem
     if preds:
         pd.concat(preds).to_csv(run / f"predictions_{stem}.csv", index=False)

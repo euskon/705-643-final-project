@@ -40,6 +40,13 @@ class AreaCloud:
                             t["steep"], t["cls"], t["normals"] = s["steep"], s["cls"], s["normals"]
                             if "wall_dist" in s:
                                 t["wall_dist"] = s["wall_dist"]
+                            if "planarity" in s:
+                                t["planarity"] = s["planarity"]
+                hp = PRETRAIN_DIR / self.slug / "stage" / f"{tid}.hag.npy"
+                if hp.exists():
+                    hag = np.load(hp)
+                    if len(hag) == len(xyz):
+                        t["hag"] = hag
             else:
                 t = None
         self._cache[tid] = t
@@ -50,9 +57,11 @@ class AreaCloud:
     def crop(self, cx: float, cy: float, half: float) -> dict:
         """Points with |x-cx|,|y-cy| <= half: ``xyz`` (abs), ``intensity``, ``steep``, ``cls``,
         ``normals``, ``multi`` (non-last return), ``wall_dist`` (m to the bare-earth wall; NaN
-        without stage files)."""
+        without stage files), ``las`` (the provider's class), ``return_number``,
+        ``number_of_returns``, ``planarity`` and ``hag`` (height above the local ground, m;
+        both NaN when the stage files lack them)."""
         s = self.size
-        parts = {k: [] for k in ("xyz", "intensity", "steep", "cls", "normals", "multi", "wall_dist")}
+        parts = {k: [] for k in ("xyz", "intensity", "steep", "cls", "normals", "multi", "wall_dist", "las", "return_number", "number_of_returns", "planarity", "hag", "i99")}
         for i in range(math.floor((cx - half) / s), math.floor((cx + half) / s) + 1):
             for j in range(math.floor((cy - half) / s), math.floor((cy + half) / s) + 1):
                 t = self._tile(Tile(i * s, j * s, s).id)
@@ -67,9 +76,19 @@ class AreaCloud:
                 parts["normals"].append(t["normals"][m].astype(np.float32) if "normals" in t else np.zeros((m.sum(), 3), np.float32))
                 parts["multi"].append(t["return_number"][m] < t["number_of_returns"][m])  # non-last return = canopy
                 parts["wall_dist"].append(t["wall_dist"][m].astype(np.float32) if "wall_dist" in t else np.full(m.sum(), np.nan, np.float32))
+                parts["las"].append(t["classification"][m])
+                parts["return_number"].append(t["return_number"][m])
+                parts["number_of_returns"].append(t["number_of_returns"][m])
+                parts["planarity"].append(t["planarity"][m].astype(np.float32) if "planarity" in t else np.full(m.sum(), np.nan, np.float32))
+                parts["hag"].append(t["hag"][m].astype(np.float32) if "hag" in t else np.full(m.sum(), np.nan, np.float32))
+                if "i99" not in t:  # the tile's 99th-percentile intensity (same normalisation as the pretraining blocks)
+                    t["i99"] = float(max(np.percentile(t["intensity"], 99), 1.0))
+                parts["i99"].append(np.full(int(m.sum()), t["i99"], np.float32))
         if not parts["xyz"]:
-            return {"xyz": np.zeros((0, 3)), "intensity": np.zeros(0, np.float32), "steep": np.zeros(0, bool), "cls": np.zeros(0, np.int8),
-                    "normals": np.zeros((0, 3), np.float32), "multi": np.zeros(0, bool), "wall_dist": np.zeros(0, np.float32)}
+            z8, zf = np.zeros(0, np.uint8), np.zeros(0, np.float32)
+            return {"xyz": np.zeros((0, 3)), "intensity": zf, "steep": np.zeros(0, bool), "cls": np.zeros(0, np.int8),
+                    "normals": np.zeros((0, 3), np.float32), "multi": np.zeros(0, bool), "wall_dist": zf, "las": z8, "return_number": z8,
+                    "number_of_returns": z8, "planarity": zf, "hag": zf, "i99": zf}
         return {k: np.concatenate(v) for k, v in parts.items()}
 
     def has_stage(self) -> bool:

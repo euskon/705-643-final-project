@@ -1,0 +1,416 @@
+[
+ {
+  "gt_id": "Waypoints_2026-10-25#0",
+  "choice": 1,
+  "confidence": "medium",
+  "reason": "Automatic snap is on the main wall about 8 m uphill (NE) of the raw point, matching the known East Side 7-12 m offset; the taller spot 3 is 15 m along the wall."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-25#1",
+  "choice": 1,
+  "confidence": "medium",
+  "reason": "Raw point sits right at a small masked wall (6.8 m) with cliff points; snap moved only 0.4 m. Wall is only just above 6 m."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-25#2",
+  "choice": 1,
+  "confidence": "low",
+  "reason": "Next points #5-#7 all snap to the north-south wall piece 3 just east; snap 1 puts this point at its north end, continuing the walk from Maximus. Several small walls nearby make this unsure."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-25#3",
+  "choice": "custom",
+  "custom_east_m": 6.1,
+  "custom_north_m": 0.1,
+  "confidence": "low",
+  "reason": "Automatic snap jumps to a different wall piece 4 to the west and below the standing height, breaking the walk along piece 3; placed it on piece 3 between the #2 and #5 snaps (spot that passed every check for #2)."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-25#5",
+  "choice": 1,
+  "confidence": "medium",
+  "reason": "Snap moved 2.6 m onto wall piece 3 at standing height, consistent with neighbours walking south along it."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-25#6",
+  "choice": 1,
+  "confidence": "medium",
+  "reason": "Snap moved 2.4 m onto piece 3, 10 m wall, foot near standing height; fits walking order."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-25#7",
+  "choice": 1,
+  "confidence": "high",
+  "reason": "Snap moved 1.4 m onto piece 3 with foot at standing height; consistent with neighbours."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-25#8",
+  "choice": 1,
+  "confidence": "high",
+  "reason": "Snap moved 0.9 m onto the corner of piece 3, foot at standing height, continues the walk south."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-25#9",
+  "choice": "custom",
+  "custom_east_m": -5.5,
+  "custom_north_m": -0.5,
+  "confidence": "low",
+  "reason": "Nc at the east tail of piece 3; automatic snap is the same spot as the next Climb #10 (raw 2.2 m apart), so moved it about 2 m west along the same masked tail to keep them apart in walking order."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-25#10",
+  "choice": 1,
+  "confidence": "low",
+  "reason": "Climb at the east end of piece 3's tail; the wall there is barely 6 m and no other masked wall is near, so the snap is the only reasonable spot."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-25#11",
+  "choice": 1,
+  "confidence": "low",
+  "reason": "Only masked wall nearby is piece 1 about 10 m south, with its foot 4 m below the standing height, which does not fit well; snap kept as the nearest spot on it."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-25#12",
+  "choice": 4,
+  "confidence": "low",
+  "reason": "Automatic snap is the same spot as #11 although the raw points are 8 m apart; candidate 4 is about 8 m further along piece 1 in walking direction. The wall foot is below the standing height, so the whole placement is doubtful."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-25#13",
+  "choice": "none",
+  "confidence": "medium",
+  "reason": "Nc with no candidates (off wall); the only rock near is the unmasked short band, and the big wall is over 20 m away."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-25#14",
+  "choice": 1,
+  "confidence": "low",
+  "reason": "Snap goes straight in to the big main wall 16 m uphill (NE), a bit beyond the usual 7-12 m offset; the next points turn back south-west to the short band, so this Nc could belong to that band instead."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-25#15",
+  "choice": "none",
+  "confidence": "medium",
+  "reason": "Nc off wall with no candidates; No candidates: the nearest rock is the short unmasked band around the raw point (too short on the ground grid) and the nearest wall over 6 m is 15-25 m away, too far for a custom spot."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-25#16",
+  "choice": "none",
+  "confidence": "medium",
+  "reason": "Nc on a wall too short to count; No candidates: the nearest rock is the short unmasked band around the raw point (too short on the ground grid) and the nearest wall over 6 m is 15-25 m away, too far for a custom spot."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-25#17",
+  "choice": "none",
+  "confidence": "low",
+  "reason": "Named route Mijo, but the wall here is too short on the ground grid and no masked wall is within reach; No candidates: the nearest rock is the short unmasked band around the raw point (too short on the ground grid) and the nearest wall over 6 m is 15-25 m away, too far for a custom spot."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-25#18",
+  "choice": "none",
+  "confidence": "low",
+  "reason": "Named route Mexican Mija in the same cluster as Mijo; wall too short and no candidate within reach."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-25#19",
+  "choice": "none",
+  "confidence": "low",
+  "reason": "Same cluster as Mijo / Mexican Mija; the rock here is too short on the ground grid and no wall of 6 m or more is within reach."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-25#20",
+  "choice": "none",
+  "confidence": "low",
+  "reason": "Same cluster as Mijo / Mexican Mija; the rock here is too short on the ground grid and no wall of 6 m or more is within reach."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-25#21",
+  "choice": "none",
+  "confidence": "low",
+  "reason": "Nc standing at the short unmasked east limb of the small arc; the snap jumps 10 m downhill to the arc's corner, the same spot as #22 and #23, so this point is dropped."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-25#22",
+  "choice": "none",
+  "confidence": "low",
+  "reason": "Nc at the short unmasked east limb of the arc; snap is the same corner spot as #21 and #23 and below the standing height, so this point is dropped."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-25#23",
+  "choice": 1,
+  "confidence": "low",
+  "reason": "Southernmost of the three Nc points, closest (4.7 m) to the masked corner of the arc; the wall there is only just 6 m."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-25#24",
+  "choice": "custom",
+  "custom_east_m": 10.0,
+  "custom_north_m": 12.5,
+  "confidence": "low",
+  "reason": "No candidates (off wall); the main wall is about 16 m uphill (NE). Placed on its foot about 8 m along the wall south-east of the next point #25's snap, matching their raw spacing."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-25#25",
+  "choice": 1,
+  "confidence": "medium",
+  "reason": "Snap goes straight in to the main wall uphill (NE), 15 m away, somewhat beyond the usual 7-12 m offset, but this is the only wall in front."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-25#26",
+  "choice": 1,
+  "confidence": "medium",
+  "reason": "Snap goes straight in about 6-8 m to the foot of the main wall uphill (NE), matching the East Side offset, and keeps the walking order along the wall."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-25#27",
+  "choice": 1,
+  "confidence": "medium",
+  "reason": "Snap goes straight in about 6-8 m to the foot of the main wall uphill (NE), matching the East Side offset, and keeps the walking order along the wall."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-25#28",
+  "choice": 1,
+  "confidence": "medium",
+  "reason": "Snap goes straight in about 6-8 m to the foot of the main wall uphill (NE), matching the East Side offset, and keeps the walking order along the wall."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-25#29",
+  "choice": 1,
+  "confidence": "medium",
+  "reason": "Snap goes straight in about 6-8 m to the foot of the main wall uphill (NE), matching the East Side offset, and keeps the walking order along the wall. Kept here; #30 moved instead to undo the squash."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-25#30",
+  "choice": 2,
+  "confidence": "medium",
+  "reason": "Automatic snap is only 1 m from #29's although the raw points are 3 m apart; candidate 2 on the same wall foot is 3 m further along in walking direction."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-25#31",
+  "choice": 1,
+  "confidence": "medium",
+  "reason": "Snap goes straight in about 6-8 m to the foot of the main wall uphill (NE), matching the East Side offset, and keeps the walking order along the wall."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-25#32",
+  "choice": 1,
+  "confidence": "medium",
+  "reason": "Snap goes straight in about 6-8 m to the foot of the main wall uphill (NE), matching the East Side offset, and keeps the walking order along the wall."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-25#33",
+  "choice": 1,
+  "confidence": "high",
+  "reason": "Snap 4.4 m straight in to the main wall foot; spacing to #34 and #35 matches their raw spacing."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-25#34",
+  "choice": 1,
+  "confidence": "high",
+  "reason": "Snap 2.7 m straight in to the main wall foot at standing height."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-25#35",
+  "choice": 1,
+  "confidence": "medium",
+  "reason": "Snap goes straight in about 6-8 m to the foot of the main wall uphill (NE), matching the East Side offset, and keeps the walking order along the wall."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-25#36",
+  "choice": 1,
+  "confidence": "medium",
+  "reason": "Snap goes straight in about 6-8 m to the foot of the main wall uphill (NE), matching the East Side offset, and keeps the walking order along the wall."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-25#37",
+  "choice": 1,
+  "confidence": "medium",
+  "reason": "Snap goes straight in about 6-8 m to the foot of the main wall uphill (NE), matching the East Side offset, and keeps the walking order along the wall."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-25#38",
+  "choice": 1,
+  "confidence": "medium",
+  "reason": "Snap straight in to the main wall; it shares a spot with #39 but their raw points differ mostly across the wall, not along it."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-25#39",
+  "choice": 1,
+  "confidence": "medium",
+  "reason": "Swamp Rat: snap 3.4 m straight in to the main wall foot; same along-wall position as #38."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-25#40",
+  "choice": 2,
+  "confidence": "medium",
+  "reason": "Nc: automatic snap is only 1.9 m from #39's although the raw points are about 4 m apart along the wall; candidate 2 on the same wall foot gives that spacing and sits between #39 and #41."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-25#41",
+  "choice": 1,
+  "confidence": "medium",
+  "reason": "Snap straight in about 10 m to the main wall foot, within the East Side offset, and continues the walk south after #40."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-25#42",
+  "choice": 1,
+  "confidence": "low",
+  "reason": "Boulder field below the main wall with blocks just over 6 m; snap is the nearest face of the block just south-east. Many Nc and Climb points share this block."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-25#43",
+  "choice": 1,
+  "confidence": "medium",
+  "reason": "Raw point is under 1 m from the block face; snap kept."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-25#44",
+  "choice": 1,
+  "confidence": "low",
+  "reason": "Snap 3.4 m onto the next block face to the east; blocks are barely 6 m tall."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-25#45",
+  "choice": 1,
+  "confidence": "low",
+  "reason": "Snap onto the same block face as #43; no better spot, blocks barely 6 m."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-25#46",
+  "choice": 1,
+  "confidence": "low",
+  "reason": "Climb after a 4-minute gap; snap onto the block just south, which is barely 6 m tall."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-25#47",
+  "choice": 2,
+  "confidence": "low",
+  "reason": "Small block about 9 m south-west and below the standing height; #47 and #48 snapped to the same spot, so #47 (the northern raw point) takes the northern end of the block face."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-25#48",
+  "choice": 1,
+  "confidence": "low",
+  "reason": "Same small block as #47, south end; the wall foot is below the standing height, so doubtful."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-25#49",
+  "choice": 1,
+  "confidence": "medium",
+  "reason": "Raw point under 1 m from the block face; snap kept."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-25#50",
+  "choice": 1,
+  "confidence": "medium",
+  "reason": "Snap 2.7 m onto the same block's face; no better spot."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-25#51",
+  "choice": 1,
+  "confidence": "medium",
+  "reason": "Raw point 1 m from a block face; snap kept."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-25#52",
+  "choice": 1,
+  "confidence": "low",
+  "reason": "Nc between two 6 m blocks; snap goes back 7 m to the block north-west, shared with nearby Climb points. Raw points here are too close together to separate reliably."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-25#53",
+  "choice": 1,
+  "confidence": "low",
+  "reason": "Snap to the north-west block, same as #52 (raw 1.2 m apart); blocks barely 6 m."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-25#54",
+  "choice": 1,
+  "confidence": "low",
+  "reason": "Snap to the north-west block, close to #53 (raw 1.6 m apart); blocks barely 6 m."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-25#55",
+  "choice": 1,
+  "confidence": "low",
+  "reason": "Nc snapped 10.8 m south-east to the next 6 m block; no clearer choice."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-25#56",
+  "choice": 1,
+  "confidence": "low",
+  "reason": "Snap onto the same south-east block as #55 (raw 2.7 m apart); blocks barely 6 m."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-25#57",
+  "choice": 2,
+  "confidence": "low",
+  "reason": "Five points (#57-#61) all snapped to one spot on an 8 m long block; spread them along its north face in walking order. This Nc takes the west end."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-25#58",
+  "choice": 1,
+  "confidence": "low",
+  "reason": "Second of five points spread along the north face of the same block; snap kept, west-centre."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-25#59",
+  "choice": 1,
+  "confidence": "low",
+  "reason": "Custom spot failed the height check; only the automatic snap (6.2 m) and the west-end spot (used by #57) pass on this block, so the snap is kept, shared with #58."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-25#60",
+  "choice": 1,
+  "confidence": "low",
+  "reason": "Raw point 0.4 m from #59; custom spot failed the height check, so it takes the same automatic snap (6.2 m) as #59."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-25#61",
+  "choice": 1,
+  "confidence": "low",
+  "reason": "Custom spot at the block's east end is not on a 6 m wall; the automatic snap (6.2 m) is the only passing spot near, shared with #58-#60."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-25#62",
+  "choice": 1,
+  "confidence": "medium",
+  "reason": "Back at the main wall: snap goes straight in about 9-12 m uphill (NE) to its foot, matching the East Side offset, and keeps the walking order and spacing along the wall."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-25#63",
+  "choice": 1,
+  "confidence": "medium",
+  "reason": "Back at the main wall: snap goes straight in about 9-12 m uphill (NE) to its foot, matching the East Side offset, and keeps the walking order and spacing along the wall. The gap to #64's snap is a bit larger than the raw gap, but no candidate fixes that cleanly."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-25#64",
+  "choice": 1,
+  "confidence": "medium",
+  "reason": "Back at the main wall: snap goes straight in about 9-12 m uphill (NE) to its foot, matching the East Side offset, and keeps the walking order and spacing along the wall."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-25#65",
+  "choice": 1,
+  "confidence": "medium",
+  "reason": "Back at the main wall: snap goes straight in about 9-12 m uphill (NE) to its foot, matching the East Side offset, and keeps the walking order and spacing along the wall."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-25#66",
+  "choice": 1,
+  "confidence": "medium",
+  "reason": "Back at the main wall: snap goes straight in about 9-12 m uphill (NE) to its foot, matching the East Side offset, and keeps the walking order and spacing along the wall."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-25#67",
+  "choice": 1,
+  "confidence": "medium",
+  "reason": "Back at the main wall: snap goes straight in about 9-12 m uphill (NE) to its foot, matching the East Side offset, and keeps the walking order and spacing along the wall."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-25#68",
+  "choice": 1,
+  "confidence": "medium",
+  "reason": "Back at the main wall: snap goes straight in about 9-12 m uphill (NE) to its foot, matching the East Side offset, and keeps the walking order and spacing along the wall."
+ }
+]

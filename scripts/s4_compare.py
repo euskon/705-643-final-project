@@ -40,6 +40,12 @@ def main() -> None:
         for split in ("val", "test"):
             for c in COLS:
                 row[f"{split}_{c}"] = r.get(split, {}).get(c)
+        t = r.get("test", {})
+        row["rrg_test_auroc"] = t.get("per_area", {}).get("red-river-gorge", {}).get("sample_auroc")
+        for k in ("hcr_climb_vs_nc", "hcr_climb_vs_nc_high_medium"):
+            row[f"{k}_auroc"] = t.get(k, {}).get("sample_auroc")
+        row["hcr_pair_acc"] = t.get("hcr_climb_vs_nc", {}).get("pair_acc")
+        row["hcr_pair_n"] = t.get("hcr_climb_vs_nc", {}).get("pair_n")
         rows.append(row)
     if not rows:
         sys.exit(f"no eval_{args.ckpt}.json under {args.runs} - run s4_eval_finetune.py first")

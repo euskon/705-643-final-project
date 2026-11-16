@@ -53,7 +53,8 @@ from crag.labeling import LabelConfig, compute_normals, slope_deg, surface_geome
 from crag.paths import LIDAR_DIR, PRETRAIN_DIR
 from crag.registry import area_crs
 from crag.tiles import Tile, load_tile
-from crag.walls import WallConfig, point_wall_distance
+from crag.channels import PRETRAIN_CHANNELS, point_channels, write_channels_json
+from crag.walls import WallConfig, point_height_above_ground, point_wall_distance
 
 log = logging.getLogger(__name__)
 
@@ -252,15 +253,22 @@ def area_pins(area: dict, crs) -> tuple[np.ndarray, np.ndarray]:
 
 
 def make_blocks(xyz_abs: np.ndarray, labels: np.ndarray, intensity: np.ndarray, tile: Tile, cfg: PseudoLabelConfig, seed: int) -> dict:
-    """Cut a tile into blocks; voxel-downsample; return concatenated arrays + per-block meta."""
+    """Cut a tile into blocks; voxel-downsample; return concatenated arrays + per-block meta.
+
+    ``intensity`` is either the raw 1-D intensity (old layout: stored normalised by the
+    tile's 99th percentile) or an (N, C) array of per-point channels (``crag.channels``),
+    stored as is."""
     rng = np.random.default_rng(seed)
     bs = cfg.block_size_m
     nb = int(round(tile.size / bs))
     loc = xyz_abs[:, :2] - [tile.x0, tile.y0]
     bi = np.clip((loc // bs).astype(np.int64), 0, nb - 1)
     block_id = bi[:, 0] * nb + bi[:, 1]
-    p99 = np.percentile(intensity, 99) if len(intensity) else 1.0
-    feat = np.clip(intensity / max(p99, 1.0), 0, 1).astype(np.float16)
+    if np.ndim(intensity) == 2:
+        feat = np.asarray(intensity, np.float16)
+    else:
+        p99 = np.percentile(intensity, 99) if len(intensity) else 1.0
+        feat = np.clip(intensity / max(p99, 1.0), 0, 1).astype(np.float16)
     order = np.argsort(block_id, kind="stable")
     starts = np.searchsorted(block_id[order], np.arange(nb * nb + 1))
     pts, labs, feats, meta = [], [], [], []
@@ -290,7 +298,7 @@ def make_blocks(xyz_abs: np.ndarray, labels: np.ndarray, intensity: np.ndarray, 
         meta.append([b, offset, offset + len(idx), cx, cy, zmin, *counts])
         offset += len(idx)
     if not pts:
-        return {"points": np.zeros((0, 3), np.float32), "labels": np.zeros(0, np.int8), "feat": np.zeros(0, np.float16), "meta": np.zeros((0, 6 + len(CLASSES) + 1))}
+        return {"points": np.zeros((0, 3), np.float32), "labels": np.zeros(0, np.int8), "feat": np.zeros((0,) + feat.shape[1:], np.float16), "meta": np.zeros((0, 6 + len(CLASSES) + 1))}
     return {
         "points": np.concatenate(pts),
         "labels": np.concatenate(labs).astype(np.int8),
@@ -313,6 +321,83 @@ def write_blocks(out_dir: Path, tile_id: str, blocks: dict, digest: str) -> None
 # ---------------------------------------------------------------------------
 # driver
 # ---------------------------------------------------------------------------
+
+
+def hag_path(slug: str, tile_id: str) -> Path:
+    return area_dir(slug) / "stage" / f"{tile_id}.hag.npy"
+
+
+def add_hag_tile(slug: str, tile_id: str, cache: _TileCache, cfg: PseudoLabelConfig, force: bool = False) -> str:
+    """Write ``stage/<tile>.hag.npy``: height above the lowest ground within 10 m (float16, the
+    tile's points only), from the same bare-earth grid as ``wall_dist`` (tile + halo)."""
+    out = hag_path(slug, tile_id)
+    t = cache.get(tile_id)
+    if t is None or len(t["xyz"]) == 0:
+        return "empty"
+    n = len(t["xyz"])
+    if out.exists() and not force:
+        try:
+            if len(np.load(out, mmap_mode="r")) == n:
+                return "skipped"
+        except Exception:
+            pass
+    h = tile_with_halo(tile_id, cache, cfg.halo_m)
+    rn, nr, las = h["return_number"], h["number_of_returns"], h["classification"]
+    hag = point_height_above_ground(h["xyz_abs"], surface_mask(rn, nr, las), cfg.wall, ground=las == GROUND_LAS_CLASS)[:n]
+    tmp = out.with_suffix(".tmp.npy")
+    np.save(tmp, hag.astype(np.float16))
+    tmp.replace(out)
+    return "written"
+
+
+def tile_channels(t: dict, stage: dict, hag: np.ndarray | None, channels=PRETRAIN_CHANNELS, stats: dict | None = None) -> np.ndarray:
+    """(N, C) channels of one tile's points (``crag.channels.point_channels``)."""
+    c = {"hag": hag if hag is not None else np.full(len(t["xyz"]), np.nan, np.float32), "normals": stage["normals"],
+         "planarity": stage["planarity"] if "planarity" in stage else np.full(len(t["xyz"]), np.nan, np.float32),
+         "return_number": t["return_number"], "number_of_returns": t["number_of_returns"], "intensity": t["intensity"],
+         "i99": float(max(np.percentile(t["intensity"], 99), 1.0)) if len(t["intensity"]) else 1.0}
+    return point_channels(c, None, channels, stats)
+
+
+def rebuild_blocks(area: dict, cfg: PseudoLabelConfig) -> dict:
+    """Rewrite only the blocks (with the per-point channels) and ``index.csv`` of an area, in
+    place, reusing the stage files (labels unchanged). Needs ``stage/<tile>.hag.npy``."""
+    slug = area["slug"]
+    out = area_dir(slug)
+    stage_dir, block_dir = out / "stage", out / "blocks"
+    tile_ids = sorted(p.name[: -len(".npz")] for p in stage_dir.glob("E*_N*.npz"))
+    cache = _TileCache(slug, cfg.tile_size_m, maxlen=2)
+    digest = cfg.digest()
+    index, stats = [], {}
+    for tid in tile_ids:
+        t = cache.get(tid)
+        if t is None or len(t["xyz"]) == 0:
+            continue
+        with np.load(stage_dir / f"{tid}.npz") as s:
+            st = {k: s[k] for k in s.files}
+        if int(st["n"]) != len(t["xyz"]):
+            raise ValueError(f"{slug}/{tid}: stage file does not match the tile")
+        hp = hag_path(slug, tid)
+        hag = np.load(hp).astype(np.float32) if hp.exists() else None
+        if hag is None or len(hag) != len(t["xyz"]):
+            raise FileNotFoundError(f"{hp} missing or stale - run scripts/s1_add_channels.py first")
+        feat = tile_channels(t, st, hag, PRETRAIN_CHANNELS, stats)
+        seed = int(hashlib.sha1(f"{slug}/{tid}".encode()).hexdigest()[:8], 16)
+        blocks = make_blocks(t["xyz_abs"], st["cls"], feat, Tile.from_id(tid, cfg.tile_size_m), cfg, seed)
+        write_blocks(block_dir, tid, blocks, digest)
+        m = pd.DataFrame(blocks["meta"], columns=META_COLS)
+        m.insert(0, "tile", tid)
+        index.append(m)
+    index = pd.concat(index, ignore_index=True) if index else pd.DataFrame(columns=["tile"] + META_COLS)
+    for c in ["block", "start", "stop", "n_ignore"] + [f"n_{c}" for c in CLASSES]:
+        index[c] = index[c].astype("int64")
+    if len(index):
+        ll = area_crs(area).to_lonlat(index["cx"].to_numpy(), index["cy"].to_numpy())
+        index["lon"], index["lat"] = ll[:, 0], ll[:, 1]
+    index.insert(0, "slug", slug)
+    index.to_csv(out / "index.csv", index=False)
+    write_channels_json(out, PRETRAIN_CHANNELS)
+    return {"slug": slug, "blocks": int(len(index)), "points": int(index["stop"].sub(index["start"]).sum()) if len(index) else 0, **stats}
 
 
 def process_area(area: dict, cfg: PseudoLabelConfig, force: bool = False) -> dict:
@@ -357,9 +442,12 @@ def process_area(area: dict, cfg: PseudoLabelConfig, force: bool = False) -> dic
         if t is None or len(t["xyz"]) == 0:
             continue
         with np.load(stage_dir / f"{tid}.npz") as s:
-            labels = s["cls"]
+            st = {k: s[k] for k in s.files}
+        labels = st["cls"]
+        add_hag_tile(slug, tid, cache, cfg)
+        hag = np.load(hag_path(slug, tid)).astype(np.float32)
         seed = int(hashlib.sha1(f"{slug}/{tid}".encode()).hexdigest()[:8], 16)
-        blocks = make_blocks(t["xyz_abs"], labels, t["intensity"].astype(np.float32), Tile.from_id(tid, cfg.tile_size_m), cfg, seed)
+        blocks = make_blocks(t["xyz_abs"], labels, tile_channels(t, st, hag), Tile.from_id(tid, cfg.tile_size_m), cfg, seed)
         write_blocks(block_dir, tid, blocks, digest)
         m = pd.DataFrame(blocks["meta"], columns=META_COLS)
         m.insert(0, "tile", tid)
@@ -384,5 +472,6 @@ def process_area(area: dict, cfg: PseudoLabelConfig, force: bool = False) -> dic
         "blocks_with_cliff": int((index["n_cliff"] > 0).sum()) if len(index) else 0,
         **{f"pts_{k}": v for k, v in counts.items()},
     }
+    write_channels_json(out, PRETRAIN_CHANNELS)
     state_path.write_text(json.dumps({"digest": digest, "tiles": tile_ids, "config": asdict(cfg), "summary": summary}, indent=1, default=str))
     return summary

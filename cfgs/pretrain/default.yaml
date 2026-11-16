@@ -8,10 +8,10 @@
 
 dataset:
   split_mode: area          # area: registry split per area | tile: hash 200 m tiles (few-area runs)
-  num_points: 8192          # points per block (resampled); keep 8192-16384 on 10 GB
+  num_points: 4096          # points per block (resampled); about the real block size, so few copies
   voxel_m: 0.25             # must match s1_pseudolabel.py
-  coord_scale: 0.16         # 0.04 m (S3DIS voxel) / 0.25 m (ours): same neighbourhood density as pretraining
-  feature_keys: pos,heights # 4 channels -> the S3DIS checkpoints' first layer loads
+  coord_scale: 0.067        # from the measured point spacing: first radius 0.1 = 1.5 m on the ground (3 / 6 / 12 m later); beat 2 m in the V4 scale test
+  feature_keys: hag,planarity   # surface channels (crag/channels.py); never position in the block
   samples_per_epoch: 20000  # blocks drawn (weighted, with replacement) per epoch
   max_val_blocks: 3000      # deterministic validation subset
   oversample: {}            # {class: extra sampling weight for blocks containing it}; most blocks hold some cliff, so none
@@ -19,6 +19,7 @@ dataset:
     block_size_m: 20.0      # must match s1_pseudolabel.py
     rock_center_prob: 0.5   # ... centred on a random cliff point this often (like fine-tuning blocks)
     rock_class: 3           # cliff
+  thin: {}                  # e.g. {prob: 0.5, max_frac: 0.4}: drop 0-40% of a training block's points (off)
 
 num_classes: 4
 ignore_index: -1
@@ -30,12 +31,12 @@ datatransforms:
     gravity_dim: 2
     scale: [0.9, 1.1]
     anisotropic: False      # isotropic: anisotropic z-scaling would change slopes (= the labels)
-    jitter_sigma: 0.005     # in scaled units (~3 cm)
-    jitter_clip: 0.02
+    jitter_sigma: 0.002     # scaled units: 0.03 m x coord_scale
+    jitter_clip: 0.008      # 0.12 m x coord_scale
 
-batch_size: 8
-val_batch_size: 8
-grad_accum_steps: 4         # effective batch 32
+batch_size: 16
+val_batch_size: 16
+grad_accum_steps: 2         # effective batch 32 (back to 8 x 4 if the GPU runs out of memory)
 dataloader:
   num_workers: 6
 

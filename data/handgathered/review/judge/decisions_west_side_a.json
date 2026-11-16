@@ -1,0 +1,220 @@
+[
+ {
+  "gt_id": "Waypoints_2026-10-24#84",
+  "choice": 1,
+  "confidence": "high",
+  "reason": "Automatic snap is 2.8 m straight in to the foot of the main wall at standing height; keeps order with #85 to the south."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#85",
+  "choice": 1,
+  "confidence": "high",
+  "reason": "Raw point is at the wall foot; snap moved only 0.4 m."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#86",
+  "choice": 1,
+  "confidence": "medium",
+  "reason": "Snap moves 4 m straight in to the same wall, foot 1.4 m above standing; fits between #84 and #87."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#87",
+  "choice": 1,
+  "confidence": "high",
+  "reason": "Raw point already at the wall foot; snap moved 0.5 m."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#88",
+  "choice": 1,
+  "confidence": "high",
+  "reason": "Raw point at the wall foot; snap moved 0.7 m and order with #87/#89 is kept."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#89",
+  "choice": 1,
+  "confidence": "high",
+  "reason": "Raw point at the wall foot; snap moved 0.8 m."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#90",
+  "choice": 1,
+  "confidence": "high",
+  "reason": "Raw point at the wall foot; snap moved 0.5 m."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#91",
+  "choice": 1,
+  "confidence": "high",
+  "reason": "Raw point at the wall foot; snap moved 0.3 m, about 4 m south of #90 as the raw points are."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#92",
+  "choice": 1,
+  "confidence": "high",
+  "reason": "Snap moves 1.3 m in to the wall foot at standing height, keeping order with #91 and #93."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#93",
+  "choice": 1,
+  "confidence": "high",
+  "reason": "Raw point at the wall foot; snap moved 0.4 m."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#94",
+  "choice": 1,
+  "confidence": "medium",
+  "reason": "Raw point is on the bench below the main wall; snap moves 6 m straight in to the main wall foot near standing height. The small step east of the raw point is about 6 m and not where the person stood."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#95",
+  "choice": 1,
+  "confidence": "low",
+  "reason": "Raw point is about 11 m out, below a short (~6 m) lower step; the snap goes straight in to the main wall and keeps order north of #96. Candidates 2/3 slide 9-14 m north for no clear reason."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#96",
+  "choice": 1,
+  "confidence": "low",
+  "reason": "Same situation as #95: raw point well out below the short lower step; the snap goes straight in to the main wall, a few metres south of #95 as the raw points are."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#97",
+  "choice": "custom",
+  "custom_east_m": -16.8,
+  "custom_north_m": -0.5,
+  "confidence": "low",
+  "reason": "Automatic snap sits on the same spot as #99 (squashed pair) and south of #98; this spot on the main wall (moved 1.2 m west into the wall mask) between #94's snap and #99 keeps the walking order and raw spacing."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#98",
+  "choice": "custom",
+  "custom_east_m": -16.7,
+  "custom_north_m": -0.3,
+  "confidence": "low",
+  "reason": "Only candidate slides 15 m south past #99 and #100, breaking walking order; this spot on the main wall foot is ~1.5 m south of #97 and north of #99, matching the raw spacing."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#99",
+  "choice": 1,
+  "confidence": "low",
+  "reason": "Snap goes straight in to the main wall; with #97 and #98 moved north it is no longer squashed and order 97-98-99-100 holds. Raw point is 13 m out, below the short step."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#100",
+  "choice": 1,
+  "confidence": "low",
+  "reason": "Snap goes straight in 10 m to the main wall foot just south of #99. It ends up within about 1 m of #107 from a later pass, which may be the same stretch."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#101",
+  "choice": 1,
+  "confidence": "medium",
+  "reason": "Raw point is on the top edge of the main wall (GPS error); snap is on the wall right in front, south of #102/#103 as in walking order."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#102",
+  "choice": "custom",
+  "custom_east_m": 0.3,
+  "custom_north_m": 1.5,
+  "confidence": "low",
+  "reason": "Automatic snap shares a spot with #103 although the raw points are 3 m apart; this spot on the wall halfway between #101's and #103's snaps keeps order and spacing."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#103",
+  "choice": 1,
+  "confidence": "medium",
+  "reason": "Only candidate, on the wall right next to the raw point (which is on the top edge); #102 moved south so they are no longer squashed."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#104",
+  "choice": 1,
+  "confidence": "high",
+  "reason": "Raw point at the main wall foot; snap moved 0.6 m."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#105",
+  "choice": 1,
+  "confidence": "high",
+  "reason": "Raw point at the wall foot; snap moved 0.2 m."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#106",
+  "choice": 1,
+  "confidence": "medium",
+  "reason": "Raw point is on the top edge of the main wall; snap 1.2 m in onto the wall right in front. Candidate 2 is almost the same."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#107",
+  "choice": 1,
+  "confidence": "medium",
+  "reason": "Raw point at the wall foot at standing height; snap moved 1 m. Close to #100's snap from an earlier pass."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#108",
+  "choice": 1,
+  "confidence": "high",
+  "reason": "Raw point at the wall foot; snap moved 0.4 m, 2.4 m south of #107 as the raw points are."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#109",
+  "choice": "custom",
+  "custom_east_m": 0.4,
+  "custom_north_m": 2.6,
+  "confidence": "low",
+  "reason": "Automatic snap lands on the same spot as #111 and south of #110, reversing order; this spot on the wall just north of #110's snap keeps 108-109-110-111 order."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#110",
+  "choice": 1,
+  "confidence": "medium",
+  "reason": "Snap 2.6 m along the wall in front of the raw point (raw on the top edge); with #109 moved north the order holds."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#111",
+  "choice": 1,
+  "confidence": "medium",
+  "reason": "Snap 2 m onto the wall in front; just south of #110 as the raw points are, and no longer squashed after moving #109."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#112",
+  "choice": 1,
+  "confidence": "high",
+  "reason": "Snap 0.7 m onto the wall straight in front, keeping order between #111 and #114."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#114",
+  "choice": 1,
+  "confidence": "high",
+  "reason": "Snap 0.9 m onto the main wall in front, just south of #112 as in walking order."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#115",
+  "choice": 1,
+  "confidence": "high",
+  "reason": "Raw point at the wall foot on the bench; snap moved 0.5 m."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#116",
+  "choice": 1,
+  "confidence": "high",
+  "reason": "Raw point at the wall foot; snap moved 0.2 m."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#117",
+  "choice": 1,
+  "confidence": "medium",
+  "reason": "Raw point on the bench 5 m out; snap goes straight in to the main wall foot at standing height. Ends up close to Nc #116, which is allowed."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#118",
+  "choice": 1,
+  "confidence": "high",
+  "reason": "Snap 1.2 m in to the wall foot at standing height, between #117 and #119."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#119",
+  "choice": 1,
+  "confidence": "medium",
+  "reason": "Snap 2.6 m straight in to the wall foot at standing height, south of #118. Lies near earlier-pass snaps (#100, #107), probably the same stretch revisited."
+ }
+]

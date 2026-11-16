@@ -1,0 +1,414 @@
+[
+{
+"gt_id": "Waypoints_2026-10-25#0",
+"choice": 1,
+"confidence": "medium",
+"reason": "Snap sits at the foot of the 11 m wall directly uphill of the raw point; nothing closer fits better."
+},
+{
+"gt_id": "Waypoints_2026-10-25#1",
+"choice": 1,
+"confidence": "medium",
+"reason": "Snap is right at the raw point on a ~7 m wall piece; reasonable for Maximus."
+},
+{
+"gt_id": "Waypoints_2026-10-25#2",
+"choice": 1,
+"confidence": "low",
+"reason": "Snap is on the north-south wall where the following routes (#5-#8) also land; raw point sits beside a dark unmasked rib so it is uncertain."
+},
+{
+"gt_id": "Waypoints_2026-10-25#3",
+"choice": "custom",
+"custom_east_m": 7.0,
+"custom_north_m": 0.0,
+"confidence": "low",
+"reason": "Snap jumps to a separate east-west wall piece while #2 and #5 before and after land on the north-south wall; placed between their snaps on that wall to keep walking order."
+},
+{
+"gt_id": "Waypoints_2026-10-25#5",
+"choice": 1,
+"confidence": "medium",
+"reason": "Snap is 2.6 m away on the north-south wall, foot near standing height, consistent with neighbours."
+},
+{
+"gt_id": "Waypoints_2026-10-25#6",
+"choice": 1,
+"confidence": "medium",
+"reason": "Snap on the 10 m north-south wall just east of raw, progressing from #5."
+},
+{
+"gt_id": "Waypoints_2026-10-25#7",
+"choice": 1,
+"confidence": "medium",
+"reason": "Snap 1.4 m away at the foot of the same wall, continues the sequence."
+},
+{
+"gt_id": "Waypoints_2026-10-25#8",
+"choice": 1,
+"confidence": "medium",
+"reason": "Snap essentially at the raw point at the wall foot near the corner of the north-south wall."
+},
+{
+"gt_id": "Waypoints_2026-10-25#9",
+"choice": 1,
+"confidence": "low",
+"reason": "Nc snapped to the short east-west wall arm (about 6 m); plausible for a non-climbable stretch but the wall is marginal."
+},
+{
+"gt_id": "Waypoints_2026-10-25#10",
+"choice": 1,
+"confidence": "low",
+"reason": "Shares the snap with Nc #9 but raw points are only 2 m apart; the east-west arm ends just east so no better spot; marginal height."
+},
+{
+"gt_id": "Waypoints_2026-10-25#11",
+"choice": 1,
+"confidence": "low",
+"reason": "Raw point sits by an unmasked dark rock arc; the only wall over 6 m is the masked wall ~10 m south, and the snap is its nearest foot. Unsure the route is on that wall."
+},
+{
+"gt_id": "Waypoints_2026-10-25#12",
+"choice": 2,
+"confidence": "low",
+"reason": "Same masked wall as #11; shares #11's snap, so moved a few metres along the wall to the anchor to keep them apart. The real rock may be the unmasked arc."
+},
+{
+"gt_id": "Waypoints_2026-10-25#13",
+"choice": "none",
+"confidence": "medium",
+"reason": "Off wall, no candidates; the nearby rock is the short unmasked ring, nothing over 6 m within reach."
+},
+{
+"gt_id": "Waypoints_2026-10-25#14",
+"choice": "none",
+"confidence": "low",
+"reason": "Nc recorded among the short ring-rock points (#13, #15-#20); the snap jumps 16 m to the big wall uphill, which is unlikely to be the rock meant."
+},
+{
+"gt_id": "Waypoints_2026-10-25#15",
+"choice": "none",
+"confidence": "medium",
+"reason": "Off wall in the middle of the short ring rock; no candidate."
+},
+{
+"gt_id": "Waypoints_2026-10-25#16",
+"choice": "none",
+"confidence": "medium",
+"reason": "Too short: the rock here is the unmasked ring, under 6 m."
+},
+{
+"gt_id": "Waypoints_2026-10-25#17",
+"choice": "none",
+"confidence": "medium",
+"reason": "Mijo is on the short ring rock (too short); no wall of 6 m or more nearby."
+},
+{
+"gt_id": "Waypoints_2026-10-25#18",
+"choice": "none",
+"confidence": "medium",
+"reason": "Mexican Mija on the same short ring rock as Mijo; too short."
+},
+{
+"gt_id": "Waypoints_2026-10-25#19",
+"choice": "none",
+"confidence": "medium",
+"reason": "Too short, same short ring rock."
+},
+{
+"gt_id": "Waypoints_2026-10-25#20",
+"choice": "none",
+"confidence": "medium",
+"reason": "Too short, same short ring rock."
+},
+{
+"gt_id": "Waypoints_2026-10-25#21",
+"choice": "none",
+"confidence": "low",
+"reason": "Nc stands at the unmasked east arc of the ring; the snap jumps 10 m to the south end of the masked wall and is shared by #22 and #23."
+},
+{
+"gt_id": "Waypoints_2026-10-25#22",
+"choice": "none",
+"confidence": "low",
+"reason": "Nc on the east arc of the ring near its corner; the snap is shared with #23, which fits it better."
+},
+{
+"gt_id": "Waypoints_2026-10-25#23",
+"choice": 1,
+"confidence": "low",
+"reason": "Nc at the south corner of the ring; snap 4.7 m away at the end of the marginal (~6 m) masked wall."
+},
+{
+"gt_id": "Waypoints_2026-10-25#24",
+"choice": "custom",
+"confidence": "low",
+"reason": "Off-wall snap, but the raw point sits ~14 m straight downhill of the big masked wall, as #25 just after it does; placed at that wall's foot about 9 m along from #25's snap, matching their raw spacing.",
+"custom_east_m": 9.5,
+"custom_north_m": 10.5
+},
+{
+"gt_id": "Waypoints_2026-10-25#25",
+"choice": 1,
+"confidence": "medium",
+"reason": "Snap at the foot of the big wall straight uphill; 15 m is large but fits the known downhill offset plus GPS error."
+},
+{
+"gt_id": "Waypoints_2026-10-25#26",
+"choice": 1,
+"confidence": "medium",
+"reason": "Snap 6.6 m uphill at the foot of the tall wall, foot near standing height; start of a run of routes going north."
+},
+{
+"gt_id": "Waypoints_2026-10-25#27",
+"choice": 1,
+"confidence": "medium",
+"reason": "Snap at the wall foot, a few metres north of #26's snap, keeping walking order."
+},
+{
+"gt_id": "Waypoints_2026-10-25#28",
+"choice": 1,
+"confidence": "medium",
+"reason": "Snap at the wall foot continuing north from #27."
+},
+{
+"gt_id": "Waypoints_2026-10-25#29",
+"choice": 1,
+"confidence": "medium",
+"reason": "Snap at the wall foot continuing the sequence; close to #30 but their raw points are only 3 m apart."
+},
+{
+"gt_id": "Waypoints_2026-10-25#30",
+"choice": 1,
+"confidence": "medium",
+"reason": "Snap at the wall foot just north of #29."
+},
+{
+"gt_id": "Waypoints_2026-10-25#31",
+"choice": 1,
+"confidence": "medium",
+"reason": "Snap at the wall foot north of #30, foot near standing height."
+},
+{
+"gt_id": "Waypoints_2026-10-25#32",
+"choice": 1,
+"confidence": "medium",
+"reason": "Snap straight uphill at the wall foot, about as far from #31's snap as the raw points are apart."
+},
+{
+"gt_id": "Waypoints_2026-10-25#33",
+"choice": 1,
+"confidence": "medium",
+"reason": "Snap 4.4 m away at the foot of the tall wall, straight uphill."
+},
+{
+"gt_id": "Waypoints_2026-10-25#34",
+"choice": 1,
+"confidence": "medium",
+"reason": "Snap 2.7 m away at the wall foot, a few metres north of #33's as the raw points are."
+},
+{
+"gt_id": "Waypoints_2026-10-25#35",
+"choice": 1,
+"confidence": "medium",
+"reason": "Snap at the wall foot, south of #33 in line with raw order."
+},
+{
+"gt_id": "Waypoints_2026-10-25#36",
+"choice": 1,
+"confidence": "medium",
+"reason": "Snap at the wall foot just south of #35."
+},
+{
+"gt_id": "Waypoints_2026-10-25#37",
+"choice": 1,
+"confidence": "medium",
+"reason": "Snap at the wall foot continuing south."
+},
+{
+"gt_id": "Waypoints_2026-10-25#38",
+"choice": 1,
+"confidence": "medium",
+"reason": "Snap at the wall foot; shares the spot with #39 but their raw points are nearly level along the wall."
+},
+{
+"gt_id": "Waypoints_2026-10-25#39",
+"choice": 1,
+"confidence": "medium",
+"reason": "Swamp Rat snaps 3.4 m to the wall foot, next to #38 whose raw point is about level along the wall."
+},
+{
+"gt_id": "Waypoints_2026-10-25#40",
+"choice": 2,
+"confidence": "medium",
+"reason": "Nc snap sat under 2 m from the Climb snaps of #38/#39; the anchor a bit south on the same wall keeps it between #39 and #41."
+},
+{
+"gt_id": "Waypoints_2026-10-25#41",
+"choice": 1,
+"confidence": "medium",
+"reason": "Snap at the wall foot south of #40, spacing matches the raw points; 10.5 m fits the downhill offset."
+},
+{
+"gt_id": "Waypoints_2026-10-25#42",
+"choice": 1,
+"confidence": "low",
+"reason": "Nc snapped to the small block just east of the raw point; blocks here are only ~6 m on the ground grid, so marginal."
+},
+{
+"gt_id": "Waypoints_2026-10-25#43",
+"choice": 1,
+"confidence": "low",
+"reason": "Nc snap under 1 m away on the same small block; marginal 6 m height."
+},
+{
+"gt_id": "Waypoints_2026-10-25#44",
+"choice": 1,
+"confidence": "low",
+"reason": "Nc snap 3.4 m away on the block cluster; marginal height and crowded with other Nc points."
+},
+{
+"gt_id": "Waypoints_2026-10-25#45",
+"choice": 1,
+"confidence": "low",
+"reason": "Nc snap on the same small block as #42/#43; raw points are close so sharing is acceptable."
+},
+{
+"gt_id": "Waypoints_2026-10-25#46",
+"choice": 1,
+"confidence": "low",
+"reason": "Climb snaps to the small block where Nc #42 also sits; no clearly better spot, the block cluster is marginal and crowded."
+},
+{
+"gt_id": "Waypoints_2026-10-25#47",
+"choice": 1,
+"confidence": "low",
+"reason": "Snap is the small west block, but its foot is ~6 m below where the person stood, which does not fit the uphill-wall pattern; unclear."
+},
+{
+"gt_id": "Waypoints_2026-10-25#48",
+"choice": 2,
+"confidence": "low",
+"reason": "Same small west block as #47 (shared snap); moved to the anchor a couple of metres along to keep them apart. Foot well below standing height, doubtful."
+},
+{
+"gt_id": "Waypoints_2026-10-25#49",
+"choice": 1,
+"confidence": "low",
+"reason": "Snap under 1 m away at the west face of the small block; marginal height."
+},
+{
+"gt_id": "Waypoints_2026-10-25#50",
+"choice": 1,
+"confidence": "low",
+"reason": "Snap 2.7 m away on the same small block as #49; spacing a bit tight but no better option."
+},
+{
+"gt_id": "Waypoints_2026-10-25#51",
+"choice": 1,
+"confidence": "low",
+"reason": "Snap 1 m away on the small north-west block; marginal height."
+},
+{
+"gt_id": "Waypoints_2026-10-25#52",
+"choice": 1,
+"confidence": "low",
+"reason": "Nc, #53 and #54 all snap to the small north-west block; their raw points are within 2 m, so sharing is acceptable."
+},
+{
+"gt_id": "Waypoints_2026-10-25#53",
+"choice": 1,
+"confidence": "low",
+"reason": "Same small block as #52/#54, raw points within 2 m."
+},
+{
+"gt_id": "Waypoints_2026-10-25#54",
+"choice": 1,
+"confidence": "low",
+"reason": "Same small block as #52/#53, raw points within 2 m."
+},
+{
+"gt_id": "Waypoints_2026-10-25#55",
+"choice": 1,
+"confidence": "low",
+"reason": "Nc snaps to the north face of the south-east rock rib; Climb #56 lands 1 m away, a bit tight versus 3 m raw spacing."
+},
+{
+"gt_id": "Waypoints_2026-10-25#56",
+"choice": 1,
+"confidence": "low",
+"reason": "Snap on the north face of the rock rib, next to #55; marginal height."
+},
+{
+"gt_id": "Waypoints_2026-10-25#57",
+"choice": 2,
+"confidence": "low",
+"reason": "Snap was shared by #57-#61 although their raw points spread over 11 m; Nc #57 is the westernmost, so placed at the anchor further west on the rib."
+},
+{
+"gt_id": "Waypoints_2026-10-25#58",
+"choice": 1,
+"confidence": "low",
+"reason": "Snap on the rib north face, about 3 m east of Nc #57's spot as their raw points are."
+},
+{
+"gt_id": "Waypoints_2026-10-25#59",
+"choice": 1,
+"confidence": "low",
+"reason": "Snap 2.7 m away on the rib; shared with #60 whose raw point is the same."
+},
+{
+"gt_id": "Waypoints_2026-10-25#60",
+"choice": 1,
+"confidence": "low",
+"reason": "Raw point identical to #59, same snap on the rib."
+},
+{
+"gt_id": "Waypoints_2026-10-25#61",
+"choice": 1,
+"confidence": "low",
+"reason": "The masked rib east of the snap is under 6 m, so I kept the automatic snap (6.2 m wall). It shares a spot with #58-#60 although this raw point is about 4 m further east."
+},
+{
+"gt_id": "Waypoints_2026-10-25#62",
+"choice": 1,
+"confidence": "medium",
+"reason": "Snap 9.5 m straight uphill at the foot of the big wall, which fits the known downhill offset; the small blocks to the west are less likely."
+},
+{
+"gt_id": "Waypoints_2026-10-25#63",
+"choice": 1,
+"confidence": "medium",
+"reason": "Snap at the big wall foot about 3 m along from #62's, matching their raw spacing."
+},
+{
+"gt_id": "Waypoints_2026-10-25#64",
+"choice": 1,
+"confidence": "medium",
+"reason": "Nc snap at the big wall foot, continuing south-east from #63."
+},
+{
+"gt_id": "Waypoints_2026-10-25#65",
+"choice": 1,
+"confidence": "medium",
+"reason": "Nc snap at the big wall foot a few metres along from #64; anchor would crowd #64."
+},
+{
+"gt_id": "Waypoints_2026-10-25#66",
+"choice": 1,
+"confidence": "medium",
+"reason": "Snap at the big wall foot just past Nc #65, in walking order."
+},
+{
+"gt_id": "Waypoints_2026-10-25#67",
+"choice": 1,
+"confidence": "medium",
+"reason": "Snap at the big wall foot continuing south-east."
+},
+{
+"gt_id": "Waypoints_2026-10-25#68",
+"choice": 1,
+"confidence": "medium",
+"reason": "Nc snap at the big wall foot, last in the sequence and spaced like the raw points."
+}
+]

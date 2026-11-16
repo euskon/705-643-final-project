@@ -1,0 +1,506 @@
+[
+ {
+  "gt_id": "Waypoints_2026-10-24#0",
+  "choice": "none",
+  "confidence": "medium",
+  "reason": "There are no candidates and no tall wall near the raw point; the only nearby walls are low boulder outcrops. The point was probably recorded while walking in, so it should be dropped."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#1",
+  "choice": "none",
+  "confidence": "medium",
+  "reason": "There are no candidates or wall mask within reach, and the profile shows only open slope. The next points are about 60 m away at the real wall."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#2",
+  "choice": 1,
+  "confidence": "high",
+  "reason": "The snap moves only 0.5 m and lands at the foot of a 20 m wall at standing height."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#3",
+  "choice": 1,
+  "confidence": "medium",
+  "reason": "The snap lands straight in front on the main wall. Along the wall the raw point sits at about the same position as #2, so being close to #2's snap is acceptable."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#4",
+  "choice": 1,
+  "confidence": "medium",
+  "reason": "The snap lands straight in front on the main wall, between the neighbours' snaps. The 12.7 m move matches the profile, which shows the foot well uphill of the standing spot."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#5",
+  "choice": 1,
+  "confidence": "medium",
+  "reason": "The snap is straight in front of the raw point. Candidate 2 would sit on top of #6 Lavender Eye's snap."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#6",
+  "choice": 1,
+  "confidence": "medium",
+  "reason": "The snap lies between Sonny Jim's and First Normal Form's snaps, straight in front of the raw point."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#7",
+  "choice": 1,
+  "confidence": "medium",
+  "reason": "The snap lies between Lavender Eye's and Green Goblin's snaps, straight in front of the raw point, on a tall wall."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#8",
+  "choice": 1,
+  "confidence": "medium",
+  "reason": "The snap is straight in front, at a wall foot about 13 m upslope as the profile confirms. It keeps a reasonable spacing from Ace in the Hole."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#9",
+  "choice": 1,
+  "confidence": "medium",
+  "reason": "The snap is straight in front of the raw point on the same stretch as Green Goblin, and their spacing roughly matches their raw spacing."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#10",
+  "choice": 1,
+  "confidence": "medium",
+  "reason": "The snap is straight in front of the raw point on the main wall, and the profile shows a foot about 16 m upslope. It sits in sequence with Ace in the Hole and Big Top."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#11",
+  "choice": 1,
+  "confidence": "medium",
+  "reason": "The snap is straight in front of the raw point, on a tall wall with many cliff points. It fits the order of the neighbours."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#12",
+  "choice": 1,
+  "confidence": "medium",
+  "reason": "The snap is straight in front of the raw point, passes every check and sits next to Big Top as the raw points do."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#13",
+  "choice": 1,
+  "confidence": "medium",
+  "reason": "The snap is straight in front of the raw point on the tallest stretch. It shares a spot with Fat Top, whose raw point is only 0.6 m away."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#14",
+  "choice": 1,
+  "confidence": "medium",
+  "reason": "The snap is straight in front of the raw point. Its raw point is 0.6 m from Big Hand's, so sharing a spot is fine."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#15",
+  "choice": 1,
+  "confidence": "medium",
+  "reason": "The snap is straight in front of the raw point and passes every check. Candidate 2 is just the tallest spot, 9 m along the wall."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#16",
+  "choice": 1,
+  "confidence": "medium",
+  "reason": "The snap is straight in front of the raw point. Side Show's raw point is at the same position along the wall, so the shared spot is plausible."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#17",
+  "choice": 1,
+  "confidence": "medium",
+  "reason": "The snap is close (5.8 m) and straight in front of the raw point. It matches Dancing Outlaw, which is at the same position along the wall."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#18",
+  "choice": 1,
+  "confidence": "medium",
+  "reason": "The snap is straight in front of the raw point at the inside corner of the wall, where the profile shows the foot. Candidate 3 is nearly the same place."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#19",
+  "choice": 1,
+  "confidence": "medium",
+  "reason": "The snap matches Summer Rain, whose raw point is 1.1 m away, at the corner below the tall wall."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#20",
+  "choice": 1,
+  "confidence": "high",
+  "reason": "The snap is close to the raw point, at the foot of a 21 m wall with many cliff points, and the profile matches."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#21",
+  "choice": 1,
+  "confidence": "high",
+  "reason": "The snap moves only 3 m to the foot of a tall wall at standing height."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#22",
+  "choice": 1,
+  "confidence": "high",
+  "reason": "The snap moves only 1.6 m, onto the foot of a tall wall at standing height."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#23",
+  "choice": 1,
+  "confidence": "high",
+  "reason": "The snap moves under 1 m, to the foot of a 17 m wall at standing height."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#24",
+  "choice": 2,
+  "confidence": "medium",
+  "reason": "Candidate 2 is at the foot at standing height. The automatic snap sits about 5 m up the face on a ledge. The raw point is 0.6 m from Crimp Scampi's, so the two being close is right."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#25",
+  "choice": 1,
+  "confidence": "high",
+  "reason": "The snap moves 2 m, to the foot of a 16 m wall at standing height."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#26",
+  "choice": 1,
+  "confidence": "high",
+  "reason": "The snap moves 2.6 m, to the foot of the wall at standing height, with many cliff points."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#27",
+  "choice": 1,
+  "confidence": "high",
+  "reason": "The snap moves 1 m, to the foot of the wall at standing height. It sits next to Emma's Got a Mullet, matching their raw spacing."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#28",
+  "choice": 1,
+  "confidence": "high",
+  "reason": "The snap moves 0.2 m and lands on a wall with very many cliff points, with the foot at standing height."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#29",
+  "choice": 1,
+  "confidence": "low",
+  "reason": "The snap stays at the raw point, but the wall here is only 6.6 m on the grid and the standing height is 8 m above #28 just 3 m away. The person may really have stood at the lower foot near #28."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#30",
+  "choice": 1,
+  "confidence": "high",
+  "reason": "The snap moves 0.5 m and lands on a 13 m wall with many cliff points, with the foot near standing height."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#31",
+  "choice": 1,
+  "confidence": "high",
+  "reason": "The snap moves 3 m to the foot of a 16 m wall at standing height. It matches the walk back south along this wall."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#32",
+  "choice": 2,
+  "confidence": "medium",
+  "reason": "Candidate 2 sits between the snaps of #31 and #33 along the wall and has more cliff points. The automatic snap lands almost on top of #33's snap."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#33",
+  "choice": 1,
+  "confidence": "medium",
+  "reason": "The snap is 3.8 m away, straight in front of the raw point, and about 4 m from #32's chosen spot, which matches their raw spacing."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#34",
+  "choice": 1,
+  "confidence": "low",
+  "reason": "The raw point lies on the face of the lower wall. The snap sits on that wall a few metres above its real foot. It is the right wall, but the exact foot is a few metres south."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#35",
+  "choice": "custom",
+  "confidence": "low",
+  "reason": "The raw point is on the bench above the lower wall. The profile shows a 15 m drop just south, and GPS drift north (as at #34, #36, #37) likely put the reading on top. This spot is placed at that wall's foot.",
+  "custom_east_m": 1.5,
+  "custom_north_m": -4.5
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#36",
+  "choice": "custom",
+  "confidence": "low",
+  "reason": "The automatic snap slides 15.5 m along to a spot only 6 m tall. The raw point is on the bench above a 17 m wall whose foot the profile shows about 7.5 m south, likely GPS drift. Groovy's snap is nearby, so it is doubtful.",
+  "custom_east_m": -0.5,
+  "custom_north_m": -7.5
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#37",
+  "choice": "custom",
+  "confidence": "low",
+  "reason": "There are no candidates because the raw point is on the bench above the lower wall. The profile shows the drop about 8-10 m south. This spot is placed at the wall foot beside Playing Hooky, keeping their raw spacing.",
+  "custom_east_m": -0.5,
+  "custom_north_m": -9.5
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#38",
+  "choice": 1,
+  "confidence": "high",
+  "reason": "The snap moves 1.1 m, to the foot of a 19 m wall at standing height."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#39",
+  "choice": 1,
+  "confidence": "medium",
+  "reason": "The snap is 2.4 m away at the foot at standing height. Its spacing from the Nc point matches their raw spacing."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#40",
+  "choice": 1,
+  "confidence": "medium",
+  "reason": "The snap is straight in front of the raw point on the 18 m wall at standing height. Candidate 2 would sit only about 2 m from the Nc point's snap, though their raw points are 4.7 m apart."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#41",
+  "choice": 1,
+  "confidence": "high",
+  "reason": "The snap moves 1.9 m, to the foot of a 19 m wall at standing height, with many cliff points."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#42",
+  "choice": 1,
+  "confidence": "medium",
+  "reason": "The snap moves 4.8 m straight in at standing height. It keeps the westward order with #41 and #43."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#43",
+  "choice": 1,
+  "confidence": "medium",
+  "reason": "The snap is 2.7 m away, straight in front of the raw point. Candidate 2 would land on #42's alternative spot."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#44",
+  "choice": 1,
+  "confidence": "high",
+  "reason": "The snap moves 1 m, to the foot of a 12 m wall at standing height."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#45",
+  "choice": 1,
+  "confidence": "low",
+  "reason": "The raw point lies on top of the wall at 595 m. The snap is the nearest wall spot, but the grid height there is only 6.0 m and its foot sits partway down a larger drop."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#46",
+  "choice": 1,
+  "confidence": "high",
+  "reason": "The snap moves 1.2 m, to the foot of a 15 m wall at standing height."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#47",
+  "choice": 1,
+  "confidence": "high",
+  "reason": "The snap moves 1.3 m, to the foot of a 15 m wall at standing height. Climb and Nc points sitting close together here is expected."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#48",
+  "choice": 1,
+  "confidence": "high",
+  "reason": "The snap moves 0.5 m, to the wall foot at standing height."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#49",
+  "choice": 1,
+  "confidence": "high",
+  "reason": "The snap moves 1.1 m, to the foot of a 15 m wall at standing height."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#50",
+  "choice": 1,
+  "confidence": "high",
+  "reason": "The snap moves 0.2 m, to the foot of a 15 m wall at standing height, with many cliff points."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#51",
+  "choice": 1,
+  "confidence": "high",
+  "reason": "The snap moves 2 m, to the foot of a 13 m wall at standing height, with many cliff points."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#52",
+  "choice": 1,
+  "confidence": "high",
+  "reason": "The snap moves 0.3 m, to the foot of a 14 m wall at standing height."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#53",
+  "choice": 1,
+  "confidence": "high",
+  "reason": "The snap moves 0.6 m, to the foot of a 15 m wall at standing height."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#54",
+  "choice": 1,
+  "confidence": "medium",
+  "reason": "The snap moves 0.5 m, onto an 11 m wall with many cliff points. The standing height is a little high compared with #52 and #53 nearby."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#55",
+  "choice": 1,
+  "confidence": "medium",
+  "reason": "The snap moves 0.4 m, to the foot at standing height in a slot between walls. The grid height (6.7 m) only just passes."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#56",
+  "choice": 1,
+  "confidence": "high",
+  "reason": "The snap moves 0.3 m, to the foot of a 12-18 m wall with many cliff points."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#57",
+  "choice": 1,
+  "confidence": "medium",
+  "reason": "The snap moves 0.6 m onto the same wall as #56. Its foot is 5 m below the raw height, but the profile shows the raw point on the slope just above."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#58",
+  "choice": 1,
+  "confidence": "medium",
+  "reason": "The snap moves 0.8 m onto the same wall stretch as #56 and #57. Candidate 2 is far away on a different stretch."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#59",
+  "choice": 1,
+  "confidence": "low",
+  "reason": "The raw point lies uphill, above the wall. The snap slides 6.6 m along to a spot only 6.0 m tall on the grid, though the column is tall. It is near the snaps of #56-#58, so it is plausible but doubtful."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#60",
+  "choice": 1,
+  "confidence": "low",
+  "reason": "The raw point lies on top of the ring-shaped rock, so the GPS is off. The snap is on its west side, between the snaps of #59 to the north and #61 to the south, which matches the walk south. Candidate 2 would sit on top of #57 and #58."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#61",
+  "choice": 1,
+  "confidence": "high",
+  "reason": "The snap is straight in front of the raw point, at the foot of a 15 m wall where the profile shows the foot."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#62",
+  "choice": 1,
+  "confidence": "medium",
+  "reason": "The snap is straight in front of the raw point, and its spacing from #61's snap matches their spacing along the wall."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#63",
+  "choice": 2,
+  "confidence": "medium",
+  "reason": "Candidate 2 sits between #62's and #64's snaps along the wall and has more cliff points. The automatic snap has a 0.4 m column and nearly lands on the Nc #64."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#64",
+  "choice": 1,
+  "confidence": "medium",
+  "reason": "The snap is straight in front of the raw point at the foot of a 15 m wall. It stays clear of #63's chosen spot."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#65",
+  "choice": 2,
+  "confidence": "low",
+  "reason": "Candidate 2 is equally close, has a taller column and more cliff points, and keeps spacing to #64 nearer the raw spacing. The automatic snap would also be acceptable."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#66",
+  "choice": 1,
+  "confidence": "medium",
+  "reason": "The snap is straight in front of the raw point, on a wall of about 10 m whose foot the profile shows upslope."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#68",
+  "choice": 1,
+  "confidence": "medium",
+  "reason": "The snap is 4 m away at the foot at standing height. It is close to #66 because their raw points are at about the same position along the wall."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#69",
+  "choice": 1,
+  "confidence": "medium",
+  "reason": "The snap moves 2.5 m to the wall foot at standing height. The wall is about 9 m, which is enough."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#70",
+  "choice": 1,
+  "confidence": "medium",
+  "reason": "The snap moves 3.6 m straight in to the wall foot, between the snaps of #69 and #71."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#71",
+  "choice": 1,
+  "confidence": "medium",
+  "reason": "The snap moves 3.8 m to the foot of a 9-10 m wall. Candidate 2 is almost the same spot."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#72",
+  "choice": 1,
+  "confidence": "medium",
+  "reason": "The raw point is at a gully bottom. The only candidate is the wall straight upslope, about 6 m above. It is in order with the neighbours along this wall."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#73",
+  "choice": 1,
+  "confidence": "medium",
+  "reason": "The only candidate is straight upslope on the same wall as the neighbours, in walking order."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#74",
+  "choice": 1,
+  "confidence": "medium",
+  "reason": "The snap is straight in front of the raw point. Candidate 2 would land exactly on #73's snap."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#75",
+  "choice": 1,
+  "confidence": "medium",
+  "reason": "The snap is straight north on the wall between the snaps of #74 and #76. The grid height (6.0 m) is borderline."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#76",
+  "choice": 1,
+  "confidence": "medium",
+  "reason": "The snap is straight in front of the raw point at the corner where the north wall meets the west wall, with the foot at standing height."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#77",
+  "choice": 1,
+  "confidence": "medium",
+  "reason": "The snap moves 3 m onto the west wall, close to standing height. The grid height is borderline (6.0 m), but candidate 2 is next to it at 7 m."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#78",
+  "choice": 1,
+  "confidence": "medium",
+  "reason": "The snap is straight in front of the raw point and lies between #77's and #79's snaps along the west wall."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#79",
+  "choice": 1,
+  "confidence": "high",
+  "reason": "The snap moves 0.8 m, to the foot of a 7 m wall at standing height, in order along the west wall."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#80",
+  "choice": 1,
+  "confidence": "high",
+  "reason": "The snap moves 0.5 m, to the wall foot at standing height, with many cliff points."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#81",
+  "choice": 1,
+  "confidence": "high",
+  "reason": "The snap moves 0.4 m, to the foot of a 12-18 m wall at standing height."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#82",
+  "choice": 1,
+  "confidence": "medium",
+  "reason": "The snap is straight in front of the raw point on the south face of the ring-shaped rock. Its spacing from #83's snap matches their raw spacing along the wall. It is near Climb #61, but Nc and Climb points sitting close is allowed."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#83",
+  "choice": 1,
+  "confidence": "medium",
+  "reason": "The snap is straight in front of the raw point on the same face, about 3 m from #82, which matches their raw spacing along the wall."
+ }
+]

@@ -62,7 +62,8 @@ RUNS_DIR = PROJECT_DIR / "runs" / "model2d"
 INPUTS = {"gradient": 2, "inbetween": 3}  # data channels per input type
 HCR = "horseshoe-canyon-ranch"
 HAND_SOURCES = ("handgathered", "handgathered_nc")
-PRED_COLS = ["sample_id", "slug", "source", "label", "confidence", "split", "score", "lon", "lat"]  # as the 3D predictions CSV
+PRED_COLS = ["sample_id", "slug", "source", "label", "confidence", "split", "score", "lon", "lat", "x", "y", "pair_id",
+             "has_opposite_neighbour", "judge_result", "judge_confidence"]  # as the 3D predictions CSV (missing ones skipped)
 
 # ---------------------------------------------------------------------------
 # metrics: verbatim copy of crag.finetune (that module needs OpenPoints to import)
@@ -84,10 +85,56 @@ def sample_metrics(pred: pd.DataFrame, threshold: float = 0.5) -> dict:
         hard = p["source"].isin(HARD_NEGATIVE_SOURCES) | (p["label"] == 1)
         if (p.loc[hard, "label"] == 0).any():
             out["sample_auroc_hard"] = float(roc_auc_score(p.loc[hard, "label"], p.loc[hard, "score"]))
+    out.update(pair_metrics(p))
     for src, g in p.groupby("source"):
         # positives: recall; negatives: specificity (fraction correctly scored below threshold)
         ok = (g["score"] >= threshold) if g["label"].iloc[0] == 1 else (g["score"] < threshold)
         out[f"acc_{src}"] = float(ok.mean())
+    return out
+
+
+def _boot_ci(vals: np.ndarray, n_boot: int = 1000, seed: int = 0) -> tuple[float, float]:
+    if len(vals) < 2:
+        return float("nan"), float("nan")
+    rng = np.random.default_rng(seed)
+    m = vals[rng.integers(0, len(vals), (n_boot, len(vals)))].mean(1)
+    return float(np.quantile(m, 0.025)), float(np.quantile(m, 0.975))
+
+
+def pair_metrics(p: pd.DataFrame, reach_m: float = 5.0) -> dict:
+    """Close climbable / not-climbable pairs (feet within ``reach_m``, same area):
+    ``pair_acc`` = share where the climbable sample scores higher (0.5 = guessing; ties 0.5),
+    with a 95% bootstrap range; ``auroc_isolated`` / ``auroc_near`` = AUROC of samples with no /
+    some opposite-label sample within ``reach_m``."""
+    out = {}
+    if not {"x", "y"} <= set(p) or p.empty:
+        return out
+    near = np.zeros(len(p), bool)
+    wins = []
+    for _, g in p.groupby("slug"):
+        pos, neg = g[g["label"] == 1], g[g["label"] == 0]
+        if pos.empty or neg.empty:
+            continue
+        from scipy.spatial import cKDTree
+
+        tree = cKDTree(neg[["x", "y"]].to_numpy(float))
+        for i, (xy, s) in enumerate(zip(pos[["x", "y"]].to_numpy(float), pos["score"].to_numpy())):
+            js = tree.query_ball_point(xy, reach_m)
+            if js:
+                near[p.index.get_indexer([pos.index[i]])] = True
+                near[p.index.get_indexer(neg.index[js])] = True
+                for j in js:
+                    t = neg["score"].iloc[j]
+                    wins.append(1.0 if s > t else 0.5 if s == t else 0.0)
+    out["pair_n"] = len(wins)
+    if wins:
+        w = np.asarray(wins)
+        out["pair_acc"] = float(w.mean())
+        out["pair_acc_lo"], out["pair_acc_hi"] = _boot_ci(w)
+    y, s = p["label"].to_numpy(), p["score"].to_numpy()
+    for name, m in (("auroc_isolated", ~near), ("auroc_near", near)):
+        if m.sum() and len(np.unique(y[m])) == 2:
+            out[name] = float(roc_auc_score(y[m], s[m]))
     return out
 
 
@@ -305,7 +352,7 @@ def predict(pipe: InputPipeline, model: Model2D, images: torch.Tensor, batch_siz
 
 
 def predictions(index: pd.DataFrame, score: np.ndarray) -> pd.DataFrame:
-    return index.assign(score=score)[PRED_COLS]
+    return index.assign(score=score)[[c for c in PRED_COLS if c in index or c == "score"]]
 
 
 def bce(score: np.ndarray, label: np.ndarray) -> float:

@@ -21,8 +21,8 @@ def _stored(dem: np.ndarray) -> torch.Tensor:
 
 
 def test_metric_code_is_the_3d_copy():
-    """sample_metrics / HARD_NEGATIVE_SOURCES must stay identical to crag/finetune.py (read as text, not imported)."""
-    for name in ("sample_metrics", "HARD_NEGATIVE_SOURCES"):
+    """sample_metrics / pair_metrics / _boot_ci / HARD_NEGATIVE_SOURCES must stay identical to crag/finetune.py (read as text, not imported)."""
+    for name in ("sample_metrics", "pair_metrics", "_boot_ci", "HARD_NEGATIVE_SOURCES"):
         assert m2.source_of(PROJECT_DIR / "crag" / "finetune.py", name) == m2.source_of(PROJECT_DIR / "crag" / "model2d_train.py", name), name
 
 

@@ -1,0 +1,399 @@
+{
+ "name": "v3-hcr-check",
+ "negative_config": {
+  "exclusion_m": 7.5,
+  "band_min_m": 10.0,
+  "band_max_m": 40.0,
+  "doc_radius_m": 75.0,
+  "doc_min_routes": 3,
+  "min_coverage": 0.6,
+  "grid_m": 2.0,
+  "neg_spacing_m": 6.0,
+  "band_per_positive": 1.0,
+  "stepback_m": [
+   12.0,
+   20.0
+  ],
+  "max_stepback_steep_frac": 0.25,
+  "far_min_m": 300.0,
+  "far_per_area": 40,
+  "cylinder_m": 2.5,
+  "min_steep_points": 8
+ },
+ "strategies": [
+  "handgathered_nc",
+  "band",
+  "stepback",
+  "far_cliff"
+ ],
+ "aug": "",
+ "positives_snapped": 123,
+ "positives_total": 126,
+ "snap_status": {
+  "ok": 123,
+  "off_wall": 3
+ },
+ "wall_check": [
+  {
+   "slug": "horseshoe-canyon-ranch",
+   "source": "handgathered",
+   "label": 1,
+   "status": "off_wall",
+   "n": 3
+  },
+  {
+   "slug": "horseshoe-canyon-ranch",
+   "source": "handgathered",
+   "label": 1,
+   "status": "ok",
+   "n": 123
+  },
+  {
+   "slug": "horseshoe-canyon-ranch",
+   "source": "handgathered_nc",
+   "label": 0,
+   "status": "off_wall",
+   "n": 2
+  },
+  {
+   "slug": "horseshoe-canyon-ranch",
+   "source": "handgathered_nc",
+   "label": 0,
+   "status": "ok",
+   "n": 58
+  }
+ ],
+ "samples_by_split_label": [
+  {
+   "split": "test",
+   "label": 0,
+   "n": 225
+  },
+  {
+   "split": "test",
+   "label": 1,
+   "n": 123
+  }
+ ],
+ "samples_by_source": {
+  "stepback": 148,
+  "handgathered": 123,
+  "handgathered_nc": 58,
+  "far_cliff": 19
+ },
+ "samples_by_area": [
+  {
+   "slug": "horseshoe-canyon-ranch",
+   "count": 348,
+   "positives": 123
+  }
+ ],
+ "negative_features_by_source": [
+  {
+   "source": "far_cliff",
+   "cliff_height_m": 14.416,
+   "n_steep": 40.684,
+   "multi_frac": 0.26,
+   "dist_to_route_m": 510.264,
+   "confidence": 0.4
+  },
+  {
+   "source": "handgathered_nc",
+   "cliff_height_m": 11.687,
+   "n_steep": 16.828,
+   "multi_frac": 0.24,
+   "dist_to_route_m": 18.765,
+   "confidence": 1.0
+  },
+  {
+   "source": "stepback",
+   "cliff_height_m": 1.264,
+   "n_steep": 2.209,
+   "multi_frac": 0.265,
+   "dist_to_route_m": 13.834,
+   "confidence": 0.9
+  }
+ ],
+ "band_validation_horseshoe": {
+  "per_run": [
+   {
+    "doc_fraction": 0.3,
+    "repeat": 0,
+    "n_documented": 32,
+    "band_n": 32,
+    "band_confirmed": 4,
+    "band_contradicted": 4,
+    "band_precision": 0.5,
+    "random_precision": 0.0,
+    "random_confirmed": 0,
+    "random_contradicted": 4
+   },
+   {
+    "doc_fraction": 0.3,
+    "repeat": 1,
+    "n_documented": 38,
+    "band_n": 38,
+    "band_confirmed": 4,
+    "band_contradicted": 11,
+    "band_precision": 0.26666666666666666,
+    "random_precision": 0.3333333333333333,
+    "random_confirmed": 1,
+    "random_contradicted": 2
+   },
+   {
+    "doc_fraction": 0.3,
+    "repeat": 2,
+    "n_documented": 28,
+    "band_n": 28,
+    "band_confirmed": 1,
+    "band_contradicted": 9,
+    "band_precision": 0.1,
+    "random_precision": 1.0,
+    "random_confirmed": 1,
+    "random_contradicted": 0
+   },
+   {
+    "doc_fraction": 0.3,
+    "repeat": 3,
+    "n_documented": 28,
+    "band_n": 28,
+    "band_confirmed": 2,
+    "band_contradicted": 7,
+    "band_precision": 0.2222222222222222,
+    "random_precision": 0.2,
+    "random_confirmed": 1,
+    "random_contradicted": 4
+   },
+   {
+    "doc_fraction": 0.3,
+    "repeat": 4,
+    "n_documented": 34,
+    "band_n": 34,
+    "band_confirmed": 4,
+    "band_contradicted": 8,
+    "band_precision": 0.3333333333333333,
+    "random_precision": 0.0,
+    "random_confirmed": 0,
+    "random_contradicted": 2
+   },
+   {
+    "doc_fraction": 0.5,
+    "repeat": 0,
+    "n_documented": 58,
+    "band_n": 58,
+    "band_confirmed": 7,
+    "band_contradicted": 11,
+    "band_precision": 0.3888888888888889,
+    "random_precision": 0.6666666666666666,
+    "random_confirmed": 4,
+    "random_contradicted": 2
+   },
+   {
+    "doc_fraction": 0.5,
+    "repeat": 1,
+    "n_documented": 60,
+    "band_n": 60,
+    "band_confirmed": 8,
+    "band_contradicted": 5,
+    "band_precision": 0.6153846153846154,
+    "random_precision": 0.8333333333333334,
+    "random_confirmed": 5,
+    "random_contradicted": 1
+   },
+   {
+    "doc_fraction": 0.5,
+    "repeat": 2,
+    "n_documented": 58,
+    "band_n": 58,
+    "band_confirmed": 8,
+    "band_contradicted": 13,
+    "band_precision": 0.38095238095238093,
+    "random_precision": 0.6666666666666666,
+    "random_confirmed": 4,
+    "random_contradicted": 2
+   },
+   {
+    "doc_fraction": 0.5,
+    "repeat": 3,
+    "n_documented": 60,
+    "band_n": 60,
+    "band_confirmed": 8,
+    "band_contradicted": 5,
+    "band_precision": 0.6153846153846154,
+    "random_precision": 0.2857142857142857,
+    "random_confirmed": 2,
+    "random_contradicted": 5
+   },
+   {
+    "doc_fraction": 0.5,
+    "repeat": 4,
+    "n_documented": 58,
+    "band_n": 58,
+    "band_confirmed": 4,
+    "band_contradicted": 11,
+    "band_precision": 0.26666666666666666,
+    "random_precision": 0.5,
+    "random_confirmed": 2,
+    "random_contradicted": 2
+   },
+   {
+    "doc_fraction": 0.75,
+    "repeat": 0,
+    "n_documented": 94,
+    "band_n": 94,
+    "band_confirmed": 8,
+    "band_contradicted": 7,
+    "band_precision": 0.5333333333333333,
+    "random_precision": 0.875,
+    "random_confirmed": 7,
+    "random_contradicted": 1
+   },
+   {
+    "doc_fraction": 0.75,
+    "repeat": 1,
+    "n_documented": 91,
+    "band_n": 91,
+    "band_confirmed": 10,
+    "band_contradicted": 5,
+    "band_precision": 0.6666666666666666,
+    "random_precision": 0.75,
+    "random_confirmed": 3,
+    "random_contradicted": 1
+   },
+   {
+    "doc_fraction": 0.75,
+    "repeat": 2,
+    "n_documented": 93,
+    "band_n": 93,
+    "band_confirmed": 8,
+    "band_contradicted": 3,
+    "band_precision": 0.7272727272727273,
+    "random_precision": 1.0,
+    "random_confirmed": 4,
+    "random_contradicted": 0
+   },
+   {
+    "doc_fraction": 0.75,
+    "repeat": 3,
+    "n_documented": 93,
+    "band_n": 93,
+    "band_confirmed": 9,
+    "band_contradicted": 8,
+    "band_precision": 0.5294117647058824,
+    "random_precision": 0.8333333333333334,
+    "random_confirmed": 5,
+    "random_contradicted": 1
+   },
+   {
+    "doc_fraction": 0.75,
+    "repeat": 4,
+    "n_documented": 94,
+    "band_n": 94,
+    "band_confirmed": 10,
+    "band_contradicted": 3,
+    "band_precision": 0.7692307692307693,
+    "random_precision": 0.8461538461538461,
+    "random_confirmed": 11,
+    "random_contradicted": 2
+   },
+   {
+    "doc_fraction": 0.9,
+    "repeat": 0,
+    "n_documented": 111,
+    "band_n": 111,
+    "band_confirmed": 9,
+    "band_contradicted": 2,
+    "band_precision": 0.8181818181818182,
+    "random_precision": 1.0,
+    "random_confirmed": 4,
+    "random_contradicted": 0
+   },
+   {
+    "doc_fraction": 0.9,
+    "repeat": 1,
+    "n_documented": 112,
+    "band_n": 112,
+    "band_confirmed": 9,
+    "band_contradicted": 3,
+    "band_precision": 0.75,
+    "random_precision": 1.0,
+    "random_confirmed": 5,
+    "random_contradicted": 0
+   },
+   {
+    "doc_fraction": 0.9,
+    "repeat": 2,
+    "n_documented": 108,
+    "band_n": 108,
+    "band_confirmed": 10,
+    "band_contradicted": 1,
+    "band_precision": 0.9090909090909091,
+    "random_precision": 1.0,
+    "random_confirmed": 6,
+    "random_contradicted": 0
+   },
+   {
+    "doc_fraction": 0.9,
+    "repeat": 3,
+    "n_documented": 109,
+    "band_n": 109,
+    "band_confirmed": 9,
+    "band_contradicted": 3,
+    "band_precision": 0.75,
+    "random_precision": 1.0,
+    "random_confirmed": 6,
+    "random_contradicted": 0
+   },
+   {
+    "doc_fraction": 0.9,
+    "repeat": 4,
+    "n_documented": 111,
+    "band_n": 111,
+    "band_confirmed": 9,
+    "band_contradicted": 3,
+    "band_precision": 0.75,
+    "random_precision": 1.0,
+    "random_confirmed": 5,
+    "random_contradicted": 0
+   }
+  ],
+  "by_coverage": [
+   {
+    "doc_fraction": 0.3,
+    "band_precision": 0.284,
+    "random_precision": 0.307,
+    "band_n": 32.0,
+    "band_confirmed": 3.0,
+    "band_contradicted": 7.8
+   },
+   {
+    "doc_fraction": 0.5,
+    "band_precision": 0.453,
+    "random_precision": 0.59,
+    "band_n": 58.8,
+    "band_confirmed": 7.0,
+    "band_contradicted": 9.0
+   },
+   {
+    "doc_fraction": 0.75,
+    "band_precision": 0.645,
+    "random_precision": 0.861,
+    "band_n": 93.0,
+    "band_confirmed": 9.0,
+    "band_contradicted": 5.2
+   },
+   {
+    "doc_fraction": 0.9,
+    "band_precision": 0.795,
+    "random_precision": 1.0,
+    "band_n": 110.2,
+    "band_confirmed": 9.2,
+    "band_contradicted": 2.4
+   }
+  ],
+  "match_m": 8.0,
+  "n_climb": 123,
+  "n_nc": 58,
+  "n_off_wall": 5
+ }
+}

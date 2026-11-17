@@ -48,7 +48,7 @@ from crag import finetune_data, registry, tiles, wandb_utils
 from crag.cli import parse_list, setup_logging
 from crag.crop import AreaCloud
 from crag.groundtruth import load_waypoints
-from crag.negatives import NegativeConfig, build_area_samples, validate_on_handgathered
+from crag.negatives import NegativeConfig, build_area_samples, spacing_report, validate_on_handgathered
 from crag.paths import AREAS_JSON, PRETRAIN_DIR, ROUTES_DIR
 from crag.pseudolabels import PseudoLabelConfig, area_pins, process_area
 
@@ -70,7 +70,7 @@ def main() -> None:
     ap.add_argument("--routes", type=Path, default=ROUTES_DIR / "verified_routes.csv")
     ap.add_argument("--registry", type=Path, default=AREAS_JSON)
     ap.add_argument("--areas", help="comma-separated slugs (default: every area with verified routes)")
-    ap.add_argument("--strategies", default="handgathered_nc,band,stepback,far_cliff")
+    ap.add_argument("--strategies", default="handgathered_nc,band,far_cliff", help="step-back samples (off the wall) are not part of the V4 task")
     ap.add_argument("--aug", default="", help="augmentation negatives from positive blocks: squash,layback")
     ap.add_argument("--band-min-m", type=float, default=10.0)
     ap.add_argument("--band-max-m", type=float, default=40.0)
@@ -84,19 +84,26 @@ def main() -> None:
     ap.add_argument("--no-download", action="store_true", help="use only LiDAR already on disk")
     ap.add_argument("--no-validate", action="store_true", help="skip the Horseshoe Canyon precision check")
     ap.add_argument("--workers", type=int, default=4)
+    ap.add_argument("--hcr-fold", default="none", choices=sorted(finetune_data.HCR_FOLDS), help="Horseshoe wall sections moved into training")
+    ap.add_argument("--blocks-from", help="reuse the block arrays of this dataset (same samples); only the splits are recomputed")
+    ap.add_argument("--allow-stale-aug", action="store_true")
     wandb_utils.add_cli(ap, default="disabled")
     args = ap.parse_args()
     setup_logging()
 
     reg = registry.load(args.registry)
+    out = finetune_data.dataset_dir(args.name)
+    if args.blocks_from:
+        fold_only(args, reg, out)
+        return
     routes = pd.read_csv(args.routes)
     slugs = parse_list(args.areas) or sorted(routes["slug"].unique())
     cfg = NegativeConfig(band_min_m=args.band_min_m, band_max_m=args.band_max_m, min_coverage=args.min_coverage)
     strategies = tuple(parse_list(args.strategies) or ())
-    out = finetune_data.dataset_dir(args.name)
     out.mkdir(parents=True, exist_ok=True)
+    strip_cfg = finetune_data.StripConfig()
     pl_cfg = PseudoLabelConfig()
-    all_pos, all_neg, known_by_slug, crs_by_slug = [], [], {}, {}
+    all_pos, all_neg, known_by_slug, crs_by_slug, area_reports = [], [], {}, {}, {}
     for area in registry.areas(reg, slugs, enabled_only=False):
         slug = area["slug"]
         r = routes[routes["slug"] == slug]
@@ -125,11 +132,13 @@ def main() -> None:
         bi_path = PRETRAIN_DIR / slug / "index.csv"
         block_index = pd.read_csv(bi_path) if bi_path.exists() else None
         _, pins = area_pins(area, crs)
-        pos, neg = build_area_samples(AreaCloud(slug), r.reset_index(drop=True), known_ll, crs, coverage, cfg, block_index, pins, strategies)
-        pos["slug"], neg["slug"] = slug, slug
+        pos, smp, rep = build_area_samples(AreaCloud(slug), r.reset_index(drop=True), known_ll, crs, coverage, cfg, block_index, pins, strategies)
+        pos["slug"], smp["slug"] = slug, slug
         all_pos.append(pos)
-        all_neg.append(neg)
-        log.info("%s: wall check %s, negatives %s", slug, pos.groupby("label")["status"].value_counts().to_dict(), neg["source"].value_counts().to_dict() if len(neg) else {})
+        all_neg.append(smp)
+        area_reports[slug] = rep
+        log.info("%s: wall check %s, samples %s, dropped %s", slug, pos.groupby("label")["status"].value_counts().to_dict(),
+                 smp.groupby(["source"]).size().to_dict() if len(smp) else {}, rep["dropped"])
 
     pos_all = pd.concat(all_pos, ignore_index=True)
     pos_all.to_csv(out / "positives_all.csv", index=False)
@@ -139,24 +148,24 @@ def main() -> None:
     pos_all[pos_all["status"] != "ok"].to_csv(out / "rejected_points.csv", index=False)
     log.info("wall check (all route GPS points): %s; median distance GPS -> wall foot %.1f m",
              pos_all["status"].value_counts().to_dict(), float(pos_all.loc[pos_all["status"] == "ok", "snap_dist_m"].median()))
-    pos_all = pos_all[pos_all["label"] == 1]  # Nc points are negatives (already added by build_area_samples)
-    ok = pos_all[pos_all["status"] == "ok"].copy()
-    P = pd.DataFrame({
-        "sample_id": ok["route_uid"], "slug": ok["slug"], "label": 1, "source": ok["source"], "confidence": np.where(ok["match_type"] == "fuzzy", 0.9, 1.0),
-        "x": ok["snap_x"], "y": ok["snap_y"], "lon": ok["snap_lon"], "lat": ok["snap_lat"], "base_z": ok["base_z"], "top_z": ok["top_z"],
-        "out_dx": ok["out_dx"], "out_dy": ok["out_dy"], "name": ok["name"], "mp_route_id": ok["mp_route_id"], "match_type": ok["match_type"],
-    })
-    neg_all = pd.concat(all_neg, ignore_index=True) if all_neg else pd.DataFrame()
-    if len(neg_all):
-        neg_all["sample_id"] = [f"{s}:neg:{src}:{i}" for i, (s, src) in enumerate(zip(neg_all["slug"], neg_all["source"]))]
-    samples = pd.concat([P, neg_all], ignore_index=True)
+    sq = spacing_report(pos_all)
+    sq.to_csv(out / "squashed_pairs.csv", index=False)
+    pos_all = pos_all[pos_all["label"] == 1]
+    ok = pos_all[pos_all["status"] == "ok"]
+    samples = pd.concat(all_neg, ignore_index=True)
+    samples["sample_id"] = [u if str(u).startswith(("osm:", "hand:")) else f"{s_}:{u}" for u, s_ in zip(samples["route_uid"], samples["slug"])]
+    samples, strip_drops = finetune_data.split_strip_widths(samples, strip_cfg)
     samples["group"] = finetune_data.assign_groups(samples, args.group_m)
     samples["split"] = finetune_data.assign_splits(samples, args.val_frac, args.test_frac, tuple(parse_list(args.test_areas) or ()), tuple(parse_list(args.val_areas) or ()))
+    samples["hcr_section"] = finetune_data.hcr_sections(samples)
+    samples["split"] = finetune_data.apply_hcr_fold(samples, samples["split"].to_numpy(), args.hcr_fold)
     samples.to_csv(out / "samples.csv", index=False)
-    finetune_data.write_heldout_regions(samples[~samples["slug"].isin([a["slug"] for a in reg["areas"] if a.get("split") == "holdout"])])
+    if args.hcr_fold == "none":
+        finetune_data.write_heldout_regions(samples[~samples["slug"].isin([a["slug"] for a in reg["areas"] if a.get("split") == "holdout"])])
+    neg_all = samples[samples["label"] == 0]
 
-    index = finetune_data.build_blocks(samples, out, args.block_size_m, pl_cfg.voxel_m, known_lonlat_by_slug=known_by_slug,
-                                       aug_kinds=tuple(parse_list(args.aug) or ()), crs_by_slug=crs_by_slug)
+    index, block_drops = finetune_data.build_blocks(samples, out, args.block_size_m, pl_cfg.voxel_m, strip=strip_cfg, known_lonlat_by_slug=known_by_slug,
+                                                    aug_kinds=tuple(parse_list(args.aug) or ()), crs_by_slug=crs_by_slug, allow_stale_aug=args.allow_stale_aug)
     index.to_csv(out / "index.csv", index=False)
     for split, g in index[~index["source"].str.startswith("aug_")].groupby("split"):
         if g["label"].nunique() < 2:
@@ -174,19 +183,41 @@ def main() -> None:
             google_maps=lambda d: [f"https://www.google.com/maps/@{a:.6f},{b:.6f},60m/data=!3m1!1e3" for a, b in zip(d["lat"], d["lon"])], review_label="", notes="")
         rev.to_csv(out / "review_negatives.csv", index=False)
 
+    drops = [d for rep in area_reports.values() for d in rep["drops"]] + strip_drops + block_drops
+    pd.DataFrame(drops, columns=["sample", "reason", "other", "source"] + [c for c in ("n_center", "split_strip") if any(c in d for d in drops)]).to_csv(out / "dropped_samples.csv", index=False)
+    dropped = {}
+    for rep in area_reports.values():
+        for k, v in rep["dropped"].items():
+            dropped[k] = dropped.get(k, 0) + v
+    for d in strip_drops + block_drops:
+        k = f"{d['source']}:{d['reason']}"
+        dropped[k] = dropped.get(k, 0) + 1
+    real = index[~index["source"].str.startswith("aug_")]
+    desc = lambda c: real.groupby("source")[c].describe(percentiles=[0.1, 0.5, 0.9])[["count", "10%", "50%", "90%"]].round(2).reset_index().to_dict("records")
     report = {
         "name": args.name,
+        "hcr_fold": args.hcr_fold,
+        "strip_config": finetune_data.strip_config_dict(strip_cfg),
+        "channels": list(finetune_data.CHANNELS),
+        "channel_missing_share": {k: round(v / max(index.attrs.get("channel_stats", {}).get("n", 1), 1), 4) for k, v in index.attrs.get("channel_stats", {}).items() if k != "n"},
+        "dropped": dropped,
+        "squashed_pairs": sq[sq["squashed_pair"]].groupby("slug").size().to_dict() if len(sq) else {},
+        "labelled_points_by_source": desc("n_center"),
+        "labelled_height_median_by_source": desc("lab_up_med"),
+        "wall_top_by_source": desc("wall_top_m"),
+        "wall_height_by_source": desc("wall_height_m"),
+        "close_pairs": int(real["has_opposite_neighbour"].sum()) if "has_opposite_neighbour" in real else 0,
         "negative_config": asdict(cfg),
         "strategies": list(strategies),
         "aug": args.aug,
-        "positives_snapped": int(len(ok)),
+        "positives_wall_checked_ok": int(len(ok)),
         "positives_total": int(len(pos_all)),
         "snap_status": pos_all["status"].value_counts().to_dict(),
         "wall_check": wall_check.to_dict("records"),
         "samples_by_split_label": index.groupby(["split", "label"]).size().rename("n").reset_index().to_dict("records"),
         "samples_by_source": index["source"].value_counts().to_dict(),
         "samples_by_area": index.groupby("slug")["label"].agg(["count", "sum"]).rename(columns={"sum": "positives"}).reset_index().to_dict("records"),
-        "negative_features_by_source": (neg_all.groupby("source")[[c for c in ("cliff_height_m", "n_steep", "multi_frac", "dist_to_route_m", "confidence") if c in neg_all]].mean().round(3).reset_index().to_dict("records") if len(neg_all) else []),
+        "negative_features_by_source": (neg_all.groupby("source")[[c for c in ("cliff_height_m", "n_steep", "multi_frac", "dist_to_route_m", "confidence", "wall_height_m") if c in neg_all]].mean().round(3).reset_index().to_dict("records") if len(neg_all) else []),
     }
     if not args.no_validate and (Path(PRETRAIN_DIR) / finetune_data_hand_slug() / "stage").exists():
         hand_area = next((a for a in reg["areas"] if a["slug"] == finetune_data_hand_slug()), None)
@@ -207,6 +238,22 @@ def main() -> None:
             run.log({"finetune_dataset/band_precision_vs_coverage": wandb.Table(dataframe=pd.DataFrame(report["band_validation_horseshoe"]["by_coverage"]))})
         run.summary.update({"positives": int((index["label"] == 1).sum()), "negatives": int((index["label"] == 0).sum())})
         run.finish()
+
+
+def fold_only(args, reg, out: Path) -> None:
+    """A Horseshoe fold: the samples and block arrays of ``--blocks-from``, new splits only."""
+    src = finetune_data.dataset_dir(args.blocks_from)
+    out.mkdir(parents=True, exist_ok=True)
+    (out / "blocks_from.txt").write_text(args.blocks_from)
+    index = pd.read_csv(src / "index.csv")
+    index["split"] = finetune_data.apply_hcr_fold(index, index["split"].to_numpy(), args.hcr_fold)
+    index.to_csv(out / "index.csv", index=False)
+    rep = json.loads((src / "report.json").read_text())
+    rep.update(name=args.name, hcr_fold=args.hcr_fold, blocks_from=args.blocks_from,
+               samples_by_split_label=index.groupby(["split", "label"]).size().rename("n").reset_index().to_dict("records"),
+               hcr_split_by_section=index[index["slug"] == finetune_data.HCR_SLUG].groupby(["hcr_section", "split", "label"]).size().rename("n").reset_index().to_dict("records"))
+    (out / "report.json").write_text(json.dumps(rep, indent=1, default=str))
+    print(index[index["slug"] == finetune_data.HCR_SLUG].groupby(["hcr_section", "split", "label"]).size().to_string())
 
 
 def finetune_data_hand_slug() -> str:

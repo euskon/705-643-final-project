@@ -6,7 +6,7 @@ import pytest
 from scipy.spatial import cKDTree
 
 from crag import crossref
-from crag.finetune_data import LABEL_MODES, augment_negative, block_codes
+from crag.finetune_data import LABEL_MODES, augment_negative
 from crag.negatives import NegativeConfig, band_candidates, greedy_select
 from crag.datasets import BlockDataset, BlockSpec
 from crag.labeling import compute_normals, slope_deg, surface_geometry
@@ -85,7 +85,7 @@ def test_wall_check_moves_points_to_the_wall_or_rejects_them():
     assert snap_one(pc, np.array([-35.0, 50.0]), LabelConfig(), GroundTruthConfig())["status"] == "off_wall"  # too far
     # steep points on a 2 m step (e.g. a boulder edge) are not a wall to climb
     low, lk = _cliff_scene(np.random.default_rng(1), height=2.0)
-    assert snap_one(_scene_pc(low, lk == "face"), np.array([-3.0, 50.0]), LabelConfig(), GroundTruthConfig())["status"] == "off_wall"
+    assert snap_one(_scene_pc(low, lk == "face"), np.array([-3.0, 50.0]), LabelConfig(), GroundTruthConfig())["status"] == "too_short"
 
 
 def test_surface_geometry_ignores_canopy():
@@ -137,7 +137,7 @@ def test_window_sampling(tmp_path):
     index = pd.DataFrame(blocks["meta"], columns=META_COLS)
     index.insert(0, "tile", tile.id)
     index.insert(0, "slug", "a")
-    spec = BlockSpec(num_points=2048)
+    spec = BlockSpec(num_points=2048, feature_keys="pos,heights")
     plain = BlockDataset(index, spec, None, train=True, root=tmp_path)
     win = BlockDataset(index, spec, None, train=True, root=tmp_path, window={"block_size_m": 20.0, "rock_center_prob": 1.0})
     np.random.seed(0)
@@ -176,17 +176,18 @@ def test_crossref_tiers():
 
 
 class FakeCloud:
-    """A straight 30 m cliff along x = 0 (steep points) with ground in front."""
+    """A straight 30 m cliff along x = 0 (steep points) with ground in front and a plateau behind."""
 
     def __init__(self):
         rng = np.random.default_rng(0)
         n = 30000
         wall = np.column_stack([rng.normal(0, 0.3, n), rng.uniform(-200, 200, n), rng.uniform(100, 130, n)])
         ground = np.column_stack([rng.uniform(2, 60, n), rng.uniform(-200, 200, n), np.full(n, 100.0)])
-        self.xyz = np.vstack([wall, ground])
-        self.steep = np.r_[np.ones(n, bool), np.zeros(n, bool)]
-        self.normals = np.tile([1.0, 0, 0], (2 * n, 1)).astype(np.float32)
-        self.normals[n:] = [0, 0, 1]
+        top = np.column_stack([rng.uniform(-60, -1, n), rng.uniform(-200, 200, n), np.full(n, 130.0)])
+        self.xyz = np.vstack([wall, ground, top])
+        self.steep = np.r_[np.ones(n, bool), np.zeros(2 * n, bool)]
+        self.normals = np.tile([0, 0, 1.0], (3 * n, 1)).astype(np.float32)
+        self.normals[:n] = [1.0, 0, 0]
 
     def crop(self, cx, cy, half):
         m = (np.abs(self.xyz[:, 0] - cx) <= half) & (np.abs(self.xyz[:, 1] - cy) <= half)
@@ -211,24 +212,15 @@ def test_band_candidates_and_selection():
     assert min(np.hypot(*(xy[i] - xy[j])) for i in range(5) for j in range(i)) >= 6.0
 
 
-def test_block_codes_and_augmentation():
+def test_augmentation():
     cloud = FakeCloud()
     crop = cloud.crop(0, 0, 10)
-    idx = np.arange(len(crop["xyz"]))
-    s = pd.Series({"x": 0.0, "y": 0.0, "label": 1, "source": "osm", "base_z": 100.0, "top_z": 115.0})
-    others = pd.DataFrame({"x": [0.0], "y": [8.0], "label": [0]})
-    codes = block_codes(crop, idx, s, others, None, 2.5, 7.5, max_center_points=0)
     xyz = crop["xyz"]
-    own = (np.hypot(xyz[:, 0], xyz[:, 1]) <= 2.5) & crop["steep"] & (xyz[:, 2] <= 115)
-    assert (codes[own] == 1).all()
-    assert (codes[(np.hypot(xyz[:, 0], xyz[:, 1] - 8) <= 2.5) & crop["steep"]] == 4).all()
-    capped = block_codes(crop, idx, s, others, None, 2.5, 7.5, max_center_points=48)
-    assert (capped == 1).sum() == 48
-    mapped = np.vectorize(LABEL_MODES["center_only"].get)(codes)
-    assert set(np.unique(mapped)) <= {-1, 1}
+    codes = np.where(crop["steep"] & (np.hypot(xyz[:, 0], xyz[:, 1]) <= 2.5), 1, 2).astype(np.int8)
     local = (xyz - [0, 0, 100]).astype(np.float32)
     sq = augment_negative(local, codes, "squash", np.array([1.0, 0.0]))
     assert sq is not None and (sq[1] == 1).sum() == 0 and sq[0][:, 2].max() < local[:, 2].max()
+    assert np.vectorize(LABEL_MODES["center_only"].get)(codes).max() == 1
 
 
 def test_assign_splits_balances_giant_group():

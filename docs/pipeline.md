@@ -132,6 +132,54 @@ bash scripts/s4_sweep.sh                                       # all strategies,
 BACKBONE=runs/pretrain/pointnet2 bash scripts/s4_sweep.sh      # same for the second backbone
 ```
 
+## V4 changes (2026-11-15): one labelling rule, filled neighbourhoods, surface channels
+
+Plans: `research-prompts/fable-investigation-project-issues-resolution-plan{1,2,3,4}.md`.
+
+**Wall check (all data).** `snap_one` only accepts walls at least 6 m tall on the
+bare-earth ground grid (`crag.walls.wall_height_at`), and moves a point straight
+toward its wall (keeping spacing along it). Statuses: `ok`, `too_short`,
+`off_wall`, `no_lidar`. Dry run of the costs: `python scripts/s3_wall_height_dryrun.py`.
+
+**Horseshoe points (once, already done).** The originals are read-only in
+`data/handgathered/original/`; the working files at the usual paths hold the
+final, judged positions and are never snapped again (`presnapped`).
+
+```bash
+python scripts/snap_hcr_waypoints.py              # automatic snap of the originals
+python scripts/hcr_judge_cases.py                 # pictures + numbers per point, PROMPT.md
+#   judges a + b per wall section (Claude subagents) -> review/judge/decisions_<section>_<a|b>.json
+python scripts/hcr_judge_apply.py --phase check   # validity, agreement, calibration; tie-break batches
+#   judge c per section with disagreements -> decisions_<section>_c.json
+python scripts/hcr_judge_apply.py --phase apply   # final positions -> working CSVs
+python scripts/s3_collect_routes.py               # refresh data/routes/verified_routes.csv
+```
+
+**Input channels.** `python scripts/s1_add_channels.py --workers 3 --rebuild-blocks`
+writes `stage/<tile>.hag.npy` (height above the lowest ground within 10 m) and
+rewrites the pretraining blocks in place with the channels of `crag/channels.py`
+(labels and block cuts unchanged). Fine-tuning blocks store them too.
+
+**Fine-tuning set V4.** Every sample is centred on its wall foot; labels sit on
+a face strip in the wall's own frame, with 4 height bands x 12 points for every
+label; close climbable / not-climbable samples split the strip; step-back
+samples are off.
+
+```bash
+python scripts/s3_build_finetune_set.py --name v4 --no-download
+python scripts/s3_build_finetune_set.py --name v4-hcr-a --blocks-from v4 --hcr-fold hcr-a
+python scripts/s3_build_finetune_set.py --name v4-hcr-b --blocks-from v4 --hcr-fold hcr-b
+python scripts/s3_leak_test.py --name v4          # group A must be ~0.5
+```
+
+**Scale.** `coord_scale 0.05` (first radius 2 m), `num_points 4096`, jitter in
+metres. Check: `python scripts/check_neighbourhoods.py --cfg cfgs/pretrain/pointnext-s.yaml --dataset pretrain`.
+A backbone trained at another scale is refused by `crag.finetune.build_model`.
+
+**Clean start.** Training resumes from `<run>/last.pt` (`resume: auto`), so
+old run folders must not be in `runs/pretrain` or `runs/finetune`. V3 runs are in
+`runs/archive-v3/` (metrics only; all old checkpoints were deleted).
+
 ## W&B
 
 Project `crag-detection` (`--wandb-project` to change). Job types: `dataset`

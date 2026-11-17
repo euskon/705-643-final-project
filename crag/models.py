@@ -3,7 +3,7 @@
 Every model is an OpenPoints ``BaseSeg`` = ``encoder`` (the convolutional
 backbone: set-abstraction / InvResMLP stages) + ``decoder`` (feature
 propagation back to every point) + ``head`` (per-point classifier). The
-pretraining head predicts the 5 pseudolabel classes; fine-tuning throws it
+pretraining head predicts the 4 pseudolabel classes; fine-tuning throws it
 away and attaches a fresh head with its own class count. Checkpoints store
 the three parts separately (``encoder``/``decoder``/``head``) as well as the
 full state, so a backbone can be reused without the head.
@@ -26,6 +26,25 @@ from openpoints.transforms import DataTransforms  # noqa: E402
 log = logging.getLogger(__name__)
 
 PARTS = ("encoder", "decoder", "head")
+
+
+def _contiguous_grouping() -> None:
+    """OpenPoints' grouping op asserts contiguous inputs; with a single input channel the
+    stem convolution can return a non-contiguous tensor. Make them contiguous first."""
+    import openpoints.models.layers.group as G
+
+    if getattr(G.grouping_operation, "_crag_wrapped", False):
+        return
+    orig = G.grouping_operation
+
+    def grouping_operation(features, idx):
+        return orig(features.contiguous(), idx.contiguous())
+
+    grouping_operation._crag_wrapped = True
+    G.grouping_operation = grouping_operation
+
+
+_contiguous_grouping()
 
 
 # Python >= 3.10 removed collections.Iterable, which OpenPoints' PointCloudRotation
@@ -66,7 +85,7 @@ def _state_dict_from_file(path: Path) -> dict:
 def load_pretrained(model: nn.Module, path: str | Path, parts: tuple[str, ...] = ("encoder", "decoder"), strict_shapes: bool = False) -> dict:
     """Copy matching tensors of ``parts`` from a checkpoint (OpenPoints or ours).
 
-    Tensors whose shape differs (e.g. a 13-class S3DIS head vs our 5 classes,
+    Tensors whose shape differs (e.g. a 13-class S3DIS head vs our 4 classes,
     or a different ``in_channels``) are skipped and reported.
     """
     path = Path(path)
@@ -89,6 +108,26 @@ def load_pretrained(model: nn.Module, path: str | Path, parts: tuple[str, ...] =
     }
     log.info("pretrained %s: loaded %d tensors (%d shape-mismatched, %d missing)", path.name, len(loaded), len(mismatched), len(report["not_in_checkpoint"]))
     return report
+
+
+# tensors whose input size depends on the number of feature channels
+FIRST_LAYER_PREFIXES = ("encoder.encoder.0.",)  # PointNeXt-S stem; PointNet++ first SA conv (+ MSG branches)
+# PointNeXt-S: the stem; PointNet++ (incl. MSG): the first set-abstraction convolution and the
+# last decoder step, which concatenates the raw input features back in
+FIRST_LAYER_PATTERNS = ("encoder.encoder.0.", "encoder.SA_modules.0.local_aggregations.0.SA_CONFIG_operator.convs.0.",
+                        "encoder.SA_modules.0.local_aggregations.1.SA_CONFIG_operator.convs.0.", "decoder.FP_modules.0.convs.0.")
+
+
+def check_first_layer_only(report: dict | None) -> None:
+    """After a channel change only the first layer may fail to load; anything else is an architecture mismatch."""
+    if not report:
+        return
+    bad = [k for k in report["mismatched"] if not k.startswith("head.") and not any(k.startswith(p) for p in FIRST_LAYER_PATTERNS)]
+    if bad:
+        raise ValueError(f"shape mismatch outside the first layer (architecture mismatch?): {bad[:5]}")
+    first = [k for k in report["mismatched"] if not k.startswith("head.")]
+    if first:
+        log.info("first layer rebuilt (channel count changed): %s", first)
 
 
 def set_frozen(model: nn.Module, frozen_parts: tuple[str, ...]) -> None:

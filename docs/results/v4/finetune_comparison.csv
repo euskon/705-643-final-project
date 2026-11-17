@@ -1,0 +1,13 @@
+run,ep,val,val_hard,rrg,hcr,hcr_n,hcr_hm,pair_acc,pair_n,hcr_bal_acc
+pointnet2-decoder_head,3,0.704,0.696,0.71,0.683,70,0.693,0.25,4,0.56
+pointnet2-full_discriminative,9,0.721,0.716,0.669,0.72,70,0.765,0.75,4,0.62
+pointnet2-gradual_unfreeze,17,0.729,0.721,0.679,0.676,70,0.714,0.25,4,0.63
+pointnet2-scratch-hcr-a,4,0.733,0.727,0.712,0.611,40,0.651,0.0,2,0.44
+pointnet2-scratch-hcr-b,3,0.683,0.67,0.719,0.456,30,0.391,0.5,2,0.5
+pointnet2-scratch,4,0.752,0.741,0.724,0.754,70,0.761,0.5,4,0.615
+pointnext-s-decoder_head,15,0.723,0.71,0.71,0.616,70,0.657,0.75,4,0.53
+pointnext-s-full_discriminative,15,0.708,0.694,0.705,0.603,70,0.626,0.5,4,0.56
+pointnext-s-gradual_unfreeze,15,0.675,0.659,0.717,0.683,70,0.722,0.75,4,0.62
+pointnext-s-scratch-hcr-a,12,0.765,0.76,0.632,0.555,40,0.605,0.0,2,0.507
+pointnext-s-scratch-hcr-b,3,0.741,0.731,0.693,0.448,30,0.402,0.5,2,0.54
+pointnext-s-scratch,4,0.751,0.735,0.688,0.67,70,0.706,0.75,4,0.575

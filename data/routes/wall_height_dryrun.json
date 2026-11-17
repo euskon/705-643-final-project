@@ -1,0 +1,68 @@
+{
+ "n_points": 784,
+ "runs": [
+  {
+   "threshold": 6.0,
+   "method": "toward_wall",
+   "groups": {
+    "Horseshoe Climb": {
+     "n": 126,
+     "pass": 0.929,
+     "too_short": 6,
+     "off_wall": 3,
+     "median_move_m": 5.93,
+     "skipped_shorter": 0.179,
+     "slid_gt_3m": 0.094
+    },
+    "Horseshoe Nc": {
+     "n": 60,
+     "pass": 0.95,
+     "too_short": 1,
+     "off_wall": 2,
+     "median_move_m": 3.17,
+     "skipped_shorter": 0.088,
+     "slid_gt_3m": 0.035
+    },
+    "Red River Gorge": {
+     "n": 250,
+     "pass": 0.98,
+     "too_short": 3,
+     "off_wall": 2,
+     "median_move_m": 1.11,
+     "skipped_shorter": 0.016,
+     "slid_gt_3m": 0.012
+    },
+    "other areas": {
+     "n": 175,
+     "pass": 0.989,
+     "too_short": 0,
+     "off_wall": 2,
+     "median_move_m": 0.43,
+     "skipped_shorter": 0.017,
+     "slid_gt_3m": 0.012
+    }
+   },
+   "squashed_pairs": {
+    "horseshoe-canyon-ranch": 52,
+    "red-river-gorge": 1
+   },
+   "hcr": {
+    "nc_on_climb_lt_0.5m": 9,
+    "nc_within_1m_of_climb": 11,
+    "nc_within_2.5m_of_climb": 21,
+    "nc_within_5m_of_climb": 26,
+    "pairs_within_1m": 41,
+    "n_nc": 57,
+    "n_climb": 117
+   },
+   "route_length": {
+    "n": 404,
+    "grid_spearman": 0.462,
+    "column_spearman": -0.04,
+    "grid_share_ge_0.8_len": 0.787,
+    "column_share_ge_0.8_len": 0.344
+   }
+  }
+ ],
+ "hcr_raw_pairs_within_1m": 5
+}

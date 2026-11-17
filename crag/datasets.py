@@ -4,20 +4,36 @@ Every item is ``{"pos": (N, 3) float32, "x": (N, C) float32, "y": (N,) int64}``
 with exactly ``num_points`` points, which is what OpenPoints ``BaseSeg``
 expects (the trainer transposes ``x`` to (B, C, N)).
 
-Coordinates. The S3DIS checkpoints were trained on points voxelised at 4 cm
-with ball-query radius 0.1. Our LiDAR is voxelised at ``voxel_m`` (0.25 m),
-so positions are multiplied by ``coord_scale = 0.04 / voxel_m`` (0.16): the
-pretrained filters then see neighbourhoods with the same number of points
-they were trained on (first radius 0.1 = 0.625 m on the ground, doubling per
-stage). A *fixed* scale keeps metric meaning - a 30 m cliff is always the
-same size - which per-block unit-sphere normalisation would destroy (a
-flat block and a cliff block would get different scales).
+Coordinates. Positions are multiplied by a fixed ``coord_scale`` (0.05), set
+from the **measured point spacing** (0.3-0.45 m), not the voxel size: the
+first ball-query radius 0.1 is then 2 m on the ground (4 / 8 / 16 m in later
+stages), so every stage finds 15-30 real neighbours
+(``docs/fable-investigation-neighbourhood-scale.md``; check with
+``scripts/check_neighbourhoods.py``). A *fixed* scale keeps metric meaning - a
+30 m cliff is always the same size.
 
-Features (``feature_keys``): ``pos`` (3, scaled xyz after augmentation),
-``heights`` (1, height above the block's lowest point, scaled),
-``intensity`` (1, per-tile normalised). The default ``pos,heights`` has the
-same 4 channels as the S3DIS checkpoints' ``rgb,height`` so their first layer
-loads.
+Point order. The neighbour search keeps the *first* 32 points it finds in a
+ball, in stored order, so the chosen points are put in random order
+(training: new each time; evaluation: fixed per block).
+
+Labelled points (codes 0 / 1 of a fine-tuning block's own sample) are always
+kept exactly once when resampling to ``num_points``; ``w`` gives each of them
+1 / (labelled points of its sample), so every sample counts once in a
+per-sample loss.
+
+Features (``feature_keys``) - must never encode position inside the block,
+except the legacy keys kept for reference runs:
+
+* stored channels (``crag.channels``): ``hag`` (height above the local
+  ground), ``vert`` (vertical part of the normal), ``planarity``,
+  ``ret_pos``, ``single``, ``intensity``, ``wall_dist`` (fine-tuning only);
+* ``intensity_rank``: intensity's rank within the block (0..1), removing the
+  per-survey brightness;
+* legacy: ``pos`` (3, scaled xyz after augmentation), ``heights`` (1, height
+  above the block's lowest point).
+
+Scaling augmentation (x0.9-1.1) changes ``pos`` but not ``hag``: a small,
+accepted mismatch. Old blocks with a 1-D ``feat`` read as ``("intensity",)``.
 """
 
 from __future__ import annotations
@@ -34,6 +50,7 @@ from torch.utils.data import Dataset, WeightedRandomSampler
 
 from crag import registry
 from crag.paths import AREAS_JSON, HELDOUT_REGIONS_JSON, PRETRAIN_DIR, add_import_paths
+from crag.channels import read_channels_json
 from crag.pseudolabels import CLASSES, IGNORE
 
 add_import_paths()
@@ -43,7 +60,8 @@ import crag.models  # noqa: E402,F401  (registers PointCloudRotationZ)
 
 log = logging.getLogger(__name__)
 
-FEATURE_DIMS = {"pos": 3, "heights": 1, "intensity": 1}
+FEATURE_DIMS = {"pos": 3, "heights": 1, "intensity": 1, "hag": 1, "vert": 1, "planarity": 1, "ret_pos": 1, "single": 1, "wall_dist": 1, "intensity_rank": 1}
+DERIVED_KEYS = {"pos", "heights", "intensity_rank"}
 
 
 def feature_dim(feature_keys: str) -> int:
@@ -52,10 +70,10 @@ def feature_dim(feature_keys: str) -> int:
 
 @dataclass
 class BlockSpec:
-    num_points: int = 8192
+    num_points: int = 4096
     voxel_m: float = 0.25
-    coord_scale: float = 0.16
-    feature_keys: str = "pos,heights"
+    coord_scale: float = 0.067
+    feature_keys: str = "hag,vert,planarity,ret_pos,single"
 
 
 def load_heldout_regions(path: Path = HELDOUT_REGIONS_JSON) -> list[dict]:
@@ -170,6 +188,8 @@ class BlockDataset(Dataset):
         label_map: dict | None = None,
         center_codes: tuple[int, ...] | None = None,
         window: dict | None = None,
+        thin: dict | None = None,
+        sample_weights_per_point: bool = False,
     ):
         self.index = index.reset_index(drop=True)
         self.spec = spec
@@ -185,6 +205,15 @@ class BlockDataset(Dataset):
             for k, v in label_map.items():
                 self.lut[int(k) + 128] = int(v)
         self.center_codes = center_codes
+        self.thin = dict(thin) if (thin and train and float(thin.get("prob", 0)) > 0) else None
+        self.point_weights = sample_weights_per_point
+        stored = read_channels_json(Path(root))
+        self.stored = stored if stored is not None else ("intensity",)
+        missing = [k for k in self.keys if k not in DERIVED_KEYS and k not in self.stored]
+        if "intensity_rank" in self.keys and "intensity" not in self.stored:
+            missing.append("intensity")
+        if missing:
+            raise ValueError(f"feature keys {missing} are not stored under {root} (stored: {self.stored}) - rebuild the blocks with channels")
         self.window = dict(window) if (window and train) else None
         if self.window:
             bs = float(self.window.get("block_size_m", 20.0))
@@ -211,16 +240,27 @@ class BlockDataset(Dataset):
         # train: from the (seeded) worker stream -> reproducible given the run seed;
         # eval: fixed per item -> identical validation points every epoch
         rng = np.random.default_rng(np.random.randint(0, 2**31)) if self.train else np.random.default_rng(i)
-        local, raw, inten = self._window(i, rng) if self.window else self._block(i)
-        n, N = len(local), self.spec.num_points
-        sel = np.sort(rng.choice(n, N, replace=n < N))
+        local, raw, feat = self._window(i, rng) if self.window else self._block(i)
+        if feat.ndim == 1:
+            feat = feat[:, None]
+        own = np.isin(raw, self.center_codes) if self.center_codes is not None else np.zeros(len(raw), bool)
+        if self.thin is not None and rng.random() < float(self.thin.get("prob", 0.5)):
+            keep = rng.random(len(raw)) >= rng.uniform(0.0, float(self.thin.get("max_frac", 0.4)))
+            keep |= own  # labelled points are never dropped
+            if keep.sum() >= 64:
+                local, raw, feat, own = local[keep], raw[keep], feat[keep], own[keep]
+        sel = resample_keep(own, self.spec.num_points, rng)
         pos = local[sel] * self.spec.coord_scale
         raw = raw[sel]
         y = self.lut[raw + 128] if self.lut is not None else raw
-        inten = inten[sel][:, None]
-        item = make_item(pos, y, inten, self.keys, self.transform)
+        cols = {k: feat[sel, j] for j, k in enumerate(self.stored)}
+        item = make_item(pos, y, cols, self.keys, self.transform)
         if self.center_codes is not None:
-            item["center"] = torch.from_numpy(np.isin(raw, self.center_codes))
+            c = own[sel]
+            item["center"] = torch.from_numpy(c)
+            if self.point_weights:
+                lab = c & (y != IGNORE)
+                item["w"] = torch.from_numpy(np.where(lab, 1.0 / max(int(lab.sum()), 1), 0.0).astype(np.float32))
         item["index"] = i
         return item
 
@@ -265,9 +305,33 @@ class BlockDataset(Dataset):
         return p, np.concatenate([q[1] for q in parts]), np.concatenate([q[2] for q in parts])
 
 
-def make_item(pos: np.ndarray, y: np.ndarray, intensity: np.ndarray, keys: list[str], transform=None) -> dict:
-    """Augment ``pos`` with OpenPoints transforms, then assemble the feature tensor."""
-    data = {"pos": pos, "intensity": intensity, "y": y}
+def resample_keep(keep: np.ndarray, n_out: int, rng: np.random.Generator) -> np.ndarray:
+    """``n_out`` indices in random order: every ``keep`` point exactly once (up to ``n_out``),
+    the rest filled at random from the other points (with repeats only when there are too few)."""
+    n = len(keep)
+    must = np.flatnonzero(keep)
+    if len(must) >= n_out:
+        sel = rng.choice(must, n_out, replace=False)
+    else:
+        rest = np.flatnonzero(~keep)
+        k = n_out - len(must)
+        if len(rest) >= k:
+            fill = rng.choice(rest, k, replace=False)
+        else:
+            pool = rest if len(rest) else np.arange(n)
+            fill = np.r_[rest, rng.choice(pool, k - len(rest), replace=True)]
+        sel = np.r_[must, fill]
+    return rng.permutation(sel)
+
+
+def make_item(pos: np.ndarray, y: np.ndarray, cols, keys: list[str], transform=None) -> dict:
+    """Augment ``pos`` with OpenPoints transforms, then assemble the feature tensor in ``keys`` order.
+
+    ``cols`` maps stored channel names to (N,) arrays (an (N, 1) array is read as intensity,
+    for old callers)."""
+    if not isinstance(cols, dict):
+        cols = {"intensity": np.asarray(cols).reshape(-1)}
+    data = {"pos": pos, "y": y}
     if transform is not None:
         data = transform(data)
     else:
@@ -279,10 +343,14 @@ def make_item(pos: np.ndarray, y: np.ndarray, intensity: np.ndarray, keys: list[
             feats.append(pos)
         elif k == "heights":
             feats.append(pos[:, 2:3] - pos[:, 2:3].min())
-        elif k == "intensity":
-            feats.append(data["intensity"].float().reshape(-1, 1))
+        elif k == "intensity_rank":
+            v = np.asarray(cols["intensity"], np.float32)
+            r = np.argsort(np.argsort(v, kind="stable"), kind="stable") / max(len(v) - 1, 1)
+            feats.append(torch.from_numpy(r.astype(np.float32)).reshape(-1, 1))
+        elif k in FEATURE_DIMS and k in cols:
+            feats.append(torch.from_numpy(np.asarray(cols[k], np.float32)).reshape(-1, 1))
         else:
-            raise KeyError(f"unknown feature key {k!r}")
+            raise KeyError(f"unknown or unavailable feature key {k!r}")
     return {"pos": pos.contiguous(), "x": torch.cat(feats, 1).contiguous(), "y": data["y"].long()}
 
 

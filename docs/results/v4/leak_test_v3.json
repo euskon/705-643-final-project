@@ -1,0 +1,185 @@
+{
+ "name": "v3",
+ "n_samples": 6184,
+ "group_A": {
+  "columns": [
+   "n_lab",
+   "lab_z_med",
+   "lab_z_span",
+   "lab_rel_height",
+   "lab_xy_dist"
+  ],
+  "val": {
+   "auroc": 0.891,
+   "lo": 0.868,
+   "hi": 0.915,
+   "n": 899,
+   "n_pos": 183
+  },
+  "rrg_test": {
+   "auroc": 0.909,
+   "lo": 0.884,
+   "hi": 0.934,
+   "n": 770,
+   "n_pos": 154
+  },
+  "test": {
+   "auroc": 0.899,
+   "lo": 0.88,
+   "hi": 0.918,
+   "n": 1227,
+   "n_pos": 299
+  },
+  "hcr_all": {
+   "auroc": 0.911,
+   "lo": 0.88,
+   "hi": 0.939,
+   "n": 344,
+   "n_pos": 119
+  },
+  "hcr_climb_vs_nc": {
+   "auroc": 0.726,
+   "lo": 0.649,
+   "hi": 0.802,
+   "n": 177,
+   "n_pos": 119
+  }
+ },
+ "group_B": {
+  "columns": [
+   "block_height",
+   "rock_share"
+  ],
+  "val": {
+   "auroc": 0.85,
+   "lo": 0.822,
+   "hi": 0.875,
+   "n": 899,
+   "n_pos": 183
+  },
+  "rrg_test": {
+   "auroc": 0.846,
+   "lo": 0.813,
+   "hi": 0.88,
+   "n": 770,
+   "n_pos": 154
+  },
+  "test": {
+   "auroc": 0.731,
+   "lo": 0.695,
+   "hi": 0.768,
+   "n": 1227,
+   "n_pos": 299
+  },
+  "hcr_all": {
+   "auroc": 0.697,
+   "lo": 0.639,
+   "hi": 0.754,
+   "n": 344,
+   "n_pos": 119
+  },
+  "hcr_climb_vs_nc": {
+   "auroc": 0.582,
+   "lo": 0.498,
+   "hi": 0.668,
+   "n": 177,
+   "n_pos": 119
+  }
+ },
+ "single": {
+  "n_lab": {
+   "all": 0.118,
+   "val": 0.164,
+   "rrg_test": 0.132,
+   "test": 0.143,
+   "hcr_all": 0.104,
+   "hcr_climb_vs_nc": 0.351
+  },
+  "lab_z_med": {
+   "all": 0.359,
+   "val": 0.435,
+   "rrg_test": 0.477,
+   "test": 0.411,
+   "hcr_all": 0.437,
+   "hcr_climb_vs_nc": 0.37
+  },
+  "lab_z_span": {
+   "all": 0.243,
+   "val": 0.302,
+   "rrg_test": 0.218,
+   "test": 0.209,
+   "hcr_all": 0.129,
+   "hcr_climb_vs_nc": 0.254
+  },
+  "lab_rel_height": {
+   "all": 0.262,
+   "val": 0.313,
+   "rrg_test": 0.364,
+   "test": 0.353,
+   "hcr_all": 0.391,
+   "hcr_climb_vs_nc": 0.383
+  },
+  "lab_xy_dist": {
+   "all": 0.475,
+   "val": 0.498,
+   "rrg_test": 0.418,
+   "test": 0.438,
+   "hcr_all": 0.423,
+   "hcr_climb_vs_nc": 0.494
+  },
+  "block_height": {
+   "all": 0.649,
+   "val": 0.711,
+   "rrg_test": 0.713,
+   "test": 0.557,
+   "hcr_all": 0.603,
+   "hcr_climb_vs_nc": 0.561
+  },
+  "rock_share": {
+   "all": 0.815,
+   "val": 0.853,
+   "rrg_test": 0.838,
+   "test": 0.759,
+   "hcr_all": 0.695,
+   "hcr_climb_vs_nc": 0.576
+  }
+ },
+ "group_B_climb_vs_far_cliff": {
+  "columns": [
+   "block_height",
+   "rock_share"
+  ],
+  "val": {
+   "auroc": 0.934,
+   "lo": 0.898,
+   "hi": 0.962,
+   "n": 260,
+   "n_pos": 183
+  },
+  "test": {
+   "auroc": 0.788,
+   "lo": 0.72,
+   "hi": 0.844,
+   "n": 350,
+   "n_pos": 299
+  },
+  "all": {
+   "auroc": 0.885,
+   "lo": 0.863,
+   "hi": 0.906,
+   "n": 1793,
+   "n_pos": 1496
+  }
+ },
+ "channels": {
+  "intensity": {
+   "label": {
+    "val": 0.488,
+    "hcr_climb_vs_nc": 0.511
+   },
+   "area_hcr_vs_rrg": 0.366,
+   "flag_area_identifier": false
+  }
+ },
+ "group_A_pass": false
+}

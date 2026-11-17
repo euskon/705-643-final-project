@@ -11,7 +11,7 @@ set -euo pipefail
 cd "$(dirname "$0")/.."
 
 BACKBONE=${BACKBONE:-runs/pretrain/pointnext-s}
-STRATEGIES=${STRATEGIES:-"linear_probe decoder_head full_discriminative gradual_unfreeze scratch s3dis_init"}
+STRATEGIES=${STRATEGIES:-"decoder_head full_discriminative scratch"}
 LRS=${LRS:-""}            # empty = each strategy's own LR
 WANDB=${WANDB:-online}
 TAG=$(basename "$BACKBONE")
@@ -19,7 +19,13 @@ TAG=$(basename "$BACKBONE")
 for s in $STRATEGIES; do
   init=("init.arch=$BACKBONE" "init.weights=$BACKBONE/backbone.pt")
   [[ $s == scratch ]] && init=("init.arch=$BACKBONE")       # scratch.yaml sets weights: null
-  [[ $s == s3dis_init ]] && init=()                          # uses its own S3DIS checkpoint
+  if [[ $s == s3dis_init ]]; then                            # its own S3DIS checkpoint, for the matching architecture
+    case "$TAG" in
+      pointnext-s*) init=() ;;                               # s3dis_init.yaml is PointNeXt-S
+      pointnet2*) init=("init.arch=cfgs/pretrain/pointnet2.yaml" "init.weights=pretrained/openpoints/s3dis-pointnet2/checkpoint/s3dis-train-pointnet++-ngpus1-seed5583-20220506-155113-AobHJJtq8wdeMfRbcHpZGD_ckpt_best.pth") ;;
+      *) echo "s3dis_init: no S3DIS checkpoint for $TAG - skipped"; continue ;;
+    esac
+  fi
   for lr in ${LRS:-default}; do
     name="$TAG-$s"; lr_arg=()
     if [[ $lr != default ]]; then name="$name-lr$lr"; lr_arg=("optimizer.lr=$lr"); fi

@@ -1,0 +1,832 @@
+{
+ "name": "v4-hcr-b",
+ "hcr_fold": "hcr-b",
+ "strip_config": {
+  "half_width_m": 2.5,
+  "out_back_m": 15.0,
+  "out_front_m": 5.0,
+  "below_foot_m": 1.0,
+  "top_rule": "grid",
+  "top_margin_m": 1.0,
+  "top_gap_m": 5.0,
+  "top_cap_m": 300.0,
+  "bands": 4,
+  "per_band": 12,
+  "min_points": 12,
+  "min_points_split": 8,
+  "pair_reach_m": 5.0,
+  "pair_gap_m": 0.5,
+  "min_side_m": 1.0
+ },
+ "channels": [
+  "hag",
+  "vert",
+  "planarity",
+  "ret_pos",
+  "single",
+  "intensity",
+  "wall_dist"
+ ],
+ "channel_missing_share": {
+  "hag_missing": 0.0,
+  "normal_missing": 0.0,
+  "planarity_missing": 0.0,
+  "wall_dist_missing": 0.0
+ },
+ "dropped": {
+  "band:no_wall": 798,
+  "band:too_short": 7972,
+  "band:exclusion_after_centring": 6784,
+  "far_cliff:too_short": 194,
+  "osm:duplicate": 85,
+  "far_cliff:no_wall": 1,
+  "far_cliff:duplicate": 1,
+  "handgathered:duplicate": 30,
+  "handgathered_nc:duplicate": 8,
+  "handgathered:strip_too_narrow": 17,
+  "handgathered_nc:strip_too_narrow": 15,
+  "handgathered:under_min_points": 21,
+  "handgathered_nc:under_min_points": 12,
+  "far_cliff:under_min_points": 12,
+  "osm:under_min_points": 137,
+  "band:under_min_points": 103
+ },
+ "squashed_pairs": {
+  "red-river-gorge": 14
+ },
+ "labelled_points_by_source": [
+  {
+   "source": "band",
+   "count": 1049.0,
+   "10%": 16.0,
+   "50%": 32.0,
+   "90%": 48.0
+  },
+  {
+   "source": "far_cliff",
+   "count": 202.0,
+   "10%": 25.1,
+   "50%": 42.5,
+   "90%": 48.0
+  },
+  {
+   "source": "handgathered",
+   "count": 50.0,
+   "10%": 15.9,
+   "50%": 29.0,
+   "90%": 48.0
+  },
+  {
+   "source": "handgathered_nc",
+   "count": 20.0,
+   "10%": 15.8,
+   "50%": 32.0,
+   "90%": 44.2
+  },
+  {
+   "source": "osm",
+   "count": 1201.0,
+   "10%": 17.0,
+   "50%": 35.0,
+   "90%": 48.0
+  }
+ ],
+ "labelled_height_median_by_source": [
+  {
+   "source": "band",
+   "count": 1049.0,
+   "10%": 3.5,
+   "50%": 9.72,
+   "90%": 20.33
+  },
+  {
+   "source": "far_cliff",
+   "count": 202.0,
+   "10%": 3.45,
+   "50%": 6.22,
+   "90%": 13.27
+  },
+  {
+   "source": "handgathered",
+   "count": 50.0,
+   "10%": 4.54,
+   "50%": 8.94,
+   "90%": 14.41
+  },
+  {
+   "source": "handgathered_nc",
+   "count": 20.0,
+   "10%": 4.53,
+   "50%": 9.13,
+   "90%": 12.9
+  },
+  {
+   "source": "osm",
+   "count": 1201.0,
+   "10%": 6.34,
+   "50%": 15.51,
+   "90%": 26.59
+  }
+ ],
+ "wall_top_by_source": [
+  {
+   "source": "band",
+   "count": 1049.0,
+   "10%": 7.92,
+   "50%": 20.0,
+   "90%": 35.39
+  },
+  {
+   "source": "far_cliff",
+   "count": 202.0,
+   "10%": 8.04,
+   "50%": 12.49,
+   "90%": 31.45
+  },
+  {
+   "source": "handgathered",
+   "count": 50.0,
+   "10%": 10.67,
+   "50%": 18.97,
+   "90%": 26.17
+  },
+  {
+   "source": "handgathered_nc",
+   "count": 20.0,
+   "10%": 10.11,
+   "50%": 16.15,
+   "90%": 24.67
+  },
+  {
+   "source": "osm",
+   "count": 1201.0,
+   "10%": 16.17,
+   "50%": 29.25,
+   "90%": 47.48
+  }
+ ],
+ "wall_height_by_source": [
+  {
+   "source": "band",
+   "count": 1049.0,
+   "10%": 6.92,
+   "50%": 19.0,
+   "90%": 34.39
+  },
+  {
+   "source": "far_cliff",
+   "count": 202.0,
+   "10%": 7.04,
+   "50%": 11.49,
+   "90%": 30.45
+  },
+  {
+   "source": "handgathered",
+   "count": 50.0,
+   "10%": 9.67,
+   "50%": 17.97,
+   "90%": 25.17
+  },
+  {
+   "source": "handgathered_nc",
+   "count": 20.0,
+   "10%": 9.11,
+   "50%": 15.15,
+   "90%": 23.67
+  },
+  {
+   "source": "osm",
+   "count": 1201.0,
+   "10%": 15.16,
+   "50%": 28.25,
+   "90%": 46.48
+  }
+ ],
+ "close_pairs": 9,
+ "negative_config": {
+  "exclusion_m": 7.5,
+  "band_min_m": 10.0,
+  "band_max_m": 40.0,
+  "doc_radius_m": 75.0,
+  "doc_min_routes": 3,
+  "min_coverage": 0.6,
+  "grid_m": 2.0,
+  "neg_spacing_m": 6.0,
+  "band_per_positive": 1.0,
+  "stepback_m": [
+   12.0,
+   20.0
+  ],
+  "max_stepback_steep_frac": 0.25,
+  "far_min_m": 300.0,
+  "far_per_area": 40,
+  "cylinder_m": 2.5,
+  "min_steep_points": 8,
+  "min_wall_height_m": 6.0,
+  "dup_m": 2.0,
+  "pair_min_m": 1.0
+ },
+ "strategies": [
+  "handgathered_nc",
+  "band",
+  "far_cliff"
+ ],
+ "aug": "",
+ "positives_wall_checked_ok": 1541,
+ "positives_total": 1660,
+ "snap_status": {
+  "ok": 1541,
+  "no_lidar": 72,
+  "too_short": 21,
+  "off_wall": 18,
+  "judge_none": 8
+ },
+ "wall_check": [
+  {
+   "slug": "horseshoe-canyon-ranch",
+   "source": "handgathered",
+   "label": 1,
+   "status": "judge_none",
+   "n": 8
+  },
+  {
+   "slug": "horseshoe-canyon-ranch",
+   "source": "handgathered",
+   "label": 1,
+   "status": "ok",
+   "n": 118
+  },
+  {
+   "slug": "horseshoe-canyon-ranch",
+   "source": "handgathered_nc",
+   "label": 0,
+   "status": "judge_none",
+   "n": 5
+  },
+  {
+   "slug": "horseshoe-canyon-ranch",
+   "source": "handgathered_nc",
+   "label": 0,
+   "status": "ok",
+   "n": 55
+  },
+  {
+   "slug": "joshua-tree-national-park",
+   "source": "osm",
+   "label": 1,
+   "status": "off_wall",
+   "n": 1
+  },
+  {
+   "slug": "joshua-tree-national-park",
+   "source": "osm",
+   "label": 1,
+   "status": "ok",
+   "n": 9
+  },
+  {
+   "slug": "lake-tahoe",
+   "source": "osm",
+   "label": 1,
+   "status": "ok",
+   "n": 18
+  },
+  {
+   "slug": "leavenworth",
+   "source": "osm",
+   "label": 1,
+   "status": "no_lidar",
+   "n": 2
+  },
+  {
+   "slug": "leavenworth",
+   "source": "osm",
+   "label": 1,
+   "status": "ok",
+   "n": 60
+  },
+  {
+   "slug": "red-river-gorge",
+   "source": "osm",
+   "label": 1,
+   "status": "off_wall",
+   "n": 16
+  },
+  {
+   "slug": "red-river-gorge",
+   "source": "osm",
+   "label": 1,
+   "status": "ok",
+   "n": 1250
+  },
+  {
+   "slug": "red-river-gorge",
+   "source": "osm",
+   "label": 1,
+   "status": "too_short",
+   "n": 21
+  },
+  {
+   "slug": "red-rocks",
+   "source": "osm",
+   "label": 1,
+   "status": "no_lidar",
+   "n": 21
+  },
+  {
+   "slug": "red-rocks",
+   "source": "osm",
+   "label": 1,
+   "status": "ok",
+   "n": 36
+  },
+  {
+   "slug": "rumney",
+   "source": "osm",
+   "label": 1,
+   "status": "ok",
+   "n": 6
+  },
+  {
+   "slug": "saint-george",
+   "source": "osm",
+   "label": 1,
+   "status": "off_wall",
+   "n": 1
+  },
+  {
+   "slug": "tahquitz-suicide-rocks",
+   "source": "osm",
+   "label": 1,
+   "status": "ok",
+   "n": 1
+  },
+  {
+   "slug": "the-gunks",
+   "source": "osm",
+   "label": 1,
+   "status": "ok",
+   "n": 43
+  },
+  {
+   "slug": "yosemite-national-park",
+   "source": "osm",
+   "label": 1,
+   "status": "no_lidar",
+   "n": 47
+  },
+  {
+   "slug": "zion-national-park",
+   "source": "osm",
+   "label": 1,
+   "status": "no_lidar",
+   "n": 2
+  }
+ ],
+ "samples_by_split_label": [
+  {
+   "split": "test",
+   "label": 0,
+   "n": 192
+  },
+  {
+   "split": "test",
+   "label": 1,
+   "n": 166
+  },
+  {
+   "split": "train",
+   "label": 0,
+   "n": 821
+  },
+  {
+   "split": "train",
+   "label": 1,
+   "n": 952
+  },
+  {
+   "split": "val",
+   "label": 0,
+   "n": 258
+  },
+  {
+   "split": "val",
+   "label": 1,
+   "n": 133
+  }
+ ],
+ "samples_by_source": {
+  "osm": 1201,
+  "band": 1049,
+  "far_cliff": 202,
+  "handgathered": 50,
+  "handgathered_nc": 20
+ },
+ "samples_by_area": [
+  {
+   "slug": "horseshoe-canyon-ranch",
+   "count": 74,
+   "positives": 50
+  },
+  {
+   "slug": "joshua-tree-national-park",
+   "count": 9,
+   "positives": 9
+  },
+  {
+   "slug": "lake-tahoe",
+   "count": 30,
+   "positives": 16
+  },
+  {
+   "slug": "leavenworth",
+   "count": 154,
+   "positives": 55
+  },
+  {
+   "slug": "red-river-gorge",
+   "count": 2055,
+   "positives": 1044
+  },
+  {
+   "slug": "red-rocks",
+   "count": 39,
+   "positives": 31
+  },
+  {
+   "slug": "rumney",
+   "count": 10,
+   "positives": 4
+  },
+  {
+   "slug": "saint-george",
+   "count": 38,
+   "positives": 0
+  },
+  {
+   "slug": "tahquitz-suicide-rocks",
+   "count": 39,
+   "positives": 1
+  },
+  {
+   "slug": "the-gunks",
+   "count": 58,
+   "positives": 41
+  },
+  {
+   "slug": "zion-national-park",
+   "count": 16,
+   "positives": 0
+  }
+ ],
+ "negative_features_by_source": [
+  {
+   "source": "band",
+   "cliff_height_m": 16.769,
+   "n_steep": 31.994,
+   "multi_frac": 0.432,
+   "dist_to_route_m": 21.828,
+   "confidence": 0.822,
+   "wall_height_m": 19.501
+  },
+  {
+   "source": "far_cliff",
+   "cliff_height_m": 9.895,
+   "n_steep": 79.734,
+   "multi_frac": 0.221,
+   "dist_to_route_m": 7570.801,
+   "confidence": 0.4,
+   "wall_height_m": 16.278
+  },
+  {
+   "source": "handgathered_nc",
+   "cliff_height_m": NaN,
+   "n_steep": NaN,
+   "multi_frac": NaN,
+   "dist_to_route_m": 33.512,
+   "confidence": 1.0,
+   "wall_height_m": 12.907
+  }
+ ],
+ "band_validation_horseshoe": {
+  "per_run": [
+   {
+    "doc_fraction": 0.3,
+    "repeat": 0,
+    "n_documented": 31,
+    "band_n": 31,
+    "band_confirmed": 5,
+    "band_contradicted": 8,
+    "band_precision": 0.38461538461538464,
+    "random_precision": 0.25,
+    "random_confirmed": 1,
+    "random_contradicted": 3
+   },
+   {
+    "doc_fraction": 0.3,
+    "repeat": 1,
+    "n_documented": 32,
+    "band_n": 32,
+    "band_confirmed": 3,
+    "band_contradicted": 12,
+    "band_precision": 0.2,
+    "random_precision": 1.0,
+    "random_confirmed": 2,
+    "random_contradicted": 0
+   },
+   {
+    "doc_fraction": 0.3,
+    "repeat": 2,
+    "n_documented": 35,
+    "band_n": 35,
+    "band_confirmed": 8,
+    "band_contradicted": 9,
+    "band_precision": 0.47058823529411764,
+    "random_precision": 0.0,
+    "random_confirmed": 0,
+    "random_contradicted": 4
+   },
+   {
+    "doc_fraction": 0.3,
+    "repeat": 3,
+    "n_documented": 41,
+    "band_n": 41,
+    "band_confirmed": 7,
+    "band_contradicted": 6,
+    "band_precision": 0.5384615384615384,
+    "random_precision": 0.3333333333333333,
+    "random_confirmed": 1,
+    "random_contradicted": 2
+   },
+   {
+    "doc_fraction": 0.3,
+    "repeat": 4,
+    "n_documented": 41,
+    "band_n": 41,
+    "band_confirmed": 7,
+    "band_contradicted": 14,
+    "band_precision": 0.3333333333333333,
+    "random_precision": 0.3333333333333333,
+    "random_confirmed": 1,
+    "random_contradicted": 2
+   },
+   {
+    "doc_fraction": 0.5,
+    "repeat": 0,
+    "n_documented": 54,
+    "band_n": 54,
+    "band_confirmed": 7,
+    "band_contradicted": 13,
+    "band_precision": 0.35,
+    "random_precision": 0.7142857142857143,
+    "random_confirmed": 5,
+    "random_contradicted": 2
+   },
+   {
+    "doc_fraction": 0.5,
+    "repeat": 1,
+    "n_documented": 64,
+    "band_n": 64,
+    "band_confirmed": 7,
+    "band_contradicted": 6,
+    "band_precision": 0.5384615384615384,
+    "random_precision": 0.75,
+    "random_confirmed": 3,
+    "random_contradicted": 1
+   },
+   {
+    "doc_fraction": 0.5,
+    "repeat": 2,
+    "n_documented": 59,
+    "band_n": 59,
+    "band_confirmed": 8,
+    "band_contradicted": 7,
+    "band_precision": 0.5333333333333333,
+    "random_precision": 0.7142857142857143,
+    "random_confirmed": 5,
+    "random_contradicted": 2
+   },
+   {
+    "doc_fraction": 0.5,
+    "repeat": 3,
+    "n_documented": 58,
+    "band_n": 58,
+    "band_confirmed": 8,
+    "band_contradicted": 13,
+    "band_precision": 0.38095238095238093,
+    "random_precision": 0.6666666666666666,
+    "random_confirmed": 4,
+    "random_contradicted": 2
+   },
+   {
+    "doc_fraction": 0.5,
+    "repeat": 4,
+    "n_documented": 59,
+    "band_n": 59,
+    "band_confirmed": 8,
+    "band_contradicted": 8,
+    "band_precision": 0.5,
+    "random_precision": 0.875,
+    "random_confirmed": 7,
+    "random_contradicted": 1
+   },
+   {
+    "doc_fraction": 0.75,
+    "repeat": 0,
+    "n_documented": 87,
+    "band_n": 87,
+    "band_confirmed": 11,
+    "band_contradicted": 2,
+    "band_precision": 0.8461538461538461,
+    "random_precision": 0.625,
+    "random_confirmed": 5,
+    "random_contradicted": 3
+   },
+   {
+    "doc_fraction": 0.75,
+    "repeat": 1,
+    "n_documented": 85,
+    "band_n": 85,
+    "band_confirmed": 11,
+    "band_contradicted": 4,
+    "band_precision": 0.7333333333333333,
+    "random_precision": 0.8,
+    "random_confirmed": 4,
+    "random_contradicted": 1
+   },
+   {
+    "doc_fraction": 0.75,
+    "repeat": 2,
+    "n_documented": 85,
+    "band_n": 84,
+    "band_confirmed": 11,
+    "band_contradicted": 6,
+    "band_precision": 0.6470588235294118,
+    "random_precision": 1.0,
+    "random_confirmed": 4,
+    "random_contradicted": 0
+   },
+   {
+    "doc_fraction": 0.75,
+    "repeat": 3,
+    "n_documented": 92,
+    "band_n": 86,
+    "band_confirmed": 13,
+    "band_contradicted": 7,
+    "band_precision": 0.65,
+    "random_precision": 0.7692307692307693,
+    "random_confirmed": 10,
+    "random_contradicted": 3
+   },
+   {
+    "doc_fraction": 0.75,
+    "repeat": 4,
+    "n_documented": 86,
+    "band_n": 86,
+    "band_confirmed": 12,
+    "band_contradicted": 2,
+    "band_precision": 0.8571428571428571,
+    "random_precision": 1.0,
+    "random_confirmed": 8,
+    "random_contradicted": 0
+   },
+   {
+    "doc_fraction": 0.9,
+    "repeat": 0,
+    "n_documented": 101,
+    "band_n": 87,
+    "band_confirmed": 11,
+    "band_contradicted": 2,
+    "band_precision": 0.8461538461538461,
+    "random_precision": 0.5,
+    "random_confirmed": 4,
+    "random_contradicted": 4
+   },
+   {
+    "doc_fraction": 0.9,
+    "repeat": 1,
+    "n_documented": 109,
+    "band_n": 82,
+    "band_confirmed": 11,
+    "band_contradicted": 3,
+    "band_precision": 0.7857142857142857,
+    "random_precision": 0.75,
+    "random_confirmed": 3,
+    "random_contradicted": 1
+   },
+   {
+    "doc_fraction": 0.9,
+    "repeat": 2,
+    "n_documented": 105,
+    "band_n": 86,
+    "band_confirmed": 11,
+    "band_contradicted": 2,
+    "band_precision": 0.8461538461538461,
+    "random_precision": 1.0,
+    "random_confirmed": 5,
+    "random_contradicted": 0
+   },
+   {
+    "doc_fraction": 0.9,
+    "repeat": 3,
+    "n_documented": 104,
+    "band_n": 86,
+    "band_confirmed": 11,
+    "band_contradicted": 0,
+    "band_precision": 1.0,
+    "random_precision": 1.0,
+    "random_confirmed": 7,
+    "random_contradicted": 0
+   },
+   {
+    "doc_fraction": 0.9,
+    "repeat": 4,
+    "n_documented": 106,
+    "band_n": 83,
+    "band_confirmed": 11,
+    "band_contradicted": 2,
+    "band_precision": 0.8461538461538461,
+    "random_precision": 0.8333333333333334,
+    "random_confirmed": 5,
+    "random_contradicted": 1
+   }
+  ],
+  "by_coverage": [
+   {
+    "doc_fraction": 0.3,
+    "band_precision": 0.385,
+    "random_precision": 0.383,
+    "band_n": 36.0,
+    "band_confirmed": 6.0,
+    "band_contradicted": 9.8
+   },
+   {
+    "doc_fraction": 0.5,
+    "band_precision": 0.461,
+    "random_precision": 0.744,
+    "band_n": 58.8,
+    "band_confirmed": 7.6,
+    "band_contradicted": 9.4
+   },
+   {
+    "doc_fraction": 0.75,
+    "band_precision": 0.747,
+    "random_precision": 0.839,
+    "band_n": 85.6,
+    "band_confirmed": 11.6,
+    "band_contradicted": 4.2
+   },
+   {
+    "doc_fraction": 0.9,
+    "band_precision": 0.865,
+    "random_precision": 0.817,
+    "band_n": 84.8,
+    "band_confirmed": 11.0,
+    "band_contradicted": 1.8
+   }
+  ],
+  "match_m": 8.0,
+  "n_climb": 118,
+  "n_nc": 55,
+  "n_off_wall": 13
+ },
+ "blocks_from": "v4",
+ "hcr_split_by_section": [
+  {
+   "hcr_section": "East Side",
+   "split": "test",
+   "label": 0,
+   "n": 5
+  },
+  {
+   "hcr_section": "East Side",
+   "split": "test",
+   "label": 1,
+   "n": 25
+  },
+  {
+   "hcr_section": "North Forty",
+   "split": "train",
+   "label": 0,
+   "n": 9
+  },
+  {
+   "hcr_section": "North Forty",
+   "split": "train",
+   "label": 1,
+   "n": 16
+  },
+  {
+   "hcr_section": "West Side",
+   "split": "train",
+   "label": 0,
+   "n": 10
+  },
+  {
+   "hcr_section": "West Side",
+   "split": "train",
+   "label": 1,
+   "n": 9
+  }
+ ]
+}

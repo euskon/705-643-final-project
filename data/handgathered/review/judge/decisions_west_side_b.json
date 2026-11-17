@@ -1,0 +1,220 @@
+[
+ {
+  "gt_id": "Waypoints_2026-10-24#84",
+  "choice": 1,
+  "confidence": "medium",
+  "reason": "Snap is 2.8 m west at the foot of the ~15 m wall the point faces, at standing height; c2 is equally plausible but no better."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#85",
+  "choice": 1,
+  "confidence": "high",
+  "reason": "Raw point sits right at the wall foot; snap moved 0.4 m and keeps order with neighbours."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#86",
+  "choice": 1,
+  "confidence": "medium",
+  "reason": "Raw is 4 m out from the wall; snap goes straight in to the same wall, foot near standing height, order with 87-89 kept."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#87",
+  "choice": 1,
+  "confidence": "high",
+  "reason": "Snap moved 0.5 m onto the wall foot at standing height; consistent with the Nc run."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#88",
+  "choice": 1,
+  "confidence": "high",
+  "reason": "Snap moved 0.7 m onto the wall foot; neighbours progress north in order."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#89",
+  "choice": 1,
+  "confidence": "high",
+  "reason": "Snap moved 0.8 m onto the wall foot at standing height."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#90",
+  "choice": 1,
+  "confidence": "high",
+  "reason": "Raw at the wall foot; snap moved 0.5 m, order with 91/92 preserved."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#91",
+  "choice": 1,
+  "confidence": "high",
+  "reason": "Snap moved 0.3 m; foot at standing height, between 90 and 92."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#92",
+  "choice": 1,
+  "confidence": "high",
+  "reason": "Snap moved 1.3 m onto the wall foot; keeps the southward walk order."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#93",
+  "choice": 1,
+  "confidence": "high",
+  "reason": "Snap moved 0.4 m to the wall foot at standing height."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#94",
+  "choice": 1,
+  "confidence": "medium",
+  "reason": "Raw is on a bench between a low lower step and the main wall; snap goes 6 m west to the main wall foot about 1 m above standing height, which fits."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#95",
+  "choice": 1,
+  "confidence": "low",
+  "reason": "Raw lies below a low lower tier ~11 m east of the main wall; snap goes straight in to the main wall (foot 4.6 m above standing). Other waypoints sit on that main wall foot, but the lower tier may be the real wall."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#96",
+  "choice": 1,
+  "confidence": "low",
+  "reason": "Same situation as 95: straight-in snap to the main wall, keeps 96 between 95 and Ship of Fools (94); c2 would sit on 94's spot."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#97",
+  "choice": "custom",
+  "confidence": "low",
+  "reason": "Snap slid south onto 99's spot (squashed pair); raw is only 2 m from 98 and north of 99, so placed on the main wall foot straight in from the raw.",
+  "custom_east_m": -17.5,
+  "custom_north_m": -0.4
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#98",
+  "choice": "custom",
+  "confidence": "low",
+  "reason": "Only candidate slid 14.7 m along the wall, out of walking order; placed on the main wall foot straight in from the raw, between 97 and 99.",
+  "custom_east_m": -19.0,
+  "custom_north_m": -1.5
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#99",
+  "choice": 1,
+  "confidence": "low",
+  "reason": "Straight-in snap to the main wall, 3.5 m south of 98's raw position, in order; same lower-tier doubt as 95-98."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#100",
+  "choice": 1,
+  "confidence": "low",
+  "reason": "Straight-in snap to the main wall foot just south of 99, in order; lower-tier doubt as for 95-99."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#101",
+  "choice": 1,
+  "confidence": "medium",
+  "reason": "Raw sits on the top edge of a short step wall; snap is 1.5 m away on the same face, and the person most likely stood at its foot just below."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#102",
+  "choice": "custom",
+  "confidence": "low",
+  "reason": "Snap slid 3.7 m north onto exactly the same spot as Nc 103 (squashed pair) although the raws are 2.9 m apart; placed on the wall straight in from the raw, between 101 and 103.",
+  "custom_east_m": 1.5,
+  "custom_north_m": 0.8
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#103",
+  "choice": 1,
+  "confidence": "medium",
+  "reason": "Only candidate, 1.5 m from the raw on the same short wall, in order between 102 and 104."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#104",
+  "choice": 1,
+  "confidence": "high",
+  "reason": "Snap moved 0.6 m onto the wall foot at standing height; c2 is on a different lower wall."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#105",
+  "choice": 1,
+  "confidence": "high",
+  "reason": "Snap moved 0.2 m; foot at standing height."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#106",
+  "choice": 1,
+  "confidence": "medium",
+  "reason": "Snap 1.2 m straight in on the face just below the raw; c2 is nearly the same spot. Wall is only about 6-10 m tall here."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#107",
+  "choice": 1,
+  "confidence": "high",
+  "reason": "Snap moved 1.0 m to the wall foot at standing height."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#108",
+  "choice": 1,
+  "confidence": "high",
+  "reason": "Snap moved 0.4 m to the wall foot at standing height."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#109",
+  "choice": 1,
+  "confidence": "medium",
+  "reason": "Raw on the top edge of the step; snap 2 m south on the same face, fits between 110's snap and 112."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#110",
+  "choice": 1,
+  "confidence": "low",
+  "reason": "Snap 2.6 m north on the same face; its raw is only 1.4 m from 109's, so order is barely reversed but within GPS error."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#111",
+  "choice": "custom",
+  "confidence": "low",
+  "reason": "Snap landed on the same spot as Climb 109; moved a little south on the same face, straight in from the raw and north of 112, to keep the Nc separate.",
+  "custom_east_m": 2.8,
+  "custom_north_m": -0.8
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#112",
+  "choice": 1,
+  "confidence": "high",
+  "reason": "Snap moved 0.7 m onto the face just east of the raw; order with 111/114 kept."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#114",
+  "choice": 1,
+  "confidence": "medium",
+  "reason": "Raw lies partway up the face; snap moved 0.9 m to the foot of the same wall, just south of 112."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#115",
+  "choice": 1,
+  "confidence": "high",
+  "reason": "Snap moved 0.5 m to the wall foot at standing height."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#116",
+  "choice": 1,
+  "confidence": "high",
+  "reason": "Snap moved 0.2 m to the wall foot at standing height."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#117",
+  "choice": 1,
+  "confidence": "medium",
+  "reason": "Raw on the bench 5 m out; snap goes straight in to the wall foot near standing height, north of 118 and 119 as in the raws."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#118",
+  "choice": 1,
+  "confidence": "high",
+  "reason": "Snap moved 1.2 m to the wall foot at standing height, between 117 and 119."
+ },
+ {
+  "gt_id": "Waypoints_2026-10-24#119",
+  "choice": 1,
+  "confidence": "high",
+  "reason": "Snap moved 2.6 m straight in to the wall foot at standing height, south of 118."
+ }
+]

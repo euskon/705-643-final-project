@@ -195,7 +195,7 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--out", type=Path, default=ROOT / "docs/figures/hcr-waypoints")
     ap.add_argument("--zoom-m", type=float, default=160.0)
-    ap.add_argument("--dataset", default="v3", help="fine-tune set whose snapped (wall-checked) positions to draw")
+    ap.add_argument("--dataset", default="v4", help="fine-tune set whose snapped (wall-checked) positions to draw")
     args = ap.parse_args()
     args.out.mkdir(parents=True, exist_ok=True)
 
@@ -222,6 +222,45 @@ def main():
     ax.legend(loc="lower right", title="black = DEM wall, red/pink = single/multi-return cliff label")
     ax.set_title("Horseshoe Canyon Ranch - hand-gathered waypoints on 1 m hillshade + cliff columns (UTM m)")
     fig.tight_layout(), fig.savefig(args.out / "overview.png", dpi=110), plt.close(fig)
+
+    # ---- the one-time clean-up (plan 4): raw GPS -> automatic snap -> final (judged) position
+    if "raw_lat" in gt:
+        crs = registry.area_crs(area)
+        L = gt[gt.label >= 0].copy()
+        for k in ("raw", "auto"):
+            ok = L[f"{k}_lat"].notna().to_numpy()
+            xy = np.full((len(L), 2), np.nan)
+            if ok.any():
+                xy[ok] = crs.to_work(L.loc[ok, f"{k}_lon"].to_numpy(float), L.loc[ok, f"{k}_lat"].to_numpy(float))
+            L[f"{k}_x"], L[f"{k}_y"] = xy[:, 0], xy[:, 1]
+        RES = {"agreed": "#2ca02c", "majority": "#1f77b4", "unresolved": "#ff7f0e", "": "#7f7f7f"}
+        for name, g in L.groupby("area_name"):
+            w = [g[["raw_x", "x"]].min().min() - 30, g[["raw_x", "x"]].max().max() + 30, g[["raw_y", "y"]].min().min() - 30, g[["raw_y", "y"]].max().max() + 30]
+            fig, ax = plt.subplots(figsize=(13, 12))
+            draw_base(ax, r, w)
+            for p in g.itertuples():
+                col = RES.get(str(p.judge_result) if isinstance(p.judge_result, str) else "", "#7f7f7f")
+                dropped = str(p.snap_status) in ("judge_none", "too_short", "off_wall", "no_lidar")
+                ax.plot(p.raw_x, p.raw_y, "x", c=COL[p.label], ms=6, mew=1.2, zorder=5)
+                if np.isfinite(p.auto_x):
+                    ax.plot([p.raw_x, p.auto_x], [p.raw_y, p.auto_y], ":", c="k", lw=0.6, zorder=4)
+                    ax.plot(p.auto_x, p.auto_y, "o", mfc="none", c="k", ms=6, mew=0.8, zorder=5)
+                if dropped:
+                    ax.plot(p.raw_x, p.raw_y, "s", mfc="none", c="r", ms=11, mew=1.5, zorder=6)
+                else:
+                    if np.isfinite(p.auto_x) and np.hypot(p.x - p.auto_x, p.y - p.auto_y) > 0.3:
+                        ax.annotate("", (p.x, p.y), (p.auto_x, p.auto_y), arrowprops=dict(arrowstyle="->", color=col, lw=1.4), zorder=6)
+                    ax.scatter(p.x, p.y, s=55, c=COL[p.label], edgecolors=col, linewidths=2.0, zorder=7)
+            for lab, txt in ((1, "Climb (final)"), (0, "Nc (final)")):
+                ax.scatter([], [], c=COL[lab], label=txt)
+            for k, c in RES.items():
+                if k:
+                    ax.scatter([], [], c="w", edgecolors=c, linewidths=2, label=f"judges: {k}")
+            ax.plot([], [], "x", c="k", label="raw GPS"), ax.plot([], [], "o", mfc="none", c="k", label="automatic snap")
+            ax.plot([], [], "s", mfc="none", c="r", label="dropped (none / too short / off wall)")
+            ax.legend(loc="lower right", fontsize=8)
+            ax.set_title(f"{name}: raw GPS -> automatic snap -> final position (judged)")
+            fig.tight_layout(), fig.savefig(args.out / f"judged_{name.replace(' ', '_')}.png", dpi=100), plt.close(fig)
 
     # ---- zooms: tile each sub-area's waypoints into zoom-m windows
     Z = args.zoom_m

@@ -4,7 +4,7 @@
 Checks whether the GPS waypoints (where people stood) sit on the rock, and
 where fine-tuning's snapping moves them. See docs/hcr-waypoint-audit.md.
 
-    python scripts/plot_hcr_waypoints.py                 # -> docs/figures/hcr-waypoints/
+    python scripts/plot_hcr_waypoints.py                 # -> docs/figures/v4/hcr-waypoints/
 
 Outputs (in --out):
   wall_mask_steps.png       how the bare-earth wall mask is built, step by step
@@ -193,7 +193,7 @@ def wall_steps(r, gt, path, half=60.0):
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--out", type=Path, default=ROOT / "docs/figures/hcr-waypoints")
+    ap.add_argument("--out", type=Path, default=ROOT / "docs/figures/v4/hcr-waypoints")
     ap.add_argument("--zoom-m", type=float, default=160.0)
     ap.add_argument("--dataset", default="v4", help="fine-tune set whose snapped (wall-checked) positions to draw")
     args = ap.parse_args()

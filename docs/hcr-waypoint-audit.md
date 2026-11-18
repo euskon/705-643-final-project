@@ -4,7 +4,7 @@ Do the hand-gathered GPS waypoints (`data/handgathered/`) sit on the rock they
 label, and where does fine-tuning's snapping (`crag.groundtruth.snap_one`)
 move them? Regenerate everything here with:
 
-    python scripts/plot_hcr_waypoints.py      # -> docs/figures/hcr-waypoints/
+    python scripts/plot_hcr_waypoints.py      # -> docs/figures/v4/hcr-waypoints/
 
 ## Figures
 
@@ -87,7 +87,7 @@ Limitations:
 
 ## Which points the ground grid is built from
 
-`docs/figures/wall-dem-methods.png` compares three ways of building the
+`docs/figures/v4/wall-dem-methods.png` compares three ways of building the
 ground grid at Tower Rock and Dip Wall (Red River Gorge) and on the Horseshoe
 Canyon plateau and North Forty wall (white = wall mask):
 

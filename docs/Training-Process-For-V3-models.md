@@ -41,4 +41,4 @@ Code changes so far (all tests pass):
   - the audit script, so it uses the shared wall definition;
   - the fine-tuning config, which now defaults to v3;
   - docs/pipeline.md.
-Update (after this was written): step 1 now builds the 1 m ground grid from the points the LiDAR provider classified as ground (LAS class 2), filling gaps from the nearest ground cell. Using the lowest surface return drew false "walls" as rings around trees. See docs/hcr-waypoint-audit.md and docs/figures/wall-dem-methods.png. Results: docs/results/v3/README.md.
+Update (after this was written): step 1 now builds the 1 m ground grid from the points the LiDAR provider classified as ground (LAS class 2), filling gaps from the nearest ground cell. Using the lowest surface return drew false "walls" as rings around trees. See docs/hcr-waypoint-audit.md and docs/figures/v4/wall-dem-methods.png. Results: docs/results/v3/README.md.

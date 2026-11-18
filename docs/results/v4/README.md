@@ -32,6 +32,11 @@ about 0.05 are noise.
   Horseshoe, pairs of points squashed together fell from 155 to 52; Horseshoe Nc points landing
   on a Climb point fell from 14 to 9.
 * Cost at 6 m: 93% of Horseshoe Climb, 95% of Nc and 98-99% of other routes pass.
+* **Maps of the wall check at four Red River Gorge crags** (Drive-By Crag, Bob Marley, The
+  Gallery, Gold Coast): `docs/figures/v4/snapping/<crag>_1_before.png` (raw route points),
+  `_2_after.png` (raw -> anchor -> snapped -> wall foot for every route) and
+  `_3_steps.png` (one route, step by step). Every one of the 264 routes in those windows
+  passed; the median move is 1.4-1.6 m and the largest 6 m. Made by `scripts/plot_snapping.py`.
 
 ### Horseshoe points: snapped once, then judged
 
@@ -50,7 +55,7 @@ no hand review (your decision).
 
 Points the judges found doubtful: West Side routes #95-#100 (they may be on a lower rock step
 the 6 m rule excludes), North Forty #34-#37 (raw points on top of the wall), and the East Side
-boulder field #42-#61. Maps: `docs/figures/hcr-waypoints/judged_*.png`.
+boulder field #42-#61. Maps: `docs/figures/v4/hcr-waypoints/judged_*.png`.
 
 ## 2. One labelling rule for every sample (plan 1)
 

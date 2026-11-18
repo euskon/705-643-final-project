@@ -105,13 +105,16 @@ def test_load_cfg_overrides():
         m2.load_cfg("scratch", ["data.input=rgb"])
 
 
-def test_run_dir_groups_by_pretrain_stage():
+def test_run_dir_groups_by_version_and_pretrain_stage():
     cfg = m2.load_cfg("scratch", ["seed=1"])
     assert cfg["pretrain"] == "none"
-    assert m2.run_dir(cfg) == m2.RUNS_DIR / "no_pseudolabel" / "gradient-scratch-nopos-s1"
-    assert m2.run_dir(cfg, "smoke") == m2.RUNS_DIR / "no_pseudolabel" / "smoke"
+    v = cfg["data"]["name"]
+    assert m2.run_dir(cfg) == m2.RUNS_DIR / v / "no_pseudolabel" / "gradient-scratch-nopos-s1"
+    assert m2.run_dir(cfg, "smoke") == m2.RUNS_DIR / v / "no_pseudolabel" / "smoke"
     pl = m2.load_cfg("scratch", ["seed=1", "pretrain=pseudolabel"])
-    assert m2.run_dir(pl) == m2.RUNS_DIR / "pseudolabel" / "gradient-scratch-nopos-s1"
+    assert m2.run_dir(pl) == m2.RUNS_DIR / v / "pseudolabel" / "gradient-scratch-nopos-s1"
+    v4 = m2.load_cfg("scratch", ["seed=1", "data.name=v4"])
+    assert m2.run_dir(v4) == m2.RUNS_DIR / "v4" / "no_pseudolabel" / "gradient-scratch-nopos-s1"
     assert m2.run_name(m2.load_cfg("scratch", ["seed=1", "data.position_channel=true"])) == "gradient-scratch-s1"
     with pytest.raises(ValueError):
         m2.run_dir(m2.load_cfg("scratch", ["pretrain=imagenet"]))

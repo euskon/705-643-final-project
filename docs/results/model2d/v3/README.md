@@ -1,5 +1,8 @@
 # 2D vs 3D climbability models: progress so far (2026-11-14)
 
+> **These are V3 results.** The 2D models were rerun on the V4 labels: see [`../v4/README.md`](../v4/README.md). On V4 the V3 shortcut is gone and 2D no longer beats 3D. V3 runs are now saved in `runs/model2d/v3/`.
+
+
 The 2D model beats the 3D model on validation and test, ties on Horseshoe Canyon, and like 3D cannot yet tell good rock from bad rock.
 
 Files in this folder:

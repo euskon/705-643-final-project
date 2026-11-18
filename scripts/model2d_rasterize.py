@@ -46,7 +46,7 @@ log = logging.getLogger("rasterize_finetune")
 
 # copied from the fine-tuning index when present (the rest of its columns describe the 3D block arrays)
 KEEP = ["sample_id", "slug", "label", "source", "confidence", "split", "group", "x", "y", "lon", "lat", "base_z", "top_z",
-        "name", "mp_route_id", "route_uid", "n_center"]
+        "name", "mp_route_id", "route_uid", "n_center", "pair_id", "has_opposite_neighbour", "judge_result", "judge_confidence"]
 
 
 def preview(images: np.ndarray, index: pd.DataFrame, cfg: RasterConfig, path: Path, per_source: int, seed: int = 0) -> None:

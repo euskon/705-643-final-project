@@ -7,7 +7,7 @@
     python scripts/model2d_train.py --strategy full_discriminative epochs=2 --name smoke   # quick pipeline check
 
 Config = ``cfgs/model2d/default.yaml`` + ``cfgs/model2d/<strategy>.yaml`` +
-``key=value`` overrides. Writes ``runs/model2d/<group>/<name>/`` (group from
+``key=value`` overrides. Writes ``runs/model2d/<data.name>/<group>/<name>/`` (group from
 ``pretrain``: ``no_pseudolabel`` or ``pseudolabel``): ``config.yaml``,
 ``log.csv`` (one row per epoch), ``best.pt`` (lowest validation loss), then
 ``predictions_best.csv`` and ``eval_best.json`` (``scripts/model2d_eval.py``).
@@ -32,7 +32,7 @@ log = logging.getLogger("model2d_train")
 def main() -> None:
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--strategy", default="full_discriminative", help="cfgs/model2d/<strategy>.yaml (or a path)")
-    ap.add_argument("--name", help="run name -> runs/model2d/<group>/<name>")
+    ap.add_argument("--name", help="run name -> runs/model2d/<data.name>/<group>/<name>")
     ap.add_argument("--no-eval", action="store_true", help="skip scoring val/test after training")
     ap.add_argument("overrides", nargs="*", help="key=value, e.g. data.input=inbetween seed=1")
     args = ap.parse_args()

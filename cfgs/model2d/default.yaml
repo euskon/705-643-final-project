@@ -13,8 +13,8 @@ data:
   exclude_sources: []         # e.g. [far_cliff] for ablations
 
 # What happens before fine-tuning; also picks the run folder (crag/model2d_train.py run_dir):
-#   none        -> runs/model2d/no_pseudolabel/  ImageNet weights (model.pretrained), or random for scratch
-#   pseudolabel -> runs/model2d/pseudolabel/     + pretraining on the 4 LiDAR terrain pseudolabel classes (next step)
+#   none        -> runs/model2d/<data.name>/no_pseudolabel/  ImageNet weights (model.pretrained), or random for scratch
+#   pseudolabel -> runs/model2d/<data.name>/pseudolabel/     + pretraining on the 4 LiDAR terrain pseudolabel classes (next step)
 pretrain: none
 
 model:

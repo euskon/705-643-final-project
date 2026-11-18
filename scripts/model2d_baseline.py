@@ -9,7 +9,8 @@ cylinder radius (2.5 m) of the centre:
 * ``slope_max``: steepest cell (degrees / 90);
 * ``relief``: highest minus lowest height in the whole 20 m image (metres).
 
-    python scripts/model2d_baseline.py                 # data/raster/v3 -> runs/model2d/baselines/<name>/
+    python scripts/model2d_baseline.py                 # data/raster/v3 -> runs/model2d/v3/baselines/<name>/
+    python scripts/model2d_baseline.py --data v4       # data/raster/v4 -> runs/model2d/v4/baselines/<name>/
 
 Writes ``predictions_best.csv`` and ``eval_best.json`` per baseline, like
 ``scripts/model2d_eval.py``, so ``scripts/model2d_compare.py`` lists them too.
@@ -53,7 +54,7 @@ def main() -> None:
         "relief": dem.max((1, 2)) - dem.min((1, 2)),
     }
     for name, s in scores.items():
-        run_dir = m2.BASELINES_DIR / name
+        run_dir = m2.runs_root(args.data) / m2.BASELINES / name
         run_dir.mkdir(parents=True, exist_ok=True)
         res = m2.write_eval(run_dir, m2.predictions(index, s), {"run": f"baseline-{name}", "pretrain": "baseline", "strategy": "baseline", "input": name})
         h = res.get("horseshoe", {})

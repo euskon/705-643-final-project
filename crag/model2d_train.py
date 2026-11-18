@@ -184,11 +184,16 @@ def run_name(cfg: dict) -> str:
     return f"{cfg['data']['input']}-{cfg['strategy']}{pos}-s{cfg['seed']}"
 
 
-# runs are grouped by what happened before fine-tuning:
-#   none        -> runs/model2d/no_pseudolabel/  (ImageNet weights, or random init for scratch)
-#   pseudolabel -> runs/model2d/pseudolabel/     (+ pretraining on the 4 LiDAR terrain pseudolabel classes)
+# runs are grouped by dataset version (data.name, e.g. v3 / v4), then by what happened before fine-tuning:
+#   none        -> runs/model2d/<version>/no_pseudolabel/  (ImageNet weights, or random init for scratch)
+#   pseudolabel -> runs/model2d/<version>/pseudolabel/     (+ pretraining on the 4 LiDAR terrain pseudolabel classes)
 PRETRAIN_GROUPS = {"none": "no_pseudolabel", "pseudolabel": "pseudolabel"}
-BASELINES_DIR = RUNS_DIR / "baselines"
+BASELINES = "baselines"  # runs/model2d/<version>/baselines/
+
+
+def runs_root(data_name: str) -> Path:
+    """``runs/model2d/<version>``: every run, baseline and comparison table of one dataset version."""
+    return RUNS_DIR / data_name
 
 
 def pretrain_group(cfg: dict) -> str:
@@ -199,8 +204,8 @@ def pretrain_group(cfg: dict) -> str:
 
 
 def run_dir(cfg: dict, name: str | None = None) -> Path:
-    """``runs/model2d/<pretrain group>/<run name>``."""
-    return RUNS_DIR / pretrain_group(cfg) / (name or run_name(cfg))
+    """``runs/model2d/<version>/<pretrain group>/<run name>``."""
+    return runs_root(cfg["data"]["name"]) / pretrain_group(cfg) / (name or run_name(cfg))
 
 
 # ---------------------------------------------------------------------------
@@ -495,6 +500,10 @@ def evaluate(pred: pd.DataFrame) -> dict:
             "climb_found": float((hand.loc[hand["label"] == 1, "score"] >= cut).mean()),
             "nc_rejected": float((hand.loc[hand["label"] == 0, "score"] < cut).mean()),
         }
+        if "judge_confidence" in hand:  # V4: leave out the hand points the judges were unsure about (as 3D hcr_hm)
+            hm = hand[hand["judge_confidence"].astype(str) != "low"]
+            if hm["label"].nunique() == 2:
+                out["horseshoe"]["hand_auroc_high_medium"] = float(roc_auc_score(hm["label"], hm["score"]))
     return out
 
 

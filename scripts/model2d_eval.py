@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 """2D model, step 3 - score a trained run (its best checkpoint) on val and test.
 
-    python scripts/model2d_eval.py --run runs/model2d/no_pseudolabel/gradient-full_discriminative-s0
+    python scripts/model2d_eval.py --run runs/model2d/v3/no_pseudolabel/gradient-full_discriminative-s0
 
 Writes ``<run>/predictions_best.csv`` (one score per sample, the same columns
 as the 3D ``predictions_best.csv``) and ``<run>/eval_best.json``: per-sample
